@@ -1,0 +1,73 @@
+Type: Package
+Package: metid
+Title: Metabolite identification based on MS1 and MS2 spectra
+Version: 1.1.0
+Date: 2021-07-02
+Authors@R: c(
+    person(given = "Xiaotao",
+           family = "Shen",
+           role = c("aut", "cre"),
+           email = "shenxt@stanford.edu",
+           comment = c(ORCID = "0000-0002-9608-9964")),
+        person(given = "Si",
+           family = "Wu",
+           role = c("aut", "ctb")),
+           person(given = "Hanyah",
+           family = "Zackriah",
+           role = c("ctb")),
+           person(given = "Liang",
+           family = "Liang",
+           role = c("ctb")),
+           person(given = "Songjie",
+           family = "Chen",
+           role = c("ctb"))
+           )
+Description: Metabolite identification using MS1 and MS2 databases.
+License: GPL-2 | file LICENSE
+URL: https://github.com/tidymass/metid
+BugReports: https://github.com/tidymass/metid/issues
+Depends: 
+    R (>= 3.5)
+Imports:
+    BiocParallel,
+    crayon,
+    dplyr,
+    future,
+    furrr,
+    ggplot2,
+    pbapply,
+    methods,
+    graphics,
+    grDevices,
+    utils,
+    stats,
+    readr,
+    readxl,
+    RColorBrewer,
+    stringr,
+    lifecycle,
+    tibble,
+    magrittr,
+    tinytools,
+    purrr,
+    plyr,
+    MSnbase,
+    ProtGenerics,
+    plotly
+Suggests: 
+    knitr,
+    rmarkdown,
+    BiocStyle,
+    RUnit,
+    BiocGenerics,
+    testthat
+VignetteBuilder: 
+    knitr
+RdMacros: 
+    lifecycle
+biocViews: Metabolomics, MassSpectrometry
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Remotes: 
+    tidymass/tinytools

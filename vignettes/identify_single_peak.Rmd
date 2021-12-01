@@ -1,0 +1,95 @@
+---
+title: "Identify single peak with metid"
+author:
+- name: Xiaotao Shen PhD (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+  name: Si Wu PhD
+  url: http://shenxt.info/
+date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{identify_single_peak}
+  %\VignettePackage{metid}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+***
+
+Some times we only want to match one peak. We can use `identify_single_peak()` function to identify single peak.
+
+```{r,eval = TRUE, warning=FALSE, message=FALSE,R.options="",cache=FALSE}
+library(metid)
+library(tidyverse)
+```
+
+## **Peak information**
+
+We need the m/z, rt and MS2 information. MS2 must be a matrix with two columns: `mz` and `intensity`.
+
+```{r,eval = TRUE, warning=FALSE, message=FALSE,R.options="",cache=FALSE}
+mz <- 472.3032
+rt <- 772.906
+ms2 <- data.frame(
+  mz = c(81.38455,82.19755,85.02840,86.5934,86.98958,89.48135,90.70250,
+         93.03886, 102.09140, 103.03903, 116.01658, 127.98412, 
+         134.06819, 152.46967, 162.02180, 162.05521, 162.11261),
+  intensity = c(1396.341,1488.730,15473.604, 1740.842,2158.014,1351.686,
+                1547.099,1325.864,22441.047,76217.016,17809.395,
+                1439.743, 1729.786, 1543.765, 2228.743, 
+                3508.225, 529120.000),
+  stringsAsFactors = FALSE
+)
+ms2 %>% head()
+```
+
+## **Run `identify_single_peak()` function**
+
+### **Load database**
+
+First we load the database from `metid` package and then put them in a `example` folder.
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=FALSE}
+##create a folder named as example
+path <- file.path(".", "example")
+dir.create(path = path, showWarnings = FALSE)
+
+##get database from metid
+database <- system.file("ms2_database", package = "metid")
+
+file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
+          to = path, overwrite = TRUE, recursive = TRUE)
+```
+
+Now in your `./example`, there are one file, namely `msDatabase_rplc_0.0.2`.
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=FALSE}
+annotation_result <- 
+  identify_single_peak(ms1.mz = mz, 
+                       ms1.rt = rt, 
+                       ms2 = ms2, 
+                       ms1.match.ppm = 15, 
+                       rt.match.tol = 30,
+                       ms2.match.tol = 0.5, 
+                       database = "msDatabase_rplc0.0.2",
+                       path = path)
+```
+
+`annotation_result` is a `metIdentifyClass` object, so you can use all the functions for it to process.
+
+
+

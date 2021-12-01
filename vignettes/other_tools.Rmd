@@ -1,0 +1,63 @@
+---
+title: "Other tools in metid"
+author:
+- name: Xiaotao Shen (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+  name: Si Wu
+  url: http://shenxt.info/
+date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{other_tools}
+  %\VignettePackage{metid}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+There are also a lot of useful tools in `metid`.
+
+```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=FALSE}
+library(metid)
+library(tidyverse)
+```
+
+## Read MS2 data
+
+### Read msp format file using `readMGF`
+
+```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
+result <- readMGF(file)
+```
+
+### Read mzXML format file using `readMZXML`
+
+```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
+result <- readMZXML(file, threads = 3)
+```
+
+### Read MGF format file using `readMGF`
+
+```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
+result <- readMGF(file)
+```
+
+
+## Show `metid` version and logo
+
+```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=FALSE}
+metid::metid_logo()
+```

@@ -1,0 +1,22 @@
+pandoc: 2.11.4
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  Version0_9_2: Version0_9_2.html
+  contact_us: contact_us.html
+  database_construction: database_construction.html
+  identify_single_peak: identify_single_peak.html
+  metabolite_annotation_using_MS1: metabolite_annotation_using_MS1.html
+  metabolite_annotation_using_MS2: metabolite_annotation_using_MS2.html
+  metid: metid.html
+  multiple_databases: multiple_databases.html
+  other_tools: other_tools.html
+  output_database: output_database.html
+  public_database_construction: public_database_construction.html
+  public_databases: public_databases.html
+  rt_correction: rt_correction.html
+last_built: 2021-12-01T17:36Z
+urls:
+  reference: https://tidymass.github.io/metid//reference
+  article: https://tidymass.github.io/metid//articles
+

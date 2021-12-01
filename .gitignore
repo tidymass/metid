@@ -22,7 +22,12 @@
 
 # produced vignettes
 vignettes/*.html
+vignettes/*.mzXML
 vignettes/*.pdf
+vignettes/*example
+vignettes/*_cache
+vignettes/database_construction/*
+
 
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
@@ -37,3 +42,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+/example/*
+/other_files/*
+example/*
+other_files/*

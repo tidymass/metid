@@ -1,0 +1,128 @@
+---
+title: "Output metid database to mgf/msp for other tools"
+author:
+- name: Xiaotao Shen (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+date: "Created on 2020-07-02 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{output_database}
+  %\VignettePackage{metid}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  out.width = "100%"
+)
+```
+
+[`MassBank`](https://massbank.eu/), [`MoNA`](https://mona.fiehnlab.ucdavis.edu/) and some other public databases provide `msp` format database of metabolites. So you can use the functions in `metid` to output `metid` format database to `msp` format which can be used for `GNPS`, `MassBank` and `MoNA`.
+
+## **MassBank**
+
+### `msp` format
+
+Just use the `write_msp_massbank()` function to output `metid` database to `msp` format for MassBank.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_msp_massbank(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_massbank()` can be found here `write_msp_massbank()`.
+
+
+### `mgf` format
+
+Just use the `write_mgf_massbank()` function to output `metid` database to `mgf` format for MassBank.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_mgf_massbank(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_massbank()` can be found here `write_msp_massbank()`.
+
+
+
+
+## **MoNA**
+
+### `msp` format
+
+Just use the `write_msp_mona()` function to output `metid` database to `msp` format for mona.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_msp_mona(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_mona()` can be found here `write_msp_mona()`.
+
+
+### `mgf` format
+
+Just use the `write_mgf_mona()` function to output `metid` database to `mgf` format for mona.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_mgf_mona(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_mona()` can be found here `write_msp_mona()`.
+
+
+## **GNPS**
+
+### `msp` format
+
+Just use the `write_msp_gnps()` function to output `metid` database to `msp` format for gnps.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_msp_gnps(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_gnps()` can be found here `write_msp_gnps()`.
+
+
+### `mgf` format
+
+Just use the `write_mgf_gnps()` function to output `metid` database to `mgf` format for gnps.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+write_mgf_gnps(databasae = databasae, path = ".")
+```
+
+The arguments of `write_msp_gnps()` can be found here `write_msp_gnps()`.
+
+

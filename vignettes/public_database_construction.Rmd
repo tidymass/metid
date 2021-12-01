@@ -1,0 +1,104 @@
+---
+title: "Construct public MS2 datbase using metid"
+author:
+- name: Xiaotao Shen (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+  url: http://shenxt.info/
+date: "Created on 2020-06-10 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{public_database_construction}
+  %\VignettePackage{metid}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  out.width = "100%"
+)
+```
+
+[`MassBank`](https://massbank.eu/), [`MoNA`](https://mona.fiehnlab.ucdavis.edu/) and some other public databases provide `msp` format database of metabolites. So you can use the functions in `metid` to transform them to `metid` format database.
+
+## **MassBank**
+
+Download the `MassBank` msp database from here: [https://massbank.eu/MassBank/](https://massbank.eu/MassBank/). And then put the `msp` data into one folder.
+
+Then set this folder as you work directory in R.
+
+### **Run `construct_massbank_database()` function**
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+massbank_database <- construct_mona_database(
+  file = "MassBank_NIST.msp",
+  path = ".",
+  version = "0.0.1",
+  source = "MoNA",
+  link = "https://mona.fiehnlab.ucdavis.edu/",
+  creater = "Xiaotao Shen",
+  email = "shenxt1990@163.com",
+  rt = FALSE,
+  threads = 5
+)
+```
+
+The arguments of `construct_mona_database()` can be found here `construct_mona_database()`.
+
+massbank_database is a `databaseClass` object, you can print it to see its information.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+save(massbank_database, file = "massbank_database")
+```
+
+
+
+
+
+## **MoNA**
+
+Download the `MoNA` msp database from here: [https://mona.fiehnlab.ucdavis.edu/downloads](https://mona.fiehnlab.ucdavis.edu/downloads). And then put the `msp` data into one folder.
+
+> Note: Only download the database you need, do NOT use the all MS2 spectra databse which is pretty large size.
+
+Then set this folder as you work directory in R.
+
+### **Run `construct_mona_database()` function**
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+library(metid)
+```
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+mona_database <- construct_mona_database(
+  file = "MoNA-export-LC-MS-MS_Spectra.msp",
+  path = ".",
+  version = "0.0.1",
+  source = "MoNA",
+  link = "https://mona.fiehnlab.ucdavis.edu/",
+  creater = "Xiaotao Shen",
+  email = "shenxt1990@163.com",
+  rt = FALSE,
+  threads = 5
+)
+```
+
+The arguments of `construct_mona_database()` can be found here `construct_mona_database()`.
+
+massbank_database is a `databaseClass` object, you can print it to see its information.
+
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+save(mona_database, file = "mona_database")
+```

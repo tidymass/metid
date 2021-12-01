@@ -1,0 +1,86 @@
+---
+title: "Brief introduction of metid"
+author:
+- name: Xiaotao Shen PhD (https://www.shenxt.info/)
+- affiliation: School of Medicine, Stanford University
+  name: Si Wu PhD
+  url: http://shenxt.info/
+date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{metid}
+  %\VignettePackage{metid}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+***
+
+## **Introduction & Installation**
+******************************************
+
+*metid* is a R package which can be used for in-house (MS2) database construction, and metabolite identification based on in-house and public MS1/MS2 database.
+
+<img src="../man/figures/Figure_1.png" align="middle" alt="" width = "100%"/>
+
+Please install it via [github](https://github.com/tidymass/metid).
+
+```{r,eval=FALSE,warning=FALSE, R.options=""}
+if(!require(devtools)){
+  install.packages("devtools")
+}
+devtools::install_github("tidymass/metid")
+```
+
+All the demo data for `metid` are from `demoData`, so please install it first.
+
+```{r,eval=FALSE,warning=FALSE, R.options=""}
+devtools::install_github("jaspershen/demoData")
+```
+
+`metid` is a part of `tidymass`, so you can also install it by installing [`tidymass`](https://tidymass.github.io/tidymass/index.html).
+
+## **Database construction**
+******************************************
+
+Please refer to this article: [Construct in-house MS2 datbase using metid](https://tidymass.github.io/metid/articles/database_construction.html) for database construction.
+
+## **Public databases**
+
+We have provide some public databases and our in-house databases, so if you want to use them, please refer this article, [Database provided for `metid`](https://tidymass.github.io/metid/articles/public_databases.html).
+
+## **Metabolite identification**
+
+If you want to identify metabolite without MS2 spectra, please refer to this article, [Annotate metabolites according to MS1 database using metid](https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html). 
+
+---
+
+If you want to identify metabolite with MS2 spectra, please refer to this article, [Annotate metabolites according to MS2 database using metid](https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS2.html). 
+
+---
+
+If you want to identify a peak table with multiple databases, please refer to this article, [Identify peak tables with multiple databases](https://tidymass.github.io/metid/articles/multiple_databases.html). 
+
+---
+
+If you just want to identify single peak, please refer to this article: [Identify single peak with metid](https://tidymass.github.io/metid/articles/identify_single_peak.html).
+
+
+## **Other tools**
+
+`metid` package also has some useful tools, please refer to this article, [Other tools in metid](https://tidymass.github.io/metid/articles/other_tools.html)
+
