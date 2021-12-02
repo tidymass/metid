@@ -24,7 +24,7 @@
 vignettes/*.html
 vignettes/*.mzXML
 vignettes/*.pdf
-vignettes/*example
+vignettes/example
 vignettes/*_cache
 vignettes/database_construction
 

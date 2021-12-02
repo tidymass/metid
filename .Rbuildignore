@@ -9,12 +9,13 @@ all_ms2_database
 pkgdown
 docs
 example
+vignettes
 vignettes/example
 vignettes/metabolite_identification.png
 vignettes/database_construction.png
 vignettes/*_cache
 vignettes/*.png
-vignettes/database_construction/
+vignettes/database_construction
 
 ^_pkgdown\.yml$
 ^docs$
@@ -38,4 +39,4 @@ manuscript
 ^\.git$
 code_manuscript/
 database_construction_code/
-other_files/
+other_files
