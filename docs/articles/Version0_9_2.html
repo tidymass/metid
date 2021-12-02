@@ -198,14 +198,14 @@
 <span class="va">ms1_peak</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">ms1_peak</span>, <span class="st">"ms1.peak.table.csv"</span><span class="op">)</span>, 
           to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; [1] TRUE</span>
 
 <span class="co">##get database from metid</span>
 <span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">database</span>, <span class="st">"msDatabase_rplc0.0.2"</span><span class="op">)</span>, 
           to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>Now in your <code>./example</code>, there are two files, namely <code>ms1.peak.table.csv</code> and <code>msDatabase_rplc_0.0.2</code>, respectively.</p>
 </div>
 <div id="use-database-name" class="section level3">
