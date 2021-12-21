@@ -25,21 +25,20 @@
 #' @seealso The example and demo data of this function can be found
 #' https://tidymass.github.io/metid/articles/metid.html
 #' @export
-
-
-# database0.0.1 <- construct_database(
-#   path = ".",
-#   version = "0.0.1",
-#   metabolite.info.name = "metabolite.info.csv",
-#   creater = "dumine",
-#   email = "dumine@zju.edu.cn",
-#   rt = FALSE,
-#   mz.tol = 15,
-#   rt.tol = 30,
-#   threads = 5
-# )
-
-
+#' @examples 
+#' \dontrun{
+#' database0.0.1 <- construct_database(
+#' path = ".",
+#' version = "0.0.1",
+#' metabolite.info.name = "metabolite.info.csv",
+#' creater = "dumine",
+#' email = "dumine@zju.edu.cn",
+#' rt = FALSE,
+#' mz.tol = 15,
+#' rt.tol = 30,
+#' threads = 5
+#' )
+#' }
 
 construct_database = function(path = ".",
                               version = "0.0.1",
@@ -152,7 +151,7 @@ construct_database = function(path = ".",
   
   if (!is.null(ms1.info.pos)) {
     match.result.pos <-
-      SXTMTmatch(
+      tinytools::mz_rt_match(
         data1 = as.data.frame(metabolite.info[, c("mz.pos", "RT")]),
         data2 = ms1.info.pos[, c(2, 3)],
         mz.tol = mz.tol,
@@ -178,7 +177,7 @@ construct_database = function(path = ".",
         if (!is.na(temp.submitter) &
             length(grep(temp.submitter, temp.match.result.pos[, 9])) > 0) {
           temp.match.result.pos <-
-            temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]),]
+            temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]), ]
         }
         
         if (nrow(temp.match.result.pos) == 0) {
@@ -228,7 +227,7 @@ construct_database = function(path = ".",
   cat(crayon::green("Matching metabolites with MS2 spectra (negative)...\n"))
   if (!is.null(ms1.info.neg)) {
     match.result.neg <-
-      SXTMTmatch(
+      tinytools::mz_rt_match(
         data1 = as.data.frame(metabolite.info[, c("mz.neg", "RT")]),
         data2 = ms1.info.neg[, c(2, 3)],
         mz.tol = mz.tol,
@@ -254,7 +253,7 @@ construct_database = function(path = ".",
         if (!is.na(temp.submitter) &
             length(grep(temp.submitter, temp.match.result.neg[, 9])) > 0) {
           temp.match.result.neg <-
-            temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]),]
+            temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]), ]
         }
         
         if (nrow(temp.match.result.neg) == 0) {

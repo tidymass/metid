@@ -304,7 +304,7 @@ identify_ms2_only = function(ms2.data,
     
     colnames(ms1.data)[1:3] <- c("name", "mz", "rt")
     match.result <-
-      SXTMTmatch(
+      tinytools::mz_rt_match(
         data1 = ms1.data[, c(2, 3)],
         data2 = ms1.info[, c(2, 3)],
         mz.tol = 2,

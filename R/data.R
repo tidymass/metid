@@ -36,7 +36,7 @@
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@163.com}
 #' @format A databaseClass object.
-"msDatabase_rplc0.0.2"
+"snyder_database_rplc0.0.3"
 
 ##------------------------------------------------------------------------------
 #' @title Michael Snyder lab RPLC database
@@ -44,5 +44,5 @@
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@163.com}
 #' @format A databaseClass object.
-"msDatabase_hilic0.0.2"
+"snyder_database_hilic0.0.3"
 

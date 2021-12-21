@@ -49,6 +49,21 @@ A databaseClass object.
 \description{
 Construct MS2 spectra database according to mzXML data and compound information table (csv format).
 }
+\examples{
+\dontrun{
+database0.0.1 <- construct_database(
+path = ".",
+version = "0.0.1",
+metabolite.info.name = "metabolite.info.csv",
+creater = "dumine",
+email = "dumine@zju.edu.cn",
+rt = FALSE,
+mz.tol = 15,
+rt.tol = 30,
+threads = 5
+)
+}
+}
 \seealso{
 The example and demo data of this function can be found
 https://tidymass.github.io/metid/articles/metid.html
