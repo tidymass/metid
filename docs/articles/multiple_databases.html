@@ -165,15 +165,13 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Identify peak tables with multiple databases</h1>
                         <h4 class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
-                                    <h4 class="author">Si Wu PhD</h4>
-            <address class="author_afil">
-      School of Medicine, Stanford University<br><h4 class="date">Created on 2020-03-28 and updated on 2021-12-20</h4>
+                        
+            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/multiple_databases.Rmd"><code>vignettes/multiple_databases.Rmd</code></a></small>
       <div class="hidden name"><code>multiple_databases.Rmd</code></div>
 
-    </address>
-</div>
+    </div>
 
     
     
@@ -197,9 +195,9 @@
 </h2>
 <p>The database must be generated using <code><a href="../reference/construct_database.html">construct_database()</a></code> function. Here we use the databases in <code>metid</code> packages.</p>
 <ul>
-<li><p><code>msDatabase_rplc0.0.2</code>: A in-house database, it contains m/z, RT and MS2 spectra information.</p></li>
-<li><p><code>orbitrapDatabase0.0.1</code>: A public database from <code>MassBank</code>. It contains m/z and MS2 spectra information.</p></li>
-<li><p><code>hmdbMS1Database0.0.1</code>: A public database from <code>HMDB</code>, only contains m/z information.</p></li>
+<li><p><code>snyder_database_rplc0.0.3</code>: A in-house database, it contains m/z, RT and MS2 spectra information.</p></li>
+<li><p><code>orbitrap_database0.0.3</code>: A public database from <code>MassBank</code>. It contains m/z and MS2 spectra information.</p></li>
+<li><p><code>hmdb_ms1_database0.0.3</code>: A public database from <code>HMDB</code>, only contains m/z information.</p></li>
 </ul>
 </div>
 <div id="data-organization" class="section level2">
@@ -247,22 +245,13 @@
 <span class="co">#&gt; [1] TRUE</span>
 
 <span class="co">##get databases from metid</span>
-<span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"snyder_database_rplc0.0.3"</span>, file <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"orbitrap_database0.0.3"</span>, file <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"hmdb_ms1_database0.0.3"</span>, file <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>
-  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span>
-    <span class="va">database</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-      <span class="st">"msDatabase_rplc0.0.2"</span>,
-      <span class="st">"orbitrapDatabase0.0.1"</span>,
-      <span class="st">"hmdbMS1Database0.0.1"</span>
-    <span class="op">)</span>
-  <span class="op">)</span>,
-  to <span class="op">=</span> <span class="va">path</span>,
-  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,
-  recursive <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; [1] TRUE TRUE TRUE</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">snyder_database_rplc0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"snyder_database_rplc0.0.3"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">orbitrap_database0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"orbitrap_database0.0.3"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">hmdb_ms1_database0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"hmdb_ms1_database0.0.3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now in your <code>./example</code>, there are files files, namely <code>ms1.peak.table.csv</code>, <code>QC1_MSMS_NCE25.mgf</code> and three databases.</p>
 </div>
 <div id="set-parameter-list" class="section level3">
@@ -280,7 +269,7 @@
     total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,
     candidate.num <span class="op">=</span> <span class="fl">3</span>,
     threads <span class="op">=</span> <span class="fl">3</span>,
-    database <span class="op">=</span> <span class="st">"msDatabase_rplc0.0.2"</span>
+    database <span class="op">=</span> <span class="st">"snyder_database_rplc0.0.3"</span>
   <span class="op">)</span>
 
 <span class="va">param2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span>
@@ -292,7 +281,7 @@
   total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,
   candidate.num <span class="op">=</span> <span class="fl">3</span>,
   threads <span class="op">=</span> <span class="fl">3</span>,
-  database <span class="op">=</span> <span class="st">"orbitrapDatabase0.0.1"</span>
+  database <span class="op">=</span> <span class="st">"orbitrap_database0.0.3"</span>
 <span class="op">)</span>
 
 <span class="va">param3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span>
@@ -304,7 +293,7 @@
   total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,
   candidate.num <span class="op">=</span> <span class="fl">3</span>,
   threads <span class="op">=</span> <span class="fl">3</span>,
-  database <span class="op">=</span> <span class="st">"hmdbMS1Database0.0.1"</span>
+  database <span class="op">=</span> <span class="st">"hmdb_ms1_database0.0.3"</span>
 <span class="op">)</span></code></pre></div>
 <blockquote>
 <p>Note: You can set different parametes for each database.</p>
@@ -323,13 +312,13 @@
 <span class="op">)</span>
 <span class="co">#&gt; Use old data</span>
 <span class="co">#&gt; -------------------------------</span>
-<span class="co">#&gt; Database 1 : msDatabase_rplc0.0.2 </span>
+<span class="co">#&gt; Database 1 : snyder_database_rplc0.0.3 </span>
 <span class="co">#&gt; -------------------------------</span>
 <span class="co">#&gt; -------------------------------</span>
-<span class="co">#&gt; Database 2 : orbitrapDatabase0.0.1 </span>
+<span class="co">#&gt; Database 2 : orbitrap_database0.0.3 </span>
 <span class="co">#&gt; -------------------------------</span>
 <span class="co">#&gt; -------------------------------</span>
-<span class="co">#&gt; Database 3 : hmdbMS1Database0.0.1 </span>
+<span class="co">#&gt; Database 3 : hmdb_ms1_database0.0.3 </span>
 <span class="co">#&gt; -------------------------------</span></code></pre></div>
 <blockquote>
 <p>Note: <code>result</code> is a list, and each element is a <code>metIdentifyClass</code> object. So you can use the functions for <code>metIdentifylass</code> object to process it.</p>
@@ -339,7 +328,7 @@
 <h3 class="hasAnchor">
 <a href="#integrate-annotation-results-from-different-databases" class="anchor"></a>Integrate annotation results from different databases</h3>
 <p>After we get the annotation result list, we then can integrate the annotation results from different databases.</p>
-<p>For <code>msDatabase_rplc0.0.2</code>, the annotaiton results are <code>Level 1</code> according to MSI.</p>
+<p>For <code>snyder_database_rplc0.0.3</code>, the annotaiton results are <code>Level 1</code> according to MSI.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; --------------metid version-----------</span>
@@ -354,7 +343,7 @@
 <span class="co">#&gt; (Use get_parameters() to get all the parameters of this processing)</span>
 <span class="co">#&gt; Polarity: positive </span>
 <span class="co">#&gt; Collision energy: all </span>
-<span class="co">#&gt; database: msDatabase_rplc0.0.2 </span>
+<span class="co">#&gt; database: snyder_database_rplc0.0.3 </span>
 <span class="co">#&gt; Total score cutoff: 0.5 </span>
 <span class="co">#&gt; Column: rp </span>
 <span class="co">#&gt; Adduct table:</span>
@@ -377,7 +366,7 @@
 <span class="co">#&gt; # … with 12 more variables: HMDB.ID &lt;chr&gt;, KEGG.ID &lt;chr&gt;, Lab.ID &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Adduct &lt;chr&gt;, mz.error &lt;dbl&gt;, mz.match.score &lt;dbl&gt;, RT.error &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   RT.match.score &lt;dbl&gt;, CE &lt;chr&gt;, SS &lt;dbl&gt;, Total.score &lt;dbl&gt;, Database &lt;chr&gt;</span></code></pre></div>
-<p>For <code>orbitrapDatabase0.0.1</code>, the annotaiton results are <code>Level 2</code> according to MSI.</p>
+<p>For <code>orbitrap_database0.0.3</code>, the annotaiton results are <code>Level 2</code> according to MSI.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; --------------metid version-----------</span>
@@ -392,7 +381,7 @@
 <span class="co">#&gt; (Use get_parameters() to get all the parameters of this processing)</span>
 <span class="co">#&gt; Polarity: positive </span>
 <span class="co">#&gt; Collision energy: all </span>
-<span class="co">#&gt; database: orbitrapDatabase0.0.1 </span>
+<span class="co">#&gt; database: orbitrap_database0.0.3 </span>
 <span class="co">#&gt; Total score cutoff: 0.5 </span>
 <span class="co">#&gt; Column: rp </span>
 <span class="co">#&gt; Adduct table:</span>
@@ -415,7 +404,7 @@
 <span class="co">#&gt; # … with 12 more variables: HMDB.ID &lt;chr&gt;, KEGG.ID &lt;chr&gt;, Lab.ID &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Adduct &lt;chr&gt;, mz.error &lt;dbl&gt;, mz.match.score &lt;dbl&gt;, RT.error &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   RT.match.score &lt;dbl&gt;, CE &lt;chr&gt;, SS &lt;dbl&gt;, Total.score &lt;dbl&gt;, Database &lt;chr&gt;</span></code></pre></div>
-<p>For <code>hmdbMS1Database0.0.1</code>, the annotaiton results are <code>Level 3</code> according to MSI.</p>
+<p>For <code>hmdb_ms1_database0.0.3</code>, the annotaiton results are <code>Level 3</code> according to MSI.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>
 <span class="co">#&gt; --------------metid version-----------</span>
@@ -430,7 +419,7 @@
 <span class="co">#&gt; (Use get_parameters() to get all the parameters of this processing)</span>
 <span class="co">#&gt; Polarity: positive </span>
 <span class="co">#&gt; Collision energy: all </span>
-<span class="co">#&gt; database: hmdbMS1Database0.0.1 </span>
+<span class="co">#&gt; database: hmdb_ms1_database0.0.3 </span>
 <span class="co">#&gt; Total score cutoff: 0.5 </span>
 <span class="co">#&gt; Column: rp </span>
 <span class="co">#&gt; Adduct table:</span>
@@ -440,6 +429,7 @@
 <code class="sourceCode R"><span class="va">annotation_table3</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="../reference/get_identification_table.html">get_identification_table</a></span><span class="op">(</span><span class="va">result</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"new"</span>, candidate.num <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; The object is identified without MS2 spectra.</span>
+
 <span class="va">annotation_table3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 × 19</span>
@@ -511,8 +501,7 @@
 <p>The <code>annotation_table</code> is the final annotation table.</p>
 <p>Then we can output it as <code>csv</code> file.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">annotation_table</span>, 
-                 <span class="st">"annotation_table.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">annotation_table</span>,file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"annotation_table.csv"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="../man/figures/Screen%20Shot%202020-03-30%20at%2010.48.10%20PM.png"></p>
 </div>
 </div>

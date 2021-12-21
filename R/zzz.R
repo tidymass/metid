@@ -3,8 +3,6 @@
     crayon::green(
       "metid,
 More information can be found at https://tidymass.github.io/metid/
-If you use metid in you publication, please cite this publication:
-Metabolic reaction network-based recursive metabolite annotation for untargeted metabolomics.
 Authors: Xiaotao Shen (shenxt1990@163.com)
 Maintainer: Xiaotao Shen."
     )

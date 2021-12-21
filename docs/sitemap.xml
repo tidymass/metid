@@ -19,37 +19,16 @@
     <loc>https://tidymass.github.io/metid//reference/databaseClass-class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/databaseConstruction.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/filterIden.html</loc>
-  </url>
-  <url>
     <loc>https://tidymass.github.io/metid//reference/filter_adducts.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/filter_identification.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/getIdenInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/getIdentificationTable.html</loc>
-  </url>
-  <url>
     <loc>https://tidymass.github.io/metid//reference/getIdentificationTable2.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/getMS2spectrum.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/getMS2spectrum2Object.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/getParams.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/getParams2.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/get_iden_info.html</loc>
@@ -100,13 +79,7 @@
     <loc>https://tidymass.github.io/metid//reference/metIdentify.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metIdentify4all.html</loc>
-  </url>
-  <url>
     <loc>https://tidymass.github.io/metid//reference/metIdentifyClass-class.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/metIdentifyParam.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/metid.html</loc>
@@ -116,12 +89,6 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/ms2plot.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/msDatabase_hilic0.0.2.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/msDatabase_rplc0.0.2.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/mzIdentify.html</loc>
@@ -175,13 +142,13 @@
     <loc>https://tidymass.github.io/metid//reference/rp.pos.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/trans2newStyle.html</loc>
+    <loc>https://tidymass.github.io/metid//reference/snyder_database_hilic0.0.3.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid//reference/snyder_database_rplc0.0.3.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/trans_to_new_style.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/whichHasIden.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/which_has_identification.html</loc>

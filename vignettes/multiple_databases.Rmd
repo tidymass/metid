@@ -211,6 +211,7 @@ Then get the annotation table.
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 annotation_table3 <-
   get_identification_table(result[[3]], type = "new", candidate.num = 1)
+
 annotation_table3 %>%
   head()
 ```
@@ -284,8 +285,7 @@ The `annotation_table` is the final annotation table.
 Then we can output it as `csv` file.
 
 ```{r,eval = FALSE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
-readr::write_csv(annotation_table, 
-                 "annotation_table.csv")
+readr::write_csv(annotation_table,file = file.path(path, "annotation_table.csv"))
 ```
 
 ![](../man/figures/Screen Shot 2020-03-30 at 10.48.10 PM.png)

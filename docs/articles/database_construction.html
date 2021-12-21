@@ -165,15 +165,13 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Construct in-house MS2 datbase using metid</h1>
                         <h4 class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
-                                    <h4 class="author">Si Wu</h4>
-            <address class="author_afil">
-      School of Medicine, Stanford University<br><h4 class="date">Created on 2020-03-28 and updated on 2021-12-20</h4>
+                        
+            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/database_construction.Rmd"><code>vignettes/database_construction.Rmd</code></a></small>
       <div class="hidden name"><code>database_construction.Rmd</code></div>
 
-    </address>
-</div>
+    </div>
 
     
     
@@ -214,30 +212,87 @@
 <p>Download the data <a href="https://github.com/jaspershen/demoData/tree/master/inst/database_construction">here</a>. and then put all of them in the “database_construction” folder.</p>
 <p>Then there will be a folder named as <code>database_construction</code> in your work directory like below figure shows:</p>
 <p><img src="../man/figures/Screen%20Shot%202021-02-26%20at%209.22.52%20PM.png"> Then we run <code><a href="../reference/construct_database.html">construct_database()</a></code> function and then we can get the database.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid">metid</a></span><span class="op">)</span>
-
-<span class="va">new.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"./database_construction"</span><span class="op">)</span>
-
-<span class="va">test.database</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/construct_database.html">construct_database</a></span><span class="op">(</span>
-  path <span class="op">=</span> <span class="va">new.path</span>,
-  version <span class="op">=</span> <span class="st">"0.0.1"</span>,
-  metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info_RPLC.csv"</span>,
-  source <span class="op">=</span> <span class="st">"Michael Snyder lab"</span>,
-  link <span class="op">=</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,
-  creater <span class="op">=</span> <span class="st">"Xiaotao Shen"</span>,
-  email <span class="op">=</span> <span class="st">"shenxt1990@163.com"</span>,
-  rt <span class="op">=</span> <span class="cn">TRUE</span>,
-  mz.tol <span class="op">=</span> <span class="fl">15</span>,
-  rt.tol <span class="op">=</span> <span class="fl">30</span>,
-  threads <span class="op">=</span> <span class="fl">5</span>
-<span class="op">)</span>
-<span class="co">#&gt; No metabolite.info_RPLC.csv in your ./database_construction</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metid)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>new.path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"./database_construction"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>test.database <span class="ot">&lt;-</span> <span class="fu">construct_database</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> new.path,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="st">"0.0.1"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">metabolite.info.name =</span> <span class="st">"metabolite.info_RPLC.csv"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">"Michael Snyder lab"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">link =</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">creater =</span> <span class="st">"Xiaotao Shen"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">email =</span> <span class="st">"shenxt1990@163.com"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mz.tol =</span> <span class="dv">15</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt.tol =</span> <span class="dv">30</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">threads =</span> <span class="dv">5</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading metabolite information...</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading positive MS2 data...</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading MS2 data...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Processing...</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading negative MS2 data...</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading MS2 data...</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Processing...</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matching metabolites with MS2 spectra (positive)...</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matching metabolites with MS2 spectra (negative)...</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; All done!</span></span></code></pre></div>
 <p>The arguments of <code><a href="../reference/construct_database.html">construct_database()</a></code> can be found here <code><a href="../reference/construct_database.html">construct_database()</a></code>.</p>
 <p>test.database is a <code>databaseClass</code> object, you can print it to see its information.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test.database</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<span class="co">#&gt; -----------Base information------------</span>
+<span class="co">#&gt; Version: 0.0.1 </span>
+<span class="co">#&gt; Source: Michael Snyder lab </span>
+<span class="co">#&gt; Link: http://snyderlab.stanford.edu/ </span>
+<span class="co">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span>
+<span class="co">#&gt; With RT information</span>
+<span class="co">#&gt; -----------Spectral information------------</span>
+<span class="co">#&gt; There are 14 items of metabolites in database:</span>
+<span class="co">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span>
+<span class="co">#&gt; There are 170 metabolites in total</span>
+<span class="co">#&gt; There are 113 metabolites in positive mode with MS2 spectra.</span>
+<span class="co">#&gt; There are 112 metabolites in negative mode with MS2 spectra.</span>
+<span class="co">#&gt; Collision energy in positive mode (number:):</span>
+<span class="co">#&gt; Total number: 2 </span>
+<span class="co">#&gt; NCE25; NCE50 </span>
+<span class="co">#&gt; Collision energy in negative mode:</span>
+<span class="co">#&gt; Total number: 2 </span>
+<span class="co">#&gt; NCE25; NCE50</span></code></pre></div>
 <blockquote>
 <p>Note: <code>test.database</code> is only a demo database (metIdentifyClass object). We will don’t use it for next metabolite identification. Then please save this database in you local folder, please note that the saved file name and database name must be same. For example:</p>
 </blockquote>

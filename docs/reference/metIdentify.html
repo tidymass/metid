@@ -215,7 +215,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Identify metabolites based on MS/MS database.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymass/metid/blob/master/R/deprecated_metIdentify.R'><code>R/deprecated_metIdentify.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidymass/metid/blob/master/R/identify_metabolites.R'><code>R/identify_metabolites.R</code></a></small>
     <div class="hidden name"><code>metIdentify.Rd</code></div>
     </div>
 
@@ -365,6 +365,40 @@ https://tidymass.github.io/metid/articles/metid.html</p></div>
     <p>Xiaotao Shen
 <a href='mailto:shenxt1990@163.com'>shenxt1990@163.com</a></p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'>##creat a folder nameed as example</span></span>
+<span class='r-in'><span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='st'>"."</span>, <span class='st'>"example"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/files2.html'>dir.create</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='va'>path</span>, showWarnings <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>##get MS1 peak table from metid</span></span>
+<span class='r-in'><span class='va'>ms1_peak</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"ms1_peak"</span>, package <span class='op'>=</span> <span class='st'>"metid"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>ms1_peak</span>, <span class='st'>"ms1.peak.table.csv"</span><span class='op'>)</span>, </span>
+<span class='r-in'>          to <span class='op'>=</span> <span class='va'>path</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ms2_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"ms2_data"</span>, package <span class='op'>=</span> <span class='st'>"metid"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>ms2_data</span>, <span class='st'>"QC1_MSMS_NCE25.mgf"</span><span class='op'>)</span>, </span>
+<span class='r-in'>          to <span class='op'>=</span> <span class='va'>path</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>database</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"ms2_database"</span>, package <span class='op'>=</span> <span class='st'>"metid"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>database</span>, <span class='st'>"msDatabase_rplc0.0.2"</span><span class='op'>)</span>, </span>
+<span class='r-in'>          to <span class='op'>=</span> <span class='va'>path</span>, overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>, recursive <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>annotate_result3</span> <span class='op'>&lt;-</span> </span>
+<span class='r-in'><span class='fu'>metIdentify</span><span class='op'>(</span>ms1.data <span class='op'>=</span> <span class='st'>"ms1.peak.table.csv"</span>, </span>
+<span class='r-in'>                     ms2.data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"QC1_MSMS_NCE25.mgf"</span><span class='op'>)</span>, </span>
+<span class='r-in'>                     ms2.match.tol <span class='op'>=</span> <span class='fl'>0.5</span>, </span>
+<span class='r-in'>                     ce <span class='op'>=</span> <span class='st'>"all"</span>,</span>
+<span class='r-in'>                     ms1.match.ppm <span class='op'>=</span> <span class='fl'>15</span>, </span>
+<span class='r-in'>                     rt.match.tol <span class='op'>=</span> <span class='fl'>30</span>, </span>
+<span class='r-in'>                     polarity <span class='op'>=</span> <span class='st'>"positive"</span>, </span>
+<span class='r-in'>                     column <span class='op'>=</span> <span class='st'>"rp"</span>, </span>
+<span class='r-in'>                     path <span class='op'>=</span> <span class='va'>path</span>, </span>
+<span class='r-in'>                     candidate.num <span class='op'>=</span> <span class='fl'>3</span>,</span>
+<span class='r-in'>                     database <span class='op'>=</span> <span class='st'>"msDatabase_rplc0.0.2"</span>, </span>
+<span class='r-in'>                     threads <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>annotate_result3</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
