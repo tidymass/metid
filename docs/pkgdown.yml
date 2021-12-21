@@ -8,13 +8,13 @@ articles:
   identify_single_peak: identify_single_peak.html
   metabolite_annotation_using_MS1: metabolite_annotation_using_MS1.html
   metabolite_annotation_using_MS2: metabolite_annotation_using_MS2.html
-  metid: metid.html
+  metid_introduction: metid_introduction.html
   multiple_databases: multiple_databases.html
   other_tools: other_tools.html
   output_database: output_database.html
   public_database_construction: public_database_construction.html
   public_databases: public_databases.html
-last_built: 2021-12-02T05:55Z
+last_built: 2021-12-21T07:52Z
 urls:
   reference: https://tidymass.github.io/metid//reference
   article: https://tidymass.github.io/metid//articles

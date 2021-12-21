@@ -79,7 +79,7 @@ navbar:
       menu:
       - text: "Brief introduction"
       - text: Brief introduction
-        href: articles/metid.html
+        href: articles/metid_introduction.html
       - text: -------
       - text: "In-house and public database construction using metid"
       - text: In-house database construction
