@@ -32,8 +32,7 @@
 #' https://tidymass.github.io/metid/articles/metid.html
 
 
-identify_ms2_only = function(
-                             ms2.data,
+identify_ms2_only = function(ms2.data,
                              ##only msp and mgf and mz(X)ML are supported
                              ms1.match.ppm = 25,
                              ms2.match.ppm = 30,

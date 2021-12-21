@@ -564,3 +564,225 @@ trans_to_new_style = function(identification.table){
     # identification1 <- dplyr::bind_rows(identification)
   }
 }
+
+
+
+
+
+##------------------------------------------------------------------------------
+#' @title Get identification table from a mzIdentifyClass object
+#' @description Get identification table from a mzIdentifyClass object.
+#' \lifecycle{deprecated}
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @param object mzIdentifyClass object.
+#' @param candidate.num The number of candidates.
+#' @param type The type of identification table.
+#' @param silence.deprecated Silenc the deprecated information or not.
+#' @return A identification table (data.frame).
+#' @export
+#' @importFrom magrittr %>%
+#' @seealso The example and demo data of this function can be found
+#' https://jaspershen.github.io/metID/articles/metID.html
+
+# object = result_rp_pos25[[8]]
+
+getIdentificationTable2 = function(object,
+                                   candidate.num = 3,
+                                   type = c("old", "new"),
+                                   silence.deprecated = FALSE) {
+  if (!silence.deprecated) {
+    cat(
+      crayon::yellow(
+        "`getIdentificationTable2()` is deprecated, use `get_identification_table()`."
+      )
+    )
+  }
+  
+  if (class(object) != "mzIdentifyClass" &
+      class(object) != "metIdentifyClass") {
+    stop("Only for mzIdentifyClass or metIdentifyClass\n")
+  }
+  
+  type <- match.arg(type)
+  database <- object@database
+  
+  identification.result <- object@identification.result
+  
+  if (is.null(identification.result[[1]])) {
+    return(NULL)
+  }
+  
+  ##add database information
+  identification.result <-
+    lapply(identification.result, function(x) {
+      if (nrow(x) > candidate.num) {
+        x <- x[1:candidate.num, , drop = FALSE]
+      }
+      data.frame(x,
+                 "Database" = object@database,
+                 stringsAsFactors = FALSE)
+    })
+  
+  peak.table <- object@ms1.data
+  
+  if (type == "old") {
+    identification.table <-
+      as.data.frame(matrix(nrow = nrow(peak.table), ncol = 2))
+    colnames(identification.table) <-
+      c("Candidate.number", "Identification")
+    item <- colnames(identification.result[[1]])
+    identification.result <-
+      lapply(identification.result, function(x) {
+        paste(apply(x, 1, function(y) {
+          paste(paste(item, as.character(y), sep = ":"), collapse = ";")
+        }), collapse = "{}")
+      })
+    
+    identification.table$Identification[match(names(identification.result),
+                                              peak.table$name)] <-
+      unlist(identification.result)
+    
+    identification.table$Candidate.number <-
+      sapply(identification.table$Identification, function(x) {
+        if (is.na(x))
+          return(0)
+        return(length(stringr::str_split(
+          string = x, pattern = "\\{\\}"
+        )[[1]]))
+      })
+    identification.table <-
+      data.frame(peak.table, identification.table, stringsAsFactors = FALSE)
+  } else{
+    identification.table <-
+      vector(mode = "list", length = nrow(peak.table))
+    
+    names(identification.table) <- object@ms1.data$name
+    
+    identification.table[match(names(identification.result),
+                               names(identification.table))] <-
+      identification.result
+    
+    peak.table <- apply(peak.table, 1, list)
+    peak.table <- lapply(peak.table, unlist)
+    
+    identification.table <-
+      mapply(
+        FUN = function(x, y) {
+          if (all(is.na(y)) | is.null(y)) {
+            temp <-
+              as.data.frame(matrix(c(x, rep(NA, 14)), nrow = 1),
+                            stringsAsFactors = FALSE)
+            
+            colnames(temp) <-
+              c(
+                names(x),
+                c(
+                  "Compound.name",
+                  "CAS.ID",
+                  "HMDB.ID",
+                  "KEGG.ID",
+                  "Lab.ID",
+                  "Adduct",
+                  "mz.error",
+                  "mz.match.score",
+                  "RT.error",
+                  "RT.match.score",
+                  "CE",
+                  "SS",
+                  "Total.score",
+                  "Database"
+                )
+              )
+            list(temp)
+          } else{
+            temp <-
+              as.data.frame(matrix(rep(x, nrow(y)), nrow = nrow(y), byrow = TRUE),
+                            stringsAsFactors = FALSE)
+            if (nrow(temp) > 1) {
+              temp[2:nrow(temp), 2:ncol(temp)] <- ""
+            }
+            colnames(temp) <- names(x)
+            temp <-
+              data.frame(temp, y, stringsAsFactors = FALSE)
+            list(temp)
+          }
+        },
+        x = peak.table,
+        y = identification.table
+      )
+    
+    identification.table <-
+      as.data.frame(do.call(rbind, identification.table))
+    ###as.numeric for several column
+    identification.table$mz =
+      identification.table$mz %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$rt =
+      identification.table$rt %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$mz.error =
+      identification.table$mz.error %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$RT.error =
+      identification.table$RT.error %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$mz.match.score =
+      identification.table$mz.match.score %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$RT.match.score =
+      identification.table$RT.match.score %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$Total.score =
+      identification.table$Total.score %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    identification.table$SS =
+      identification.table$SS %>%
+      stringr::str_trim(side = "both") %>%
+      as.numeric()
+    
+    ##add MS2.spectra.name and Candidate.number
+    identification.table$MS2.spectra.name = NA
+    identification.table$Candidate.number = NA
+    identification.table = 
+      identification.table %>% 
+      dplyr::select(colnames(object@ms1.data), 
+                    MS2.spectra.name,
+                    Candidate.number,
+                    Compound.name,
+                    CAS.ID,
+                    HMDB.ID,
+                    KEGG.ID,  
+                    Lab.ID,
+                    Adduct,
+                    mz.error,        
+                    mz.match.score,
+                    RT.error,
+                    RT.match.score,  
+                    CE,
+                    SS,
+                    Total.score,     
+                    Database
+      )
+    
+  }
+  
+  rownames(identification.table) <- NULL
+  
+  
+  return(tibble::as_tibble(identification.table))
+}
