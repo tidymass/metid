@@ -36,7 +36,7 @@ devtools::install_github("tidymass/metid")
 
 ## Usage
 
-Please see the [Get started](https://tidymass.github.io/metid/articles/metid.html) page to
+Please see the [Help document](https://tidymass.github.io/metid/articles/metid_introduction.html) page to
 get the instruction of `metid`.
 
 ## Need help?

@@ -2,7 +2,6 @@
 title: "Output metid database to mgf/msp for other tools"
 author:
 - name: Xiaotao Shen (https://www.shenxt.info/)
-- affiliation: School of Medicine, Stanford University
 date: "Created on 2020-07-02 and updated on `r Sys.Date()`"
 output:
   html_document:

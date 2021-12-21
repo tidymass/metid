@@ -2,9 +2,6 @@
 title: "Construct in-house MS2 datbase using metid"
 author:
 - name: Xiaotao Shen (https://www.shenxt.info/)
-- affiliation: School of Medicine, Stanford University
-  name: Si Wu
-  url: http://shenxt.info/
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
 output:
   html_document:
@@ -113,7 +110,6 @@ save(test.database, file = "test.database")
 ```
 
 > If you save the `test.database` as a different name, it will be a error when you use it.
-
 
 ## MS1 database
 

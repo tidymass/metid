@@ -1,10 +1,10 @@
 ##------------------------------------------------------------------------------
-#' @title Get identification table from a metIdentifyClass object
-#' @description Get identification table from a metIdentifyClass object.
+#' @title Get identification table from a metidentifyClass object
+#' @description Get identification table from a metidentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@163.com}
-#' @param ... One or multiple metIdentifyClass objects.
+#' @param ... One or multiple metidentifyClass objects.
 #' @param candidate.num The number of candidates.
 #' @param type The type of identification table.
 #' @return A identification table (data.frame).
@@ -31,8 +31,8 @@ get_identification_table = function(...,
     object = object[[1]]
   }
   
-  if (any(unique(unlist(lapply(object, class))) != "metIdentifyClass")) {
-    stop("Only for metIdentifyClass\n")
+  if (any(unique(unlist(lapply(object, class))) != "metidentifyClass")) {
+    stop("Only for metidentifyClass\n")
   }
   
   type <- match.arg(type)
@@ -583,7 +583,7 @@ trans_to_new_style = function(identification.table){
 #' @export
 #' @importFrom magrittr %>%
 #' @seealso The example and demo data of this function can be found
-#' https://jaspershen.github.io/metID/articles/metID.html
+#' https://tidymass.github.io/metid/articles/metid.html
 
 # object = result_rp_pos25[[8]]
 
@@ -600,8 +600,8 @@ getIdentificationTable2 = function(object,
   }
   
   if (class(object) != "mzIdentifyClass" &
-      class(object) != "metIdentifyClass") {
-    stop("Only for mzIdentifyClass or metIdentifyClass\n")
+      class(object) != "metidentifyClass") {
+    stop("Only for mzIdentifyClass or metidentifyClass\n")
   }
   
   type <- match.arg(type)

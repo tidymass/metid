@@ -2,9 +2,6 @@
 title: "Other tools in metid"
 author:
 - name: Xiaotao Shen (https://www.shenxt.info/)
-- affiliation: School of Medicine, Stanford University
-  name: Si Wu
-  url: http://shenxt.info/
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
 output:
   html_document:

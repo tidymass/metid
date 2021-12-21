@@ -2,9 +2,6 @@
 title: "Identify single peak with metid"
 author:
 - name: Xiaotao Shen PhD (https://www.shenxt.info/)
-- affiliation: School of Medicine, Stanford University
-  name: Si Wu PhD
-  url: http://shenxt.info/
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
 output:
   html_document:
@@ -69,13 +66,11 @@ path <- file.path(".", "example")
 dir.create(path = path, showWarnings = FALSE)
 
 ##get database from metid
-database <- system.file("ms2_database", package = "metid")
-
-file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
-          to = path, overwrite = TRUE, recursive = TRUE)
+data("snyder_database_rplc0.0.3", package = "metid")
+save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.3"))
 ```
 
-Now in your `./example`, there are one file, namely `msDatabase_rplc_0.0.2`.
+Now in your `./example`, there are one file, namely `snyder_database_rplc0.0.3`.
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=FALSE}
 annotation_result <- 
@@ -85,7 +80,7 @@ annotation_result <-
                        ms1.match.ppm = 15, 
                        rt.match.tol = 30,
                        ms2.match.tol = 0.5, 
-                       database = "msDatabase_rplc0.0.2",
+                       database = "snyder_database_rplc0.0.3",
                        path = path)
 ```
 

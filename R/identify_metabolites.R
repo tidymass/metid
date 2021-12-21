@@ -28,7 +28,7 @@
 #' @param candidate.num The number of candidate.
 #' @param database MS2 database name or MS database.
 #' @param threads Number of threads
-#' @return A metIdentifyClass object.
+#' @return A metidentifyClass object.
 #' @importFrom crayon yellow green red bgRed
 #' @importFrom magrittr %>%
 #' @export
@@ -107,7 +107,7 @@ identify_metabolites = function(
       silence.deprecated = TRUE
     )
   } else{
-    metIdentify(
+    metidentify(
       ms1.data = ms1.data,
       ms2.data = ms2.data,
       ##only msp and mgf and mz(X)ML are supported
@@ -158,12 +158,12 @@ identify_metabolites = function(
 #' @param database MS1 database name or MS1 database.
 #' @param threads Number of threads
 #' @param silence.deprecated Silenc the deprecated information or not.
-#' @return A mzIdentifyClass or metIdentifyClass object.
+#' @return A mzIdentifyClass or metidentifyClass object.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr pull filter
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://jaspershen.github.io/metID/articles/metID.html
+#' https://tidymass.github.io/metid/articles/metid.html
 
 
 mzIdentify =
@@ -457,7 +457,7 @@ mzIdentify =
     
     if (class(database) == "databaseClass") {
       return.result <- new(
-        Class = "metIdentifyClass",
+        Class = "metidentifyClass",
         ms1.data = ms1.data,
         # ms1.info = ms1.info,
         # ms2.info = ms2.info,
@@ -562,31 +562,31 @@ mzIdentify =
 #' @param database MS2 database name or MS2 database.
 #' @param threads Number of threads
 #' @param silence.deprecated Silenc the deprecated information or not.
-#' @return A metIdentifyClass object.
+#' @return A metidentifyClass object.
 #' @importFrom crayon yellow green red bgRed
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://jaspershen.github.io/metID/articles/metID.html
+#' https://tidymass.github.io/metid/articles/metid.html
 #' @examples 
 #' \dontrun{
 #' ##creat a folder nameed as example
 #' path <- file.path(".", "example")
 #' dir.create(path = path, showWarnings = FALSE)
 #' 
-#' ##get MS1 peak table from metID
-#' ms1_peak <- system.file("ms1_peak", package = "metID")
+#' ##get MS1 peak table from metid
+#' ms1_peak <- system.file("ms1_peak", package = "metid")
 #' file.copy(from = file.path(ms1_peak, "ms1.peak.table.csv"), 
 #'           to = path, overwrite = TRUE, recursive = TRUE)
-#' ms2_data <- system.file("ms2_data", package = "metID")
+#' ms2_data <- system.file("ms2_data", package = "metid")
 #' file.copy(from = file.path(ms2_data, "QC1_MSMS_NCE25.mgf"), 
 #'           to = path, overwrite = TRUE, recursive = TRUE)
-#' database <- system.file("ms2_database", package = "metID")
+#' database <- system.file("ms2_database", package = "metid")
 #' 
 #' file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
 #'           to = path, overwrite = TRUE, recursive = TRUE)
 #' 
 #' annotate_result3 <- 
-#' metIdentify(ms1.data = "ms1.peak.table.csv", 
+#' metidentify(ms1.data = "ms1.peak.table.csv", 
 #'                      ms2.data = c("QC1_MSMS_NCE25.mgf"), 
 #'                      ms2.match.tol = 0.5, 
 #'                      ce = "all",
@@ -602,7 +602,7 @@ mzIdentify =
 #' }
 
 
-metIdentify = function(
+metidentify = function(
   ms1.data,
   ##csv format
   ms2.data = NULL,
@@ -633,7 +633,7 @@ metIdentify = function(
   
   if(!silence.deprecated){
     cat(crayon::yellow(
-      "`metIdentify()` is deprecated, use `identify_metabolites()`."
+      "`metidentify()` is deprecated, use `identify_metabolites()`."
     ))  
   }
   
@@ -797,7 +797,7 @@ metIdentify = function(
       })
       
       names(ms2.data) <- ms2.data.name
-      ###prepare data for metIdentification function
+      ###prepare data for metidentification function
       cat(crayon::green("Preparing MS2 data for identification..."))
       ms2.data <-
         mapply(
@@ -877,7 +877,7 @@ metIdentify = function(
     
     ##check for the ms1 data
     if(ncol(ms1.data) < 3){
-      stop("MS1 data should have there columns. See here: \n https://jaspershen.github.io/metID/articles/metabolite_annotation_using_MS1.html")
+      stop("MS1 data should have there columns. See here: \n https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html")
     }
     
     if(colnames(ms1.data)[1] != "name" | 
@@ -955,7 +955,7 @@ metIdentify = function(
   }
   
   ms2Matchresult <-
-    metIdentification(
+    metidentification(
       ms1.info = ms1.info,
       ms2.info = ms2.info,
       polarity = polarity,
@@ -980,7 +980,7 @@ metIdentify = function(
     )
   
   return.result <- new(
-    Class = "metIdentifyClass",
+    Class = "metidentifyClass",
     ms1.data = ms1.data,
     ms1.info = ms1.info,
     ms2.info = ms2.info,

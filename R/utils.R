@@ -112,7 +112,7 @@ readTable = function(file, ...){
 #' @return A MS2 spectrum (data.frame).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://jaspershen.github.io/metID/articles/metID.html
+#' https://tidymass.github.io/metid/articles/metid.html
 
 getMS2spectrum = function(lab.id,
                           database,
