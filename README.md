@@ -7,11 +7,8 @@
 [![Dependencies](https://tinyverse.netlify.com/badge/metid)](https://cran.r-project.org/package=metid)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-## News
 
-* [Version 1.0.0 2021-05-08](https://tidymass.github.io/metid/news/index.html)
-* [Version 0.9.2 2021-03-12](https://tidymass.github.io/metid/articles/Version0_9_2.html)
-* More News [click here](https://tidymass.github.io/metid/news/index.html).
+`metid` is a part of [tidymass](https://tidymass.github.io/tidymass/)
 
 -------
 

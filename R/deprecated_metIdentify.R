@@ -340,7 +340,7 @@ metIdentify = function(
       "peaks have MS2 spectra.\n"
     ))
     
-    ###if one peak matches multiple peaks, select the more relibale MS2 spectrum
+    ###if one peak matches multiple peaks, select the more reliable MS2 spectrum
     cat(crayon::green("Selecting the most intense MS2 spectrum for each peak..."))
     temp.idx <- unique(match.result[, 1])
     
