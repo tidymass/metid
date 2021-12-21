@@ -58,10 +58,10 @@ If you have any questions about `metid`, please don’t hesitate to email me (<s
 
 If you use `metid` in you publication, please cite this publication:
 
-Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen,  View ORCID ProfileKevin Contrepois, Zheng-Jiang Zhu\*, Michael Snyder\* (Corresponding Author)
+Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen, Kevin Contrepois, Zheng-Jiang Zhu\*, Michael Snyder\* (Corresponding Author)
 
-metid: A R package for automatable compound annotation for LC−MS-based data
+metID: A R package for automatable compound annotation for LC−MS-based data
 
-doi: [https://doi.org/10.1101/2021.05.08.443258](doi: https://doi.org/10.1101/2021.05.08.443258)
+Bioinformatics, btab583, [https://doi.org/10.1093/bioinformatics/btab583](https://doi.org/10.1093/bioinformatics/btab583)
 
 Thanks very much!

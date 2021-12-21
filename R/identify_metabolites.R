@@ -28,7 +28,7 @@
 #' @param candidate.num The number of candidate.
 #' @param database MS2 database name or MS database.
 #' @param threads Number of threads
-#' @return A metidentifyClass object.
+#' @return A metIdentifyClass object.
 #' @importFrom crayon yellow green red bgRed
 #' @importFrom magrittr %>%
 #' @export
@@ -107,7 +107,7 @@ identify_metabolites = function(
       silence.deprecated = TRUE
     )
   } else{
-    metidentify(
+    metIdentify(
       ms1.data = ms1.data,
       ms2.data = ms2.data,
       ##only msp and mgf and mz(X)ML are supported
@@ -158,7 +158,7 @@ identify_metabolites = function(
 #' @param database MS1 database name or MS1 database.
 #' @param threads Number of threads
 #' @param silence.deprecated Silenc the deprecated information or not.
-#' @return A mzIdentifyClass or metidentifyClass object.
+#' @return A mzIdentifyClass or metIdentifyClass object.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr pull filter
 #' @export
@@ -457,7 +457,7 @@ mzIdentify =
     
     if (class(database) == "databaseClass") {
       return.result <- new(
-        Class = "metidentifyClass",
+        Class = "metIdentifyClass",
         ms1.data = ms1.data,
         # ms1.info = ms1.info,
         # ms2.info = ms2.info,
@@ -562,7 +562,7 @@ mzIdentify =
 #' @param database MS2 database name or MS2 database.
 #' @param threads Number of threads
 #' @param silence.deprecated Silenc the deprecated information or not.
-#' @return A metidentifyClass object.
+#' @return A metIdentifyClass object.
 #' @importFrom crayon yellow green red bgRed
 #' @export
 #' @seealso The example and demo data of this function can be found
@@ -586,7 +586,7 @@ mzIdentify =
 #'           to = path, overwrite = TRUE, recursive = TRUE)
 #' 
 #' annotate_result3 <- 
-#' metidentify(ms1.data = "ms1.peak.table.csv", 
+#' metIdentify(ms1.data = "ms1.peak.table.csv", 
 #'                      ms2.data = c("QC1_MSMS_NCE25.mgf"), 
 #'                      ms2.match.tol = 0.5, 
 #'                      ce = "all",
@@ -602,7 +602,7 @@ mzIdentify =
 #' }
 
 
-metidentify = function(
+metIdentify = function(
   ms1.data,
   ##csv format
   ms2.data = NULL,
@@ -633,7 +633,7 @@ metidentify = function(
   
   if(!silence.deprecated){
     cat(crayon::yellow(
-      "`metidentify()` is deprecated, use `identify_metabolites()`."
+      "`metIdentify()` is deprecated, use `identify_metabolites()`."
     ))  
   }
   
@@ -955,7 +955,7 @@ metidentify = function(
   }
   
   ms2Matchresult <-
-    metidentification(
+    metIdentification(
       ms1.info = ms1.info,
       ms2.info = ms2.info,
       polarity = polarity,
@@ -980,7 +980,7 @@ metidentify = function(
     )
   
   return.result <- new(
-    Class = "metidentifyClass",
+    Class = "metIdentifyClass",
     ms1.data = ms1.data,
     ms1.info = ms1.info,
     ms2.info = ms2.info,

@@ -48,7 +48,7 @@ Identify peaks based on MS1 database.
 }
 \seealso{
 The example and demo data of this function can be found
-https://jaspershen.github.io/metID/articles/metID.html
+https://tidymass.github.io/metid/articles/metid.html
 }
 \author{
 Xiaotao Shen

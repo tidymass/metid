@@ -94,14 +94,14 @@ Identify metabolites based on MS/MS database.
 path <- file.path(".", "example")
 dir.create(path = path, showWarnings = FALSE)
 
-##get MS1 peak table from metID
-ms1_peak <- system.file("ms1_peak", package = "metID")
+##get MS1 peak table from metid
+ms1_peak <- system.file("ms1_peak", package = "metid")
 file.copy(from = file.path(ms1_peak, "ms1.peak.table.csv"), 
           to = path, overwrite = TRUE, recursive = TRUE)
-ms2_data <- system.file("ms2_data", package = "metID")
+ms2_data <- system.file("ms2_data", package = "metid")
 file.copy(from = file.path(ms2_data, "QC1_MSMS_NCE25.mgf"), 
           to = path, overwrite = TRUE, recursive = TRUE)
-database <- system.file("ms2_database", package = "metID")
+database <- system.file("ms2_database", package = "metid")
 
 file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
           to = path, overwrite = TRUE, recursive = TRUE)
@@ -124,7 +124,7 @@ annotate_result3
 }
 \seealso{
 The example and demo data of this function can be found
-https://jaspershen.github.io/metID/articles/metID.html
+https://tidymass.github.io/metid/articles/metid.html
 }
 \author{
 Xiaotao Shen
