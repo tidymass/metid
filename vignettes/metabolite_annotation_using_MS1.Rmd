@@ -67,10 +67,8 @@ file.copy(from = file.path(ms1_peak, "ms1.peak.table.csv"),
           to = path, overwrite = TRUE, recursive = TRUE)
 
 ##get database from metid
-database <- system.file("ms2_database", package = "metid")
-
-file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
-          to = path, overwrite = TRUE, recursive = TRUE)
+data("snyder_database_rplc0.0.3", package = "metid")
+save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.3"))
 ```
 
 Now in your `./example`, there are two files, namely `ms1.peak.table.csv` and `msDatabase_rplc_0.0.2`, respectively.
@@ -88,7 +86,7 @@ annotate_result1 <-
                        column = "rp", 
                        path = path, 
                        candidate.num = 3,
-                       database = "msDatabase_rplc0.0.2", 
+                       database = "snyder_database_rplc0.0.3", 
                        threads = 5)
 ```
 
@@ -123,12 +121,8 @@ annotate_result1
 
 > now we can also provide "databaseClass" object for "database" argument. For example: we load the database first.
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-load(file.path(path, "msDatabase_rplc0.0.2"))
-```
-
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
-msDatabase_rplc0.0.2
+snyder_database_rplc0.0.3
 ```
 
 > Then we can directory provide this database to `identify_metabolites()`:
@@ -142,7 +136,7 @@ annotate_result2 <-
                        column = "rp", 
                        path = path, 
                        candidate.num = 3,
-                       database = msDatabase_rplc0.0.2, 
+                       database = snyder_database_rplc0.0.3, 
                        threads = 5)
 ```
 
@@ -159,8 +153,8 @@ annotate_result2@database
 > It is because that if you give the `databaseClass`, so `identify_metabolites` can know the name of database, if just use the `source` and `version` as the name for database.
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-paste(msDatabase_rplc0.0.2@database.info$Source,
-      msDatabase_rplc0.0.2@database.info$Version, 
+paste(snyder_database_rplc0.0.3@database.info$Source,
+      snyder_database_rplc0.0.3@database.info$Version, 
       sep = "_")
 
 ```
@@ -178,7 +172,7 @@ annotate_result2 <-
                        column = "rp", 
                        path = path, 
                        candidate.num = 3,
-                       database = "msDatabase_rplc0.0.2", 
+                       database = "snyder_database_rplc0.0.3", 
                        threads = 5)
 ```
 
@@ -191,11 +185,11 @@ After get the `annotation_result`, we can get the detailed information from it.
 We can use `get_parameters()` function to get the detailed parameters. This is very useful for reproductive analysis for data analysis.
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-metid::get_parameters(annotate_result1)
+metid::get_parameters_metid(annotate_result1)
 ```
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-metid::get_parameters(annotate_result2)
+metid::get_parameters_metid(annotate_result2)
 ```
 
 ### Check what peaks with annotations
@@ -257,10 +251,9 @@ which_has_identification(annotate_result1) %>%
 Then we can get the annotation for peak `pRPLC_376` use `get_iden_info()` function.
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-load(file.path(path, "msDatabase_rplc0.0.2"))
 get_iden_info(object = annotate_result1, 
               which.peak = "pRPLC_376", 
-              database = msDatabase_rplc0.0.2)
+              database = snyder_database_rplc0.0.3)
 ```
 
 We can get the detailed information for metabolites in database.

@@ -49,7 +49,7 @@ Place the MS1 peak table, MS2 data and database which you want to use in one fol
 
 ## **Run `identify_metabolites()` function**
 
-We use the demo data in `metid` package to show how to use `metid` to identify metablite without MS2 spectra. Here, we use the in-house database from Michael Snyder lab (`msDatabase_rplc0.0.2`).
+We use the demo data in `metid` package to show how to use `metid` to identify metablite without MS2 spectra. Here, we use the in-house database from Michael Snyder lab (`snyder_database_rplc0.0.3`).
 
 > In-house database
 The in-house database in our lab were provided, with RPLC and HILIC mode RT information. They were acquired using Thermo Fisher QE-plus. However, the LC system may be different with your experiments, so if you want to use our in-house database for metabolite identification, please set `rt.match.tol` as 100000000 (no limitation). The in-house database can be downloaded in my [github](https://github.com/tidymass/metid/tree/master/data).
@@ -81,11 +81,11 @@ file.copy(from = file.path(ms2_data, "QC1_MSMS_NCE25.mgf"),
 ##get database from metid
 database <- system.file("ms2_database", package = "metid")
 
-file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
-          to = path, overwrite = TRUE, recursive = TRUE)
+data("snyder_database_rplc0.0.3", package = "metid")
+save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.3"))
 ```
 
-Now in your `./example`, there are three files, namely `ms1.peak.table.csv`, `QC1_MSMS_NCE25.mgf` and `msDatabase_rplc_0.0.2`.
+Now in your `./example`, there are three files, namely `ms1.peak.table.csv`, `QC1_MSMS_NCE25.mgf` and `snyder_database_rplc0.0.3`.
 
 ### Use m/z, RT and MS2 for metabolite identification
 
@@ -101,7 +101,7 @@ annotate_result3 <-
                        column = "rp", 
                        path = path, 
                        candidate.num = 3,
-                       database = "msDatabase_rplc0.0.2", 
+                       database = "snyder_database_rplc0.0.3", 
                        threads = 3)
 ```
 
@@ -155,12 +155,12 @@ which_has_identification(annotate_result3) %>%
 Becase we need the information from database, so we need to load database first.
 
 ```{r, eval = TRUE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
-load(file.path(path, "msDatabase_rplc0.0.2"))
+load(file.path(path, "snyder_database_rplc0.0.3"))
 ```
 
 ```{r, eval = TRUE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
 ms2.plot1 <- ms2plot(object = annotate_result3,
-                     database = msDatabase_rplc0.0.2,
+                     database = snyder_database_rplc0.0.3,
                      which.peak = "pRPLC_603")
 ms2.plot1
 ```
@@ -171,7 +171,7 @@ ms2.plot1
 ```{r, eval = TRUE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
 ##which peaks have identification
 ms2.plot2 <- ms2plot(object = annotate_result3,
-                     database = msDatabase_rplc0.0.2,
+                     database = snyder_database_rplc0.0.3,
                      which.peak = "pRPLC_603", 
                      interaction.plot = TRUE)
 ms2.plot2
@@ -181,7 +181,7 @@ Some time you want to get the dark theme. Because the plot from `ms2plot` is a `
 
 ```{r, eval = TRUE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
 ms2.plot1 <- ms2plot(object = annotate_result3,
-                     database = msDatabase_rplc0.0.2,
+                     database = snyder_database_rplc0.0.3,
                      which.peak = "pRPLC_603", 
                      col.exp = "white")
 ms2.plot1_2 <- 
@@ -207,7 +207,7 @@ For example, if we want to output all the MS2 spectra match plots:
 ```{r, eval=FALSE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
 ms2plot(
   object = annotate_result3,
-  database = msDatabase_rplc0.0.2,
+  database = snyder_database_rplc0.0.3,
   which.peak = "all",
   path = file.path(path, "inhouse"), 
   threads = 3

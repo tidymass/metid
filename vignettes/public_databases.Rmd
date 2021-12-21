@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 ***
 
-## **In-house $MS^2$ databases from [Michael Snyder lab](http://med.stanford.edu/snyderlab.html)**
+## **In-house MS2 databases from [Michael Snyder lab](http://med.stanford.edu/snyderlab.html)**
 
 ### 1. Michael Snyder HILIC databases
 
@@ -47,7 +47,7 @@ knitr::opts_chunk$set(
 
 ***
 
-## **Public $MS^2$ databases**
+## **Public MS2 databases**
 
 ### 1. [HMDB database](https://hmdb.ca/downloads)
 

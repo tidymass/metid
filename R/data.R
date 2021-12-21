@@ -46,3 +46,21 @@
 #' @format A databaseClass object.
 "snyder_database_hilic0.0.3"
 
+
+##------------------------------------------------------------------------------
+#' @title hmdb_ms1_database0.0.3
+#' @description hmdb_ms1_database0.0.3
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format A databaseClass object.
+"hmdb_ms1_database0.0.3"
+
+
+##------------------------------------------------------------------------------
+#' @title orbitrap_database0.0.3
+#' @description orbitrap_database0.0.3
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format A databaseClass object.
+"orbitrap_database0.0.3"
+

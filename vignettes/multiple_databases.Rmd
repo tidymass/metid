@@ -43,11 +43,11 @@ The raw MS2 data from DDA or DIA should be transfered to msp, mgf or mzXML forma
 
 The database must be generated using `construct_database()` function. Here we use the databases in `metid` packages. 
 
-* `msDatabase_rplc0.0.2`: A in-house database, it contains m/z, RT and MS2 spectra information.
+* `snyder_database_rplc0.0.3`: A in-house database, it contains m/z, RT and MS2 spectra information.
 
-* `orbitrapDatabase0.0.1`: A public database from `MassBank`. It contains m/z and MS2 spectra information.
+* `orbitrap_database0.0.3`: A public database from `MassBank`. It contains m/z and MS2 spectra information.
 
-* `hmdbMS1Database0.0.1`: A public database from `HMDB`, only contains m/z information.
+* `hmdb_ms1_database0.0.3`: A public database from `HMDB`, only contains m/z information.
 
 ## Data organization
 
@@ -94,21 +94,13 @@ file.copy(
 )
 
 ##get databases from metid
-database <- system.file("ms2_database", package = "metid")
+data("snyder_database_rplc0.0.3", file = "metid")
+data("orbitrap_database0.0.3", file = "metid")
+data("hmdb_ms1_database0.0.3", file = "metid")
 
-file.copy(
-  from = file.path(
-    database,
-    c(
-      "msDatabase_rplc0.0.2",
-      "orbitrapDatabase0.0.1",
-      "hmdbMS1Database0.0.1"
-    )
-  ),
-  to = path,
-  overwrite = TRUE,
-  recursive = TRUE
-)
+save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.3"))
+save(orbitrap_database0.0.3, file = file.path(path, "orbitrap_database0.0.3"))
+save(hmdb_ms1_database0.0.3, file = file.path(path, "hmdb_ms1_database0.0.3"))
 ```
 
 Now in your `./example`, there are files files, namely `ms1.peak.table.csv`, `QC1_MSMS_NCE25.mgf` and three databases.
@@ -128,7 +120,7 @@ param1 <-
     total.score.tol = 0.5,
     candidate.num = 3,
     threads = 3,
-    database = "msDatabase_rplc0.0.2"
+    database = "snyder_database_rplc0.0.3"
   )
 
 param2 <- identify_metabolites_params(
@@ -140,7 +132,7 @@ param2 <- identify_metabolites_params(
   total.score.tol = 0.5,
   candidate.num = 3,
   threads = 3,
-  database = "orbitrapDatabase0.0.1"
+  database = "orbitrap_database0.0.3"
 )
 
 param3 <- identify_metabolites_params(
@@ -152,7 +144,7 @@ param3 <- identify_metabolites_params(
   total.score.tol = 0.5,
   candidate.num = 3,
   threads = 3,
-  database = "hmdbMS1Database0.0.1"
+  database = "hmdb_ms1_database0.0.3"
 )
 ```
 
@@ -177,7 +169,7 @@ result <- identify_metabolite_all(
 
 After we get the annotation result list, we then can integrate the annotation results from different databases. 
 
-For `msDatabase_rplc0.0.2`, the annotaiton results are `Level 1` according to MSI.
+For `snyder_database_rplc0.0.3`, the annotaiton results are `Level 1` according to MSI.
 
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result[[1]]
@@ -192,7 +184,7 @@ annotation_table1 %>%
   head()
 ```
 
-For `orbitrapDatabase0.0.1`, the annotaiton results are `Level 2` according to MSI.
+For `orbitrap_database0.0.3`, the annotaiton results are `Level 2` according to MSI.
 
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result[[2]]
@@ -208,7 +200,7 @@ annotation_table2 %>%
 ```
 
 
-For `hmdbMS1Database0.0.1`, the annotaiton results are `Level 3` according to MSI.
+For `hmdb_ms1_database0.0.3`, the annotaiton results are `Level 3` according to MSI.
 
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result[[3]]
