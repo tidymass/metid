@@ -138,10 +138,6 @@ identify_metabolites = function(
 }
 
 
-
-
-
-
 #' @title Identify peaks based on MS1 database
 #' @description Identify peaks based on MS1 database.
 #' \lifecycle{deprecated}

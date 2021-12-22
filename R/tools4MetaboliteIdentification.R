@@ -233,7 +233,7 @@ identifyPeak = function(idx,
       exp(-0.5 * (temp.rt.error / (rt.match.tol)) ^ 2)
     
     ####if user set rt.match.tol as FALSE, set RT.error as NA
-    if (rt.match.tol < 0) {
+    if (rt.match.tol > 10000) {
       temp.rt.error = NA
       temp.rt.match.score = NA
     }
