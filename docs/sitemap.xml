@@ -4,6 +4,12 @@
     <loc>https://tidymass.github.io/metid//index.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metid//reference/annotate_metabolites_mass_dataset.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid//reference/annotate_single_peak_mass_dataset.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metid//reference/construct_database.html</loc>
   </url>
   <url>
@@ -68,9 +74,6 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/identify_metabolites.html</loc>
-  </url>
-  <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_metabolites_mass_dataset.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//reference/identify_metabolites_params.html</loc>
@@ -188,6 +191,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//articles/Version0_9_2.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid//articles/annotate_single_peak_mass_dataset.Rmd.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//articles/contact_us.html</loc>

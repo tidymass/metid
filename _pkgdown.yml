@@ -104,14 +104,18 @@ navbar:
       - text: "Others"
       - text: Other usefull tools
         href: articles/other_tools.html
+      - text: -------
+      - text: "metid for mass_dataset class object"
       - text: "Work with mass_dataset class object"
         href: articles/work_with_mass_dataset.html
+      - text: "Annotate single peak in mass_dataset"
+        href: articles/annotate_single_peak_mass_dataset.Rmd.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/JasperShen1990
-    # contact:
-    #   text: Contact us
-    #   href: articles/contact_us.html
+    contact:
+      text: Contact us
+      href: articles/contact_us.html
     database:
       text: Public databases
       href: articles/public_databases.html

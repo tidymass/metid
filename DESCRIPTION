@@ -54,7 +54,8 @@ Imports:
     MSnbase,
     ProtGenerics,
     plotly,
-    massdataset
+    massdataset,
+    tidyverse
 Suggests: 
     knitr,
     rmarkdown,

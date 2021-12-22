@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • metid</title>
+<title>Identify metabolites based on MS1 or MS/MS database for single peak. — annotate_single_peak_mass_dataset • metid</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,7 +52,9 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Identify metabolites based on MS1 or MS/MS database for single peak. — annotate_single_peak_mass_dataset" />
+<meta property="og:description" content="Identify metabolites based on MS1 or MS/MS database.
+" />
 <meta property="og:image" content="https://tidymass.github.io/metid/logo.png" />
 
 
@@ -82,7 +84,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -212,44 +214,161 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Identify metabolites based on MS1 or MS/MS database for single peak.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymass/metid/blob/master/R/annotate_single_peak_mass_dataset.R'><code>R/annotate_single_peak_mass_dataset.R</code></a></small>
+    <div class="hidden name"><code>annotate_single_peak_mass_dataset.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Version0_9_2.html">Version 0.9.2</a></dt>
-        <dd></dt>
-        <dt><a href="annotate_single_peak_mass_dataset.Rmd.html">Annotate single peaks in mass_dataset</a></dt>
-        <dd></dt>
-        <dt><a href="contact_us.html">Contact us</a></dt>
-        <dd></dt>
-        <dt><a href="database_construction.html">Construct in-house MS2 datbase using metid</a></dt>
-        <dd></dt>
-        <dt><a href="identify_single_peak.html">Identify single peak with metid</a></dt>
-        <dd></dt>
-        <dt><a href="metabolite_annotation_using_MS1.html">Annotate metabolites according to MS1 database using metid package</a></dt>
-        <dd></dt>
-        <dt><a href="metabolite_annotation_using_MS2.html">Annotate metabolites according to MS2 database using metid</a></dt>
-        <dd></dt>
-        <dt><a href="metid_introduction.html">Brief introduction of metid</a></dt>
-        <dd></dt>
-        <dt><a href="multiple_databases.html">Identify peak tables with multiple databases</a></dt>
-        <dd></dt>
-        <dt><a href="other_tools.html">Other tools in metid</a></dt>
-        <dd></dt>
-        <dt><a href="output_database.html">Output metid database to mgf/msp for other tools</a></dt>
-        <dd></dt>
-        <dt><a href="public_database_construction.html">Construct public MS2 datbase using metid</a></dt>
-        <dd></dt>
-        <dt><a href="public_databases.html">Database provided for `metid`</a></dt>
-        <dd></dt>
-        <dt><a href="work_with_mass_dataset.html">metid support mass_dataaset class object</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Identify metabolites based on MS1 or MS/MS database.
+<a href='https://lifecycle.r-lib.org/articles/stages.html#maturing'><img src='figures/lifecycle-maturing.svg' alt='[Maturing]' /></a></p>
     </div>
+
+    <pre class="usage"><span class='fu'>annotate_single_peak_mass_dataset</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>variable_id</span>,
+  <span class='va'>variable_index</span>,
+  based_on_rt <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  based_on_ms2 <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  add_to_annotation_table <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ms1.match.ppm <span class='op'>=</span> <span class='fl'>25</span>,
+  ms2.match.ppm <span class='op'>=</span> <span class='fl'>30</span>,
+  mz.ppm.thr <span class='op'>=</span> <span class='fl'>400</span>,
+  ms2.match.tol <span class='op'>=</span> <span class='fl'>0.5</span>,
+  fraction.weight <span class='op'>=</span> <span class='fl'>0.3</span>,
+  dp.forward.weight <span class='op'>=</span> <span class='fl'>0.6</span>,
+  dp.reverse.weight <span class='op'>=</span> <span class='fl'>0.1</span>,
+  rt.match.tol <span class='op'>=</span> <span class='fl'>30</span>,
+  polarity <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"positive"</span>, <span class='st'>"negative"</span><span class='op'>)</span>,
+  ce <span class='op'>=</span> <span class='st'>"all"</span>,
+  column <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"rp"</span>, <span class='st'>"hilic"</span><span class='op'>)</span>,
+  ms1.match.weight <span class='op'>=</span> <span class='fl'>0.25</span>,
+  rt.match.weight <span class='op'>=</span> <span class='fl'>0.25</span>,
+  ms2.match.weight <span class='op'>=</span> <span class='fl'>0.5</span>,
+  total.score.tol <span class='op'>=</span> <span class='fl'>0.5</span>,
+  candidate.num <span class='op'>=</span> <span class='fl'>3</span>,
+  <span class='va'>database</span>,
+  threads <span class='op'>=</span> <span class='fl'>3</span>
+<span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>A mass_dataset class obejct.</p></td>
+    </tr>
+    <tr>
+      <th>variable_id</th>
+      <td><p>variable_id</p></td>
+    </tr>
+    <tr>
+      <th>variable_index</th>
+      <td><p>variable_index</p></td>
+    </tr>
+    <tr>
+      <th>based_on_rt</th>
+      <td><p>based_on_rt</p></td>
+    </tr>
+    <tr>
+      <th>based_on_ms2</th>
+      <td><p>based_on_ms2</p></td>
+    </tr>
+    <tr>
+      <th>add_to_annotation_table</th>
+      <td><p>add_to_annotation_table</p></td>
+    </tr>
+    <tr>
+      <th>ms1.match.ppm</th>
+      <td><p>Precursor match ppm tolerance.</p></td>
+    </tr>
+    <tr>
+      <th>ms2.match.ppm</th>
+      <td><p>Fragment ion match ppm tolerance.</p></td>
+    </tr>
+    <tr>
+      <th>mz.ppm.thr</th>
+      <td><p>Accurate mass tolerance for m/z error calculation.</p></td>
+    </tr>
+    <tr>
+      <th>ms2.match.tol</th>
+      <td><p>MS2 match (MS2 similarity) tolerance.</p></td>
+    </tr>
+    <tr>
+      <th>fraction.weight</th>
+      <td><p>The weight for matched fragments.</p></td>
+    </tr>
+    <tr>
+      <th>dp.forward.weight</th>
+      <td><p>Forward dot product weight.</p></td>
+    </tr>
+    <tr>
+      <th>dp.reverse.weight</th>
+      <td><p>Reverse dot product weight.</p></td>
+    </tr>
+    <tr>
+      <th>rt.match.tol</th>
+      <td><p>RT match tolerance.</p></td>
+    </tr>
+    <tr>
+      <th>polarity</th>
+      <td><p>The polarity of data, "positive"or "negative".</p></td>
+    </tr>
+    <tr>
+      <th>ce</th>
+      <td><p>Collision energy. Please confirm the CE values in your database. Default is "all".</p></td>
+    </tr>
+    <tr>
+      <th>column</th>
+      <td><p>"hilic" (HILIC column) or "rp" (reverse phase).</p></td>
+    </tr>
+    <tr>
+      <th>ms1.match.weight</th>
+      <td><p>The weight of MS1 match for total score calculation.</p></td>
+    </tr>
+    <tr>
+      <th>rt.match.weight</th>
+      <td><p>The weight of RT match for total score calculation.</p></td>
+    </tr>
+    <tr>
+      <th>ms2.match.weight</th>
+      <td><p>The weight of MS2 match for total score calculation.</p></td>
+    </tr>
+    <tr>
+      <th>total.score.tol</th>
+      <td><p>Total score tolerance. The total score are referring to MS-DIAL.</p></td>
+    </tr>
+    <tr>
+      <th>candidate.num</th>
+      <td><p>The number of candidate.</p></td>
+    </tr>
+    <tr>
+      <th>database</th>
+      <td><p>MS2 database name or MS database.</p></td>
+    </tr>
+    <tr>
+      <th>threads</th>
+      <td><p>Number of threads</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A metIdentifyClass object.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>The example and demo data of this function can be found
+https://tidymass.github.io/metid/articles/metid.html</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Xiaotao Shen
+<a href='mailto:shenxt1990@163.com'>shenxt1990@163.com</a></p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

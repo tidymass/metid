@@ -1,5 +1,5 @@
 ---
-title: "metid support mass_dataaset class object"
+title: "Annotate single peaks in mass_dataset"
 author:
 - name: Xiaotao Shen PhD (https://www.shenxt.info/)
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
@@ -10,7 +10,7 @@ output:
   pdf_document:
     toc: no
 vignette: >
-  %\VignetteIndexEntry{metid_mass_dataset}
+  %\VignetteIndexEntry{annotate_single_peak_mass_dataset}
   %\VignettePackage{metid}
   % \VignetteEngine{knitr::rmarkdown}
   % \usepackage[utf8]{inputenc}
@@ -98,45 +98,90 @@ object@ms2_data
 
 ```
 
-## **Identify metabolites according to MS1**
+## **Annotate single peaks**
 
-
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-data("hmdb_ms1_database0.0.3", package = "metid")
-hmdb_ms1_database0.0.3
-object1 =
-  annotate_metabolites_mass_dataset(object = object,
-                                    database = hmdb_ms1_database0.0.3)
-```
-
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-object1
-```
-
-## **Identify metabolites according to MS2**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("snyder_database_rplc0.0.3", package = "metid")
 
-object2 =
-  annotate_metabolites_mass_dataset(object = object1,
-                                    database = snyder_database_rplc0.0.3)
-head(object2@annotation_table)
-head(extract_variable_info(object = object2))
+annotate_single_peak_mass_dataset(
+  object = object,
+  variable_index = 3,
+  based_on_rt = FALSE,
+  based_on_ms2 = FALSE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = FALSE
+)
 ```
 
-## **Identify metabolites according another database**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-data("orbitrap_database0.0.3", package = "metid")
+annotate_single_peak_mass_dataset(
+  object = object,
+  variable_index = 3,
+  based_on_rt = TRUE,
+  based_on_ms2 = FALSE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = FALSE
+)
+```
 
-object3 =
-  annotate_metabolites_mass_dataset(object = object2,
-                                    database = orbitrap_database0.0.3)
-head(extract_variable_info(object = object3))
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+annotate_single_peak_mass_dataset(
+  object = object,
+  variable_index = 3,
+  based_on_rt = TRUE,
+  based_on_ms2 = TRUE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = FALSE
+)
 ```
 
 
+## **Add to object**
+
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+
+object@annotation_table
+
+object1 = 
+annotate_single_peak_mass_dataset(
+  object = object,
+  variable_index = 3,
+  based_on_rt = FALSE,
+  based_on_ms2 = FALSE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = TRUE
+)
+
+object1@annotation_table
+```
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+object2 = 
+annotate_single_peak_mass_dataset(
+  object = object1,
+  variable_index = 3,
+  based_on_rt = TRUE,
+  based_on_ms2 = FALSE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = TRUE
+)
+
+object2@annotation_table
+```
+```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+object3 = 
+annotate_single_peak_mass_dataset(
+  object = object2,
+  variable_index = 3,
+  based_on_rt = TRUE,
+  based_on_ms2 = FALSE,
+  database = snyder_database_rplc0.0.3,
+  add_to_annotation_table = TRUE
+)
+
+object3@annotation_table
+```
 
 
 

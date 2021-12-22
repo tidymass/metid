@@ -1,9 +1,14 @@
-#' @title Identify metabolites based on MS1 or MS/MS database
+#' @title Identify metabolites based on MS1 or MS/MS database for single peak.
 #' @description Identify metabolites based on MS1 or MS/MS database.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@163.com}
 #' @param object A mass_dataset class obejct.
+#' @param variable_id variable_id
+#' @param variable_index variable_index
+#' @param based_on_rt based_on_rt
+#' @param based_on_ms2 based_on_ms2
+#' @param add_to_annotation_table add_to_annotation_table
 #' @param ms1.match.ppm Precursor match ppm tolerance.
 #' @param ms2.match.ppm Fragment ion match ppm tolerance.
 #' @param mz.ppm.thr Accurate mass tolerance for m/z error calculation.
@@ -28,61 +33,14 @@
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' https://tidymass.github.io/metid/articles/metid.html
-#' @examples
-#' library(massdataset)
-#' library(tidyverse)
-#' library(metid)
-#' ms1_data =
-#'   readr::read_csv(file.path(
-#'     system.file("ms1_peak", package = "metid"),
-#'     "ms1.peak.table.csv"
-#'   ))
-#'
-#' ms1_data = data.frame(ms1_data, sample1 = 1, sample2 = 2)
-#'
-#' expression_data = ms1_data %>%
-#'   dplyr::select(-c(name:rt))
-#'
-#' variable_info =
-#'   ms1_data %>%
-#'   dplyr::select(name:rt) %>%
-#'   dplyr::rename(variable_id = name)
-#'
-#' sample_info =
-#'   data.frame(
-#'     sample_id = colnames(expression_data),
-#'     injection.order = c(1, 2),
-#'     class = c("Subject", "Subject"),
-#'     group = c("Subject", "Subject")
-#'   )
-#' rownames(expression_data) = variable_info$variable_id
-#'
-#' object = create_mass_dataset(
-#'   expression_data = expression_data,
-#'   sample_info = sample_info,
-#'   variable_info = variable_info
-#' )
-#'
-#' object
-#'
-#' data("hmdb_ms1_database0.0.3", package = "metid")
-#'
-#' object1 =
-#'   annotate_metabolites_mass_dataset(object = object,
-#'                                     database = hmdb_ms1_database0.0.3)
-#'
-#' data("snyder_database_rplc0.0.3", package = "metid")
-#'
-#' database = snyder_database_rplc0.0.3
-#'
-#' object2 =
-#'   annotate_metabolites_mass_dataset(object = object1,
-#'                                     database = snyder_database_rplc0.0.3)
-#' head(object2@annotation_table)
-#' extract_variable_info(object = object)
 
-annotate_metabolites_mass_dataset =
+annotate_single_peak_mass_dataset =
   function(object,
+           variable_id,
+           variable_index,
+           based_on_rt = TRUE,
+           based_on_ms2 = TRUE,
+           add_to_annotation_table = FALSE,
            ms1.match.ppm = 25,
            ms2.match.ppm = 30,
            mz.ppm.thr = 400,
@@ -128,6 +86,10 @@ annotate_metabolites_mass_dataset =
       }
     }
     
+    if(!based_on_rt){
+      rt.match.tol = 1000000
+    }
+    
     if (is.na(rt.match.tol)) {
       rt.match.tol = 1000000
     }
@@ -149,13 +111,42 @@ annotate_metabolites_mass_dataset =
                           database@database.info$Version,
                           sep = "_")
     
+    ######check variable_id and variable_index
+    if (missing(variable_id) & missing(variable_index)) {
+      stop("provide variable_id or variable_index.\n")
+    }
+    
+    if (!missing(variable_id)) {
+      
+      purrr::walk(variable_id, .f = function(temp_variable_id){
+        if (!temp_variable_id %in% object@variable_info$variable_id) {
+          stop(paste(temp_variable_id, "is not in variable_info.\n"))
+        }  
+      })
+        variable_index = match(variable_id, object@variable_info$variable_id)
+    } else{
+      
+      purrr::walk(variable_index, .f = function(temp_variable_index){
+        if (temp_variable_index <= 0 |
+            temp_variable_index > nrow(object@variable_info)) {
+          stop(
+            "variable_index ",
+            temp_variable_index,
+            " should be range from 1 to ",
+            nrow(object@variable_info)
+          )
+        }
+      })
+    }
+    
+    temp_object = object[variable_index,]
     
     ######NO MS2 in object
-    if (length(object@ms2_data) == 0) {
+    if (length(object@ms2_data) == 0 | !based_on_ms2) {
       cat(crayon::yellow("No MS2 data in object, so only use mz and/or RT for matching.\n"))
       annotation_result =
         mzIdentify_mass_dataset(
-          object = object,
+          object = temp_object,
           rt.match.tol = rt.match.tol,
           ms1.match.ppm = ms1.match.ppm,
           polarity = polarity,
@@ -168,7 +159,7 @@ annotate_metabolites_mass_dataset =
     }
     
     ######MS2 in object
-    if (length(object@ms2_data) > 0) {
+    if (length(object@ms2_data) > 0 & based_on_ms2) {
       spectra_pos_number =
         database@spectra.data[['Spectra.positive']] %>%
         length()
@@ -190,7 +181,7 @@ annotate_metabolites_mass_dataset =
         ))
         annotation_result =
           mzIdentify_mass_dataset(
-            object = object,
+            object = temp_object,
             rt.match.tol = rt.match.tol,
             ms1.match.ppm = ms1.match.ppm,
             polarity = polarity,
@@ -204,7 +195,7 @@ annotate_metabolites_mass_dataset =
         ######MS2 in database
         annotation_result =
           metIdentify_mass_dataset(
-            object = object,
+            object = temp_object,
             ms1.match.ppm = ms1.match.ppm,
             ms2.match.ppm = ms2.match.ppm,
             mz.ppm.thr = mz.ppm.thr,
@@ -250,13 +241,16 @@ annotate_metabolites_mass_dataset =
     
     annotation_result$Level = Level
     
+    # browser()
+    
     annotation_result =
       annotation_result %>%
       dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
     
     annotation_result =
       annotation_result %>%
-      dplyr::filter(variable_id %in% object@variable_info$variable_id)
+      dplyr::filter(variable_id %in% temp_object@variable_info$variable_id)
+    
     
     annotation_result =
       annotation_result[, c(
@@ -280,60 +274,66 @@ annotate_metabolites_mass_dataset =
         "Level"
       )]
     
-    if (nrow(object@annotation_table) == 0) {
-      object@annotation_table = annotation_result
-    } else{
-      object@annotation_table =
-        rbind(object@annotation_table,
-              annotation_result) %>%
-        dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
+    
+    if (add_to_annotation_table) {
+      if (nrow(object@annotation_table) == 0) {
+        object@annotation_table = as.data.frame(annotation_result)
+      } else{
+        object@annotation_table =
+          rbind(object@annotation_table,
+                annotation_result) %>%
+          dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
+        
+        ###only remain top annotations
+        object@annotation_table =
+          object@annotation_table %>%
+          dplyr::group_by(variable_id) %>%
+          dplyr::slice_head(n = candidate.num) %>%
+          dplyr::ungroup() %>%
+          dplyr::distinct(.keep_all = TRUE) %>% 
+          as.data.frame()
+      }
       
-      ###only remain top annotations
-      object@annotation_table =
-        object@annotation_table %>%
-        dplyr::group_by(variable_id) %>%
-        dplyr::slice_head(n = candidate.num) %>%
-        dplyr::ungroup() %>%
-        dplyr::distinct(.keep_all = TRUE)
-    }
-    
-    ###processing information
-    process_info = object@process_info
-    
-    parameter <- new(
-      Class = "tidymass_parameter",
-      pacakge_name = "metid",
-      function_name = "annotate_metabolites_mass_dataset()",
-      parameter = list(
-        ms1.match.ppm = ms1.match.ppm,
-        ms2.match.ppm = ms2.match.ppm,
-        mz.ppm.thr = mz.ppm.thr,
-        ms2.match.tol = ms2.match.tol,
-        fraction.weight = fraction.weight,
-        dp.forward.weight = dp.forward.weight,
-        dp.reverse.weight = dp.reverse.weight,
-        rt.match.tol = rt.match.tol,
-        polarity = polarity,
-        ce = ce,
-        column = column,
-        ms1.match.weight = ms1.match.weight,
-        rt.match.weight = rt.match.weight,
-        ms2.match.weight = ms2.match.weight,
-        total.score.tol = total.score.tol,
-        candidate.num = candidate.num,
-        database = database.name,
-        threads = threads
-      ),
-      time = Sys.time()
-    )
-    
-    if (all(names(process_info) != "annotate_metabolites_mass_dataset")) {
-      process_info$annotate_metabolites_mass_dataset = parameter
+      ###processing information
+      process_info = object@process_info
+      
+      parameter <- new(
+        Class = "tidymass_parameter",
+        pacakge_name = "metid",
+        function_name = "identify_metabolites_mass_dataset()",
+        parameter = list(
+          ms1.match.ppm = ms1.match.ppm,
+          ms2.match.ppm = ms2.match.ppm,
+          mz.ppm.thr = mz.ppm.thr,
+          ms2.match.tol = ms2.match.tol,
+          fraction.weight = fraction.weight,
+          dp.forward.weight = dp.forward.weight,
+          dp.reverse.weight = dp.reverse.weight,
+          rt.match.tol = rt.match.tol,
+          polarity = polarity,
+          ce = ce,
+          column = column,
+          ms1.match.weight = ms1.match.weight,
+          rt.match.weight = rt.match.weight,
+          ms2.match.weight = ms2.match.weight,
+          total.score.tol = total.score.tol,
+          candidate.num = candidate.num,
+          database = database.name,
+          threads = threads
+        ),
+        time = Sys.time()
+      )
+      
+      if (all(names(process_info) != "identify_metabolites_mass_dataset")) {
+        process_info$identify_metabolites_mass_dataset = parameter
+      } else{
+        process_info$identify_metabolites_mass_dataset = c(process_info$identify_metabolites_mass_dataset,
+                                                           parameter)
+      }
+      
+      object@process_info = process_info
+      return(object)
     } else{
-      process_info$annotate_metabolites_mass_dataset = c(process_info$annotate_metabolites_mass_dataset,
-                                                         parameter)
+      return(annotation_result)
     }
-    
-    object@process_info = process_info
-    return(object)
   }
