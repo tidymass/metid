@@ -18,7 +18,7 @@
 #' @param ms1.match.weight The weight of MS1 match for total score calculation.
 #' @param rt.match.weight The weight of RT match for total score calculation.
 #' @param ms2.match.weight The weight of MS2 match for total score calculation.
-#' @param total.score.tol Total score tolerance. The total score are refering to MS-DIAL.
+#' @param total.score.tol Total score tolerance. The total score are referring to MS-DIAL.
 #' @param candidate.num The number of candidate.
 #' @param database MS2 database name or MS database.
 #' @param threads Number of threads
@@ -28,26 +28,26 @@
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' https://tidymass.github.io/metid/articles/metid.html
-#' @examples 
+#' @examples
 #' library(massdataset)
 #' library(tidyverse)
-#' 
+#' library(metid)
 #' ms1_data =
 #'   readr::read_csv(file.path(
 #'     system.file("ms1_peak", package = "metid"),
 #'     "ms1.peak.table.csv"
 #'   ))
-#' 
+#'
 #' ms1_data = data.frame(ms1_data, sample1 = 1, sample2 = 2)
-#' 
+#'
 #' expression_data = ms1_data %>%
 #'   dplyr::select(-c(name:rt))
-#' 
+#'
 #' variable_info =
 #'   ms1_data %>%
 #'   dplyr::select(name:rt) %>%
 #'   dplyr::rename(variable_id = name)
-#' 
+#'
 #' sample_info =
 #'   data.frame(
 #'     sample_id = colnames(expression_data),
@@ -56,30 +56,30 @@
 #'     group = c("Subject", "Subject")
 #'   )
 #' rownames(expression_data) = variable_info$variable_id
-#' 
+#'
 #' object = create_mass_dataset(
 #'   expression_data = expression_data,
 #'   sample_info = sample_info,
 #'   variable_info = variable_info
 #' )
-#' 
+#'
 #' object
-#' 
+#'
 #' data("hmdb_ms1_database0.0.3", package = "metid")
-#' 
-#' object1 = 
-#'   identify_metabolites_mass_dataset(object = object, 
+#'
+#' object1 =
+#'   identify_metabolites_mass_dataset(object = object,
 #'                                     database = hmdb_ms1_database0.0.3)
-#' 
+#'
 #' data("snyder_database_rplc0.0.3", package = "metid")
-#' 
+#'
 #' database = snyder_database_rplc0.0.3
-#' 
-#' object2 = 
-#'   identify_metabolites_mass_dataset(object = object1, 
+#'
+#' object2 =
+#'   identify_metabolites_mass_dataset(object = object1,
 #'                                     database = snyder_database_rplc0.0.3)
-#' 
 #' head(object2@annotation_table)
+#' extract_variable_info(object = object)
 
 identify_metabolites_mass_dataset =
   function(object,
@@ -228,7 +228,8 @@ identify_metabolites_mass_dataset =
         object@annotation_table %>%
         dplyr::group_by(variable_id) %>%
         dplyr::slice_head(n = candidate.num) %>%
-        dplyr::ungroup()
+        dplyr::ungroup() %>% 
+        dplyr::distinct(.keep_all = TRUE)
     }
     
     ###processing information

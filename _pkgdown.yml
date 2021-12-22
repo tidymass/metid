@@ -104,8 +104,8 @@ navbar:
       - text: "Others"
       - text: Other usefull tools
         href: articles/other_tools.html
-      - text: Test
-        href: https://www.tidyverse.org/blog/2018/12/readxl-1-2-0/
+      - text: "Work with mass_dataset class object"
+        href: articles/work_with_mass_dataset.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/JasperShen1990

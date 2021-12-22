@@ -34,6 +34,7 @@
 #' @import graphics
 #' @import grDevices
 #' @import utils
+#' @importClassesFrom massdataset mass_dataset
 #' @export
 #' @examples
 #' metid_logo()

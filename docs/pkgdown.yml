@@ -14,7 +14,8 @@ articles:
   output_database: output_database.html
   public_database_construction: public_database_construction.html
   public_databases: public_databases.html
-last_built: 2021-12-21T22:05Z
+  work_with_mass_dataset: work_with_mass_dataset.html
+last_built: 2021-12-22T08:24Z
 urls:
   reference: https://tidymass.github.io/metid//reference
   article: https://tidymass.github.io/metid//articles

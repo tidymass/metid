@@ -57,7 +57,7 @@ identify_metabolites_mass_dataset(
 
 \item{ms2.match.weight}{The weight of MS2 match for total score calculation.}
 
-\item{total.score.tol}{Total score tolerance. The total score are refering to MS-DIAL.}
+\item{total.score.tol}{Total score tolerance. The total score are referring to MS-DIAL.}
 
 \item{candidate.num}{The number of candidate.}
 
@@ -111,19 +111,19 @@ object
 
 data("hmdb_ms1_database0.0.3", package = "metid")
 
-object1 = 
-  identify_metabolites_mass_dataset(object = object, 
+object1 =
+  identify_metabolites_mass_dataset(object = object,
                                     database = hmdb_ms1_database0.0.3)
 
 data("snyder_database_rplc0.0.3", package = "metid")
 
 database = snyder_database_rplc0.0.3
 
-object2 = 
-  identify_metabolites_mass_dataset(object = object1, 
+object2 =
+  identify_metabolites_mass_dataset(object = object1,
                                     database = snyder_database_rplc0.0.3)
-
 head(object2@annotation_table)
+extract_variable_info(object = object)
 }
 \seealso{
 The example and demo data of this function can be found
