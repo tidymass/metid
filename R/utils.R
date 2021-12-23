@@ -1,70 +1,3 @@
-# SXTMTmatch = function(data1,
-#                       data2,
-#                       mz.tol,
-#                       #rt.tol is relative
-#                       rt.tol = 30,
-#                       rt.error.type = c("relative", "abs")){
-#   rt.error.type <- match.arg(rt.error.type)
-#   #
-#   if (nrow(data1) == 0 | nrow(data2) == 0) {
-#     result <- NULL
-#     return(result)
-#   }
-#   
-#   info1 <- data1[, c(1, 2), drop = FALSE]
-#   info1 <- apply(info1, 1, list)
-#   
-#   mz2 <- as.numeric(data2[, 1])
-#   rt2 <- as.numeric(data2[, 2])
-#   
-#   result <- pbapply::pblapply(info1, function(x) {
-#     temp.mz1 <- x[[1]][[1]]
-#     temp.rt1 <- x[[1]][[2]]
-#     mz.error <- abs(temp.mz1 - mz2) * 10 ^ 6 / temp.mz1
-#     if (rt.error.type == "relative") {
-#       rt.error <- abs(temp.rt1 - rt2) * 100 / temp.rt1
-#     } else{
-#       rt.error <- abs(temp.rt1 - rt2)
-#     }
-#     
-#     j <- which(mz.error <= mz.tol & rt.error <= rt.tol)
-#     if (length(j) == 0) {
-#       matrix(NA, ncol = 7)
-#     } else{
-#       cbind(j, temp.mz1, mz2[j], mz.error[j], temp.rt1, rt2[j], rt.error[j])
-#     }
-#   })
-#   
-#   if (length(result) == 1) {
-#     result <- cbind(1, result[[1]])
-#   } else{
-#     result <- mapply(function(x, y) {
-#       list(cbind(x, y))
-#     },
-#     x <- 1:length(info1),
-#     y = result)
-#     result <- do.call(rbind, result)
-#   }
-#   
-#   result <-
-#     matrix(result[which(!apply(result, 1, function(x)
-#       any(is.na(x)))), ], ncol = 8)
-#   if (nrow(result) == 0)
-#     return(NULL)
-#   colnames(result) <-
-#     c("Index1",
-#       "Index2",
-#       "mz1",
-#       "mz2",
-#       "mz error",
-#       "rt1",
-#       "rt2",
-#       "rt error")
-#   result <- result
-# }
-# 
-
-
 getExtension = function(file){
   tail(stringr::str_split(string = file, pattern = "\\.")[[1]], 1)
 }
@@ -88,6 +21,69 @@ readTable = function(file, ...){
       extenstion != "xls") {
     cat(crayon::red("file are not csv, xlsx or xls.\n"))
   }
+}
+
+
+
+
+
+msg <- function(..., startup = FALSE) {
+  if (startup) {
+    if (!isTRUE(getOption("metid.quiet"))) {
+      packageStartupMessage(text_col(...))
+    }
+  } else {
+    message(text_col(...))
+  }
+}
+
+text_col <- function(x) {
+  # If RStudio not available, messages already printed in black
+  if (!rstudioapi::isAvailable()) {
+    return(x)
+  }
+  
+  if (!rstudioapi::hasFun("getThemeInfo")) {
+    return(x)
+  }
+  
+  theme <- rstudioapi::getThemeInfo()
+  
+  if (isTRUE(theme$dark)) crayon::white(x) else crayon::black(x)
+  
+}
+
+#' List all packages in the metid
+#'
+#' @param include_self Include metid in the list?
+#' @export
+#' @examples
+#' metid_packages()
+metid_packages <- function(include_self = TRUE) {
+  raw <- utils::packageDescription("metid")$Imports
+  imports <- strsplit(raw, ",")[[1]]
+  parsed <- gsub("^\\s+|\\s+$", "", imports)
+  names <- vapply(strsplit(parsed, "\\s+"), "[[", 1, FUN.VALUE = character(1))
+  
+  if (include_self) {
+    names <- c(names, "metid")
+  }
+  
+  names
+}
+
+invert <- function(x) {
+  if (length(x) == 0) return()
+  stacked <- utils::stack(x)
+  tapply(as.character(stacked$ind), stacked$values, list)
+}
+
+
+style_grey <- function(level, ...) {
+  crayon::style(
+    paste0(...),
+    crayon::make_style(grDevices::grey(level), grey = TRUE)
+  )
 }
 
 

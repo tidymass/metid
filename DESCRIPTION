@@ -55,7 +55,9 @@ Imports:
     ProtGenerics,
     plotly,
     massdataset,
-    tidyverse
+    tidyverse,
+    cli,
+    rstudioapi
 Suggests: 
     knitr,
     rmarkdown,

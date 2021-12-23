@@ -26,6 +26,8 @@
 #' @importFrom plotly ggplotly
 #' @importFrom future plan multisession 
 #' @importFrom furrr future_map2 future_map
+#' @importFrom rstudioapi isAvailable hasFun getThemeInfo
+#' @importFrom cli rule symbol cat_line
 #' @import lifecycle
 #' @import RColorBrewer
 #' @import utils
