@@ -4,6 +4,7 @@
 #' @slot database.info Database information.
 #' @slot spectra.info Metabolites in database.
 #' @slot spectra.data MS2 spectra data.
+#' @exportClass databaseClass
 
 setClass(
   Class = "databaseClass",

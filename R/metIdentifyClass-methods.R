@@ -24,6 +24,7 @@
 #' @slot database Parameter for annotation.
 #' @slot threads Parameter for annotation.
 #' @slot version Parameter for annotation.
+#' @exportClass metIdentifyClass
 
 ###S4 class for function metIdentification.
 setClass(
