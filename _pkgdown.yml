@@ -109,7 +109,9 @@ navbar:
       - text: "Work with mass_dataset class object"
         href: articles/work_with_mass_dataset.html
       - text: "Annotate single peak in mass_dataset"
-        href: articles/annotate_single_peak_mass_dataset.Rmd.html
+        href: articles/annotate_single_peak_mass_dataset.html
+      - text: "MS2 plot in mass_dataset"
+        href: articles/ms2_plot_mass_dataset.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/JasperShen1990

@@ -3,20 +3,21 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   Version0_9_2: Version0_9_2.html
-  annotate_single_peak_mass_dataset.Rmd: annotate_single_peak_mass_dataset.Rmd.html
+  annotate_single_peak_mass_dataset: annotate_single_peak_mass_dataset.html
   contact_us: contact_us.html
   database_construction: database_construction.html
   identify_single_peak: identify_single_peak.html
   metabolite_annotation_using_MS1: metabolite_annotation_using_MS1.html
   metabolite_annotation_using_MS2: metabolite_annotation_using_MS2.html
   metid_introduction: metid_introduction.html
+  ms2_plot_mass_dataset: ms2_plot_mass_dataset.html
   multiple_databases: multiple_databases.html
   other_tools: other_tools.html
   output_database: output_database.html
   public_database_construction: public_database_construction.html
   public_databases: public_databases.html
   work_with_mass_dataset: work_with_mass_dataset.html
-last_built: 2021-12-22T22:28Z
+last_built: 2021-12-23T00:12Z
 urls:
   reference: https://tidymass.github.io/metid//reference
   article: https://tidymass.github.io/metid//articles

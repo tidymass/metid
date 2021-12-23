@@ -100,6 +100,9 @@
     <loc>https://tidymass.github.io/metid//reference/metid_logo.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metid//reference/ms2_plot_mass_dataset.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metid//reference/ms2plot.html</loc>
   </url>
   <url>
@@ -193,7 +196,7 @@
     <loc>https://tidymass.github.io/metid//articles/Version0_9_2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/annotate_single_peak_mass_dataset.Rmd.html</loc>
+    <loc>https://tidymass.github.io/metid//articles/annotate_single_peak_mass_dataset.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//articles/contact_us.html</loc>
@@ -212,6 +215,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//articles/metid_introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid//articles/ms2_plot_mass_dataset.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid//articles/multiple_databases.html</loc>
