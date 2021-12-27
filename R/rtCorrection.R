@@ -735,7 +735,7 @@ bestloess = function(x,
   
   pre.all <- list()
   
-  for (i in 1:nrow(para)) {
+  for (i in seq_len(nrow(para))) {
     temp.degree <- para[i, 1]
     temp.span <- para[i, 2]
     pre <- NULL

@@ -27,7 +27,7 @@ License: GPL-2 | file LICENSE
 URL: https://github.com/tidymass/metid
 BugReports: https://github.com/tidymass/metid/issues
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     BiocParallel,
     crayon,
@@ -55,7 +55,6 @@ Imports:
     ProtGenerics,
     plotly,
     massdataset,
-    tidyverse,
     cli,
     rstudioapi
 Suggests: 

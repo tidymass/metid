@@ -132,7 +132,7 @@ construct_mona_database = function(file,
   metabolite_info =
     metabolite_info %>%
     dplyr::mutate(
-      Lab.ID = paste("MoNA", 1:nrow(metabolite_info), sep = "_"),
+      Lab.ID = paste("MoNA", seq_len(nrow(metabolite_info)), sep = "_"),
       RT = NA,
       CAS.ID = NA,
       HMDB.ID = NA,

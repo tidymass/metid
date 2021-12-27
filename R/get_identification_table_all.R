@@ -33,7 +33,7 @@ get_identification_table_all =
     result =
       purrr::map2(
         .x = result,
-        .y = 1:length(result),
+        .y = seq_along(result),
         .f = function(x, y) {
           names(x) = paste(y, names(x), sep = "_")
           x
@@ -58,7 +58,7 @@ get_identification_table_all =
       do.call(rbind, .) %>%
       as.data.frame()
 
-    colnames(database_level)[1:2] = c("database", "level")
+    colnames(database_level)[seq_len(2)] = c("database", "level")
     database_level =
       database_level %>% 
       tibble::rownames_to_column(var = "name")

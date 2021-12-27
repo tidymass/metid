@@ -235,7 +235,7 @@ identify_metabolite_all = function(ms1.data,
     if (length(duplicated.name) > 0) {
       lapply(duplicated.name, function(x) {
         ms1.info$name[which(ms1.info$name == x)] <-
-          paste(x, c(1:sum(ms1.info$name == x)), sep = "_")
+          paste(x, seq_len(sum(ms1.info$name == x)), sep = "_")
       })
     }
     
@@ -273,7 +273,7 @@ identify_metabolite_all = function(ms1.data,
   database_info =
     data.frame(database.name,
                database_class,
-               parameter = 1:length(database.name))
+               parameter = seq_along(database.name))
   
   write.csv(
     database_info,
@@ -296,7 +296,7 @@ identify_metabolite_all = function(ms1.data,
   
   names(identification.result) <- database.name
   
-  for (i in 1:length(database.name)) {
+  for (i in seq_along(database.name)) {
     cat(crayon::yellow("-------------------------------\n"))
     cat(crayon::yellow('Database', i, ":", database.name[i], "\n"))
     cat(crayon::yellow("-------------------------------\n"))

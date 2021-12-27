@@ -127,7 +127,7 @@ construct_massbank_database = function(file,
   metabolite_info =
     metabolite_info %>%
     dplyr::mutate(
-      Lab.ID = paste("MassBank", 1:nrow(metabolite_info), sep = "_"),
+      Lab.ID = paste("MassBank", seq_len(nrow(metabolite_info)), sep = "_"),
       RT = NA,
       CAS.ID = NA,
       HMDB.ID = NA,

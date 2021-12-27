@@ -487,13 +487,14 @@ ms2plot = function(object,
     if (nrow(matched.info) > 1) {
       cat(crayon::green("There are", nrow(matched.info), "identifications.\n"))
       cat(crayon::green(paste(
-        paste(c(1:nrow(matched.info)), as.character(matched.info[, 1]), sep = ":"),
+        paste(seq_len(nrow(matched.info)), 
+              as.character(matched.info[, 1]), sep = ":"),
         collapse = "\n"
       )))
       cat("\n")
       which.identification <- "test"
       while (is.na(which.identification) |
-             !which.identification %in% c(1:length(matched.info))) {
+             !which.identification %in% seq_along(matched.info)) {
         which.identification <-
           readline(prompt = "Which identification (index: number)?")
         which.identification <-

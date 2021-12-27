@@ -214,7 +214,7 @@ mzIdentify_mass_dataset =
       }
       
       if (nrow(match.idx) > candidate.num) {
-        match.idx <- match.idx[1:candidate.num, , drop = FALSE]
+        match.idx <- match.idx[seq_len(candidate.num), , drop = FALSE]
       }
       
       match.idx <- data.frame(match.idx,
@@ -249,7 +249,7 @@ mzIdentify_mass_dataset =
     
     match.result <-
       BiocParallel::bplapply(
-        1:nrow(ms1.data),
+        seq_len(nrow(ms1.data)),
         FUN = temp.fun,
         BPPARAM = bpparam,
         ms1.data = ms1.data,

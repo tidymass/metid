@@ -64,3 +64,21 @@
 #' @format A databaseClass object.
 "orbitrap_database0.0.3"
 
+
+
+
+##------------------------------------------------------------------------------
+#' @title Michael Snyder lab RPLC database 0.0.2
+#' @description Michael Snyder lab RPLC database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format A databaseClass object.
+"msDatabase_rplc0.0.2"
+
+##------------------------------------------------------------------------------
+#' @title Michael Snyder lab RPLC database 0.0.2
+#' @description Michael Snyder lab RPLC database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@163.com}
+#' @format A databaseClass object.
+"msDatabase_hilic0.0.2"

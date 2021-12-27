@@ -64,7 +64,7 @@ get_identification_table = function(...,
     identification.result <-
       lapply(identification.result, function(x) {
         if (nrow(x) > candidate.num) {
-          x <- x[1:candidate.num, , drop = FALSE]
+          x <- x[seq_len(candidate.num), , drop = FALSE]
         }
         data.frame(x,
                    "Database" = object@database,
@@ -96,13 +96,14 @@ get_identification_table = function(...,
         unlist(identification.result)
       
       identification.table$Candidate.number <-
-        sapply(identification.table$Identification, function(x) {
+        lapply(identification.table$Identification, function(x) {
           if (is.na(x))
             return(0)
           return(length(stringr::str_split(
             string = x, pattern = "\\{\\}"
           )[[1]]))
-        })
+        }) %>% 
+        unlist()
       identification.table <-
         data.frame(peak.table, identification.table, stringsAsFactors = FALSE)
     } else {
@@ -259,7 +260,7 @@ get_identification_table = function(...,
           iden.result <- x@identification.result
           iden.result <- mapply(function(x, y) {
             if (nrow(x) > candidate.num) {
-              x <- x[1:candidate.num, , drop = FALSE]
+              x <- x[seq_len(candidate.num), , drop = FALSE]
             }
             x <- data.frame(x,
                             "MS2.spectra.name" = y,
@@ -284,7 +285,7 @@ get_identification_table = function(...,
           iden.result <- x@identification.result
           iden.result <- mapply(function(x, y) {
             if (nrow(x) > candidate.num) {
-              x <- x[1:candidate.num, , drop = FALSE]
+              x <- x[seq_len(candidate.num), , drop = FALSE]
             }
             x <- data.frame(x,
                             "MS2.spectra.name" = y,
@@ -315,7 +316,7 @@ get_identification_table = function(...,
       },
       x = identification.result,
       y = database.name,
-      z = 1:length(identification.result)
+      z = seq_along(identification.result)
     )
     
     identification.result <-
@@ -330,7 +331,7 @@ get_identification_table = function(...,
         .fun = function(x) {
           x <- x[order(x$SS, decreasing = TRUE), , drop = FALSE]
           if (nrow(x) > candidate.num) {
-            x <- x[1:candidate.num, , drop = FALSE]
+            x <- x[seq_len(candidate.num), , drop = FALSE]
           }
           x
         }
@@ -356,13 +357,14 @@ get_identification_table = function(...,
       unlist(identification.result)
     
     identification.table$Candidate.number <-
-      sapply(identification.table$Identification, function(x) {
+      lapply(identification.table$Identification, function(x) {
         if (is.na(x))
           return(0)
         return(length(stringr::str_split(
           string = x, pattern = "\\{\\}"
         )[[1]]))
-      })
+      }) %>% 
+      unlist()
     
     identification.table$MS2.spectra.name <-
       unlist(lapply(identification.table$Identification, function(x) {
@@ -617,7 +619,7 @@ getIdentificationTable2 = function(object,
   identification.result <-
     lapply(identification.result, function(x) {
       if (nrow(x) > candidate.num) {
-        x <- x[1:candidate.num, , drop = FALSE]
+        x <- x[seq_len(candidate.num), , drop = FALSE]
       }
       data.frame(x,
                  "Database" = object@database,

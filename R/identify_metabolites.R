@@ -239,7 +239,7 @@ mzIdentify =
       readr::read_csv(file = file.path(path, ms1.data),
                       col_types = readr::cols())
     
-    colnames(ms1.data)[1:3] <- c("name", "mz", "rt")
+    colnames(ms1.data)[seq_len(3)] <- c("name", "mz", "rt")
     
     
     if (rt.match.tol > 10000) {
@@ -255,16 +255,6 @@ mzIdentify =
         )
       )
     }
-    
-    # ##debug
-    # for(i in 1:nrow(ms1.data)){
-    #   cat(i, " ")
-    #   result = temp.fun(idx = i, ms1.data = ms1.data,
-    #                     ms1.match.ppm = ms1.match.ppm,
-    #                     rt.match.tol = rt.match.tol,
-    #                     database = database,
-    #                     adduct.table = adduct.table, candidate.num = candidate.num)
-    # }
     
     temp.fun <- function(idx,
                          ms1.data,
@@ -395,7 +385,7 @@ mzIdentify =
       }
       
       if (nrow(match.idx) > candidate.num) {
-        match.idx <- match.idx[1:candidate.num, , drop = FALSE]
+        match.idx <- match.idx[seq_len(candidate.num), , drop = FALSE]
       }
       
       match.idx <- data.frame(match.idx,
@@ -430,7 +420,7 @@ mzIdentify =
     
     match.result <-
       BiocParallel::bplapply(
-        1:nrow(ms1.data),
+        seq_len(nrow(ms1.data)),
         FUN = temp.fun,
         BPPARAM = bpparam,
         ms1.data = ms1.data,
@@ -843,7 +833,7 @@ metIdentify = function(
     if (length(duplicated.name) > 0) {
       lapply(duplicated.name, function(x) {
         ms1.info$name[which(ms1.info$name == x)] <-
-          paste(x, c(1:sum(ms1.info$name == x)), sep = "_")
+          paste(x, seq_len(sum(ms1.info$name == x)), sep = "_")
       })
     }
     
@@ -883,7 +873,7 @@ metIdentify = function(
       stop("The columns should be name, mz and rt, respectively.\n")
     }
     
-    colnames(ms1.data)[1:3] <- c("name", "mz", "rt")
+    colnames(ms1.data)[seq_len(3)] <- c("name", "mz", "rt")
     match.result <-
       tinytools::mz_rt_match(
         data1 = ms1.data[, c(2, 3)],
@@ -916,7 +906,7 @@ metIdentify = function(
         return(c(idx, idx2[which.max(unlist(lapply(temp.ms2.info, function(y) {
           y <- y[order(y[, 2], decreasing = TRUE), , drop = FALSE]
           if (nrow(y) > 5)
-            y <- y[1:5,]
+            y <- y[seq_len(5),]
           sum(y[, 2])
         })))]))
       }

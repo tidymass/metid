@@ -256,8 +256,8 @@ identify_single_peak = function(
     dplyr::select(-file)
   
   match.result <- data.frame(
-    Index1.ms1.data = 1:nrow(ms1.info),
-    Index.ms2.spectra = 1:nrow(ms1.info),
+    Index1.ms1.data = seq_len(nrow(ms1.info)),
+    Index.ms2.spectra = seq_len(nrow(ms1.info)),
     MS1.peak.name = ms1.info$name,
     MS2.spectra.name = ms1.info$name,
     stringsAsFactors = FALSE

@@ -39,7 +39,7 @@ read_mzxml = function(file,
     if (length(duplicated.name) > 0) {
       lapply(duplicated.name, function(x) {
         info$name[which(info$name == x)] <-
-          paste(x, c(1:sum(info$name == x)), sep = "_")
+          paste(x, seq_len(sum(info$name == x)), sep = "_")
       })
     }
     
@@ -52,19 +52,9 @@ read_mzxml = function(file,
     list(info = info, spec = spec)
   }
   
-  # new.ms2 <-
-  #   BiocParallel::bplapply(
-  #     X = c(1:length(new.ms2)),
-  #     FUN = temp.fun,
-  #     BPPARAM = BiocParallel::SnowParam(workers = threads,
-  #                                       progressbar = TRUE,
-  #                                       type = "SOCK"),
-  #     ms2 = new.ms2
-  #   )
-  
   new.ms2 <-
     BiocParallel::bplapply(
-      X = c(1:length(new.ms2)),
+      X = seq_along(new.ms2),
       FUN = temp.fun,
       BPPARAM = BiocParallel::MulticoreParam(workers = threads,
                                              progressbar = TRUE),
@@ -119,7 +109,7 @@ readMZXML = function(file,
     if (length(duplicated.name) > 0) {
       lapply(duplicated.name, function(x) {
         info$name[which(info$name == x)] <-
-          paste(x, c(1:sum(info$name == x)), sep = "_")
+          paste(x, seq_len(sum(info$name == x)), sep = "_")
       })
     }
     
@@ -132,19 +122,9 @@ readMZXML = function(file,
     list(info = info, spec = spec)
   }
   
-  # new.ms2 <-
-  #   BiocParallel::bplapply(
-  #     X = c(1:length(new.ms2)),
-  #     FUN = temp.fun,
-  #     BPPARAM = BiocParallel::SnowParam(workers = threads,
-  #                                       progressbar = TRUE,
-  #                                       type = "SOCK"),
-  #     ms2 = new.ms2
-  #   )
-  
   new.ms2 <-
     BiocParallel::bplapply(
-      X = c(1:length(new.ms2)),
+      X = seq_along(new.ms2),
       FUN = temp.fun,
       BPPARAM = BiocParallel::MulticoreParam(workers = threads,
                                              progressbar = TRUE),

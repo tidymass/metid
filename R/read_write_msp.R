@@ -382,10 +382,6 @@ readMSP_MoNA = function(file) {
   
   pbapply::pboptions(style = 1)
   # fix bug
-  # for(idx in 1:length(temp.idx)){
-  # cat(idx, " ")
-  # idx <- temp.idx[[idx]]
-  
   cat(crayon::yellow("Transforming...\n"))
   info.spec <- pbapply::pblapply(temp.idx, function(idx) {
     if (idx[1] == idx[2])

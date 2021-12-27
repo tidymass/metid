@@ -184,7 +184,7 @@ ms2_plot_mass_dataset =
     
     
     names(all_plot) = paste(temp_annotation_table$variable_id,
-                            1:nrow(temp_annotation_table),
+                            seq_len(nrow(temp_annotation_table)),
                             sep = "_")
     return(all_plot)
   }

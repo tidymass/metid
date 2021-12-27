@@ -75,7 +75,7 @@ metIdentification = function(ms1.info,
   identification.result <-
     suppressMessages(
       BiocParallel::bplapply(
-        1:nrow(ms1.info),
+        seq_len(nrow(ms1.info)),
         FUN = identifyPeak,
         BPPARAM = bpparam,
         ms1.info = ms1.info,
@@ -317,7 +317,7 @@ identifyPeak = function(idx,
   match.idx <-
     match.idx[order(match.idx$Total.score, decreasing = TRUE),]
   if (nrow(match.idx) > candidate.num) {
-    match.idx <- match.idx[1:candidate.num,]
+    match.idx <- match.idx[seq_len(candidate.num),]
   }
   ##add other information
   match.idx <-
