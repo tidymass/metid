@@ -34,6 +34,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,18 +48,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Under development">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Help documents
@@ -70,7 +66,8 @@
       <a href="../articles/metid_introduction.html">Brief introduction</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">In-house and public database construction using metid</li>
+    </li>
+<li class="dropdown-header">In-house and public database construction using metid</li>
     <li>
       <a href="../articles/database_construction.html">In-house database construction</a>
     </li>
@@ -84,7 +81,8 @@
       <a href="../articles/rt_correction.html">Correct retention times in database according to internal standards</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Metabolite identification</li>
+    </li>
+<li class="dropdown-header">Metabolite identification</li>
     <li>
       <a href="../articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
     </li>
@@ -98,12 +96,14 @@
       <a href="../articles/identify_single_peak.html">Identify single peak</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Others</li>
+    </li>
+<li class="dropdown-header">Others</li>
     <li>
       <a href="../articles/other_tools.html">Other usefull tools</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">metid for mass_dataset class object</li>
+    </li>
+<li class="dropdown-header">metid for mass_dataset class object</li>
     <li>
       <a href="../articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
     </li>
@@ -127,16 +127,17 @@
       <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Change log</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../articles/public_databases.html">Public databases</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/public_databases.html">Public databases</a>
 </li>
 <li>
   <a href="../articles/contact_us.html">Contact us</a>
@@ -144,13 +145,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidymass/metid/">
+  <a href="https://github.com/tidymass/metid/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990">
+  <a href="https://twitter.com/JasperShen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -171,15 +172,15 @@
 
       
 
-      </header><script src="identify_single_peak_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Identify single peak with metid</h1>
-                        <h4 class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-22</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/identify_single_peak.Rmd"><code>vignettes/identify_single_peak.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/identify_single_peak.Rmd" class="external-link"><code>vignettes/identify_single_peak.Rmd</code></a></small>
       <div class="hidden name"><code>identify_single_peak.Rmd</code></div>
 
     </div>
@@ -189,27 +190,27 @@
 <hr>
 <p>Some times we only want to match one peak. We can use <code><a href="../reference/identify_single_peak.html">identify_single_peak()</a></code> function to identify single peak.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid">metid</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<div id="peak-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#peak-information" class="anchor"></a><strong>Peak information</strong>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="peak-information">
+<strong>Peak information</strong><a class="anchor" aria-label="anchor" href="#peak-information"></a>
 </h2>
 <p>We need the m/z, rt and MS2 information. MS2 must be a matrix with two columns: <code>mz</code> and <code>intensity</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mz</span> <span class="op">&lt;-</span> <span class="fl">472.3032</span>
 <span class="va">rt</span> <span class="op">&lt;-</span> <span class="fl">772.906</span>
-<span class="va">ms2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  mz <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">81.38455</span>,<span class="fl">82.19755</span>,<span class="fl">85.02840</span>,<span class="fl">86.5934</span>,<span class="fl">86.98958</span>,<span class="fl">89.48135</span>,<span class="fl">90.70250</span>,
+<span class="va">ms2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  mz <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">81.38455</span>,<span class="fl">82.19755</span>,<span class="fl">85.02840</span>,<span class="fl">86.5934</span>,<span class="fl">86.98958</span>,<span class="fl">89.48135</span>,<span class="fl">90.70250</span>,
          <span class="fl">93.03886</span>, <span class="fl">102.09140</span>, <span class="fl">103.03903</span>, <span class="fl">116.01658</span>, <span class="fl">127.98412</span>, 
          <span class="fl">134.06819</span>, <span class="fl">152.46967</span>, <span class="fl">162.02180</span>, <span class="fl">162.05521</span>, <span class="fl">162.11261</span><span class="op">)</span>,
-  intensity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1396.341</span>,<span class="fl">1488.730</span>,<span class="fl">15473.604</span>, <span class="fl">1740.842</span>,<span class="fl">2158.014</span>,<span class="fl">1351.686</span>,
+  intensity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1396.341</span>,<span class="fl">1488.730</span>,<span class="fl">15473.604</span>, <span class="fl">1740.842</span>,<span class="fl">2158.014</span>,<span class="fl">1351.686</span>,
                 <span class="fl">1547.099</span>,<span class="fl">1325.864</span>,<span class="fl">22441.047</span>,<span class="fl">76217.016</span>,<span class="fl">17809.395</span>,
                 <span class="fl">1439.743</span>, <span class="fl">1729.786</span>, <span class="fl">1543.765</span>, <span class="fl">2228.743</span>, 
                 <span class="fl">3508.225</span>, <span class="fl">529120.000</span><span class="op">)</span>,
   stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
-<span class="va">ms2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">ms2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt;         mz intensity</span>
 <span class="co">#&gt; 1 81.38455  1396.341</span>
 <span class="co">#&gt; 2 82.19755  1488.730</span>
@@ -218,23 +219,23 @@
 <span class="co">#&gt; 5 86.98958  2158.014</span>
 <span class="co">#&gt; 6 89.48135  1351.686</span></code></pre></div>
 </div>
-<div id="run-identify_single_peak-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#run-identify_single_peak-function" class="anchor"></a><strong>Run <code>identify_single_peak()</code> function</strong>
+<div class="section level2">
+<h2 id="run-identify_single_peak-function">
+<strong>Run <code>identify_single_peak()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-identify_single_peak-function"></a>
 </h2>
-<div id="load-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#load-database" class="anchor"></a><strong>Load database</strong>
+<div class="section level3">
+<h3 id="load-database">
+<strong>Load database</strong><a class="anchor" aria-label="anchor" href="#load-database"></a>
 </h3>
 <p>First we load the database from <code>metid</code> package and then put them in a <code>example</code> folder.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">##create a folder named as example</span>
-<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co">##get database from metid</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"snyder_database_rplc0.0.3"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">snyder_database_rplc0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"snyder_database_rplc0.0.3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"snyder_database_rplc0.0.3"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">snyder_database_rplc0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"snyder_database_rplc0.0.3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now in your <code>./example</code>, there are one file, namely <code>snyder_database_rplc0.0.3</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>annotation_result <span class="ot">&lt;-</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identify_single_peak</span>(<span class="at">ms1.mz =</span> mz, </span>
@@ -245,16 +246,17 @@
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ms2.match.tol =</span> <span class="fl">0.5</span>, </span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">database =</span> <span class="st">"snyder_database_rplc0.0.3"</span>,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">path =</span> path)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Use all CE values.</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Identifing metabolites with MS/MS database...</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33mUse all CE values.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32mIdentifing metabolites with MS/MS database...</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; All done.</span></span></code></pre></div>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [41mAll done.</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49m</span></span></code></pre></div>
 <p><code>annotation_result</code> is a <code>metIdentifyClass</code> object, so you can use all the functions for it to process.</p>
 </div>
 </div>
@@ -271,11 +273,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Xiaotao Shen, Si Wu.</p>
+  <p></p>
+<p>metid Developed by Xiaotao Shen, Si Wu. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

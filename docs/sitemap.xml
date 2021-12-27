@@ -1,240 +1,315 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tidymass.github.io/metid//index.html</loc>
+    <loc>https://tidymass.github.io/metid/404.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/annotate_metabolites_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/annotate_single_peak_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/construct_database.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/Version0_9_2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/construct_massbank_database.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/annotate_single_peak_mass_dataset.Rmd.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/construct_mona_database.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/annotate_single_peak_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/correct_database_rt.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/contact_us.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/databaseClass-class.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/database_construction.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/filter_adducts.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/identify_single_peak.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/filter_identification.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/getIdentificationTable2.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/getMS2spectrum.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_iden_info.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/metid.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_identification_table.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/metid_introduction.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_identification_table_all.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/ms2_plot_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_ms2_spectrum.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/multiple_databases.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_ms2_spectrum_from_object.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/other_tools.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_parameters.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/output_database.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/get_parameters_metid.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/public_database_construction.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/hilic.neg.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/public_databases.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/hilic.pos.html</loc>
+    <loc>https://tidymass.github.io/metid/articles/work_with_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/hmdb_ms1_database0.0.3.html</loc>
+    <loc>https://tidymass.github.io/metid/authors.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identifyPeak.html</loc>
+    <loc>https://tidymass.github.io/metid/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_metabolite_all.html</loc>
+    <loc>https://tidymass.github.io/metid/news/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_metabolites.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/annotate_metabolites_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_metabolites_params.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/annotate_single_peak_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_ms2_only.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/construct_database.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/identify_single_peak.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/construct_massbank_database.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metIdentify.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/construct_mona_database.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metIdentifyClass-class.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/correct_database_rt.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metIdentify_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/databaseClass-class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metid.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/databaseConstruction.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/metid_logo.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/filterIden.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/ms2_plot_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/filter_adducts.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/ms2plot.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/filter_identification.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/mzIdentify.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getIdenInfo.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/mzIdentifyParam.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getIdentificationTable.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/mzIdentify_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getIdentificationTable2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/orbitrap_database0.0.3.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getMS2spectrum.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/readMGF.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getMS2spectrum2Object.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/readMSP.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getParams.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/readMSP_MoNA.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/getParams2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/readMZXML.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_iden_info.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_mgf.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_identification_table.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_mgf_experiment.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_identification_table_all.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_mgf_gnps.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_ms2_spectrum.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_mgf_mona.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_ms2_spectrum_from_object.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_msp.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_parameters.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_msp_database.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/get_parameters_metid.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_msp_gnps.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/hilic.neg.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_msp_mona.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/hilic.pos.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/read_mzxml.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/hmdb_ms1_database0.0.3.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/rp.neg.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identifyPeak.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/rp.pos.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_metabolite_all.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/snyder_database_hilic0.0.3.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_metabolites.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/snyder_database_rplc0.0.3.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_metabolites_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/trans_to_new_style.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_metabolites_params.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/which_has_identification.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_ms2_only.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_mgf_gnps.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/identify_single_peak.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_mgf_massbank.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_mgf_mona.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metIdentify.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_msp_gnps.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metIdentify4all.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_msp_massbank.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metIdentifyClass-class.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//reference/write_msp_mona.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metIdentifyParam.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/Version0_9_2.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metIdentify_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/annotate_single_peak_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metid.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/contact_us.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metid_conflicts.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/database_construction.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metid_logo.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/identify_single_peak.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/metid_packages.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/metabolite_annotation_using_MS1.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/ms2_plot_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/metabolite_annotation_using_MS2.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/ms2plot.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/metid_introduction.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/msDatabase_hilic0.0.2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/ms2_plot_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/msDatabase_rplc0.0.2.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/multiple_databases.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/mzIdentify.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/other_tools.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/mzIdentifyParam.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/output_database.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/mzIdentify_mass_dataset.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/public_database_construction.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/orbitrap_database0.0.3.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/public_databases.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/readMGF.html</loc>
   </url>
   <url>
-    <loc>https://tidymass.github.io/metid//articles/work_with_mass_dataset.html</loc>
+    <loc>https://tidymass.github.io/metid/reference/readMSP.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/readMSP_MoNA.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/readMZXML.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_mgf.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_mgf_experiment.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_mgf_gnps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_mgf_mona.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_msp.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_msp_database.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_msp_gnps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_msp_mona.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/read_mzxml.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/rp.neg.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/rp.pos.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/snyder_database_hilic0.0.3.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/snyder_database_rplc0.0.3.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/trans2newStyle.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/trans_to_new_style.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/whichHasIden.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/which_has_identification.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_mgf_gnps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_mgf_massbank.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_mgf_mona.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_msp_gnps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_msp_massbank.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/write_msp_mona.html</loc>
   </url>
 </urlset>

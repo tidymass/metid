@@ -34,6 +34,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,18 +48,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Under development">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Help documents
@@ -70,7 +66,8 @@
       <a href="../articles/metid_introduction.html">Brief introduction</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">In-house and public database construction using metid</li>
+    </li>
+<li class="dropdown-header">In-house and public database construction using metid</li>
     <li>
       <a href="../articles/database_construction.html">In-house database construction</a>
     </li>
@@ -84,7 +81,8 @@
       <a href="../articles/rt_correction.html">Correct retention times in database according to internal standards</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Metabolite identification</li>
+    </li>
+<li class="dropdown-header">Metabolite identification</li>
     <li>
       <a href="../articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
     </li>
@@ -98,12 +96,14 @@
       <a href="../articles/identify_single_peak.html">Identify single peak</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Others</li>
+    </li>
+<li class="dropdown-header">Others</li>
     <li>
       <a href="../articles/other_tools.html">Other usefull tools</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">metid for mass_dataset class object</li>
+    </li>
+<li class="dropdown-header">metid for mass_dataset class object</li>
     <li>
       <a href="../articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
     </li>
@@ -127,16 +127,17 @@
       <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Change log</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../articles/public_databases.html">Public databases</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/public_databases.html">Public databases</a>
 </li>
 <li>
   <a href="../articles/contact_us.html">Contact us</a>
@@ -144,13 +145,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidymass/metid/">
+  <a href="https://github.com/tidymass/metid/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990">
+  <a href="https://twitter.com/JasperShen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -171,15 +172,15 @@
 
       
 
-      </header><script src="database_construction_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Construct in-house MS2 datbase using metid</h1>
-                        <h4 class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-22</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/database_construction.Rmd"><code>vignettes/database_construction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/database_construction.Rmd" class="external-link"><code>vignettes/database_construction.Rmd</code></a></small>
       <div class="hidden name"><code>database_construction.Rmd</code></div>
 
     </div>
@@ -188,16 +189,16 @@
     
 <p>If you have in-house standards which have been acquired with MS2 spectra data, then you can construct the in-house MS2 spectra databases using the <code>metid</code> package.</p>
 <p>There are no specific requirements on how to run the LC/MS data for users. As the in-house database construction in metid is used for users to get the in-house databases for themselves (including m/z, retention time and MS/MS spectra of metabolites, for level 1 annotation (Sumner et al., 2007)), so the users just need to run the standards using the same column, LC-gradient, and MS settings with their real samples in the lab</p>
-<div id="data-preparation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-preparation" class="anchor"></a><strong>Data preparation</strong>
+<div class="section level2">
+<h2 id="data-preparation">
+<strong>Data preparation</strong><a class="anchor" aria-label="anchor" href="#data-preparation"></a>
 </h2>
-<p>Firstly, please transform your raw standard MS data (positive and negative modes) to mzXML format using <a href="http://proteowizard.sourceforge.net/">ProteoWizard</a>. The parameter setting is shown in the figure below:</p>
-<p><img src="../man/figures/parameter_setting_MS_conventer.png"></p>
+<p>Firstly, please transform your raw standard MS data (positive and negative modes) to mzXML format using <a href="http://proteowizard.sourceforge.net/" class="external-link">ProteoWizard</a>. The parameter setting is shown in the figure below:</p>
+<p><img src="../reference/figures/parameter_setting_MS_conventer.png"></p>
 </div>
-<div id="data-organization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-organization" class="anchor"></a><strong>Data organization</strong>
+<div class="section level2">
+<h2 id="data-organization">
+<strong>Data organization</strong><a class="anchor" aria-label="anchor" href="#data-organization"></a>
 </h2>
 <p>Secondly, please organize your standard information as a table, and output it in a csv or xlsx format. The format of standard information can refer to our demo data in <code>demoData</code> package.</p>
 <p>From column 1 to 11, the columns are “Lab.ID”, “Compound.name”, “mz”, “RT”, “CAS.ID”, “HMDB.ID”, “KEGG.ID”, “Formula”, “mz.pos”, “mz.neg”, “Submitter”, respectively. It is OK if you have other information for the standards. As the demo data show, there are other additional information, namely “Family”, “Sub.pathway” and “Note”.</p>
@@ -209,20 +210,20 @@
 <li><p>mz.neg: Mass to change ratio of compound in negative mode, for example, M-H. <strong>You can set it as NA</strong>.</p></li>
 <li><p>Submitter: The name of person or organization. <strong>You can set it as NA</strong>.</p></li>
 </ul>
-<p><img src="../man/figures/compound_information.PNG"></p>
+<p><img src="../reference/figures/compound_information.PNG"></p>
 <p>Then create a folder and put your mzXML format datasets (positive mode in ‘POS’ folder and negative mode in ‘NEG’ folder) and compound information in it. The mzXML file should have the collision energy in the name of each file. For example, <code>test_NCE25.mzXML</code>.</p>
 <p>The names of the mzXML files should be like this: <code>xxx_NCE25.mzXML</code>.</p>
-<p><img src="../man/figures/database_construction.png"></p>
+<p><img src="../reference/figures/database_construction.png"></p>
 </div>
-<div id="run-construct_database-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#run-construct_database-function" class="anchor"></a><strong>Run <code>construct_database()</code> function</strong>
+<div class="section level2">
+<h2 id="run-construct_database-function">
+<strong>Run <code>construct_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_database-function"></a>
 </h2>
 <p>Here we use the demo data from <code>demoData</code> package to show how to use the <code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct database.</p>
 <p>We first prepare dataset.</p>
-<p>Download the data <a href="https://github.com/jaspershen/demoData/tree/master/inst/database_construction">here</a>. and then put all of them in the “database_construction” folder.</p>
+<p>Download the data <a href="https://github.com/jaspershen/demoData/tree/master/inst/database_construction" class="external-link">here</a>. and then put all of them in the “database_construction” folder.</p>
 <p>Then there will be a folder named as <code>database_construction</code> in your work directory like below figure shows:</p>
-<p><img src="../man/figures/Screen%20Shot%202021-02-26%20at%209.22.52%20PM.png"> Then we run <code><a href="../reference/construct_database.html">construct_database()</a></code> function and then we can get the database.</p>
+<p><img src="../reference/figures/Screen%20Shot%202021-02-26%20at%209.22.52%20PM.png"> Then we run <code><a href="../reference/construct_database.html">construct_database()</a></code> function and then we can get the database.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metid)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>new.path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"./database_construction"</span>)</span>
@@ -240,11 +241,11 @@
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt.tol =</span> <span class="dv">30</span>,</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">threads =</span> <span class="dv">5</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading metabolite information...</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading positive MS2 data...</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading MS2 data...</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Processing...</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32mReading metabolite information...</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading positive MS2 data...</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading MS2 data...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mProcessing...</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
@@ -258,11 +259,11 @@
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading negative MS2 data...</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reading MS2 data...</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Processing...</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [31mOK</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading negative MS2 data...</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading MS2 data...</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mProcessing...</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
@@ -276,46 +277,48 @@
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matching metabolites with MS2 spectra (positive)...</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Matching metabolites with MS2 spectra (negative)...</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; OK</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; All done!</span></span></code></pre></div>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [31mOK</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mMatching metabolites with MS2 spectra (positive)...</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [31mOK</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mMatching metabolites with MS2 spectra (negative)...</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [31mOK</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [41mAll done!</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49m</span></span></code></pre></div>
 <p>The arguments of <code><a href="../reference/construct_database.html">construct_database()</a></code> can be found here <code><a href="../reference/construct_database.html">construct_database()</a></code>.</p>
 <p>test.database is a <code>databaseClass</code> object, you can print it to see its information.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">test.database</span>
-<span class="co">#&gt; -----------Base information------------</span>
-<span class="co">#&gt; Version: 0.0.1 </span>
-<span class="co">#&gt; Source: Michael Snyder lab </span>
-<span class="co">#&gt; Link: http://snyderlab.stanford.edu/ </span>
-<span class="co">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span>
-<span class="co">#&gt; With RT information</span>
-<span class="co">#&gt; -----------Spectral information------------</span>
-<span class="co">#&gt; There are 14 items of metabolites in database:</span>
-<span class="co">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span>
-<span class="co">#&gt; There are 170 metabolites in total</span>
-<span class="co">#&gt; There are 113 metabolites in positive mode with MS2 spectra.</span>
-<span class="co">#&gt; There are 112 metabolites in negative mode with MS2 spectra.</span>
-<span class="co">#&gt; Collision energy in positive mode (number:):</span>
-<span class="co">#&gt; Total number: 2 </span>
-<span class="co">#&gt; NCE25; NCE50 </span>
-<span class="co">#&gt; Collision energy in negative mode:</span>
-<span class="co">#&gt; Total number: 2 </span>
-<span class="co">#&gt; NCE25; NCE50</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BBBB00;">-----------Base information------------</span></span>
+<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">Version: 0.0.1 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Source: Michael Snyder lab </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Link: http://snyderlab.stanford.edu/ </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; With RT information</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; </span><span style="color: #BBBB00;">-----------Spectral information------------</span></span>
+<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">There are 14 items of metabolites in database:</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; There are 170 metabolites in total</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; There are 113 metabolites in positive mode with MS2 spectra.</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; There are 112 metabolites in negative mode with MS2 spectra.</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in positive mode (number:):</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in negative mode:</span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
+<span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
 <blockquote>
 <p>Note: <code>test.database</code> is only a demo database (metIdentifyClass object). We will don’t use it for next metabolite identification. Then please save this database in you local folder, please note that the saved file name and database name must be same. For example:</p>
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">test.database</span>, file <span class="op">=</span> <span class="st">"test.database"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">test.database</span>, file <span class="op">=</span> <span class="st">"test.database"</span><span class="op">)</span></code></pre></div>
 <blockquote>
 <p>If you save the <code>test.database</code> as a different name, it will be a error when you use it.</p>
 </blockquote>
 </div>
-<div id="ms1-database" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ms1-database" class="anchor"></a>MS1 database</h2>
+<div class="section level2">
+<h2 id="ms1-database">MS1 database<a class="anchor" aria-label="anchor" href="#ms1-database"></a>
+</h2>
 <p>If you do not have MS2 data, you can also use <code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct MS1 database.</p>
 </div>
   </div>
@@ -331,11 +334,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Xiaotao Shen, Si Wu.</p>
+  <p></p>
+<p>metid Developed by Xiaotao Shen, Si Wu. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

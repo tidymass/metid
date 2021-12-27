@@ -34,6 +34,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,18 +48,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Under development">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Help documents
@@ -70,7 +66,8 @@
       <a href="../articles/metid_introduction.html">Brief introduction</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">In-house and public database construction using metid</li>
+    </li>
+<li class="dropdown-header">In-house and public database construction using metid</li>
     <li>
       <a href="../articles/database_construction.html">In-house database construction</a>
     </li>
@@ -84,7 +81,8 @@
       <a href="../articles/rt_correction.html">Correct retention times in database according to internal standards</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Metabolite identification</li>
+    </li>
+<li class="dropdown-header">Metabolite identification</li>
     <li>
       <a href="../articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
     </li>
@@ -98,12 +96,14 @@
       <a href="../articles/identify_single_peak.html">Identify single peak</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Others</li>
+    </li>
+<li class="dropdown-header">Others</li>
     <li>
       <a href="../articles/other_tools.html">Other usefull tools</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">metid for mass_dataset class object</li>
+    </li>
+<li class="dropdown-header">metid for mass_dataset class object</li>
     <li>
       <a href="../articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
     </li>
@@ -127,16 +127,17 @@
       <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Change log</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../articles/public_databases.html">Public databases</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/public_databases.html">Public databases</a>
 </li>
 <li>
   <a href="../articles/contact_us.html">Contact us</a>
@@ -144,13 +145,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidymass/metid/">
+  <a href="https://github.com/tidymass/metid/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990">
+  <a href="https://twitter.com/JasperShen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -171,34 +172,34 @@
 
       
 
-      </header><script src="public_database_construction_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Construct public MS2 datbase using metid</h1>
-                        <h4 class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 class="date">Created on 2020-06-10 and updated on 2021-12-22</h4>
+            <h4 data-toc-skip class="date">Created on 2020-06-10 and updated on 2021-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/public_database_construction.Rmd"><code>vignettes/public_database_construction.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/public_database_construction.Rmd" class="external-link"><code>vignettes/public_database_construction.Rmd</code></a></small>
       <div class="hidden name"><code>public_database_construction.Rmd</code></div>
 
     </div>
 
     
     
-<p><a href="https://massbank.eu/"><code>MassBank</code></a>, <a href="https://mona.fiehnlab.ucdavis.edu/"><code>MoNA</code></a> and some other public databases provide <code>msp</code> format database of metabolites. So you can use the functions in <code>metid</code> to transform them to <code>metid</code> format database.</p>
-<div id="massbank" class="section level2">
-<h2 class="hasAnchor">
-<a href="#massbank" class="anchor"></a><strong>MassBank</strong>
+<p><a href="https://massbank.eu/" class="external-link"><code>MassBank</code></a>, <a href="https://mona.fiehnlab.ucdavis.edu/" class="external-link"><code>MoNA</code></a> and some other public databases provide <code>msp</code> format database of metabolites. So you can use the functions in <code>metid</code> to transform them to <code>metid</code> format database.</p>
+<div class="section level2">
+<h2 id="massbank">
+<strong>MassBank</strong><a class="anchor" aria-label="anchor" href="#massbank"></a>
 </h2>
-<p>Download the <code>MassBank</code> msp database from here: <a href="https://massbank.eu/MassBank/">https://massbank.eu/MassBank/</a>. And then put the <code>msp</code> data into one folder.</p>
+<p>Download the <code>MassBank</code> msp database from here: <a href="https://massbank.eu/MassBank/" class="external-link">https://massbank.eu/MassBank/</a>. And then put the <code>msp</code> data into one folder.</p>
 <p>Then set this folder as you work directory in R.</p>
-<div id="run-construct_massbank_database-function" class="section level3">
-<h3 class="hasAnchor">
-<a href="#run-construct_massbank_database-function" class="anchor"></a><strong>Run <code>construct_massbank_database()</code> function</strong>
+<div class="section level3">
+<h3 id="run-construct_massbank_database-function">
+<strong>Run <code>construct_massbank_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_massbank_database-function"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid">metid</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">massbank_database</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/construct_mona_database.html">construct_mona_database</a></span><span class="op">(</span>
   file <span class="op">=</span> <span class="st">"MassBank_NIST.msp"</span>,
@@ -214,24 +215,24 @@
 <p>The arguments of <code><a href="../reference/construct_mona_database.html">construct_mona_database()</a></code> can be found here <code><a href="../reference/construct_mona_database.html">construct_mona_database()</a></code>.</p>
 <p>massbank_database is a <code>databaseClass</code> object, you can print it to see its information.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">massbank_database</span>, file <span class="op">=</span> <span class="st">"massbank_database"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">massbank_database</span>, file <span class="op">=</span> <span class="st">"massbank_database"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="mona" class="section level2">
-<h2 class="hasAnchor">
-<a href="#mona" class="anchor"></a><strong>MoNA</strong>
+<div class="section level2">
+<h2 id="mona">
+<strong>MoNA</strong><a class="anchor" aria-label="anchor" href="#mona"></a>
 </h2>
-<p>Download the <code>MoNA</code> msp database from here: <a href="https://mona.fiehnlab.ucdavis.edu/downloads">https://mona.fiehnlab.ucdavis.edu/downloads</a>. And then put the <code>msp</code> data into one folder.</p>
+<p>Download the <code>MoNA</code> msp database from here: <a href="https://mona.fiehnlab.ucdavis.edu/downloads" class="external-link">https://mona.fiehnlab.ucdavis.edu/downloads</a>. And then put the <code>msp</code> data into one folder.</p>
 <blockquote>
 <p>Note: Only download the database you need, do NOT use the all MS2 spectra databse which is pretty large size.</p>
 </blockquote>
 <p>Then set this folder as you work directory in R.</p>
-<div id="run-construct_mona_database-function" class="section level3">
-<h3 class="hasAnchor">
-<a href="#run-construct_mona_database-function" class="anchor"></a><strong>Run <code>construct_mona_database()</code> function</strong>
+<div class="section level3">
+<h3 id="run-construct_mona_database-function">
+<strong>Run <code>construct_mona_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_mona_database-function"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid">metid</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mona_database</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/construct_mona_database.html">construct_mona_database</a></span><span class="op">(</span>
   file <span class="op">=</span> <span class="st">"MoNA-export-LC-MS-MS_Spectra.msp"</span>,
@@ -247,7 +248,7 @@
 <p>The arguments of <code><a href="../reference/construct_mona_database.html">construct_mona_database()</a></code> can be found here <code><a href="../reference/construct_mona_database.html">construct_mona_database()</a></code>.</p>
 <p>massbank_database is a <code>databaseClass</code> object, you can print it to see its information.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">mona_database</span>, file <span class="op">=</span> <span class="st">"mona_database"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">mona_database</span>, file <span class="op">=</span> <span class="st">"mona_database"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -263,11 +264,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Xiaotao Shen, Si Wu.</p>
+  <p></p>
+<p>metid Developed by Xiaotao Shen, Si Wu. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

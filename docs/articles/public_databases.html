@@ -34,6 +34,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,18 +48,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Under development">1.1.0</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Help documents
@@ -70,7 +66,8 @@
       <a href="../articles/metid_introduction.html">Brief introduction</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">In-house and public database construction using metid</li>
+    </li>
+<li class="dropdown-header">In-house and public database construction using metid</li>
     <li>
       <a href="../articles/database_construction.html">In-house database construction</a>
     </li>
@@ -84,7 +81,8 @@
       <a href="../articles/rt_correction.html">Correct retention times in database according to internal standards</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Metabolite identification</li>
+    </li>
+<li class="dropdown-header">Metabolite identification</li>
     <li>
       <a href="../articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
     </li>
@@ -98,12 +96,14 @@
       <a href="../articles/identify_single_peak.html">Identify single peak</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Others</li>
+    </li>
+<li class="dropdown-header">Others</li>
     <li>
       <a href="../articles/other_tools.html">Other usefull tools</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">metid for mass_dataset class object</li>
+    </li>
+<li class="dropdown-header">metid for mass_dataset class object</li>
     <li>
       <a href="../articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
     </li>
@@ -127,16 +127,17 @@
       <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Change log</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="../articles/public_databases.html">Public databases</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/public_databases.html">Public databases</a>
 </li>
 <li>
   <a href="../articles/contact_us.html">Contact us</a>
@@ -144,13 +145,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidymass/metid/">
+  <a href="https://github.com/tidymass/metid/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990">
+  <a href="https://twitter.com/JasperShen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -171,16 +172,16 @@
 
       
 
-      </header><script src="public_databases_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Database provided for <code>metid</code>
 </h1>
-                        <h4 class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 class="date">Created on 2020-03-28 and updated on 2021-12-22</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/master/vignettes/public_databases.Rmd"><code>vignettes/public_databases.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/public_databases.Rmd" class="external-link"><code>vignettes/public_databases.Rmd</code></a></small>
       <div class="hidden name"><code>public_databases.Rmd</code></div>
 
     </div>
@@ -188,75 +189,70 @@
     
     
 <hr>
-<div id="in-house-ms2-databases-from-michael-snyder-lab" class="section level2">
-<h2 class="hasAnchor">
-<a href="#in-house-ms2-databases-from-michael-snyder-lab" class="anchor"></a><strong>In-house MS2 databases from <a href="http://med.stanford.edu/snyderlab.html">Michael Snyder lab</a></strong>
+<div class="section level2">
+<h2 id="in-house-ms2-databases-from-michael-snyder-lab">
+<strong>In-house MS2 databases from <a href="http://med.stanford.edu/snyderlab.html" class="external-link">Michael Snyder lab</a></strong><a class="anchor" aria-label="anchor" href="#in-house-ms2-databases-from-michael-snyder-lab"></a>
 </h2>
-<div id="michael-snyder-hilic-databases" class="section level3">
-<h3 class="hasAnchor">
-<a href="#michael-snyder-hilic-databases" class="anchor"></a>1. Michael Snyder HILIC databases</h3>
+<div class="section level3">
+<h3 id="michael-snyder-hilic-databases">1. Michael Snyder HILIC databases<a class="anchor" aria-label="anchor" href="#michael-snyder-hilic-databases"></a>
+</h3>
 <ul>
 <li><p><i class="fa fa-info"></i> Professor Michael Snyder’s lab. More than 1,000 metabolites.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/snyder_database_hilic0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/snyder_database_hilic0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="michael-snyder-rplc-databases" class="section level3">
-<h3 class="hasAnchor">
-<a href="#michael-snyder-rplc-databases" class="anchor"></a>2. Michael Snyder RPLC databases</h3>
+<div class="section level3">
+<h3 id="michael-snyder-rplc-databases">2. Michael Snyder RPLC databases<a class="anchor" aria-label="anchor" href="#michael-snyder-rplc-databases"></a>
+</h3>
 <ul>
 <li><p><i class="fa fa-info"></i> Professor Michael Snyder’s lab. More than 1,000 metabolites.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/snyder_database_rplc0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/snyder_database_rplc0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 <hr>
 </div>
 </div>
-<div id="public-ms2-databases" class="section level2">
-<h2 class="hasAnchor">
-<a href="#public-ms2-databases" class="anchor"></a><strong>Public MS2 databases</strong>
+<div class="section level2">
+<h2 id="public-ms2-databases">
+<strong>Public MS2 databases</strong><a class="anchor" aria-label="anchor" href="#public-ms2-databases"></a>
 </h2>
-<div id="hmdb-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hmdb-database" class="anchor"></a>1. <a href="https://hmdb.ca/downloads">HMDB database</a>
+<div class="section level3">
+<h3 id="hmdb-database">1. <a href="https://hmdb.ca/downloads" class="external-link">HMDB database</a><a class="anchor" aria-label="anchor" href="#hmdb-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> HMDB database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/hmdb_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/hmdb_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="massbank-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#massbank-database" class="anchor"></a>2. <a href="https://massbank.eu/MassBank/">MassBank database</a>
+<div class="section level3">
+<h3 id="massbank-database">2. <a href="https://massbank.eu/MassBank/" class="external-link">MassBank database</a><a class="anchor" aria-label="anchor" href="#massbank-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> MassBank database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/massbank_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/massbank_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="mona-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mona-database" class="anchor"></a>3. <a href="https://mona.fiehnlab.ucdavis.edu/">MoNA database</a>
+<div class="section level3">
+<h3 id="mona-database">3. <a href="https://mona.fiehnlab.ucdavis.edu/" class="external-link">MoNA database</a><a class="anchor" aria-label="anchor" href="#mona-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> MoNA database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/mona_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/mona_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="orbitrap-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#orbitrap-database" class="anchor"></a>4. <a href="https://mona.fiehnlab.ucdavis.edu/">Orbitrap database</a>
+<div class="section level3">
+<h3 id="orbitrap-database">4. <a href="https://mona.fiehnlab.ucdavis.edu/" class="external-link">Orbitrap database</a><a class="anchor" aria-label="anchor" href="#orbitrap-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> Orbitrap database from MoNA.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/orbitrap_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/orbitrap_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="fiehn-hilic-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fiehn-hilic-database" class="anchor"></a>5. <a href="https://fiehnlab.ucdavis.edu/staff/kind/publications">Fiehn HILIC database</a>
+<div class="section level3">
+<h3 id="fiehn-hilic-database">5. <a href="https://fiehnlab.ucdavis.edu/staff/kind/publications" class="external-link">Fiehn HILIC database</a><a class="anchor" aria-label="anchor" href="#fiehn-hilic-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> HILIC MS2 database from Fiehn lab.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/fiehn_hilic_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/fiehn_hilic_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 <!-- ### 6. Exposome database --><!-- * <i class="fa fa-info"></i> Some chemical exposome database --><!-- * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/exposureDatabase) --><blockquote>
 <p>If you need this database, please contact <a href="mailto:shenxt@stanford.edu" class="email">shenxt@stanford.edu</a>.</p>
@@ -264,54 +260,49 @@
 <hr>
 </div>
 </div>
-<div id="public-ms1-databases" class="section level2">
-<h2 class="hasAnchor">
-<a href="#public-ms1-databases" class="anchor"></a><strong>Public MS1 databases</strong>
+<div class="section level2">
+<h2 id="public-ms1-databases">
+<strong>Public MS1 databases</strong><a class="anchor" aria-label="anchor" href="#public-ms1-databases"></a>
 </h2>
-<div id="hmdb-ms1-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#hmdb-ms1-database" class="anchor"></a>1. <a href="https://hmdb.ca/downloads">HMDB MS1 database</a>
+<div class="section level3">
+<h3 id="hmdb-ms1-database">1. <a href="https://hmdb.ca/downloads" class="external-link">HMDB MS1 database</a><a class="anchor" aria-label="anchor" href="#hmdb-ms1-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> HMDB MS1 database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/hmdb_ms1_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/hmdb_ms1_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="kegg-ms1-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#kegg-ms1-database" class="anchor"></a>2. <a href="https://www.genome.jp/kegg/compound/">KEGG MS1 database</a>
+<div class="section level3">
+<h3 id="kegg-ms1-database">2. <a href="https://www.genome.jp/kegg/compound/" class="external-link">KEGG MS1 database</a><a class="anchor" aria-label="anchor" href="#kegg-ms1-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> KEGG MS1 database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/kegg_ms1_database0.0.3.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/kegg_ms1_database0.0.3.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="drugbank-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#drugbank-database" class="anchor"></a>3. <a href="https://go.drugbank.com/releases/latest">Drugbank database</a>
+<div class="section level3">
+<h3 id="drugbank-database">3. <a href="https://go.drugbank.com/releases/latest" class="external-link">Drugbank database</a><a class="anchor" aria-label="anchor" href="#drugbank-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> Drugbank MS1 database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/drugbank_database5.1.8.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/drugbank_database5.1.8.rda" class="external-link">Download here</a></p></li>
 </ul>
 <!-- ### 4. [Foodb database](https://foodb.ca/downloads) --><!-- * <i class="fa fa-info"></i> Foodb MS1 database. --><!-- * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdbMS1Database0.0.1) -->
 </div>
-<div id="t3db-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#t3db-database" class="anchor"></a>4. <a href="http://www.t3db.ca/downloads">T3DB database</a>
+<div class="section level3">
+<h3 id="t3db-database">4. <a href="http://www.t3db.ca/downloads" class="external-link">T3DB database</a><a class="anchor" aria-label="anchor" href="#t3db-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> T3DB MS1 database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/t3db_database1.0.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/t3db_database1.0.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
-<div id="blood-exposome-database" class="section level3">
-<h3 class="hasAnchor">
-<a href="#blood-exposome-database" class="anchor"></a>5. <a href="https://bloodexposome.org/#/download">Blood exposome database</a>
+<div class="section level3">
+<h3 id="blood-exposome-database">5. <a href="https://bloodexposome.org/#/download" class="external-link">Blood exposome database</a><a class="anchor" aria-label="anchor" href="#blood-exposome-database"></a>
 </h3>
 <ul>
 <li><p><i class="fa fa-info"></i> Blood exposome MS1 database.</p></li>
-<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/bloodexposome_database1.0.rda">Download here</a></p></li>
+<li><p><i class="fa fa-download"></i> <a href="https://www.shenxt.info/ms2_data/bloodexposome_database1.0.rda" class="external-link">Download here</a></p></li>
 </ul>
 </div>
 </div>
@@ -328,11 +319,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Xiaotao Shen, Si Wu.</p>
+  <p></p>
+<p>metid Developed by Xiaotao Shen, Si Wu. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

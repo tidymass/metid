@@ -71,7 +71,7 @@ navbar:
   title: "sparklyr" 
   # type: inverse
   structure:
-    left: [home, references, articles, news, database]
+    left: [home, articles, news, reference, database, contact]
     right: [github, twitter]
   components:
     articles:
@@ -130,5 +130,18 @@ navbar:
       - text: "------------------"
       - text: "Change log"
         href: news/index.html
+
+footer:
+  structure: 
+    left: [package, developed_by, from]
+    right: [contact, email, wechat, tidymass]
+  components:
+    from: <br> from <i class="fa fa-university"></i> Stanford University <br> <i class="fa fa-clinic-medical"></i>School of Medicine <br> <i class="fa fa-dna"></i> Genetics Department
+    contact: <b>Contact Us:</b> <br>
+    email: <i class="fa fa-envelope"></i> shenxt1990@outlook.com <br>
+    wechat: <i class="fa fa-weixin"></i>  [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg) <br>
+    tidymass: <i class="fa fa-network-wired"></i> [A part of tidymass](https://tidymass.github.io/tidymass/)
+     
+
 toc:
   depth: 3
