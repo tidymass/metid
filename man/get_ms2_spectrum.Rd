@@ -32,15 +32,15 @@ Get MS2 spectra of peaks from databaseClass object.
 }
 \seealso{
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html
+\url{https://tidymass.github.io/metid/articles/metid.html}
 
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html
+\url{https://tidymass.github.io/metid/articles/metid.html}
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

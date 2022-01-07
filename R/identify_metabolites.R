@@ -3,7 +3,7 @@
 #' @description Identify metabolites based on MS1 or MS/MS database.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", Column 2 is
 #' "mz" and column is "rt" (second).
 #' @param ms2.data MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").
@@ -33,7 +33,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 identify_metabolites = function(
   ms1.data,
@@ -142,7 +142,7 @@ identify_metabolites = function(
 #' @description Identify peaks based on MS1 database.
 #' \lifecycle{deprecated}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", column 2 is
 #' "mz" and column 3 is "rt" (retention time, second).
 #' @param ms1.match.ppm Precursor match ppm tolerance.
@@ -159,7 +159,7 @@ identify_metabolites = function(
 #' @importFrom dplyr pull filter
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 
 mzIdentify =
@@ -522,7 +522,7 @@ mzIdentify =
 #' @description Identify metabolites based on MS/MS database.
 #' \lifecycle{deprecated}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", Column 2 is
 #' "mz" and column is "rt" (second).
 #' @param ms2.data MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").
@@ -552,7 +552,7 @@ mzIdentify =
 #' @importFrom crayon yellow green red bgRed
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @examples 
 #' \dontrun{
 #' ##creat a folder nameed as example
@@ -863,7 +863,8 @@ metIdentify = function(
     
     ##check for the ms1 data
     if(ncol(ms1.data) < 3){
-      stop("MS1 data should have there columns. See here: \n https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html")
+      stop("MS1 data should have there columns. 
+           See here: \n https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html")
     }
     
     if(colnames(ms1.data)[1] != "name" | 

@@ -29,17 +29,17 @@ knitr::opts_chunk$set(
 
 Some time we have multiple databases, so we can use `identify_metabolite_all()` functions to identify metabolites using multiple database.
 
-## **MS1 data preparation**
+# **MS1 data preparation**
 
 The peak table must contain "name" (peak name), "mz" (mass to charge ratio) and "rt" (retention time, unit is second). It can be from any data processing software (XCMS, MS-DIAL and so on).
 
 ![](../man/figures/Screen Shot 2020-03-30 at 5.51.02 PM.png)
 
-## MS2 data preparation
+# MS2 data preparation
 
 The raw MS2 data from DDA or DIA should be transfered to msp, mgf or mzXML format files using [ProteoWizard software](http://proteowizard.sourceforge.net/).
 
-## **Database**
+# **Database**
 
 The database must be generated using `construct_database()` function. Here we use the databases in `metid` packages. 
 
@@ -49,17 +49,17 @@ The database must be generated using `construct_database()` function. Here we us
 
 * `hmdb_ms1_database0.0.3`: A public database from `HMDB`, only contains m/z information.
 
-## Data organization
+# Data organization
 
 Place the MS1 peak table, MS2 data and databases which you want to use in one folder like below figure shows:
 
 ![](../man/figures/Screen Shot 2020-03-30 at 9.49.16 PM.png)
 
-## **Run `identify_metabolite_all()` function**
+# **Run `identify_metabolite_all()` function**
 
 We use the demo data in `metid` package.
 
-### **Load demo data**
+# **Load demo data**
 
 First we load the MS1 peak, MS2 data and databases from `metid` package and then put them in a `example` folder.
 
@@ -105,7 +105,7 @@ save(hmdb_ms1_database0.0.3, file = file.path(path, "hmdb_ms1_database0.0.3"))
 
 Now in your `./example`, there are files files, namely `ms1.peak.table.csv`, `QC1_MSMS_NCE25.mgf` and three databases.
 
-### Set parameter list
+## Set parameter list
 
 We need to use `identify_metabolites_params()` functions to set parameter list for each database.
 
@@ -150,7 +150,7 @@ param3 <- identify_metabolites_params(
 
 > Note: You can set different parametes for each database.
 
-### Metabolite identification
+## Metabolite identification
 
 All the parameters for three databases should be provided to `parameter.list`.
 
@@ -165,7 +165,7 @@ result <- identify_metabolite_all(
 
 > Note: `result` is a list, and each element is a `metIdentifyClass` object. So you can use the functions for `metIdentifylass` object to process it.
 
-### Integrate annotation results from different databases
+## Integrate annotation results from different databases
 
 After we get the annotation result list, we then can integrate the annotation results from different databases. 
 
@@ -289,3 +289,9 @@ readr::write_csv(annotation_table,file = file.path(path, "annotation_table.csv")
 ```
 
 ![](../man/figures/Screen Shot 2020-03-30 at 10.48.10 PM.png)
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```

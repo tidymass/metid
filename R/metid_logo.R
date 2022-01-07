@@ -2,7 +2,7 @@
 #' @description Show the base information of metid pacakge.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @return A ASCII log of metid
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -46,7 +46,7 @@ metid_logo <- function() {
   cat(crayon::green("Version 1.1.0 (20210702)\n"))
   cat(
     crayon::green(
-      "More information can be found at https://tidymass.github.io/metid/\n"
+      "More information: google tidymass metid.\n"
     )
   )
   cat(crayon::green(

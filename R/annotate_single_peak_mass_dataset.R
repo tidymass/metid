@@ -2,7 +2,7 @@
 #' @description Identify metabolites based on MS1 or MS/MS database.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A mass_dataset class obejct.
 #' @param variable_id variable_id
 #' @param variable_index variable_index
@@ -32,7 +32,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 annotate_single_peak_mass_dataset =
   function(object,

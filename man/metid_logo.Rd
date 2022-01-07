@@ -18,5 +18,5 @@ metid_logo()
 }
 \author{
 Xiaotao Shen
-\email{shenxt@stanford.edu}
+\email{shenxt1990@outlook.com}
 }

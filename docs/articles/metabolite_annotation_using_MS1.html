@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -64,6 +64,9 @@
 <li class="dropdown-header">Brief introduction</li>
     <li>
       <a href="../articles/metid_introduction.html">Brief introduction</a>
+    </li>
+    <li>
+      <a href="../articles/install.html">Install metid</a>
     </li>
     <li class="divider">
     </li>
@@ -178,7 +181,7 @@
       <h1 data-toc-skip>Annotate metabolites according to MS1 database using metid package</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2021-12-27</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-01-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/metabolite_annotation_using_MS1.Rmd" class="external-link"><code>vignettes/metabolite_annotation_using_MS1.Rmd</code></a></small>
       <div class="hidden name"><code>metabolite_annotation_using_MS1.Rmd</code></div>
@@ -188,35 +191,35 @@
     
     
 <hr>
-<div class="section level2">
-<h2 id="ms1-data-preparation">
+<div class="section level1">
+<h1 id="ms1-data-preparation">
 <strong>MS1 data preparation</strong><a class="anchor" aria-label="anchor" href="#ms1-data-preparation"></a>
-</h2>
+</h1>
 <p>The peak table must contain “name” (peak name), “mz” (mass to charge ratio) and “rt” (retention time, unit is second). It can be from any data processing software (XCMS, MS-DIAL and so on).</p>
 <p><img src="../reference/figures/Screen%20Shot%202020-03-30%20at%205.51.02%20PM.png"></p>
 </div>
-<div class="section level2">
-<h2 id="database">
+<div class="section level1">
+<h1 id="database">
 <strong>Database</strong><a class="anchor" aria-label="anchor" href="#database"></a>
-</h2>
+</h1>
 <p>The database must be generated using <code>constructDatabase()</code> function. You can also use the public databases we provoded <a href="https://github.com/jaspershen/demoData/tree/master/inst/ms2_database" class="external-link">here</a>.</p>
 </div>
-<div class="section level2">
-<h2 id="data-organization">
+<div class="section level1">
+<h1 id="data-organization">
 <strong>Data organization</strong><a class="anchor" aria-label="anchor" href="#data-organization"></a>
-</h2>
+</h1>
 <p>Place the MS1 peak table and databases which you want to use in one folder like below figure shows:</p>
 <p><img src="../reference/figures/Screen%20Shot%202020-03-30%20at%201.55.53%20PM.png"></p>
 </div>
-<div class="section level2">
-<h2 id="run-identify_metabolites-function">
+<div class="section level1">
+<h1 id="run-identify_metabolites-function">
 <strong>Run <code>identify_metabolites()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-identify_metabolites-function"></a>
-</h2>
+</h1>
 <p>We use the demo data in <code>metid</code> package to show how to use <code>metid</code> to identify metabolites without MS2 spectra.</p>
-<div class="section level3">
-<h3 id="load-demo-data">
+<div class="section level2">
+<h2 id="load-demo-data">
 <strong>Load demo data</strong><a class="anchor" aria-label="anchor" href="#load-demo-data"></a>
-</h3>
+</h2>
 <p>First we load the MS1 peak and database from <code>metid</code> package and then put them in a <code>example</code> folder.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span>
@@ -237,9 +240,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">snyder_database_rplc0.0.3</span>, file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"snyder_database_rplc0.0.3"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now in your <code>./example</code>, there are two files, namely <code>ms1.peak.table.csv</code> and <code>msDatabase_rplc_0.0.2</code>, respectively.</p>
 </div>
-<div class="section level3">
-<h3 id="only-use-mz-for-metabolite-identification">Only use m/z for metabolite identification<a class="anchor" aria-label="anchor" href="#only-use-mz-for-metabolite-identification"></a>
-</h3>
+<div class="section level2">
+<h2 id="only-use-mz-for-metabolite-identification">Only use m/z for metabolite identification<a class="anchor" aria-label="anchor" href="#only-use-mz-for-metabolite-identification"></a>
+</h2>
 <p>First, we only use m/z for metabolite identification.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>annotate_result1 <span class="ot">&lt;-</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identify_metabolites</span>(<span class="at">ms1.data =</span> <span class="st">"ms1.peak.table.csv"</span>, </span>
@@ -377,9 +380,9 @@
       sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "MS_0.0.2"</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="only-use-mz-and-rt-for-metabolite-identification">Only use m/z and RT for metabolite identification<a class="anchor" aria-label="anchor" href="#only-use-mz-and-rt-for-metabolite-identification"></a>
-</h3>
+<div class="section level2">
+<h2 id="only-use-mz-and-rt-for-metabolite-identification">Only use m/z and RT for metabolite identification<a class="anchor" aria-label="anchor" href="#only-use-mz-and-rt-for-metabolite-identification"></a>
+</h2>
 <p>Here we set RT tolerance (<code>rt.match.tol</code>) as 30 s.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>annotate_result2 <span class="ot">&lt;-</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identify_metabolites</span>(<span class="at">ms1.data =</span> <span class="st">"ms1.peak.table.csv"</span>, </span>
@@ -411,13 +414,13 @@
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49m</span></span></code></pre></div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="get-detailed-annotation-information">Get detailed annotation information<a class="anchor" aria-label="anchor" href="#get-detailed-annotation-information"></a>
-</h2>
+<div class="section level1">
+<h1 id="get-detailed-annotation-information">Get detailed annotation information<a class="anchor" aria-label="anchor" href="#get-detailed-annotation-information"></a>
+</h1>
 <p>After get the <code>annotation_result</code>, we can get the detailed information from it.</p>
-<div class="section level3">
-<h3 id="get-the-processing-parameters">Get the processing parameters<a class="anchor" aria-label="anchor" href="#get-the-processing-parameters"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-the-processing-parameters">Get the processing parameters<a class="anchor" aria-label="anchor" href="#get-the-processing-parameters"></a>
+</h2>
 <p>We can use <code><a href="../reference/get_parameters.html">get_parameters()</a></code> function to get the detailed parameters. This is very useful for reproductive analysis for data analysis.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">metid</span><span class="fu">::</span><span class="fu"><a href="../reference/get_parameters_metid.html">get_parameters_metid</a></span><span class="op">(</span><span class="va">annotate_result1</span><span class="op">)</span>
@@ -464,9 +467,9 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">16</span> database             MS2 database                          snyder_database_r…</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">17</span> threads              Thread number                         5</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="check-what-peaks-with-annotations">Check what peaks with annotations<a class="anchor" aria-label="anchor" href="#check-what-peaks-with-annotations"></a>
-</h3>
+<div class="section level2">
+<h2 id="check-what-peaks-with-annotations">Check what peaks with annotations<a class="anchor" aria-label="anchor" href="#check-what-peaks-with-annotations"></a>
+</h2>
 <p>Use <code><a href="../reference/which_has_identification.html">which_has_identification()</a></code> function to get what peaks have annotions.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/which_has_identification.html">which_has_identification</a></span><span class="op">(</span><span class="va">annotate_result1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -482,9 +485,9 @@
 <p>Because there are no ms2 data, so the peaks have no MS2 spectra.</p>
 </blockquote>
 </div>
-<div class="section level3">
-<h3 id="get-the-identification-table">Get the identification table<a class="anchor" aria-label="anchor" href="#get-the-identification-table"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-the-identification-table">Get the identification table<a class="anchor" aria-label="anchor" href="#get-the-identification-table"></a>
+</h2>
 <p>We can use <code><a href="../reference/get_identification_table.html">get_identification_table()</a></code> to get the identification table.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">table1</span> <span class="op">&lt;-</span> 
@@ -560,9 +563,9 @@
 <span class="co">#&gt; <span style="color: #949494;">#   RT.error &lt;dbl&gt;, RT.match.score &lt;dbl&gt;, CE &lt;chr&gt;, SS &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   Total.score &lt;dbl&gt;, Database &lt;chr&gt;</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="get-the-identification-information-for-single-peak">Get the identification information for single peak<a class="anchor" aria-label="anchor" href="#get-the-identification-information-for-single-peak"></a>
-</h3>
+<div class="section level2">
+<h2 id="get-the-identification-information-for-single-peak">Get the identification information for single peak<a class="anchor" aria-label="anchor" href="#get-the-identification-information-for-single-peak"></a>
+</h2>
 <p>We can use <code><a href="../reference/get_iden_info.html">get_iden_info()</a></code> function to get the detailed information for a sinlge peak. Because it gets the information from the database, so this function need provide the database.</p>
 <p>First, we need to know what peaks have annotations.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -592,9 +595,9 @@
 <span class="co">#&gt; <span style="color: #949494;">#   Sub.pathway &lt;chr&gt;, Note &lt;chr&gt;</span></span></code></pre></div>
 <p>We can get the detailed information for metabolites in database.</p>
 </div>
-<div class="section level3">
-<h3 id="filter-identifications">Filter identifications<a class="anchor" aria-label="anchor" href="#filter-identifications"></a>
-</h3>
+<div class="section level2">
+<h2 id="filter-identifications">Filter identifications<a class="anchor" aria-label="anchor" href="#filter-identifications"></a>
+</h2>
 <p>After we get the annotation result use <code><a href="../reference/identify_metabolites.html">identify_metabolites()</a></code> function. We can also use <code><a href="../reference/filter_identification.html">filter_identification()</a></code> function to filter annotations based on m/z, rt and MS2 match tolerance.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">annotate_result2_2</span> <span class="op">&lt;-</span> 
@@ -639,6 +642,76 @@
 <span class="co"><span style="color: #00BB00;">#&gt; Adduct table:</span></span>
 <span class="co"><span style="color: #00BB00;">#&gt; (M+H)+;(M+H-H2O)+;(M+H-2H2O)+;(M+NH4)+;(M+Na)+;(M-H+2Na)+;(M-2H+3Na)+;(M+K)+;(M-H+2K)+;(M-2H+3K)+;(M+CH3CN+H)+;(M+CH3CN+Na)+;(2M+H)+;(2M+NH4)+;(2M+Na)+;(2M+K)+;(M+HCOO+2H)+</span></span></code></pre></div>
 </div>
+</div>
+<div class="section level1">
+<h1 id="session-information">
+<strong>Session information</strong><a class="anchor" aria-label="anchor" href="#session-information"></a>
+</h1>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
+<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; other attached packages:</span>
+<span class="co">#&gt;  [1] forcats_0.5.1      stringr_1.4.0      dplyr_1.0.7        purrr_0.3.4       </span>
+<span class="co">#&gt;  [5] readr_2.0.0        tidyr_1.1.3        tibble_3.1.3       ggplot2_3.3.5     </span>
+<span class="co">#&gt;  [9] tidyverse_1.3.1    massdataset_0.99.1 magrittr_2.0.1     tinytools_0.9.1   </span>
+<span class="co">#&gt; [13] metid_1.2.1       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;   [1] colorspace_2.0-2      rjson_0.2.20          ellipsis_0.3.2       </span>
+<span class="co">#&gt;   [4] leaflet_2.0.4.1       rprojroot_2.0.2       circlize_0.4.14      </span>
+<span class="co">#&gt;   [7] GlobalOptions_0.1.2   fs_1.5.0              clue_0.3-59          </span>
+<span class="co">#&gt;  [10] rstudioapi_0.13       mzR_2.26.1            listenv_0.8.0        </span>
+<span class="co">#&gt;  [13] furrr_0.2.3           affyio_1.62.0         lubridate_1.7.10     </span>
+<span class="co">#&gt;  [16] fansi_0.5.0           xml2_1.3.2            codetools_0.2-18     </span>
+<span class="co">#&gt;  [19] ncdf4_1.17            doParallel_1.0.16     cachem_1.0.5         </span>
+<span class="co">#&gt;  [22] impute_1.66.0         knitr_1.33            jsonlite_1.7.2       </span>
+<span class="co">#&gt;  [25] Cairo_1.5-12.2        broom_0.7.9           dbplyr_2.1.1         </span>
+<span class="co">#&gt;  [28] cluster_2.1.2         vsn_3.60.0            png_0.1-7            </span>
+<span class="co">#&gt;  [31] BiocManager_1.30.16   compiler_4.1.0        httr_1.4.2           </span>
+<span class="co">#&gt;  [34] backports_1.2.1       rvcheck_0.1.8         assertthat_0.2.1     </span>
+<span class="co">#&gt;  [37] fastmap_1.1.0         lazyeval_0.2.2        limma_3.48.1         </span>
+<span class="co">#&gt;  [40] cli_3.0.1             htmltools_0.5.2       tools_4.1.0          </span>
+<span class="co">#&gt;  [43] gtable_0.3.0          glue_1.4.2            affy_1.70.0          </span>
+<span class="co">#&gt;  [46] Rcpp_1.0.7            MALDIquant_1.20       Biobase_2.52.0       </span>
+<span class="co">#&gt;  [49] cellranger_1.1.0      jquerylib_0.1.4       pkgdown_2.0.1        </span>
+<span class="co">#&gt;  [52] vctrs_0.3.8           preprocessCore_1.54.0 iterators_1.0.13     </span>
+<span class="co">#&gt;  [55] crosstalk_1.1.1       xfun_0.24             globals_0.14.0       </span>
+<span class="co">#&gt;  [58] rvest_1.0.1           openxlsx_4.2.4        lifecycle_1.0.0      </span>
+<span class="co">#&gt;  [61] XML_3.99-0.6          future_1.21.0         zlibbioc_1.38.0      </span>
+<span class="co">#&gt;  [64] MASS_7.3-54           scales_1.1.1          MSnbase_2.18.0       </span>
+<span class="co">#&gt;  [67] ragg_1.1.3            pcaMethods_1.84.0     hms_1.1.0            </span>
+<span class="co">#&gt;  [70] ProtGenerics_1.24.0   parallel_4.1.0        RColorBrewer_1.1-2   </span>
+<span class="co">#&gt;  [73] ComplexHeatmap_2.8.0  yaml_2.2.1            memoise_2.0.0        </span>
+<span class="co">#&gt;  [76] pbapply_1.4-3         sass_0.4.0            stringi_1.7.3        </span>
+<span class="co">#&gt;  [79] S4Vectors_0.30.0      desc_1.3.0            foreach_1.5.1        </span>
+<span class="co">#&gt;  [82] BiocGenerics_0.38.0   zip_2.2.0             BiocParallel_1.26.1  </span>
+<span class="co">#&gt;  [85] shape_1.4.6           rlang_0.4.11          pkgconfig_2.0.3      </span>
+<span class="co">#&gt;  [88] systemfonts_1.0.2     matrixStats_0.60.0    mzID_1.30.0          </span>
+<span class="co">#&gt;  [91] evaluate_0.14         lattice_0.20-44       htmlwidgets_1.5.3    </span>
+<span class="co">#&gt;  [94] tidyselect_1.1.1      ggsci_2.9             parallelly_1.27.0    </span>
+<span class="co">#&gt;  [97] plyr_1.8.6            R6_2.5.0              IRanges_2.26.0       </span>
+<span class="co">#&gt; [100] generics_0.1.0        DBI_1.1.1             withr_2.4.2          </span>
+<span class="co">#&gt; [103] haven_2.4.1           pillar_1.6.2          MsCoreUtils_1.4.0    </span>
+<span class="co">#&gt; [106] modelr_0.1.8          crayon_1.4.1          utf8_1.2.2           </span>
+<span class="co">#&gt; [109] plotly_4.9.4.1        tzdb_0.1.2            rmarkdown_2.9        </span>
+<span class="co">#&gt; [112] GetoptLong_1.0.5      grid_4.1.0            readxl_1.3.1         </span>
+<span class="co">#&gt; [115] data.table_1.14.0     reprex_2.0.0          digest_0.6.27        </span>
+<span class="co">#&gt; [118] gridGraphics_0.5-1    textshaping_0.3.6     stats4_4.1.0         </span>
+<span class="co">#&gt; [121] munsell_0.5.0         ggplotify_0.0.8       viridisLite_0.4.0    </span>
+<span class="co">#&gt; [124] bslib_0.3.1</span></code></pre></div>
 </div>
   </div>
 

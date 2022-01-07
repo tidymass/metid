@@ -2,7 +2,7 @@
 #' @description Read MGF data (from GNPS).
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mgf.
 #' @param threads threads number.
 #' @importFrom future plan
@@ -70,7 +70,7 @@ read_mgf_gnps = function(file,
 #' @description Read MGF data (from mona).
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mgf.
 #' @param threads threads number.
 #' @return Return ms2 data. This is a list.
@@ -136,7 +136,7 @@ read_mgf_mona = function(file,
 #' @description Read MGF data from experiment.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mgf.
 #' @param threads threads number.
 #' @importFrom magrittr %>%
@@ -201,7 +201,7 @@ read_mgf_experiment = function(file,
 #' @description Read MGF data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mgf.
 #' @return Return ms2 data. This is a list.
 #' @export
@@ -220,10 +220,10 @@ read_mgf = function(file) {
           grep('^\\d', x))
       info.mz <-
         lapply(mgf.data, function(x)
-          grep('^PEPMASS', x, value = T))
+          grep('^PEPMASS', x, value = TRUE))
       info.rt <-
         lapply(mgf.data, function(x)
-          grep('^RTINSECONDS', x, value = T))
+          grep('^RTINSECONDS', x, value = TRUE))
       
       info.mz <- unlist(info.mz)
       #for orbitrap data, the intensity of precursor ion should be removed
@@ -338,7 +338,7 @@ ListMGF = function(file) {
 #' @description Read MGF data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mgf.
 #' @return Return ms2 data. This is a list.
 #' @export
@@ -356,10 +356,10 @@ readMGF = function(file) {
         grep('^\\d', x))
     info.mz <-
       lapply(mgf.data, function(x)
-        grep('^PEPMASS', x, value = T))
+        grep('^PEPMASS', x, value = TRUE))
     info.rt <-
       lapply(mgf.data, function(x)
-        grep('^RTINSECONDS', x, value = T))
+        grep('^RTINSECONDS', x, value = TRUE))
     
     info.mz <- unlist(info.mz)
     #for orbitrap data, the intensity of precursor ion should be removed

@@ -19,5 +19,5 @@ Export metid database to mgf (mona format).
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

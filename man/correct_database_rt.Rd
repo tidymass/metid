@@ -38,5 +38,5 @@ Correct RTs of metabolites in database using internal standard list.
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

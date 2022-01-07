@@ -471,7 +471,7 @@
 #' @description Correct RTs of metabolites in database using internal standard list.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param experiment.is.table Experiment internal standard table.
 #' @param database.is.table Database internal standard table.
 #' @param database Database, must be datasetClass object.

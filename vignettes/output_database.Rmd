@@ -27,9 +27,9 @@ knitr::opts_chunk$set(
 
 [`MassBank`](https://massbank.eu/), [`MoNA`](https://mona.fiehnlab.ucdavis.edu/) and some other public databases provide `msp` format database of metabolites. So you can use the functions in `metid` to output `metid` format database to `msp` format which can be used for `GNPS`, `MassBank` and `MoNA`.
 
-## **MassBank**
+# **MassBank**
 
-### `msp` format
+## `msp` format
 
 Just use the `write_msp_massbank()` function to output `metid` database to `msp` format for MassBank.
 
@@ -44,7 +44,7 @@ write_msp_massbank(databasae = databasae, path = ".")
 The arguments of `write_msp_massbank()` can be found here `write_msp_massbank()`.
 
 
-### `mgf` format
+## `mgf` format
 
 Just use the `write_mgf_massbank()` function to output `metid` database to `mgf` format for MassBank.
 
@@ -61,9 +61,9 @@ The arguments of `write_msp_massbank()` can be found here `write_msp_massbank()`
 
 
 
-## **MoNA**
+# **MoNA**
 
-### `msp` format
+## `msp` format
 
 Just use the `write_msp_mona()` function to output `metid` database to `msp` format for mona.
 
@@ -78,7 +78,7 @@ write_msp_mona(databasae = databasae, path = ".")
 The arguments of `write_msp_mona()` can be found here `write_msp_mona()`.
 
 
-### `mgf` format
+## `mgf` format
 
 Just use the `write_mgf_mona()` function to output `metid` database to `mgf` format for mona.
 
@@ -93,9 +93,9 @@ write_mgf_mona(databasae = databasae, path = ".")
 The arguments of `write_msp_mona()` can be found here `write_msp_mona()`.
 
 
-## **GNPS**
+# **GNPS**
 
-### `msp` format
+## `msp` format
 
 Just use the `write_msp_gnps()` function to output `metid` database to `msp` format for gnps.
 
@@ -110,7 +110,7 @@ write_msp_gnps(databasae = databasae, path = ".")
 The arguments of `write_msp_gnps()` can be found here `write_msp_gnps()`.
 
 
-### `mgf` format
+## `mgf` format
 
 Just use the `write_mgf_gnps()` function to output `metid` database to `mgf` format for gnps.
 
@@ -124,4 +124,8 @@ write_mgf_gnps(databasae = databasae, path = ".")
 
 The arguments of `write_msp_gnps()` can be found here `write_msp_gnps()`.
 
+# **Session information**
 
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```

@@ -3,7 +3,7 @@
 #' @description Generate the mzIdentify parameter list.
 #' \lifecycle{deprecated}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.match.ppm Precursor match ppm tolerance.
 #' @param polarity The polarity of data, "positive"or "negative".
 #' @param column "hilic" (HILIC column) or "rp" (reverse phase).
@@ -13,7 +13,7 @@
 #' @return A mzIdentifyClass object.
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 mzIdentifyParam = function(
   ms1.match.ppm = 25,

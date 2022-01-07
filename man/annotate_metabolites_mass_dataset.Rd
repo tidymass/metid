@@ -75,7 +75,6 @@ Identify metabolites based on MS1 or MS/MS database.
 \examples{
 library(massdataset)
 library(tidyverse)
-library(metid)
 ms1_data =
   readr::read_csv(file.path(
     system.file("ms1_peak", package = "metid"),
@@ -127,9 +126,9 @@ extract_variable_info(object = object)
 }
 \seealso{
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html
+\url{https://tidymass.github.io/metid/articles/metid.html}
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

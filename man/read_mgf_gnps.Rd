@@ -20,5 +20,5 @@ Read MGF data (from GNPS).
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

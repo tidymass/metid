@@ -136,7 +136,7 @@ setMethod(
 #' @description Get parameters from a metIdentifyClass object.
 #' \lifecycle{deprecated}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return A data frame contains all the parameters of this metIdentifiyClass object.
 #' @export
@@ -222,7 +222,7 @@ get_parameters =
 #' @description Get parameters from a metIdentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return A data frame contains all the parameters of this metIdentifiyClass object.
 #' @export
@@ -307,14 +307,14 @@ get_parameters_metid =
 #' @description Get identification information from a metIdentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param which.peak A peak name or "all". "all" means all peaks with identifications will be output.
 #' @param database Database used.
 #' @return A identification table (data.frame).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 get_iden_info = function(
   object,
   which.peak,
@@ -392,7 +392,7 @@ get_iden_info = function(
 #' @description Get MS2 match plots from a metIdentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param database Used database (databaseClass).
 #' @param which.peak Peak name(s) or "all". You can use which_has_identification functions to get what peaks have identifications.
@@ -420,7 +420,7 @@ get_iden_info = function(
 #' @return A or all ms2 match plot(s).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 ms2plot = function(object,
                    database,
@@ -740,12 +740,12 @@ ms2plot = function(object,
 #' @description Get the peak names which have identifications.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return Peak names with identifications.
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 which_has_identification = function(object){
   if (class(object) != "metIdentifyClass")
@@ -780,7 +780,7 @@ which_has_identification = function(object){
 #' @description Filter identifications according to m/z error, RT error, MS similarity and total score.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param ms1.match.ppm MS1 match ppm.
 #' @param rt.match.tol RT match tolerance.
@@ -789,7 +789,7 @@ which_has_identification = function(object){
 #' @return A new metIdentifyClass.
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 filter_identification = function(object,
                                  ms1.match.ppm = 25,
@@ -841,13 +841,13 @@ filter_identification = function(object,
 #' @description Get spectra of peaks from metIdentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object metIdentifyClass.
 #' @param peak.name Peak name.
 #' @return A MS2 spectrum.
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 get_ms2_spectrum_from_object = function(object,
                                         peak.name){
@@ -874,7 +874,7 @@ get_ms2_spectrum_from_object = function(object,
 #' @description Filter adducts.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object metIdentifyClass.
 #' @param remove_adduct What adduct you want to remove from annotation result. Like '(M-H)-'. All the adduct list can be found here:
 #' data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'), 
@@ -883,7 +883,7 @@ get_ms2_spectrum_from_object = function(object,
 #' @importFrom magrittr %>%
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 filter_adducts = function(object,
                           remove_adduct = NULL){

@@ -27,13 +27,13 @@ knitr::opts_chunk$set(
 
 [`MassBank`](https://massbank.eu/), [`MoNA`](https://mona.fiehnlab.ucdavis.edu/) and some other public databases provide `msp` format database of metabolites. So you can use the functions in `metid` to transform them to `metid` format database.
 
-## **MassBank**
+# **MassBank**
 
 Download the `MassBank` msp database from here: [https://massbank.eu/MassBank/](https://massbank.eu/MassBank/). And then put the `msp` data into one folder.
 
 Then set this folder as you work directory in R.
 
-### **Run `construct_massbank_database()` function**
+## **Run `construct_massbank_database()` function**
 
 ```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metid)
@@ -65,7 +65,7 @@ save(massbank_database, file = "massbank_database")
 
 
 
-## **MoNA**
+# **MoNA**
 
 Download the `MoNA` msp database from here: [https://mona.fiehnlab.ucdavis.edu/downloads](https://mona.fiehnlab.ucdavis.edu/downloads). And then put the `msp` data into one folder.
 
@@ -73,7 +73,7 @@ Download the `MoNA` msp database from here: [https://mona.fiehnlab.ucdavis.edu/d
 
 Then set this folder as you work directory in R.
 
-### **Run `construct_mona_database()` function**
+## **Run `construct_mona_database()` function**
 
 ```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metid)
@@ -99,4 +99,10 @@ massbank_database is a `databaseClass` object, you can print it to see its infor
 
 ```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 save(mona_database, file = "mona_database")
+```
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
 ```

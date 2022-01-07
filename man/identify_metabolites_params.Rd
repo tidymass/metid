@@ -92,9 +92,9 @@ param1
 }
 \seealso{
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/multiple_databases.html
+\url{https://tidymass.github.io/metid/articles/multiple_databases.html}
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

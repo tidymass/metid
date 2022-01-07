@@ -24,7 +24,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -38,6 +38,9 @@
   <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Brief introduction</li>
     <li>
       <a href="../articles/metid_introduction.html">Brief introduction</a>
+    </li>
+    <li>
+      <a href="../articles/install.html">Install metid</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">In-house and public database construction using metid</li>
@@ -216,12 +219,12 @@
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html</p></div>
+<a href="https://tidymass.github.io/metid/articles/metid.html">https://tidymass.github.io/metid/articles/metid.html</a></p></div>
     </div>
     <div id="author">
     <h2>Author</h2>
     <p>Xiaotao Shen
-<a href="mailto:shenxt1990@163.com">shenxt1990@163.com</a></p>
+<a href="mailto:shenxt1990@outlook.com">shenxt1990@outlook.com</a></p>
     </div>
 
     <div id="ref-examples">
@@ -238,7 +241,6 @@ https://tidymass.github.io/metid/articles/metid.html</p></div>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span>    masks <span style="color: #0000BB;">massdataset</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>       masks <span style="color: #0000BB;">stats</span>::lag()</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">purrr</span>::<span style="color: #00BB00;">set_names()</span> masks <span style="color: #0000BB;">magrittr</span>::set_names()</span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></span>
 <span class="r-in"><span class="va">ms1_data</span> <span class="op">=</span></span>
 <span class="r-in">  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
 <span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>,</span>
@@ -280,7 +282,7 @@ https://tidymass.github.io/metid/articles/metid.html</p></div>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">object</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">-------------------- </span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">massdataset version: 0.01 </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">massdataset version: 0.99.1 </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">-------------------- </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">1.expression_data:</span>[ 100 x 2 data.frame]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">2.sample_info:</span>[ 2 x 4 data.frame]</span>
@@ -290,9 +292,9 @@ https://tidymass.github.io/metid/articles/metid.html</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">6.ms2_data:</span>[ 0 variables x 0 MS2 spectra]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">-------------------- </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Processing information (extract_process_info())</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Creation ---------- </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">create_mass_dataset ---------- </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Package         Function.used                Time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 massdataset create_mass_dataset() 2021-12-27 12:21:26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 massdataset create_mass_dataset() 2022-01-07 00:55:13</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmdb_ms1_database0.0.3"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
 <span class="r-in"></span>

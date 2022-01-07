@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -64,6 +64,9 @@
 <li class="dropdown-header">Brief introduction</li>
     <li>
       <a href="../articles/metid_introduction.html">Brief introduction</a>
+    </li>
+    <li>
+      <a href="../articles/install.html">Install metid</a>
     </li>
     <li class="divider">
     </li>
@@ -178,7 +181,7 @@
       <h1 data-toc-skip>Construct public MS2 datbase using metid</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-06-10 and updated on 2021-12-27</h4>
+            <h4 data-toc-skip class="date">Created on 2020-06-10 and updated on 2022-01-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/public_database_construction.Rmd" class="external-link"><code>vignettes/public_database_construction.Rmd</code></a></small>
       <div class="hidden name"><code>public_database_construction.Rmd</code></div>
@@ -188,16 +191,16 @@
     
     
 <p><a href="https://massbank.eu/" class="external-link"><code>MassBank</code></a>, <a href="https://mona.fiehnlab.ucdavis.edu/" class="external-link"><code>MoNA</code></a> and some other public databases provide <code>msp</code> format database of metabolites. So you can use the functions in <code>metid</code> to transform them to <code>metid</code> format database.</p>
-<div class="section level2">
-<h2 id="massbank">
+<div class="section level1">
+<h1 id="massbank">
 <strong>MassBank</strong><a class="anchor" aria-label="anchor" href="#massbank"></a>
-</h2>
+</h1>
 <p>Download the <code>MassBank</code> msp database from here: <a href="https://massbank.eu/MassBank/" class="external-link">https://massbank.eu/MassBank/</a>. And then put the <code>msp</code> data into one folder.</p>
 <p>Then set this folder as you work directory in R.</p>
-<div class="section level3">
-<h3 id="run-construct_massbank_database-function">
+<div class="section level2">
+<h2 id="run-construct_massbank_database-function">
 <strong>Run <code>construct_massbank_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_massbank_database-function"></a>
-</h3>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -218,19 +221,19 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">massbank_database</span>, file <span class="op">=</span> <span class="st">"massbank_database"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div class="section level2">
-<h2 id="mona">
+<div class="section level1">
+<h1 id="mona">
 <strong>MoNA</strong><a class="anchor" aria-label="anchor" href="#mona"></a>
-</h2>
+</h1>
 <p>Download the <code>MoNA</code> msp database from here: <a href="https://mona.fiehnlab.ucdavis.edu/downloads" class="external-link">https://mona.fiehnlab.ucdavis.edu/downloads</a>. And then put the <code>msp</code> data into one folder.</p>
 <blockquote>
 <p>Note: Only download the database you need, do NOT use the all MS2 spectra databse which is pretty large size.</p>
 </blockquote>
 <p>Then set this folder as you work directory in R.</p>
-<div class="section level3">
-<h3 id="run-construct_mona_database-function">
+<div class="section level2">
+<h2 id="run-construct_mona_database-function">
 <strong>Run <code>construct_mona_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_mona_database-function"></a>
-</h3>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -250,6 +253,36 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">mona_database</span>, file <span class="op">=</span> <span class="st">"mona_database"</span><span class="op">)</span></code></pre></div>
 </div>
+</div>
+<div class="section level1">
+<h1 id="session-information">
+<strong>Session information</strong><a class="anchor" aria-label="anchor" href="#session-information"></a>
+</h1>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
+<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib</span>
+<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;  [1] rprojroot_2.0.2   digest_0.6.27     crayon_1.4.1      R6_2.5.0         </span>
+<span class="co">#&gt;  [5] jsonlite_1.7.2    magrittr_2.0.1    evaluate_0.14     stringi_1.7.3    </span>
+<span class="co">#&gt;  [9] rlang_0.4.11      cachem_1.0.5      fs_1.5.0          jquerylib_0.1.4  </span>
+<span class="co">#&gt; [13] bslib_0.3.1       ragg_1.1.3        rmarkdown_2.9     pkgdown_2.0.1    </span>
+<span class="co">#&gt; [17] textshaping_0.3.6 desc_1.3.0        tools_4.1.0       stringr_1.4.0    </span>
+<span class="co">#&gt; [21] purrr_0.3.4       yaml_2.2.1        xfun_0.24         fastmap_1.1.0    </span>
+<span class="co">#&gt; [25] compiler_4.1.0    systemfonts_1.0.2 memoise_2.0.0     htmltools_0.5.2  </span>
+<span class="co">#&gt; [29] knitr_1.33        sass_0.4.0</span></code></pre></div>
 </div>
   </div>
 

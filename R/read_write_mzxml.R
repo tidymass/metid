@@ -2,7 +2,7 @@
 #' @description Read mzXML data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mzXML or mzML.
 #' @param threads Thread number
 #' @return Return ms2 data. This is a list.
@@ -71,7 +71,7 @@ read_mzxml = function(file,
 #' @description Read mzXML data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be mzXML or mzML.
 #' @param threads Thread number
 #' @return Return ms2 data. This is a list.

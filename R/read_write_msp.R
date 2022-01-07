@@ -3,7 +3,7 @@
 #' @description Read MSP data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.
 #' @param threads threads number.
 #' @return Return ms2 data. This is a list.
@@ -173,7 +173,7 @@ read_msp = function(file,
 #' @description Read MSP data for database.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.
 #' @param threads threads
 #' @return Return ms2 data. This is a list.
@@ -354,7 +354,7 @@ read_msp_database = function(file,
 #' @description Read MSP data from MoNA.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
 #' @return Return ms2 data. This is a list.
 #' @export
@@ -464,7 +464,7 @@ readMSP_MoNA = function(file) {
 #' @description Read MSP data from MoNA.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
 #' @param threads The number of threads
 #' @return Return ms2 data. This is a list.
@@ -536,7 +536,7 @@ read_msp_mona = function(file,
 #' @description Read MSP data from MoNA.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
 #' @param threads The number of threads
 #' @return Return ms2 data. This is a list.
@@ -639,7 +639,7 @@ WriteMSP = function(info, fn.pre, spec.all) {
 #' @description Read MSP data.
 #' \lifecycle{experimental}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.
 #' @param silence.deprecated Silenc the deprecated information or not.
 #' @return Return ms2 data. This is a list.

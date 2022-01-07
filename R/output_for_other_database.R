@@ -6,7 +6,7 @@
 #' @title Export metid database to msp (mona format)
 #' @description Export metid database to msp (mona format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
@@ -182,7 +182,7 @@ write_msp_mona = function(databasae,
 #' @title Export metid database to mgf (mona format)
 #' @description Export metid database to mgf (mona format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
@@ -363,7 +363,7 @@ write_mgf_mona = function(databasae,
 #' @title Export metid database to msp (MassBank format)
 #' @description Export metid database to msp (MassBank format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
@@ -540,7 +540,7 @@ write_msp_massbank = function(databasae,
 #' @title Export metid database to mgf (MassBank format)
 #' @description Export metid database to mgf (MassBank format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
@@ -726,7 +726,7 @@ write_mgf_massbank = function(databasae,
 #' @title Export metid database to msp (gnps format)
 #' @description Export metid database to msp (gnps format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
@@ -892,7 +892,7 @@ write_msp_gnps = function(databasae,
 #' @title Export metid database to mgf (gnps format)
 #' @description Export metid database to mgf (gnps format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param databasae metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%

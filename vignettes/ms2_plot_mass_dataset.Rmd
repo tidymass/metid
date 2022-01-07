@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 *** 
 
-## **Data preparation**
+# **Data preparation**
 
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
@@ -69,7 +69,7 @@ object = create_mass_dataset(
 object
 ```
 
-## Add MS2 to mass_dataset object
+# **Add MS2 to `mass_dataset` object**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 path = "./example"
@@ -98,7 +98,7 @@ object@ms2_data
 
 ```
 
-## **Identify metabolites according to MS2**
+# **Identify metabolites according to MS2**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("snyder_database_rplc0.0.3", package = "metid")
@@ -110,7 +110,7 @@ head(object1@annotation_table)
 head(extract_variable_info(object = object1))
 ```
 
-## **MS2 plot**
+# **MS2 plot**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 ms2_plot_mass_dataset(object = object1, variable_index = 1, database = snyder_database_rplc0.0.3)
@@ -119,4 +119,10 @@ ms2_plot_mass_dataset(object = object1, variable_index = 1, database = snyder_da
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 ms2_plot_mass_dataset(object = object1, variable_index = 3, database = snyder_database_rplc0.0.3)
+```
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
 ```

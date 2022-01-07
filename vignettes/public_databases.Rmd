@@ -27,16 +27,16 @@ knitr::opts_chunk$set(
 
 ***
 
-## **In-house MS2 databases from [Michael Snyder lab](http://med.stanford.edu/snyderlab.html)**
+# **In-house MS2 databases from [Michael Snyder lab](http://med.stanford.edu/snyderlab.html)**
 
-### 1. Michael Snyder HILIC databases
+## 1. Michael Snyder HILIC databases
 
 * <i class="fa fa-info"></i> Professor Michael Snyder's lab. More than 1,000 metabolites.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/snyder_database_hilic0.0.3.rda)
 
 
-### 2. Michael Snyder RPLC databases
+## 2. Michael Snyder RPLC databases
 
 * <i class="fa fa-info"></i> Professor Michael Snyder's lab. More than 1,000 metabolites.
 
@@ -45,33 +45,33 @@ knitr::opts_chunk$set(
 
 ***
 
-## **Public MS2 databases**
+# **Public MS2 databases**
 
-### 1. [HMDB database](https://hmdb.ca/downloads)
+## 1. [HMDB database](https://hmdb.ca/downloads)
 
 * <i class="fa fa-info"></i> HMDB database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdb_database0.0.3.rda)
 
-### 2. [MassBank database](https://massbank.eu/MassBank/)
+## 2. [MassBank database](https://massbank.eu/MassBank/)
 
 * <i class="fa fa-info"></i> MassBank database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/massbank_database0.0.3.rda)
 
-### 3. [MoNA database](https://mona.fiehnlab.ucdavis.edu/)
+## 3. [MoNA database](https://mona.fiehnlab.ucdavis.edu/)
 
 * <i class="fa fa-info"></i> MoNA database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/mona_database0.0.3.rda)
 
-### 4. [Orbitrap database](https://mona.fiehnlab.ucdavis.edu/)
+## 4. [Orbitrap database](https://mona.fiehnlab.ucdavis.edu/)
 
 * <i class="fa fa-info"></i> Orbitrap database from MoNA.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/orbitrap_database0.0.3.rda)
 
-### 5. [Fiehn HILIC database](https://fiehnlab.ucdavis.edu/staff/kind/publications)
+## 5. [Fiehn HILIC database](https://fiehnlab.ucdavis.edu/staff/kind/publications)
 
 * <i class="fa fa-info"></i> HILIC MS2 database from Fiehn lab.
 
@@ -87,22 +87,22 @@ knitr::opts_chunk$set(
 
 ***
 
-## **Public MS1 databases**
+# **Public MS1 databases**
 
-### 1. [HMDB MS1 database](https://hmdb.ca/downloads)
+## 1. [HMDB MS1 database](https://hmdb.ca/downloads)
 
 * <i class="fa fa-info"></i> HMDB MS1 database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdb_ms1_database0.0.3.rda)
 
 
-### 2. [KEGG MS1 database](https://www.genome.jp/kegg/compound/)
+## 2. [KEGG MS1 database](https://www.genome.jp/kegg/compound/)
 
 * <i class="fa fa-info"></i> KEGG MS1 database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/kegg_ms1_database0.0.3.rda)
 
-### 3. [Drugbank database](https://go.drugbank.com/releases/latest)
+## 3. [Drugbank database](https://go.drugbank.com/releases/latest)
 
 * <i class="fa fa-info"></i> Drugbank MS1 database.
 
@@ -114,20 +114,24 @@ knitr::opts_chunk$set(
 
 <!-- * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdbMS1Database0.0.1) -->
 
-### 4. [T3DB database](http://www.t3db.ca/downloads)
+## 4. [T3DB database](http://www.t3db.ca/downloads)
 
 * <i class="fa fa-info"></i> T3DB MS1 database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/t3db_database1.0.rda)
 
-### 5. [Blood exposome database](https://bloodexposome.org/#/download)
+## 5. [Blood exposome database](https://bloodexposome.org/#/download)
 
 * <i class="fa fa-info"></i> Blood exposome MS1 database.
 
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/bloodexposome_database1.0.rda)
 
 
+# **Session information**
 
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```
 
 
 

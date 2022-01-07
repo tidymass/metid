@@ -2,7 +2,7 @@
 #' @description Show the base information of metid pacakge.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt@@stanford.edu}
+#' \email{shenxt1990@@outlook.com}
 #' @return A ASCII log of metid
 #' @export
 #' @examples 

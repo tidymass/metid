@@ -80,6 +80,8 @@ navbar:
       - text: "Brief introduction"
       - text: Brief introduction
         href: articles/metid_introduction.html
+      - text: Install metid
+        href: articles/install.html
       - text: -------
       - text: "In-house and public database construction using metid"
       - text: In-house database construction

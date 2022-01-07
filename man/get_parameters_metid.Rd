@@ -18,5 +18,5 @@ Get parameters from a metIdentifyClass object.
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

@@ -3,7 +3,7 @@
 #' @description Identify metabolites based on MS2 data.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms2.data MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").
 #' @param ms1.match.ppm Precursor match ppm tolerance.
 #' @param ms2.match.ppm Fragment ion match ppm tolerance.
@@ -29,7 +29,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 
 identify_ms2_only = function(ms2.data,

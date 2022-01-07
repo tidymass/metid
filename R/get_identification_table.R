@@ -3,7 +3,7 @@
 #' @description Get identification table from a metIdentifyClass object.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ... One or multiple metIdentifyClass objects.
 #' @param candidate.num The number of candidates.
 #' @param type The type of identification table.
@@ -13,7 +13,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select mutate everything lag filter
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 get_identification_table = function(...,
                                     candidate.num = 3,
@@ -27,7 +27,7 @@ get_identification_table = function(...,
   object <- list(...)
   
   ###if object is a one list or not
-  if (length(object) == 1 & class(object[[1]]) == "list") {
+  if (length(object) == 1 & is.list(object[[1]])) {
     object = object[[1]]
   }
   
@@ -433,12 +433,12 @@ get_identification_table = function(...,
 #' @description Transform old style identification table to new style.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param identification.table Identification table from get_identification_table.
 #' @return A identification table (data.frame).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 trans_to_new_style = function(identification.table){
   if (all(colnames(identification.table) != "Identification")) {
@@ -483,7 +483,7 @@ trans_to_new_style = function(identification.table){
             stringr::str_split(string = x, pattern = ";")[[1]]
           
           x <-
-            sapply(c(
+            lapply(c(
               "CAS.ID\\:",
               "HMDB.ID\\:",
               "KEGG.ID\\:",
@@ -509,7 +509,8 @@ trans_to_new_style = function(identification.table){
               }
               y
               
-            })
+            }) %>% 
+            unlist()
           x <- stringr::str_replace(
             string = x,
             pattern = c(
@@ -576,7 +577,7 @@ trans_to_new_style = function(identification.table){
 #' @description Get identification table from a mzIdentifyClass object.
 #' \lifecycle{deprecated}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param object mzIdentifyClass object.
 #' @param candidate.num The number of candidates.
 #' @param type The type of identification table.
@@ -585,7 +586,7 @@ trans_to_new_style = function(identification.table){
 #' @export
 #' @importFrom magrittr %>%
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 # object = result_rp_pos25[[8]]
 
@@ -646,13 +647,14 @@ getIdentificationTable2 = function(object,
       unlist(identification.result)
     
     identification.table$Candidate.number <-
-      sapply(identification.table$Identification, function(x) {
+      lapply(identification.table$Identification, function(x) {
         if (is.na(x))
           return(0)
         return(length(stringr::str_split(
           string = x, pattern = "\\{\\}"
         )[[1]]))
-      })
+      }) %>% 
+      unlist()
     identification.table <-
       data.frame(peak.table, identification.table, stringsAsFactors = FALSE)
   } else{

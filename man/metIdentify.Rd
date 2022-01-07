@@ -124,9 +124,9 @@ annotate_result3
 }
 \seealso{
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html
+\url{https://tidymass.github.io/metid/articles/metid.html}
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

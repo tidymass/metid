@@ -2,7 +2,7 @@
 #' @title Construct public MS2 database from massbank with msp format.
 #' @description Construct MS2 spectra database according to mzXML data and compound information table (csv format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param file The file name of MassBank or MoNA database (mgf format).
 #' @param only.remain.ms2 Only remain the metabolites with MS2 spectra?
 #' @param path Work directory.
@@ -20,7 +20,7 @@
 #' @importFrom pbapply pblapply
 #' @return A databaseClass object.
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @export
 
 # # ####MassBank library

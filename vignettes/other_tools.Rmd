@@ -32,29 +32,36 @@ library(metid)
 library(tidyverse)
 ```
 
-## Read MS2 data
+# **Read MS2 data**
 
-### Read msp format file using `readMGF`
+## **Read msp format file using `readMGF`**
 
 ```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result <- readMGF(file)
 ```
 
-### Read mzXML format file using `readMZXML`
+## **Read mzXML format file using `readMZXML`**
 
 ```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result <- readMZXML(file, threads = 3)
 ```
 
-### Read MGF format file using `readMGF`
+## **Read MGF format file using `readMGF`**
 
 ```{r,eval = FALSE, warning=FALSE, message=TRUE,R.options="",cache=TRUE}
 result <- readMGF(file)
 ```
 
 
-## Show `metid` version and logo
+# **Show `metid` version and logo**
 
 ```{r,eval = TRUE,warning=FALSE, message=TRUE,R.options="",cache=FALSE}
 metid::metid_logo()
+```
+
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
 ```

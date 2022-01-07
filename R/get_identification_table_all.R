@@ -3,7 +3,7 @@
 #' @description Extract the identifications from multiple results of `identify_metabolite_all()`.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ... One or multiple results from `identify_metabolite_all()`.
 #' @param candidate.num candidate.num
 #' @param level_condition Condition for level assign.
@@ -16,7 +16,7 @@
 #' @importFrom crayon green red yellow
 #' @importFrom dplyr select mutate everything filter left_join
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 get_identification_table_all =
   function(...,

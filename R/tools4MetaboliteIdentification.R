@@ -118,7 +118,7 @@ metIdentification = function(ms1.info,
 #' @description Identify metabolites based on MS1 or MS/MS database.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param idx idx
 #' @param ms1.info ms1.info
 #' @param ms2.info ms2.info
@@ -448,7 +448,7 @@ plotMS2match = function(matched.info,
     unlist(database@spectra.info[match(matched.info["Lab.ID"], database@spectra.info$Lab.ID), , drop = TRUE])
   temp.info <- temp.info[!is.na(temp.info)]
   temp.info <-
-    temp.info[sapply(temp.info, stringr::str_count) < 50]
+    temp.info[unlist(lapply(temp.info, stringr::str_count)) < 50]
   temp.info <-
     paste(names(temp.info), temp.info, sep = ": ")
   

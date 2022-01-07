@@ -7,6 +7,7 @@ articles:
   contact_us: contact_us.html
   database_construction: database_construction.html
   identify_single_peak: identify_single_peak.html
+  install: install.html
   metabolite_annotation_using_MS1: metabolite_annotation_using_MS1.html
   metabolite_annotation_using_MS2: metabolite_annotation_using_MS2.html
   metid_introduction: metid_introduction.html
@@ -17,7 +18,7 @@ articles:
   public_database_construction: public_database_construction.html
   public_databases: public_databases.html
   work_with_mass_dataset: work_with_mass_dataset.html
-last_built: 2021-12-27T20:21Z
+last_built: 2022-01-07T08:55Z
 urls:
   reference: https://tidymass.github.io/metid/reference
   article: https://tidymass.github.io/metid/articles

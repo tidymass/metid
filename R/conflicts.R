@@ -9,6 +9,7 @@
 #' existing code.
 #'
 #' @export
+#' @return metid_conflicts
 #' @examples
 #' metid_conflicts()
 metid_conflicts <- function() {

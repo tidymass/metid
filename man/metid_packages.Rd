@@ -9,6 +9,9 @@ metid_packages(include_self = TRUE)
 \arguments{
 \item{include_self}{Include metid in the list?}
 }
+\value{
+metid_packages
+}
 \description{
 List all packages in the metid
 }

@@ -34,7 +34,7 @@ library(metid)
 library(tidyverse)
 ```
 
-## **Peak information**
+# **Peak information**
 
 We need the m/z, rt and MS2 information. MS2 must be a matrix with two columns: `mz` and `intensity`.
 
@@ -54,9 +54,9 @@ ms2 <- data.frame(
 ms2 %>% head()
 ```
 
-## **Run `identify_single_peak()` function**
+# **Run `identify_single_peak()` function**
 
-### **Load database**
+## **Load database**
 
 First we load the database from `metid` package and then put them in a `example` folder.
 
@@ -86,5 +86,9 @@ annotation_result <-
 
 `annotation_result` is a `metIdentifyClass` object, so you can use all the functions for it to process.
 
+# **Session information**
 
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```
 

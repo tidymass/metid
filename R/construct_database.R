@@ -2,12 +2,12 @@
 #' @title Construct in-house or public MS2 database for metid.
 #' @description Construct MS2 spectra database according to mzXML data and compound information table (csv format).
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param path Work directory.
 #' @param version The version of you database. Default is 0.0.1.
 #' @param metabolite.info.name The metabolite information table name, it must be csv format.
 #' The demo data can be got from the `demoData` package.
-#' Please see https://tidymass.github.io/metid/articles/metid.html
+#' Please see \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @param source The source of your database.
 #' @param link Website link of the source.
 #' @param creater Creater name. For example, Xiaotao Shen.
@@ -23,7 +23,7 @@
 #' @importFrom pbapply pblapply
 #' @return A databaseClass object.
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @export
 #' @examples 
 #' \dontrun{

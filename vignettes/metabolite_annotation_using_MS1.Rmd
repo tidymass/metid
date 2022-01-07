@@ -27,27 +27,27 @@ knitr::opts_chunk$set(
 
 ***
 
-## **MS1 data preparation**
+# **MS1 data preparation**
 
 The peak table must contain "name" (peak name), "mz" (mass to charge ratio) and "rt" (retention time, unit is second). It can be from any data processing software (XCMS, MS-DIAL and so on).
 
 ![](../man/figures/Screen Shot 2020-03-30 at 5.51.02 PM.png)
 
-## **Database**
+# **Database**
 
 The database must be generated using `constructDatabase()` function. You can also use the public databases we provoded [here](https://github.com/jaspershen/demoData/tree/master/inst/ms2_database).
 
-## **Data organization**
+# **Data organization**
 
 Place the MS1 peak table and databases which you want to use in one folder like below figure shows:
 
 ![](../man/figures/Screen Shot 2020-03-30 at 1.55.53 PM.png)
 
-## **Run `identify_metabolites()` function**
+# **Run `identify_metabolites()` function**
 
 We use the demo data in `metid` package to show how to use `metid` to identify metabolites without MS2 spectra. 
 
-### **Load demo data**
+## **Load demo data**
 
 First we load the MS1 peak and database from `metid` package and then put them in a `example` folder.
 
@@ -73,7 +73,7 @@ save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.
 
 Now in your `./example`, there are two files, namely `ms1.peak.table.csv` and `msDatabase_rplc_0.0.2`, respectively.
 
-### Only use m/z for metabolite identification
+## Only use m/z for metabolite identification
 
 First, we only use m/z for metabolite identification.
 
@@ -159,7 +159,7 @@ paste(snyder_database_rplc0.0.3@database.info$Source,
 
 ```
 
-### Only use m/z and RT for metabolite identification
+## Only use m/z and RT for metabolite identification
 
 Here we set RT tolerance (`rt.match.tol`) as 30 s.
 
@@ -176,11 +176,11 @@ annotate_result2 <-
                        threads = 5)
 ```
 
-## Get detailed annotation information
+# Get detailed annotation information
 
 After get the `annotation_result`, we can get the detailed information from it.
 
-### Get the processing parameters
+## Get the processing parameters
 
 We can use `get_parameters()` function to get the detailed parameters. This is very useful for reproductive analysis for data analysis.
 
@@ -192,7 +192,7 @@ metid::get_parameters_metid(annotate_result1)
 metid::get_parameters_metid(annotate_result2)
 ```
 
-### Check what peaks with annotations
+## Check what peaks with annotations
 
 Use `which_has_identification()` function to get what peaks have annotions.
 
@@ -203,7 +203,7 @@ which_has_identification(annotate_result1) %>%
 
 > Because there are no ms2 data, so the peaks have no MS2 spectra.
 
-### Get the identification table
+## Get the identification table
 
 We can use `get_identification_table()` to get the identification table. 
 
@@ -235,7 +235,7 @@ table2 <-
 table2
 ```
 
-### Get the identification information for single peak
+## Get the identification information for single peak
 
 We can use `get_iden_info()` function to get the detailed information for a sinlge peak. Because it gets the information from the database, so this function need provide the database.
 
@@ -259,7 +259,7 @@ get_iden_info(object = annotate_result1,
 We can get the detailed information for metabolites in database.
 
 
-### Filter identifications 
+## Filter identifications 
 
 After we get the annotation result use `identify_metabolites()` function. We can also use `filter_identification()` function to filter annotations based on m/z, rt and MS2 match tolerance.
 
@@ -275,4 +275,10 @@ annotate_result2_2
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 annotate_result2
+```
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
 ```

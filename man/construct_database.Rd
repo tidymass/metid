@@ -25,7 +25,7 @@ construct_database(
 
 \item{metabolite.info.name}{The metabolite information table name, it must be csv format.
 The demo data can be got from the `demoData` package.
-Please see https://tidymass.github.io/metid/articles/metid.html}
+Please see \url{https://tidymass.github.io/metid/articles/metid.html}}
 
 \item{source}{The source of your database.}
 
@@ -66,9 +66,9 @@ threads = 5
 }
 \seealso{
 The example and demo data of this function can be found
-https://tidymass.github.io/metid/articles/metid.html
+\url{https://tidymass.github.io/metid/articles/metid.html}
 }
 \author{
 Xiaotao Shen
-\email{shenxt1990@163.com}
+\email{shenxt1990@outlook.com}
 }

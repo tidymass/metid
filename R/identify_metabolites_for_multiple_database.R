@@ -2,7 +2,7 @@
 #' @description Identify metabolites using multiple databases one time.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", column 2 is
 #' "mz" and column 3 is "rt" (second).
 #' @param ms2.data MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").
@@ -13,7 +13,7 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/multiple_databases.html
+#' \url{https://tidymass.github.io/metid/articles/multiple_databases.html}
 #' @examples
 #' \dontrun{
 #' ##creat a folder nameed as example
@@ -380,7 +380,7 @@ identify_metabolite_all = function(ms1.data,
 #' @description Generate the parameter list for metIdentify function.
 #' \lifecycle{maturing}
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param ms1.ms2.match.mz.tol MS1 peak and MS2 spectrum matching m/z tolerance. Default is 25 pm.
 #' @param ms1.ms2.match.rt.tol MS1 peak and MS2 spectrum matching RT tolerance. Default is 10 s.
 #' @param ms1.match.ppm Precursor match ppm tolerance.
@@ -404,7 +404,7 @@ identify_metabolite_all = function(ms1.data,
 #' @return A metIdentifyClass object.
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/multiple_databases.html
+#' \url{https://tidymass.github.io/metid/articles/multiple_databases.html}
 #' @examples
 #'  param1 <-
 #' identify_metabolites_params(

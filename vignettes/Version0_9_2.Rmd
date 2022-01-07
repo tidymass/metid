@@ -117,4 +117,8 @@ paste(msDatabase_rplc0.0.2@database.info$Source,
 
 ```
 
-#
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```

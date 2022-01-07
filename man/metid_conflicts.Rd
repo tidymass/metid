@@ -6,6 +6,9 @@
 \usage{
 metid_conflicts()
 }
+\value{
+metid_conflicts
+}
 \description{
 This function lists all the conflicts between packages in the metid
 and other packages that you have loaded.

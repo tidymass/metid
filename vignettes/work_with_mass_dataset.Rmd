@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 *** 
 
-## **Data preparation**
+# **Data preparation**
 
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
@@ -69,7 +69,7 @@ object = create_mass_dataset(
 object
 ```
 
-## Add MS2 to mass_dataset object
+# **Add MS2 to `mass_dataset` object**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 path = "./example"
@@ -98,7 +98,7 @@ object@ms2_data
 
 ```
 
-## **Identify metabolites according to MS1**
+# **Identify metabolites according to MS1**
 
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
@@ -113,7 +113,7 @@ object1 =
 object1
 ```
 
-## **Identify metabolites according to MS2**
+# **Identify metabolites according to MS2**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("snyder_database_rplc0.0.3", package = "metid")
@@ -125,7 +125,7 @@ head(object2@annotation_table)
 head(extract_variable_info(object = object2))
 ```
 
-## **Identify metabolites according another database**
+# **Identify metabolites according another database**
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 data("orbitrap_database0.0.3", package = "metid")
@@ -136,7 +136,11 @@ object3 =
 head(extract_variable_info(object = object3))
 ```
 
+# **Session information**
 
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```
 
 
 

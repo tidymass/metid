@@ -27,34 +27,34 @@ knitr::opts_chunk$set(
 
 ***
 
-## **MS1 data preparation**
+# **MS1 data preparation**
 
 The peak table must contain "name" (peak name), "mz" (mass to charge ratio) and "rt" (retention time, unit is second). It can be from any data processing software (XCMS, MS-DIAL and so on).
 
 ![](../man/figures/Screen Shot 2020-03-30 at 5.51.02 PM.png)
 
-## MS2 data preparation
+# MS2 data preparation
 
 The raw MS2 data from DDA or DIA should be transfered to msp, mgf or mzXML format files using [ProteoWizard software](http://proteowizard.sourceforge.net/).
 
-## **Database**
+# **Database**
 
 The database must be generated using `constructDatabase()` function. You can also use the public databases we provoded [here](https://github.com/jaspershen/demoData/tree/master/inst/ms2_database).
 
-## Data organization
+# Data organization
 
 Place the MS1 peak table, MS2 data and database which you want to use in one folder like below figure shows:
 
 ![](../man/figures/Screen Shot 2020-03-30 at 7.05.35 PM.png)
 
-## **Run `identify_metabolites()` function**
+# **Run `identify_metabolites()` function**
 
 We use the demo data in `metid` package to show how to use `metid` to identify metablite without MS2 spectra. Here, we use the in-house database from Michael Snyder lab (`snyder_database_rplc0.0.3`).
 
 > In-house database
 The in-house database in our lab were provided, with RPLC and HILIC mode RT information. They were acquired using Thermo Fisher QE-plus. However, the LC system may be different with your experiments, so if you want to use our in-house database for metabolite identification, please set `rt.match.tol` as 100000000 (no limitation). The in-house database can be downloaded in my [github](https://github.com/tidymass/metid/tree/master/data).
 
-### **Load demo datas**
+## **Load demo datas**
 
 First we load the MS1 peak, MS2 data and database from `metid` package and then put them in a `example` folder.
 
@@ -64,7 +64,7 @@ library(tidyverse)
 ```
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=FALSE}
-##creat a folder nameed as example
+#creat a folder nameed as example
 path <- file.path(".", "example")
 dir.create(path = path, showWarnings = FALSE)
 
@@ -87,7 +87,7 @@ save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.
 
 Now in your `./example`, there are three files, namely `ms1.peak.table.csv`, `QC1_MSMS_NCE25.mgf` and `snyder_database_rplc0.0.3`.
 
-### Use m/z, RT and MS2 for metabolite identification
+## Use m/z, RT and MS2 for metabolite identification
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=FALSE}
 annotate_result3 <- 
@@ -135,16 +135,16 @@ The return result `annotate_result3` is a `metIdentifyClass` object, you can dir
 annotate_result3
 ```
 
-## Get detailed annotation information
+# Get detailed annotation information
 
 Most of the detailed annotation information are same with `Annotate metabolites according to MS1 database using metid package`. 
 
 
-## **Get MS2 spectra match plot**
+# **Get MS2 spectra match plot**
 
 You can also use `ms2plot()` function to output the MS2 specra match plot for one, multiple or all peaks.
 
-### Output one MS2 spectra match plot.
+## Output one MS2 spectra match plot.
 
 ```{r, eval = TRUE,warning=FALSE,message=FALSE,R.options="",cache=FALSE}
 ##which peaks have identifications
@@ -198,7 +198,7 @@ ms2.plot1_2 %>%
   plotly::ggplotly()
 ```
 
-### Output multiple or all MS2 spectra match plots
+## Output multiple or all MS2 spectra match plots
 
 You can set the `which.peak` as a vector of peak names to output multiple peaks MS2 match plot, or set it as `all` to output all MS2 spectra match plots.
 
@@ -217,3 +217,9 @@ ms2plot(
 Then all the MS2 spectra match plots will be output in the "inhouse" folder.
 
 ![](../man/figures/Screen Shot 2020-03-30 at 7.38.48 PM.png)
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```

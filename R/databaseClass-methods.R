@@ -96,7 +96,7 @@ setMethod(
 #' @title Get MS2 spectra of peaks from databaseClass object
 #' @description Get MS2 spectra of peaks from databaseClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param lab.id The lab ID of metabolite.
 #' @param database Database (databaseClass object).
 #' @param polarity positive or negative.
@@ -104,12 +104,12 @@ setMethod(
 #' @return A MS2 spectrum (data.frame).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 #' @title Get MS2 spectra of peaks from databaseClass object
 #' @description Get MS2 spectra of peaks from databaseClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@163.com}
+#' \email{shenxt1990@@outlook.com}
 #' @param lab.id The lab ID of metabolite.
 #' @param database Database (databaseClass object).
 #' @param polarity positive or negative.
@@ -117,7 +117,7 @@ setMethod(
 #' @return A MS2 spectrum (data.frame).
 #' @export
 #' @seealso The example and demo data of this function can be found
-#' https://tidymass.github.io/metid/articles/metid.html
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 get_ms2_spectrum = function(lab.id,
                             database,
