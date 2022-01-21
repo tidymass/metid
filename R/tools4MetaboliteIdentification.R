@@ -64,7 +64,7 @@ metIdentification = function(ms1.info,
   cat("\n")
   cat(crayon::green('Identifing metabolites with MS/MS database...\n'))
   
-  if (tinytools::get_os() == "windows") {
+  if (masstools::get_os() == "windows") {
     bpparam = BiocParallel::SnowParam(workers = threads,
                                       progressbar = TRUE)
   } else{
@@ -260,7 +260,7 @@ identifyPeak = function(idx,
     x <- as.character(x)
     lib.spec <- spectra.data[[x[1]]]
     dp <- lapply(lib.spec, function(y) {
-      tinytools::getSpectraMatchScore(
+      masstools::getSpectraMatchScore(
         exp.spectrum = as.data.frame(pk.spec),
         lib.spectrum = y,
         ppm.tol = ppm.ms2match,
@@ -383,7 +383,7 @@ plotMS2match = function(matched.info,
   }
   
   matched.spec <-
-    tinytools::ms2Match(
+    masstools::ms2Match(
       exp.spectrum = exp.spectrum,
       lib.spectrum = lib.spectrum,
       ppm.tol = ppm.tol,

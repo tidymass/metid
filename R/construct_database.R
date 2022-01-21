@@ -151,7 +151,7 @@ construct_database = function(path = ".",
   
   if (!is.null(ms1.info.pos)) {
     match.result.pos <-
-      tinytools::mz_rt_match(
+      masstools::mz_rt_match(
         data1 = as.data.frame(metabolite.info[, c("mz.pos", "RT")]),
         data2 = ms1.info.pos[, c(2, 3)],
         mz.tol = mz.tol,
@@ -227,7 +227,7 @@ construct_database = function(path = ".",
   cat(crayon::green("Matching metabolites with MS2 spectra (negative)...\n"))
   if (!is.null(ms1.info.neg)) {
     match.result.neg <-
-      tinytools::mz_rt_match(
+      masstools::mz_rt_match(
         data1 = as.data.frame(metabolite.info[, c("mz.neg", "RT")]),
         data2 = ms1.info.neg[, c(2, 3)],
         mz.tol = mz.tol,

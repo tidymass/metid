@@ -1,6 +1,6 @@
 core <-
   c(
-    "tinytools", "massdataset"
+    "masstools", "massdataset"
   )
 
 metid_core_unloaded <- function() {

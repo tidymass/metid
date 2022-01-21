@@ -15,7 +15,7 @@
 #' @return A list of ggplot2 object.
 #' @importFrom crayon yellow green red bgRed
 #' @importFrom magrittr %>%
-#' @importFrom tinytools ms2_plot
+#' @importFrom masstools ms2_plot
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
@@ -139,7 +139,7 @@ ms2_plot_mass_dataset =
         if(is.null(spectrum2)){
           cat("database may be wrong.\n")
           plot = 
-            tinytools::ms2_plot(
+            masstools::ms2_plot(
               spectrum1 = spectrum1,
               spectrum1_name = x[1],
               spectrum2_name = x[4],
@@ -149,7 +149,7 @@ ms2_plot_mass_dataset =
             )
         }else{
           plot =
-            tinytools::ms2_plot(
+            masstools::ms2_plot(
               spectrum1 = spectrum1,
               spectrum2 = spectrum2,
               spectrum1_name = x[1],

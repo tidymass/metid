@@ -698,7 +698,7 @@ ms2plot = function(object,
         })
     }
     
-    if(tinytools::get_os() == "windows"){
+    if(masstools::get_os() == "windows"){
       bpparam = BiocParallel::SnowParam(workers = threads, 
                                         progressbar = TRUE)
     }else{

@@ -239,7 +239,7 @@ mzIdentify_mass_dataset =
     }
     
     
-    if (tinytools::get_os() == "windows") {
+    if (masstools::get_os() == "windows") {
       bpparam = BiocParallel::SnowParam(workers = threads,
                                         progressbar = TRUE)
     } else{

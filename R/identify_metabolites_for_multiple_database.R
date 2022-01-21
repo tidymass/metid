@@ -101,7 +101,7 @@
 #' result[[3]]
 #' }
 
-# tinytools::setwd_project()
+# masstools::setwd_project()
 # setwd("example")
 # param1 <-
 # identify_metabolites_params(

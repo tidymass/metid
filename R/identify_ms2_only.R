@@ -304,7 +304,7 @@ identify_ms2_only = function(ms2.data,
     
     colnames(ms1.data)[seq_len(3)] <- c("name", "mz", "rt")
     match.result <-
-      tinytools::mz_rt_match(
+      masstools::mz_rt_match(
         data1 = ms1.data[, c(2, 3)],
         data2 = ms1.info[, c(2, 3)],
         mz.tol = 2,
