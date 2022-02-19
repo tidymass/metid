@@ -24,7 +24,7 @@
 #' @importFrom masstools ms2Match get_os mz_rt_match
 #' @importFrom stats lm loess predict
 #' @importFrom plotly ggplotly
-#' @importFrom future plan multisession 
+#' @importFrom future plan multisession
 #' @importFrom furrr future_map2 future_map
 #' @importFrom rstudioapi isAvailable hasFun getThemeInfo
 #' @importFrom cli rule symbol cat_line
@@ -43,12 +43,8 @@
 
 metid_logo <- function() {
   cat(crayon::green("Thank you for using metid!\n"))
-  cat(crayon::green("Version 1.1.0 (20210702)\n"))
-  cat(
-    crayon::green(
-      "More information: google tidymass metid.\n"
-    )
-  )
+  message(crayon::green("Version", massid_version, "(", update_date, ')\n'))
+  cat(crayon::green("More information: google tidymass metid.\n"))
   cat(crayon::green(
     c(
       "                _    _____  ___ ",
@@ -63,7 +59,8 @@ metid_logo <- function() {
 }
 
 
-
+massid_version = "1.2.2"
+update_date = as.character(Sys.time())
 
 
 
