@@ -43,7 +43,7 @@
 
 metid_logo <- function() {
   cat(crayon::green("Thank you for using metid!\n"))
-  message(crayon::green("Version", massid_version, "(", update_date, ')\n'))
+  message(crayon::green("Version", metid_version, "(", update_date, ')\n'))
   cat(crayon::green("More information: google tidymass metid.\n"))
   cat(crayon::green(
     c(
@@ -59,7 +59,7 @@ metid_logo <- function() {
 }
 
 
-massid_version = "1.2.2"
+metid_version = "1.2.2"
 update_date = as.character(Sys.time())
 
 

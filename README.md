@@ -26,10 +26,10 @@ You can install `metid` from
 [Github](https://github.com/tidymass/metid).
 
 ``` r
-if(!require(devtools)){
-install.packages("devtools")
+if(!require(remotes)){
+install.packages("remotes")
 }
-devtools::install_github("tidymass/metid")
+remotes::install_github("tidymass/metid")
 ```
 
 `metid` is a part of `tidymass`, so you can also install it by installing [`tidymass`](https://tidymass.github.io/tidymass/index.html).
