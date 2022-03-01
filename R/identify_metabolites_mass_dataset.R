@@ -80,7 +80,7 @@
 #' head(object2@annotation_table)
 #' extract_variable_info(object = object)
 
-annotate_metabolites_mass_dataset =
+annotate_metabolites_mass_dataset <-
   function(object,
            ms1.match.ppm = 25,
            ms2.match.ppm = 30,
@@ -168,11 +168,11 @@ annotate_metabolites_mass_dataset =
     
     ######MS2 in object
     if (length(object@ms2_data) > 0) {
-      spectra_pos_number =
+      spectra_pos_number <-
         database@spectra.data[['Spectra.positive']] %>%
         length()
       
-      spectra_neg_number =
+      spectra_neg_number <-
         database@spectra.data[['Spectra.negative']] %>%
         length()
       
@@ -187,7 +187,7 @@ annotate_metabolites_mass_dataset =
         cat(crayon::yellow(
           "No MS2 data in database, so only use mz and/or RT for matching.\n"
         ))
-        annotation_result =
+        annotation_result <-
           mzIdentify_mass_dataset(
             object = object,
             rt.match.tol = rt.match.tol,
@@ -201,7 +201,7 @@ annotate_metabolites_mass_dataset =
         annotation_result$SS = NA
       } else{
         ######MS2 in database
-        annotation_result =
+        annotation_result <-
           metIdentify_mass_dataset(
             object = object,
             ms1.match.ppm = ms1.match.ppm,
@@ -226,7 +226,51 @@ annotate_metabolites_mass_dataset =
       }
     }
     
-    Level =
+    ###processing information
+    process_info <- object@process_info
+    
+    parameter <- new(
+      Class = "tidymass_parameter",
+      pacakge_name = "metid",
+      function_name = "annotate_metabolites_mass_dataset()",
+      parameter = list(
+        ms1.match.ppm = ms1.match.ppm,
+        ms2.match.ppm = ms2.match.ppm,
+        mz.ppm.thr = mz.ppm.thr,
+        ms2.match.tol = ms2.match.tol,
+        fraction.weight = fraction.weight,
+        dp.forward.weight = dp.forward.weight,
+        dp.reverse.weight = dp.reverse.weight,
+        rt.match.tol = rt.match.tol,
+        polarity = polarity,
+        ce = ce,
+        column = column,
+        ms1.match.weight = ms1.match.weight,
+        rt.match.weight = rt.match.weight,
+        ms2.match.weight = ms2.match.weight,
+        total.score.tol = total.score.tol,
+        candidate.num = candidate.num,
+        database = database.name,
+        threads = threads
+      ),
+      time = Sys.time()
+    )
+    
+    if (all(names(process_info) != "annotate_metabolites_mass_dataset")) {
+      process_info$annotate_metabolites_mass_dataset <- parameter
+    } else{
+      process_info$annotate_metabolites_mass_dataset <-
+        c(process_info$annotate_metabolites_mass_dataset,
+          parameter)
+    }
+    
+    object@process_info <- process_info
+    
+    if (nrow(annotation_result) == 0) {
+      return(object)
+    }
+    
+    Level <-
       annotation_result %>%
       dplyr::select(RT.error, SS) %>%
       t() %>%
@@ -247,9 +291,9 @@ annotate_metabolites_mass_dataset =
       }) %>%
       unlist()
     
-    annotation_result$Level = Level
+    annotation_result$Level <- Level
     
-    annotation_result =
+    annotation_result <-
       annotation_result %>%
       dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
     
@@ -280,9 +324,9 @@ annotate_metabolites_mass_dataset =
       )]
     
     if (nrow(object@annotation_table) == 0) {
-      object@annotation_table = annotation_result
+      object@annotation_table <- annotation_result
     } else{
-      object@annotation_table =
+      object@annotation_table <-
         rbind(object@annotation_table,
               annotation_result) %>%
         dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
@@ -295,44 +339,5 @@ annotate_metabolites_mass_dataset =
         dplyr::ungroup() %>%
         dplyr::distinct(.keep_all = TRUE)
     }
-    
-    ###processing information
-    process_info = object@process_info
-    
-    parameter <- new(
-      Class = "tidymass_parameter",
-      pacakge_name = "metid",
-      function_name = "annotate_metabolites_mass_dataset()",
-      parameter = list(
-        ms1.match.ppm = ms1.match.ppm,
-        ms2.match.ppm = ms2.match.ppm,
-        mz.ppm.thr = mz.ppm.thr,
-        ms2.match.tol = ms2.match.tol,
-        fraction.weight = fraction.weight,
-        dp.forward.weight = dp.forward.weight,
-        dp.reverse.weight = dp.reverse.weight,
-        rt.match.tol = rt.match.tol,
-        polarity = polarity,
-        ce = ce,
-        column = column,
-        ms1.match.weight = ms1.match.weight,
-        rt.match.weight = rt.match.weight,
-        ms2.match.weight = ms2.match.weight,
-        total.score.tol = total.score.tol,
-        candidate.num = candidate.num,
-        database = database.name,
-        threads = threads
-      ),
-      time = Sys.time()
-    )
-    
-    if (all(names(process_info) != "annotate_metabolites_mass_dataset")) {
-      process_info$annotate_metabolites_mass_dataset = parameter
-    } else{
-      process_info$annotate_metabolites_mass_dataset = c(process_info$annotate_metabolites_mass_dataset,
-                                                         parameter)
-    }
-    
-    object@process_info = process_info
     return(object)
   }

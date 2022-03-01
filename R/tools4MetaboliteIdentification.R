@@ -1,115 +1,114 @@
 #---------------------------------------------------------------------------
 
-metIdentification = function(ms1.info,
-                             ms2.info,
-                             polarity = c("positive", "negative"),
-                             ce = '30',
-                             database,
-                             ms1.match.ppm = 25,
-                             ms2.match.ppm = 30,
-                             mz.ppm.thr = 400,
-                             ms2.match.tol = 0.5,
-                             rt.match.tol = 30,
-                             column = "rp",
-                             ms1.match.weight = 0.25,
-                             rt.match.weight = 0.25,
-                             ms2.match.weight = 0.5,
-                             total.score.tol = 0.5,
-                             candidate.num = 3,
-                             adduct.table,
-                             threads = 3,
-                             fraction.weight = 0.3,
-                             dp.forward.weight = 0.6,
-                             dp.reverse.weight = 0.1) {
-  polarity <- match.arg(polarity)
-  ms1.info$mz <- as.numeric(ms1.info$mz)
-  ms1.info$rt <- as.numeric(ms1.info$rt)
-  ##filter the database for using
-  ##polarity
-  if (polarity == "positive") {
-    spectra.data <- database@spectra.data$Spectra.positive
-  } else{
-    spectra.data <- database@spectra.data$Spectra.negative
-  }
-  
-  ##get the MS2 spectra within the CE values
-  if (any(ce == "all")) {
-    cat(crayon::yellow("Use all CE values.\n"))
-    ce <- unique(unlist(lapply(spectra.data, function(x) {
-      names(x)
-    })))
-  } else{
-    spectra.data <- lapply(spectra.data, function(x) {
-      x <- x[which(names(x) %in% ce)]
-      if (length(x) == 0)
-        return(NULL)
-      return(x)
-    })
-  }
-  
-  ##remove some metabolites which have no spectra
-  spectra.data <-
-    spectra.data[which(!unlist(lapply(spectra.data, is.null)))]
-  if (length(spectra.data) == 0) {
-    stop("No spectra with CE: ",
-         paste(ce, collapse = ", "),
-         " in you database.\n")
-  }
-  
-  spectra.info <- database@spectra.info
-  spectra.info <-
-    spectra.info[which(spectra.info$Lab.ID %in% names(spectra.data)),]
-  
-  rm(list = c("database"))
-  cat("\n")
-  cat(crayon::green('Identifing metabolites with MS/MS database...\n'))
-  
-  if (masstools::get_os() == "windows") {
-    bpparam = BiocParallel::SnowParam(workers = threads,
-                                      progressbar = TRUE)
-  } else{
-    bpparam = BiocParallel::MulticoreParam(workers = threads,
-                                           progressbar = TRUE)
-  }
-  
-  identification.result <-
-    suppressMessages(
-      BiocParallel::bplapply(
-        seq_len(nrow(ms1.info)),
-        FUN = identifyPeak,
-        BPPARAM = bpparam,
-        ms1.info = ms1.info,
-        ms2.info = ms2.info,
-        spectra.info = spectra.info,
-        spectra.data = spectra.data,
-        ppm.ms1match = ms1.match.ppm,
-        ppm.ms2match = ms2.match.ppm,
-        mz.ppm.thr = mz.ppm.thr,
-        ms2.match.tol = ms2.match.tol,
-        rt.match.tol = rt.match.tol,
-        ms1.match.weight = ms1.match.weight,
-        rt.match.weight = rt.match.weight,
-        ms2.match.weight = ms2.match.weight,
-        total.score.tol = total.score.tol,
-        adduct.table = adduct.table,
-        candidate.num = candidate.num,
-        fraction.weight = fraction.weight,
-        dp.forward.weight = dp.forward.weight,
-        dp.reverse.weight = dp.reverse.weight
+metIdentification <-
+  function(ms1.info,
+           ms2.info,
+           polarity = c("positive", "negative"),
+           ce = '30',
+           database,
+           ms1.match.ppm = 25,
+           ms2.match.ppm = 30,
+           mz.ppm.thr = 400,
+           ms2.match.tol = 0.5,
+           rt.match.tol = 30,
+           column = "rp",
+           ms1.match.weight = 0.25,
+           rt.match.weight = 0.25,
+           ms2.match.weight = 0.5,
+           total.score.tol = 0.5,
+           candidate.num = 3,
+           adduct.table,
+           threads = 3,
+           fraction.weight = 0.3,
+           dp.forward.weight = 0.6,
+           dp.reverse.weight = 0.1) {
+    polarity <- match.arg(polarity)
+    ms1.info$mz <- as.numeric(ms1.info$mz)
+    ms1.info$rt <- as.numeric(ms1.info$rt)
+    ##filter the database for using
+    ##polarity
+    if (polarity == "positive") {
+      spectra.data <- database@spectra.data$Spectra.positive
+    } else{
+      spectra.data <- database@spectra.data$Spectra.negative
+    }
+    
+    ##get the MS2 spectra within the CE values
+    if (any(ce == "all")) {
+      cat(crayon::yellow("Use all CE values.\n"))
+      ce <- unique(unlist(lapply(spectra.data, function(x) {
+        names(x)
+      })))
+    } else{
+      spectra.data <- lapply(spectra.data, function(x) {
+        x <- x[which(names(x) %in% ce)]
+        if (length(x) == 0)
+          return(NULL)
+        return(x)
+      })
+    }
+    
+    ##remove some metabolites which have no spectra
+    spectra.data <-
+      spectra.data[which(!unlist(lapply(spectra.data, is.null)))]
+    if (length(spectra.data) == 0) {
+      stop("No spectra with CE: ",
+           paste(ce, collapse = ", "),
+           " in you database.\n")
+    }
+    
+    spectra.info <- database@spectra.info
+    spectra.info <-
+      spectra.info[which(spectra.info$Lab.ID %in% names(spectra.data)), ]
+    
+    rm(list = c("database"))
+    cat("\n")
+    cat(crayon::green('Identifing metabolites with MS/MS database...\n'))
+    
+    if (masstools::get_os() == "windows") {
+      bpparam = BiocParallel::SnowParam(workers = threads,
+                                        progressbar = TRUE)
+    } else{
+      bpparam = BiocParallel::MulticoreParam(workers = threads,
+                                             progressbar = TRUE)
+    }
+    
+    identification.result <-
+      suppressMessages(
+        BiocParallel::bplapply(
+          seq_len(nrow(ms1.info)),
+          FUN = identifyPeak,
+          BPPARAM = bpparam,
+          ms1.info = ms1.info,
+          ms2.info = ms2.info,
+          spectra.info = spectra.info,
+          spectra.data = spectra.data,
+          ppm.ms1match = ms1.match.ppm,
+          ppm.ms2match = ms2.match.ppm,
+          mz.ppm.thr = mz.ppm.thr,
+          ms2.match.tol = ms2.match.tol,
+          rt.match.tol = rt.match.tol,
+          ms1.match.weight = ms1.match.weight,
+          rt.match.weight = rt.match.weight,
+          ms2.match.weight = ms2.match.weight,
+          total.score.tol = total.score.tol,
+          adduct.table = adduct.table,
+          candidate.num = candidate.num,
+          fraction.weight = fraction.weight,
+          dp.forward.weight = dp.forward.weight,
+          dp.reverse.weight = dp.reverse.weight
+        )
       )
-    )
-  
-  names(identification.result) <- ms1.info$name
-  identification.result <-
-    identification.result[which(!unlist(lapply(identification.result, function(x)
-      all(is.na(x)))))]
-  if (length(identification.result) == 0) {
-    return(list(NULL))
+    
+    names(identification.result) <- ms1.info$name
+    identification.result <-
+      identification.result[which(!unlist(lapply(identification.result, function(x)
+        all(is.na(x)))))]
+    if (length(identification.result) == 0) {
+      return(list(NULL))
+    }
+    return(identification.result)
   }
-  return(identification.result)
-}
-
-
 
 
 #---------------------------------------------------------------------------
@@ -161,7 +160,7 @@ identifyPeak = function(idx,
                         dp.forward.weight = 0.6,
                         dp.reverse.weight = 0.1,
                         ...) {
-  pk.precursor <- ms1.info[idx, ]
+  pk.precursor <- ms1.info[idx,]
   rm(list = c("ms1.info"))
   pk.mz <- pk.precursor$mz
   pk.rt <- pk.precursor$rt
@@ -315,9 +314,9 @@ identifyPeak = function(idx,
   }
   
   match.idx <-
-    match.idx[order(match.idx$Total.score, decreasing = TRUE),]
+    match.idx[order(match.idx$Total.score, decreasing = TRUE), ]
   if (nrow(match.idx) > candidate.num) {
-    match.idx <- match.idx[seq_len(candidate.num),]
+    match.idx <- match.idx[seq_len(candidate.num), ]
   }
   ##add other information
   match.idx <-
@@ -516,21 +515,3 @@ plotMS2match = function(matched.info,
     )
   plot
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
