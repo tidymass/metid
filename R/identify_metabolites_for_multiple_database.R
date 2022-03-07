@@ -1,6 +1,5 @@
 #' @title Identify metabolites using multiple databases one time
 #' @description Identify metabolites using multiple databases one time.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", column 2 is
@@ -167,7 +166,7 @@ identify_metabolite_all = function(ms1.data,
     
     if (temp.ms2.type %in% c("mzXML", "mzML")) {
       ms2.data <-
-        read_mzxml(file = file.path(old.path, ms2.data.name),
+        masstools::read_mzxml(file = file.path(old.path, ms2.data.name),
                   threads = threads)
     } else{
       ms2.data <- lapply(ms2.data.name, function(temp.ms2.data) {
@@ -180,7 +179,8 @@ identify_metabolite_all = function(ms1.data,
         if (temp.ms2.type == "msp") {
           temp.ms2.data <- readMSP(file = file.path(old.path, temp.ms2.data))
         } else{
-          temp.ms2.data <- read_mgf(file = file.path(old.path, temp.ms2.data))
+          temp.ms2.data <- 
+            masstools::read_mgf(file = file.path(old.path, temp.ms2.data))
         }
         temp.ms2.data
       })
@@ -378,7 +378,6 @@ identify_metabolite_all = function(ms1.data,
 
 #' @title Generate the parameter list for identify_metabolites function
 #' @description Generate the parameter list for metIdentify function.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.ms2.match.mz.tol MS1 peak and MS2 spectrum matching m/z tolerance. Default is 25 pm.

@@ -16,7 +16,6 @@ Return ms2 data. This is a list.
 }
 \description{
 Read mzXML data.
-\lifecycle{experimental}
 }
 \author{
 Xiaotao Shen

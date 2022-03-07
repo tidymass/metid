@@ -96,7 +96,7 @@ construct_database = function(path = ".",
   
   if (length(file.pos) > 0) {
     ms2.data.pos <-
-      read_mzxml(file = file.pos, threads = threads)
+      masstools::read_mzxml(file = file.pos, threads = threads)
     
     ms1.info.pos <- lapply(ms2.data.pos, function(x) {
       x[[1]]
@@ -125,7 +125,7 @@ construct_database = function(path = ".",
   
   if (length(file.neg) > 0) {
     ms2.data.neg <-
-      read_mzxml(file = file.neg, threads = threads)
+      masstools::read_mzxml(file = file.neg, threads = threads)
     
     ms1.info.neg <- lapply(ms2.data.neg, function(x) {
       x[[1]]

@@ -115,7 +115,6 @@ metIdentification <-
 
 #' @title Identify metabolites based on MS1 or MS/MS database
 #' @description Identify metabolites based on MS1 or MS/MS database.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param idx idx

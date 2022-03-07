@@ -85,7 +85,6 @@ A or all ms2 match plot(s).
 }
 \description{
 Get MS2 match plots from a metIdentifyClass object.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

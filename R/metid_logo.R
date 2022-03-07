@@ -1,6 +1,5 @@
 #' @title Show the base information of metid pacakge
 #' @description Show the base information of metid pacakge.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @return A ASCII log of metid
@@ -21,14 +20,13 @@
 #' @importFrom ggplot2 element_line element_text
 #' @importFrom MSnbase readMSData
 #' @importFrom ProtGenerics spectra
-#' @importFrom masstools ms2Match get_os mz_rt_match
+#' @importFrom masstools ms2Match get_os mz_rt_match read_mzxml read_mgf
 #' @importFrom stats lm loess predict
 #' @importFrom plotly ggplotly
 #' @importFrom future plan multisession
 #' @importFrom furrr future_map2 future_map
 #' @importFrom rstudioapi isAvailable hasFun getThemeInfo
 #' @importFrom cli rule symbol cat_line
-#' @import lifecycle
 #' @import RColorBrewer
 #' @import utils
 #' @import ggplot2
@@ -59,7 +57,7 @@ metid_logo <- function() {
 }
 
 
-metid_version = "1.2.3"
+metid_version = "1.2.4"
 update_date = as.character(Sys.time())
 
 

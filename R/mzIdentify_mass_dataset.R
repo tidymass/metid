@@ -1,6 +1,5 @@
 #' @title Identify peaks based on MS1 database
 #' @description Identify peaks based on MS1 database.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A mass_dataset class object.

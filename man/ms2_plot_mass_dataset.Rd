@@ -40,7 +40,6 @@ A list of ggplot2 object.
 }
 \description{
 Identify metabolites based on MS1 or MS/MS database.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

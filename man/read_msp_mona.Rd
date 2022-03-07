@@ -16,7 +16,6 @@ Return ms2 data. This is a list.
 }
 \description{
 Read MSP data from MoNA.
-\lifecycle{experimental}
 }
 \details{
 ---------------------------------------------------------------------------

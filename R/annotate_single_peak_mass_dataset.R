@@ -1,6 +1,5 @@
 #' @title Identify metabolites based on MS1 or MS/MS database for single peak.
 #' @description Identify metabolites based on MS1 or MS/MS database.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A mass_dataset class obejct.

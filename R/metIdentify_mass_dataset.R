@@ -1,6 +1,5 @@
 #' @title Identify metabolites based on MS/MS database.
 #' @description Identify metabolites based on MS/MS database.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A mass_dataset class object.

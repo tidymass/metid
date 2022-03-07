@@ -37,7 +37,6 @@ A mzIdentifyClass or metIdentifyClass object.
 }
 \description{
 Identify peaks based on MS1 database.
-\lifecycle{deprecated}
 }
 \seealso{
 The example and demo data of this function can be found

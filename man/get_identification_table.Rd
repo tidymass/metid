@@ -18,7 +18,6 @@ A identification table (data.frame).
 }
 \description{
 Get identification table from a metIdentifyClass object.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

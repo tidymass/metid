@@ -1,6 +1,5 @@
 #' @title Identify single peak based on database.
 #' @description We can use this function to identify single peak, you can just provide m/z or rt, or you can also provide MS2 spectrum for this peak.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.mz m/z value of the peaks

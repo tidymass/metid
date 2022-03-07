@@ -1,7 +1,6 @@
 ##------------------------------------------------------------------------------
 #' @title get_identification_table_all
 #' @description Extract the identifications from multiple results of `identify_metabolite_all()`.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ... One or multiple results from `identify_metabolite_all()`.

@@ -18,7 +18,6 @@ A MS2 spectrum.
 }
 \description{
 Filter adducts.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

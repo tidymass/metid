@@ -1,6 +1,5 @@
 #' @title Show the base information of metid pacakge
 #' @description Show the base information of metid pacakge.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @return A ASCII log of metid

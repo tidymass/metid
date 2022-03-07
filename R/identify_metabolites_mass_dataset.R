@@ -1,6 +1,5 @@
 #' @title Identify metabolites based on MS1 or MS/MS database
 #' @description Identify metabolites based on MS1 or MS/MS database.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A mass_dataset class obejct.
@@ -30,7 +29,8 @@
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @examples
 #' library(massdataset)
-#' library(tidyverse)
+#' library(magrittr)
+#' library(dplyr)
 #' ms1_data =
 #'   readr::read_csv(file.path(
 #'     system.file("ms1_peak", package = "metid"),

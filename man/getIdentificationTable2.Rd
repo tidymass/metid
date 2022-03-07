@@ -25,7 +25,6 @@ A identification table (data.frame).
 }
 \description{
 Get identification table from a mzIdentifyClass object.
-\lifecycle{deprecated}
 }
 \seealso{
 The example and demo data of this function can be found

@@ -22,7 +22,6 @@ A list containing mzIdentifyClass object.
 }
 \description{
 Identify metabolites using multiple databases one time.
-\lifecycle{maturing}
 }
 \examples{
 \dontrun{

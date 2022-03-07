@@ -16,7 +16,6 @@ Return ms2 data. This is a list.
 }
 \description{
 Read MGF data from experiment.
-\lifecycle{experimental}
 }
 \author{
 Xiaotao Shen

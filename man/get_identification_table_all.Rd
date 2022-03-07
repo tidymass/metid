@@ -22,7 +22,6 @@ A identification table (data.frame).
 }
 \description{
 Extract the identifications from multiple results of `identify_metabolite_all()`.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

@@ -11,7 +11,6 @@ A ASCII log of metid
 }
 \description{
 Show the base information of metid pacakge.
-\lifecycle{maturing}
 }
 \examples{
 metid()

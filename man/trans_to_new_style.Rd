@@ -14,7 +14,6 @@ A identification table (data.frame).
 }
 \description{
 Transform old style identification table to new style.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

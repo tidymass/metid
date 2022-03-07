@@ -1,7 +1,6 @@
 #---------------------------------------------------------------------------
 #' @title read_msp
 #' @description Read MSP data.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.
@@ -171,7 +170,6 @@ read_msp = function(file,
 #---------------------------------------------------------------------------
 #' @title read_msp_database
 #' @description Read MSP data for database.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.
@@ -352,7 +350,6 @@ read_msp_database = function(file,
 #' ---------------------------------------------------------------------------
 #' @title readMSP_MoNA
 #' @description Read MSP data from MoNA.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
@@ -462,7 +459,6 @@ readMSP_MoNA = function(file) {
 #' ---------------------------------------------------------------------------
 #' @title read_msp_mona
 #' @description Read MSP data from MoNA.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
@@ -534,7 +530,6 @@ read_msp_mona = function(file,
 #' ---------------------------------------------------------------------------
 #' @title read_msp_gnps
 #' @description Read MSP data from MoNA.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp. The msp data must from MoNA.
@@ -637,7 +632,6 @@ WriteMSP = function(info, fn.pre, spec.all) {
 #---------------------------------------------------------------------------
 #' @title readMSP
 #' @description Read MSP data.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param file The vector of names of ms2 files. MS2 file must be msp format.

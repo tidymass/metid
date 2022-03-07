@@ -1,7 +1,6 @@
 
 #' @title Identify metabolites based on MS1 or MS/MS database
 #' @description Identify metabolites based on MS1 or MS/MS database.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", Column 2 is
@@ -140,7 +139,6 @@ identify_metabolites = function(
 
 #' @title Identify peaks based on MS1 database
 #' @description Identify peaks based on MS1 database.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", column 2 is
@@ -520,7 +518,6 @@ mzIdentify =
 
 #' @title Identify metabolites based on MS/MS database.
 #' @description Identify metabolites based on MS/MS database.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.data The name of ms1 peak table (csv format). Column 1 is "name", Column 2 is
@@ -764,7 +761,7 @@ metIdentify = function(
     
     if (temp.ms2.type %in% c("mzXML", "mzML")) {
       ms2.data <-
-        read_mzxml(file = file.path(path, ms2.data.name),
+        masstools::read_mzxml(file = file.path(path, ms2.data.name),
                    threads = threads)
     } else{
       ms2.data <- lapply(ms2.data.name, function(temp.ms2.data) {
@@ -777,7 +774,8 @@ metIdentify = function(
         if (temp.ms2.type == "msp") {
           temp.ms2.data <- readMSP(file = file.path(path, temp.ms2.data))
         } else{
-          temp.ms2.data <- read_mgf(file = file.path(path, temp.ms2.data))
+          temp.ms2.data <- 
+            masstools::read_mgf(file = file.path(path, temp.ms2.data))
         }
         temp.ms2.data
       })

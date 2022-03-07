@@ -1,7 +1,6 @@
 
 #' @title Identify metabolites based on MS/MS database
 #' @description Identify metabolites based on MS2 data.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms2.data MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").
@@ -196,7 +195,7 @@ identify_ms2_only = function(ms2.data,
     
     if (temp.ms2.type %in% c("mzXML", "mzML")) {
       ms2.data <-
-        read_mzxml(file = file.path(path, ms2.data.name),
+        masstools::read_mzxml(file = file.path(path, ms2.data.name),
                   threads = threads)
     } else{
       ms2.data <- lapply(ms2.data.name, function(temp.ms2.data) {
@@ -209,7 +208,8 @@ identify_ms2_only = function(ms2.data,
         if (temp.ms2.type == "msp") {
           temp.ms2.data <- readMSP(file = file.path(path, temp.ms2.data))
         } else{
-          temp.ms2.data <- read_mgf(file = file.path(path, temp.ms2.data))
+          temp.ms2.data <- 
+            masstools::read_mgf(file = file.path(path, temp.ms2.data))
         }
         temp.ms2.data
       })

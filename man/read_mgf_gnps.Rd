@@ -15,8 +15,7 @@ read_mgf_gnps(file, threads = 3)
 Return ms2 data. This is a list.
 }
 \description{
-Read MGF data (from GNPS).
-\lifecycle{experimental}
+Read MGF data from GNPS
 }
 \author{
 Xiaotao Shen

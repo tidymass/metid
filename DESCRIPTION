@@ -1,7 +1,7 @@
 Type: Package
 Package: metid
 Title: Metabolite identification based on MS1 and MS2 spectra
-Version: 1.2.3
+Version: 1.2.4
 Date: 2021-07-02
 Authors@R: c(
     person(given = "Xiaotao",
@@ -51,7 +51,6 @@ Imports:
     readxl,
     RColorBrewer,
     stringr,
-    lifecycle,
     tibble,
     magrittr,
     masstools,
@@ -72,8 +71,6 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
 biocViews: Metabolomics, MassSpectrometry
 Encoding: UTF-8
 LazyData: true

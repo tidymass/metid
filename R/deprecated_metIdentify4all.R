@@ -1,7 +1,6 @@
 
 #' @title Generate the mzIdentify parameter list
 #' @description Generate the mzIdentify parameter list.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ms1.match.ppm Precursor match ppm tolerance.

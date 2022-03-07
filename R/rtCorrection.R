@@ -469,7 +469,6 @@
 
 #' @title Correct RTs of metabolites in database using internal standard list
 #' @description Correct RTs of metabolites in database using internal standard list.
-#' \lifecycle{experimental}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param experiment.is.table Experiment internal standard table.

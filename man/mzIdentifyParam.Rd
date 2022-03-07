@@ -31,7 +31,6 @@ A mzIdentifyClass object.
 }
 \description{
 Generate the mzIdentify parameter list.
-\lifecycle{deprecated}
 }
 \seealso{
 The example and demo data of this function can be found

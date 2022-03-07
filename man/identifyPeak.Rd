@@ -73,7 +73,6 @@ A metIdentifyClass object.
 }
 \description{
 Identify metabolites based on MS1 or MS/MS database.
-\lifecycle{maturing}
 }
 \author{
 Xiaotao Shen

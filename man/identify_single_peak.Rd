@@ -80,7 +80,6 @@ A metIdentifyClass object.
 }
 \description{
 We can use this function to identify single peak, you can just provide m/z or rt, or you can also provide MS2 spectrum for this peak.
-\lifecycle{experimental}
 }
 \examples{
 \dontrun{

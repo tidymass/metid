@@ -70,11 +70,11 @@ A metIdentifyClass object.
 }
 \description{
 Identify metabolites based on MS1 or MS/MS database.
-\lifecycle{maturing}
 }
 \examples{
 library(massdataset)
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 ms1_data =
   readr::read_csv(file.path(
     system.file("ms1_peak", package = "metid"),

@@ -34,7 +34,6 @@ A metIdentifyClass object.
 }
 \description{
 Correct RTs of metabolites in database using internal standard list.
-\lifecycle{experimental}
 }
 \author{
 Xiaotao Shen

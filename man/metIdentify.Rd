@@ -86,7 +86,6 @@ A metIdentifyClass object.
 }
 \description{
 Identify metabolites based on MS/MS database.
-\lifecycle{deprecated}
 }
 \examples{
 \dontrun{

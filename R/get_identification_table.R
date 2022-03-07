@@ -1,7 +1,6 @@
 ##------------------------------------------------------------------------------
 #' @title Get identification table from a metIdentifyClass object
 #' @description Get identification table from a metIdentifyClass object.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param ... One or multiple metIdentifyClass objects.
@@ -431,7 +430,6 @@ get_identification_table = function(...,
 ##------------------------------------------------------------------------------
 #' @title Transform old style identification table to new style
 #' @description Transform old style identification table to new style.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param identification.table Identification table from get_identification_table.
@@ -575,7 +573,6 @@ trans_to_new_style = function(identification.table){
 ##------------------------------------------------------------------------------
 #' @title Get identification table from a mzIdentifyClass object
 #' @description Get identification table from a mzIdentifyClass object.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object mzIdentifyClass object.

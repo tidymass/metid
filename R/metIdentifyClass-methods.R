@@ -134,7 +134,6 @@ setMethod(
 #------------------------------------------------------------------------------
 #' @title Get parameters from a metIdentifyClass object
 #' @description Get parameters from a metIdentifyClass object.
-#' \lifecycle{deprecated}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -220,7 +219,6 @@ get_parameters =
 #------------------------------------------------------------------------------
 #' @title Get parameters from a metIdentifyClass object
 #' @description Get parameters from a metIdentifyClass object.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -305,7 +303,6 @@ get_parameters_metid =
 ##------------------------------------------------------------------------------
 #' @title Get identification information from a metIdentifyClass object
 #' @description Get identification information from a metIdentifyClass object.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -390,7 +387,6 @@ get_iden_info = function(
 ##------------------------------------------------------------------------------
 #' @title Get MS2 match plots from a metIdentifyClass object
 #' @description Get MS2 match plots from a metIdentifyClass object.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -738,7 +734,6 @@ ms2plot = function(object,
 #------------------------------------------------------------------------------
 #' @title Get the peak names which have identifications
 #' @description Get the peak names which have identifications.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -778,7 +773,6 @@ which_has_identification = function(object){
 #------------------------------------------------------------------------------
 #' @title Filter identifications according to m/z error, RT error, MS similarity and total score
 #' @description Filter identifications according to m/z error, RT error, MS similarity and total score.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object A metIdentifyClass object.
@@ -839,7 +833,6 @@ filter_identification = function(object,
 #------------------------------------------------------------------------------
 #' @title Get spectra of peaks from metIdentifyClass object
 #' @description Get spectra of peaks from metIdentifyClass object.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object metIdentifyClass.
@@ -872,7 +865,6 @@ get_ms2_spectrum_from_object = function(object,
 #------------------------------------------------------------------------------
 #' @title Filter adducts.
 #' @description Filter adducts.
-#' \lifecycle{maturing}
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param object metIdentifyClass.

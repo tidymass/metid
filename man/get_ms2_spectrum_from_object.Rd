@@ -16,7 +16,6 @@ A MS2 spectrum.
 }
 \description{
 Get spectra of peaks from metIdentifyClass object.
-\lifecycle{maturing}
 }
 \seealso{
 The example and demo data of this function can be found

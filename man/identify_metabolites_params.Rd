@@ -73,7 +73,6 @@ A metIdentifyClass object.
 }
 \description{
 Generate the parameter list for metIdentify function.
-\lifecycle{maturing}
 }
 \examples{
  param1 <-
