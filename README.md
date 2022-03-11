@@ -32,7 +32,7 @@ install.packages("remotes")
 remotes::install_github("tidymass/metid")
 ```
 
-`metid` is a part of `tidymass`, so you can also install it by installing [`tidymass`](https://tidymass.github.io/tidymass/index.html).
+`metid` is a part of `tidymass`, so you can also install it by installing [`tidymass`](https://www.tidymass.org/).
 
 ## Usage
 

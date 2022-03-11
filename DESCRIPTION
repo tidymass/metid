@@ -68,7 +68,7 @@ Suggests:
     BiocStyle,
     RUnit,
     BiocGenerics,
-    testthat
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 biocViews: Metabolomics, MassSpectrometry
@@ -78,3 +78,4 @@ RoxygenNote: 7.1.2
 Remotes: 
     gitlab::jaspershen/masstools,
     gitlab::jaspershen/massdataset
+Config/testthat/edition: 3
