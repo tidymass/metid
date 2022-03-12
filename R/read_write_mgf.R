@@ -326,7 +326,7 @@ readMGF <- function(file) {
   # cat("Remove noise of MS/MS spectra...\n")
   # spec.info <- pbapply::pblapply(spec.info, function(x){
   #   temp.spec <- x[[2]]
-  #   temp.spec <- removeNoise(temp.spec)
+  #   temp.spec <- remove_noise(temp.spec)
   #   x[[2]] <- temp.spec
   #   x
   # })

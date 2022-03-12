@@ -53,7 +53,7 @@ Imports:
     stringr,
     tibble,
     magrittr,
-    masstools,
+    masstools (>= 0.99.9),
     purrr,
     plyr,
     MSnbase,

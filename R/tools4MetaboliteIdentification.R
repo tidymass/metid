@@ -258,7 +258,7 @@ identifyPeak = function(idx,
     x <- as.character(x)
     lib.spec <- spectra.data[[x[1]]]
     dp <- lapply(lib.spec, function(y) {
-      masstools::getSpectraMatchScore(
+      masstools::get_spectra_match_score(
         exp.spectrum = as.data.frame(pk.spec),
         lib.spectrum = y,
         ppm.tol = ppm.ms2match,
@@ -381,7 +381,7 @@ plotMS2match = function(matched.info,
   }
   
   matched.spec <-
-    masstools::ms2Match(
+    masstools::ms2_match(
       exp.spectrum = exp.spectrum,
       lib.spectrum = lib.spectrum,
       ppm.tol = ppm.tol,
