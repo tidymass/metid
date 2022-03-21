@@ -27,40 +27,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-# **Uninstall tinyTools**
 
-`tinyTools` has been renamed as `tinytools`. So please uninstall it before you install `metid`. **And don't use it any more.**
+# **Install metid from GitLab**
 
-1. detach it by:
+You can just use the `remotes` to install `metid`. 
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-detach("package:tinyTools")
+remotes::install_gitlab("jaspershen/metid", dependencies = TRUE)
 ```
 
-2. Remove it by:
+
+# **Install metid from GitHub**
+
+You can just use the `remotes` to install `metid`. 
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-remove.packages(pkgs = "tinyTools")
-```
-
-3. Restart your R session. 
-
-> If there are errors, ignore them.
-
-# **Install metid from github**
-
-You can just use the `devtools` or `remotes` to install `metid`. 
-
-Please update `devtools` first and then restart your r session.
-
-```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-install.packages("devtools")
-```
-
-Then install `metid`:
-
-```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-devtools::install_github("tidymass/metid", dependencies = TRUE)
+remotes::install_github("tidymass/metid", dependencies = TRUE)
 ```
 
 In the installation, it will ask if you want to update some packages for few times, just press `enter` key to skip it.

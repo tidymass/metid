@@ -183,34 +183,39 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div class="section level1">
 <div class="page-header"><h1 id="metid-">metid <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#metid-"></a>
 </h1></div>
 
 <p><code>metid</code> is a part of <a href="https://tidymass.github.io/tidymass/" class="external-link">tidymass</a></p>
 <hr>
-<div class="section level2">
-<h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
-</h2>
-<p><code>metid</code> is a R packge which is used for metabolite identification based on in-house database and public database based on accurate mass (m/z), rentention time (RT) and/or MS2 spectra.</p>
+</div>
+<div class="section level1">
+<h1 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h1>
+<p><code>metid</code> is a R package which is used for metabolite identification based on in-house database and public database based on accurate mass (m/z), retention time (RT) and/or MS2 spectra.</p>
 <p><img src="reference/figures/Figure_1.png" align="middle" alt="" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install <code>metid</code> from <a href="https://github.com/tidymass/metid" class="external-link">Github</a>.</p>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>You can install <code>metid</code> from <a href="https://gitlab.com/jaspershen/metid" class="external-link">GitLab</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/metid"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_gitlab.html" class="external-link">install_gitlab</a></span><span class="op">(</span><span class="st">"jaspershen/metid"</span><span class="op">)</span></code></pre></div>
+<p>or</p>
+<p><a href="https://github.com/tidymass/metid" class="external-link">Github</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/metid"</span><span class="op">)</span></code></pre></div>
 <p><code>metid</code> is a part of <code>tidymass</code>, so you can also install it by installing <a href="https://www.tidymass.org/" class="external-link"><code>tidymass</code></a>.</p>
 </div>
-<div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h2>
-<p>Please see the <a href="https://tidymass.github.io/metid/articles/metid_introduction.html">Help document</a> page to get the instruction of <code>metid</code>.</p>
-</div>
+<div class="section level1">
+<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h1>
+<p>Please see the <code>Help document</code> page to get the instruction of <code>metid</code>.</p>
 <div class="section level2">
 <h2 id="need-help">Need help?<a class="anchor" aria-label="anchor" href="#need-help"></a>
 </h2>
@@ -220,16 +225,22 @@
 <p><i class="fa fa-twitter"></i> <a href="https://twitter.com/JasperShen1990" class="external-link">Twitter</a></p>
 <p><i class="fa fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/Alway+Building/@37.4322345,-122.1770883,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa4d335c3be37:0x9057931f3b312c29!8m2!3d37.4322345!4d-122.1748996" class="external-link">M339, Alway Buidling, Cooper Lane, Palo Alto, CA 94304</a></p>
 </div>
-<div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h2>
+</div>
+<div class="section level1">
+<h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h1>
 <p>If you use <code>metid</code> in you publication, please cite this publication:</p>
 <p>Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen, Kevin Contrepois, Zheng-Jiang Zhu*, Michael Snyder* (Corresponding Author)</p>
 <p>metID: A R package for automatable compound annotation for LC−MS-based data</p>
 <p>Bioinformatics, btab583, <a href="https://doi.org/10.1093/bioinformatics/btab583" class="external-link">https://doi.org/10.1093/bioinformatics/btab583</a></p>
+<p>and</p>
+<p>If you use <code>masscleaner</code> in you publication, please cite this publication:</p>
+<p>TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.</p>
+<p>Xiaotao Shen, Hong Yan, Chuchu Wang, Peng Gao, Caroline H. Johnson, Michael P. Snyder.</p>
+<p><a href="https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1" class="external-link">Web Link</a>.</p>
 <p>Thanks very much!</p>
 </div>
-</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
