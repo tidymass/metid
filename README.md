@@ -22,7 +22,7 @@ retention time (RT) and/or MS2 spectra.
 
 # Installation
 
-You can install `metid` from [GitLab](https://gitlab.com/jaspershen/metid).
+You can install `metid` from [GitLab](https://gitlab.com/jaspershen/metid)
 
 ``` r
 if(!require(remotes)){
@@ -30,9 +30,7 @@ install.packages("remotes")
 }
 remotes::install_gitlab("jaspershen/metid")
 ```
-or 
-
-[Github](https://github.com/tidymass/metid).
+or [Github](https://github.com/tidymass/metid)
 
 ``` r
 remotes::install_github("tidymass/metid")
@@ -42,7 +40,7 @@ remotes::install_github("tidymass/metid")
 
 # Usage
 
-Please see the `Help document` page to get the instruction of `metid`.
+Please see the `Help documents` page to get the instruction of `metid`.
 
 ## Need help?
 
@@ -61,7 +59,7 @@ If you have any questions about `metid`, please don’t hesitate to email me (<s
 
 # Citation
 
-If you use `metid` in you publication, please cite this publication:
+If you use `metid` in your publications, please cite this paper:
 
 Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen, Kevin Contrepois, Zheng-Jiang Zhu\*, Michael Snyder\* (Corresponding Author)
 
@@ -70,8 +68,6 @@ metID: A R package for automatable compound annotation for LC−MS-based data
 Bioinformatics, btab583, [https://doi.org/10.1093/bioinformatics/btab583](https://doi.org/10.1093/bioinformatics/btab583)
 
 and 
-
-If you use `masscleaner` in you publication, please cite this publication:
 
 TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
 
