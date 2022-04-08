@@ -78,3 +78,7 @@
 # Version 1.1.1 (2021-12-27)
 
 * metid now support mass_dataset class object (from massdataset pacakge).
+
+# Version 1.2.5 (2022-04-08)
+
+* Now databaseClass support nocl, nrow, and dim.
