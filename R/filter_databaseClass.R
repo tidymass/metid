@@ -1,4 +1,4 @@
-#' @method filter mass_dataset
+#' @method filter databaseClass
 #' @docType methods
 #' @importFrom rlang quos !!!
 #' @importFrom dplyr filter

@@ -2,7 +2,7 @@
 
 S3method(colnames,databaseClass)
 S3method(dim,databaseClass)
-S3method(filter,mass_dataset)
+S3method(filter,databaseClass)
 S3method(ncol,databaseClass)
 S3method(nrow,databaseClass)
 S3method(print,metid_conflicts)
