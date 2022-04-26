@@ -62,7 +62,7 @@ setMethod(
       crayon::green(
         "There are",
         length(object@spectra.data$Spectra.positive),
-        "metabolites in positive mode with MS2 spectra.\n"
+        "MS2 spectra in positive mode.\n"
       )
     )
     
@@ -70,7 +70,7 @@ setMethod(
       crayon::green(
         "There are",
         length(object@spectra.data$Spectra.negative),
-        "metabolites in negative mode with MS2 spectra.\n"
+        "MS2 spectra in negative mode.\n"
       )
     )
     

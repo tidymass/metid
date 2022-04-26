@@ -47,5 +47,5 @@ object1 <-
 
 test_that("identify_metabolites_mass_dataset", {
   testthat::expect_s4_class(object = object1, "mass_dataset")
-  testthat::expect_true(massdataset::check_mass_dataset_class(object = object1))
+  # testthat::expect_true(massdataset::check_mass_dataset_class(object = object1))
 })

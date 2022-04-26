@@ -58,8 +58,8 @@ metid_logo <- function() {
 }
 
 
-metid_version = "1.2.4"
-update_date = as.character(Sys.time())
+metid_version <- utils::packageVersion(pkg = "metid")
+update_date <- as.character(Sys.time())
 
 
 
