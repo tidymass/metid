@@ -10,14 +10,17 @@
 #' @param fraction.weight The weight for matched fragments.
 #' @param dp.forward.weight Forward dot product weight.
 #' @param dp.reverse.weight Reverse dot product weight.
+#' @param remove_fragment_intensity_cutoff remove_fragment_intensity_cutoff
 #' @param rt.match.tol RT match tolerance.
 #' @param polarity The polarity of data, "positive"or "negative".
-#' @param ce Collision energy. Please confirm the CE values in your database. Default is "all".
+#' @param ce Collision energy. Please confirm the CE values in your database.
+#' Default is "all".
 #' @param column "hilic" (HILIC column) or "rp" (reverse phase).
 #' @param ms1.match.weight The weight of MS1 match for total score calculation.
 #' @param rt.match.weight The weight of RT match for total score calculation.
 #' @param ms2.match.weight The weight of MS2 match for total score calculation.
-#' @param total.score.tol Total score tolerance. The total score are referring to MS-DIAL.
+#' @param total.score.tol Total score tolerance. The total score are referring
+#' to MS-DIAL.
 #' @param candidate.num The number of candidate.
 #' @param database MS2 database name or MS database.
 #' @param threads Number of threads
@@ -89,6 +92,7 @@ annotate_metabolites_mass_dataset <-
            fraction.weight = 0.3,
            dp.forward.weight = 0.6,
            dp.reverse.weight = 0.1,
+           remove_fragment_intensity_cutoff = 0,
            rt.match.tol = 30,
            polarity = c("positive", "negative"),
            ce = "all",
@@ -221,7 +225,8 @@ annotate_metabolites_mass_dataset <-
             total.score.tol = total.score.tol,
             candidate.num = candidate.num,
             database = database,
-            threads = threads
+            threads = threads,
+            remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
           )
       }
     }

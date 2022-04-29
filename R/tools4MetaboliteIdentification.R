@@ -21,7 +21,8 @@ metIdentification <-
            threads = 3,
            fraction.weight = 0.3,
            dp.forward.weight = 0.6,
-           dp.reverse.weight = 0.1) {
+           dp.reverse.weight = 0.1,
+           remove_fragment_intensity_cutoff = 0) {
     polarity <- match.arg(polarity)
     ms1.info$mz <- as.numeric(ms1.info$mz)
     ms1.info$rt <- as.numeric(ms1.info$rt)
@@ -59,7 +60,7 @@ metIdentification <-
     
     spectra.info <- database@spectra.info
     spectra.info <-
-      spectra.info[which(spectra.info$Lab.ID %in% names(spectra.data)), ]
+      spectra.info[which(spectra.info$Lab.ID %in% names(spectra.data)),]
     
     rm(list = c("database"))
     cat("\n")
@@ -96,7 +97,8 @@ metIdentification <-
           candidate.num = candidate.num,
           fraction.weight = fraction.weight,
           dp.forward.weight = dp.forward.weight,
-          dp.reverse.weight = dp.reverse.weight
+          dp.reverse.weight = dp.reverse.weight,
+          remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
         )
       )
     
@@ -136,6 +138,7 @@ metIdentification <-
 #' @param fraction.weight The weight of MS1 match for total score calculation.
 #' @param dp.forward.weight The weight of RT match for total score calculation.
 #' @param dp.reverse.weight The weight of MS2 match for total score calculation.
+#' @param remove_fragment_intensity_cutoff remove_fragment_intensity_cutoff
 #' @param ... other parameters
 #' @return A metIdentifyClass object.
 
@@ -158,8 +161,9 @@ identifyPeak = function(idx,
                         fraction.weight = 0.3,
                         dp.forward.weight = 0.6,
                         dp.reverse.weight = 0.1,
+                        remove_fragment_intensity_cutoff = 0,
                         ...) {
-  pk.precursor <- ms1.info[idx,]
+  pk.precursor <- ms1.info[idx, ]
   rm(list = c("ms1.info"))
   pk.mz <- pk.precursor$mz
   pk.rt <- pk.precursor$rt
@@ -254,26 +258,28 @@ identifyPeak = function(idx,
   }
   
   ###MS2 spectra match
-  ms2.score <- apply(match.idx, 1, function(x) {
-    x <- as.character(x)
-    lib.spec <- spectra.data[[x[1]]]
-    dp <- lapply(lib.spec, function(y) {
-      masstools::get_spectra_match_score(
-        exp.spectrum = as.data.frame(pk.spec),
-        lib.spectrum = y,
-        ppm.tol = ppm.ms2match,
-        mz.ppm.thr = mz.ppm.thr,
-        fraction.weight = fraction.weight,
-        dp.forward.weight = dp.forward.weight,
-        dp.reverse.weight = dp.reverse.weight
-      )
+  ms2.score <-
+    apply(match.idx, 1, function(x) {
+      x <- as.character(x)
+      lib.spec <- spectra.data[[x[1]]]
+      dp <- lapply(lib.spec, function(y) {
+        masstools::get_spectra_match_score(
+          exp.spectrum = as.data.frame(pk.spec),
+          lib.spectrum = y,
+          ppm.tol = ppm.ms2match,
+          mz.ppm.thr = mz.ppm.thr,
+          fraction.weight = fraction.weight,
+          dp.forward.weight = dp.forward.weight,
+          dp.reverse.weight = dp.reverse.weight,
+          remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+        )
+      })
+      dp <- dp[which.max(unlist(dp))]
+      dp <- unlist(dp)
+      data.frame("CE" = names(dp),
+                 "SS" = dp,
+                 stringsAsFactors = FALSE)
     })
-    dp <- dp[which.max(unlist(dp))]
-    dp <- unlist(dp)
-    data.frame("CE" = names(dp),
-               "SS" = dp,
-               stringsAsFactors = FALSE)
-  })
   
   ms2.score <- do.call(rbind, ms2.score)
   rownames(ms2.score) <- NULL
@@ -313,9 +319,9 @@ identifyPeak = function(idx,
   }
   
   match.idx <-
-    match.idx[order(match.idx$Total.score, decreasing = TRUE), ]
+    match.idx[order(match.idx$Total.score, decreasing = TRUE),]
   if (nrow(match.idx) > candidate.num) {
-    match.idx <- match.idx[seq_len(candidate.num), ]
+    match.idx <- match.idx[seq_len(candidate.num),]
   }
   ##add other information
   match.idx <-

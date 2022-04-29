@@ -24,6 +24,7 @@ identifyPeak(
   fraction.weight = 0.3,
   dp.forward.weight = 0.6,
   dp.reverse.weight = 0.1,
+  remove_fragment_intensity_cutoff = 0,
   ...
 )
 }
@@ -65,6 +66,8 @@ identifyPeak(
 \item{dp.forward.weight}{The weight of RT match for total score calculation.}
 
 \item{dp.reverse.weight}{The weight of MS2 match for total score calculation.}
+
+\item{remove_fragment_intensity_cutoff}{remove_fragment_intensity_cutoff}
 
 \item{...}{other parameters}
 }

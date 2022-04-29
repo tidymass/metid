@@ -90,3 +90,7 @@
 # Version 1.2.7 (2022-04-29)
 
 * fix a small bug.
+
+# Version 1.2.8 (2022-04-29)
+
+* Add new argument in identify_metabolites_mass_dataset.

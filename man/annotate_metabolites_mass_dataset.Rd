@@ -13,6 +13,7 @@ annotate_metabolites_mass_dataset(
   fraction.weight = 0.3,
   dp.forward.weight = 0.6,
   dp.reverse.weight = 0.1,
+  remove_fragment_intensity_cutoff = 0,
   rt.match.tol = 30,
   polarity = c("positive", "negative"),
   ce = "all",
@@ -43,11 +44,14 @@ annotate_metabolites_mass_dataset(
 
 \item{dp.reverse.weight}{Reverse dot product weight.}
 
+\item{remove_fragment_intensity_cutoff}{remove_fragment_intensity_cutoff}
+
 \item{rt.match.tol}{RT match tolerance.}
 
 \item{polarity}{The polarity of data, "positive"or "negative".}
 
-\item{ce}{Collision energy. Please confirm the CE values in your database. Default is "all".}
+\item{ce}{Collision energy. Please confirm the CE values in your database.
+Default is "all".}
 
 \item{column}{"hilic" (HILIC column) or "rp" (reverse phase).}
 
@@ -57,7 +61,8 @@ annotate_metabolites_mass_dataset(
 
 \item{ms2.match.weight}{The weight of MS2 match for total score calculation.}
 
-\item{total.score.tol}{Total score tolerance. The total score are referring to MS-DIAL.}
+\item{total.score.tol}{Total score tolerance. The total score are referring
+to MS-DIAL.}
 
 \item{candidate.num}{The number of candidate.}
 

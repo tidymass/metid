@@ -23,7 +23,8 @@ metIdentify_mass_dataset(
   total.score.tol = 0.5,
   candidate.num = 3,
   database,
-  threads = 3
+  threads = 3,
+  remove_fragment_intensity_cutoff = 0
 )
 }
 \arguments{
@@ -64,6 +65,8 @@ metIdentify_mass_dataset(
 \item{database}{MS2 database name or MS2 database.}
 
 \item{threads}{Number of threads}
+
+\item{remove_fragment_intensity_cutoff}{default is 0.}
 }
 \value{
 A metIdentifyClass object.
