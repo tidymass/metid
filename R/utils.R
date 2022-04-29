@@ -1,11 +1,11 @@
-getExtension = function(file){
+getExtension = function(file) {
   tail(stringr::str_split(string = file, pattern = "\\.")[[1]], 1)
 }
 
-readTable = function(file, ...){
+readTable = function(file, ...) {
   extension <- getExtension(file = file)
   if (extension == "csv") {
-    return(readr::read_csv(file = file, ...))
+    return(readr::read_csv(file = file, show_col_types = FALSE, ...))
   }
   
   if (extension == 'xlsx') {
@@ -22,9 +22,6 @@ readTable = function(file, ...){
     cat(crayon::red("file are not csv, xlsx or xls.\n"))
   }
 }
-
-
-
 
 
 msg <- function(..., startup = FALSE) {
@@ -49,7 +46,10 @@ text_col <- function(x) {
   
   theme <- rstudioapi::getThemeInfo()
   
-  if (isTRUE(theme$dark)) crayon::white(x) else crayon::black(x)
+  if (isTRUE(theme$dark))
+    crayon::white(x)
+  else
+    crayon::black(x)
   
 }
 
@@ -64,7 +64,8 @@ metid_packages <- function(include_self = TRUE) {
   raw <- utils::packageDescription("metid")$Imports
   imports <- strsplit(raw, ",")[[1]]
   parsed <- gsub("^\\s+|\\s+$", "", imports)
-  names <- vapply(strsplit(parsed, "\\s+"), "[[", 1, FUN.VALUE = character(1))
+  names <-
+    vapply(strsplit(parsed, "\\s+"), "[[", 1, FUN.VALUE = character(1))
   
   if (include_self) {
     names <- c(names, "metid")
@@ -74,17 +75,16 @@ metid_packages <- function(include_self = TRUE) {
 }
 
 invert <- function(x) {
-  if (length(x) == 0) return()
+  if (length(x) == 0)
+    return()
   stacked <- utils::stack(x)
   tapply(as.character(stacked$ind), stacked$values, list)
 }
 
 
 style_grey <- function(level, ...) {
-  crayon::style(
-    paste0(...),
-    crayon::make_style(grDevices::grey(level), grey = TRUE)
-  )
+  crayon::style(paste0(...),
+                crayon::make_style(grDevices::grey(level), grey = TRUE))
 }
 
 
@@ -127,4 +127,3 @@ getMS2spectrum = function(lab.id,
     database@spectra.data[[pol]][[match(lab.id, names(database@spectra.data[[pol]]))]]
   temp[[match(ce, names(temp))]]
 }
-

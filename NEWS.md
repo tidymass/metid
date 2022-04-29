@@ -83,6 +83,10 @@
 
 * Now databaseClass support nocl, nrow, and dim.
 
-# Version 1.2.5 (2022-04-26)
+# Version 1.2.6 (2022-04-26)
 
 * Now databaseClass support filter function.
+
+# Version 1.2.7 (2022-04-29)
+
+* fix a small bug.
