@@ -152,10 +152,9 @@ annotate_metabolites_mass_dataset <-
                           database@database.info$Version,
                           sep = "_")
     
-    
     ######NO MS2 in object
     if (length(object@ms2_data) == 0) {
-      cat(crayon::yellow("No MS2 data in object, so only use mz and/or RT for matching.\n"))
+      message(crayon::yellow("No MS2 data in object, so only use mz and/or RT for matching."))
       annotation_result =
         mzIdentify_mass_dataset(
           object = object,
@@ -188,8 +187,8 @@ annotate_metabolites_mass_dataset <-
       
       ######NO MS2 in database
       if (spectra_number == 0) {
-        cat(crayon::yellow(
-          "No MS2 data in database, so only use mz and/or RT for matching.\n"
+        message(crayon::yellow(
+          "No MS2 data in database, so only use mz and/or RT for matching."
         ))
         annotation_result <-
           mzIdentify_mass_dataset(

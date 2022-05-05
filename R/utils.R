@@ -19,7 +19,7 @@ readTable = function(file, ...) {
   if (extenstion != "csv" &
       extenstion != "xlsx" &
       extenstion != "xls") {
-    cat(crayon::red("file are not csv, xlsx or xls.\n"))
+    message(crayon::red("file is not csv, xlsx or xls."))
   }
 }
 
@@ -115,7 +115,7 @@ getMS2spectrum = function(lab.id,
                           database,
                           polarity = c("positive", "negative"),
                           ce = "30") {
-  cat(crayon::yellow(
+  message(crayon::yellow(
     "`getMS2spectrum()` is deprecated, use `get_ms2_spectrum()`."
   ))
   polarity <- match.arg(polarity)

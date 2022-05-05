@@ -118,7 +118,7 @@ ms2_plot_mass_dataset =
       dplyr::filter(!is.na(SS))
     
     if (nrow(temp_annotation_table) == 0) {
-      cat(paste(temp_variable_id, "has no annotation with MS2.\n"))
+      message(paste(temp_variable_id, "has no annotation with MS2."))
       return(NULL)
     }
     
@@ -136,7 +136,7 @@ ms2_plot_mass_dataset =
             ce = x[14]
           )
         if(is.null(spectrum2)){
-          cat("database may be wrong.\n")
+          message("database may be wrong.")
           plot = 
             masstools::ms2_plot(
               spectrum1 = spectrum1,

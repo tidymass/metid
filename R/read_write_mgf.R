@@ -17,7 +17,7 @@ read_mgf_gnps <-
   function(file,
            threads = 3) {
     # pbapply::pboptions(style = 1)
-    cat(crayon::green("Reading mgf data from GNPS...\n"))
+    message(crayon::green("Reading mgf data from GNPS..."))
     
     future::plan(strategy = future::multisession, workers = threads)
     
@@ -62,7 +62,7 @@ read_mgf_gnps <-
     )
     
     ms2 = Reduce(`c`, ms2)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
     ms2
   }
 
@@ -83,7 +83,7 @@ read_mgf_gnps <-
 read_mgf_mona = function(file,
                          threads = 3) {
   # pbapply::pboptions(style = 1)
-  cat(crayon::green("Reading mgf data from MoNA...\n"))
+  message(crayon::green("Reading mgf data from MoNA..."))
   future::plan(strategy = future::multisession, workers = threads)
   ms2 <- furrr::future_map(
     .x = file,
@@ -127,7 +127,7 @@ read_mgf_mona = function(file,
   )
   
   ms2 = Reduce(`c`, ms2)
-  cat(crayon::green("Done.\n"))
+  message(crayon::green("Done."))
   ms2
 }
 
@@ -150,7 +150,7 @@ read_mgf_mona = function(file,
 
 read_mgf_experiment = function(file,
                                threads = 3) {
-  cat(crayon::green("Reading mgf data...\n"))
+  message(crayon::green("Reading mgf data..."))
   future::plan(strategy = future::multisession, workers = threads)
   ms2 <- furrr::future_map(
     .x = file,
@@ -193,7 +193,7 @@ read_mgf_experiment = function(file,
   )
   
   ms2 = Reduce(`c`, ms2)
-  cat(crayon::green("Done.\n"))
+  message(crayon::green("Done."))
   ms2
 }
 
@@ -240,9 +240,9 @@ ListMGF <- function(file) {
 #' @export
 
 readMGF <- function(file) {
-  cat(crayon::yellow("`readMGF()` is deprecated, use `read_mgf()`.\n"))
+  message(crayon::yellow("`readMGF()` is deprecated, use `read_mgf()`."))
   pbapply::pboptions(style = 1)
-  cat(crayon::green("Reading MS2 data...\n"))
+  message(crayon::green("Reading MS2 data..."))
   # mgf.data.list <- pbapply::pblapply(file, ListMGF)
   ms2 <- pbapply::pblapply(file, function(mgf.data) {
     mgf.data <- ListMGF(mgf.data)

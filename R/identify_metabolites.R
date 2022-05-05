@@ -92,7 +92,7 @@ identify_metabolites = function(
   }
   
   if (is.null(ms2.data)) {
-    cat(crayon::yellow("You don't provide MS2 data, so only use mz and/or RT for matching.\n"))
+    message(crayon::yellow("You don't provide MS2 data, so only use mz and/or RT for matching."))
     mzIdentify(
       ms1.data = ms1.data,
       rt.match.tol = rt.match.tol,
@@ -173,7 +173,7 @@ mzIdentify =
            threads = 3,
            silence.deprecated = FALSE) {
     if (!silence.deprecated) {
-      cat(crayon::yellow(
+      message(crayon::yellow(
         "`mzIdentify()` is deprecated, use `identify_metabolites()`."
       ))
     }
@@ -241,15 +241,15 @@ mzIdentify =
     
     
     if (rt.match.tol > 10000) {
-      cat(
+      message(
         crayon::yellow(
-          "You set rt.match.tol > 10,000, so RT will not be used for matching.\n"
+          "You set rt.match.tol > 10,000, so RT will not be used for matching."
         )
       )
     } else{
-      cat(
+      message(
         crayon::yellow(
-          "You set rt.match.tol < 10,000, so if the compounds have RT,  RTs will be used for matching\n"
+          "You set rt.match.tol < 10,000, so if the compounds have RT,  RTs will be used for matching."
         )
       )
     }
@@ -509,7 +509,7 @@ mzIdentify =
         threads = threads
       )
     }
-    cat(crayon::bgRed("All done.\n"))
+    message(crayon::bgRed("All done."))
     return(return.result)
   }
 
@@ -615,7 +615,7 @@ metIdentify = function(
 ) {
   
   if(!silence.deprecated){
-    cat(crayon::yellow(
+    message(crayon::yellow(
       "`metIdentify()` is deprecated, use `identify_metabolites()`."
     ))  
   }
@@ -721,7 +721,7 @@ metIdentify = function(
   
   ##RT in database or not
   if (!database@database.info$RT) {
-    cat(crayon::yellow("No RT information in database.\nThe weight of RT have been set as 0.\n"))
+    message(crayon::yellow("No RT information in database.\nThe weight of RT have been set as 0."))
   }
   
   #------------------------------------------------------------------
@@ -747,7 +747,7 @@ metIdentify = function(
   }
   
   if (all(c("ms1.info", "ms2.info") %in% dir(intermediate_path))) {
-    cat(crayon::yellow("Use old data\n"))
+    message(crayon::yellow("Use old data."))
     load(file.path(intermediate_path, "ms1.info"))
     load(file.path(intermediate_path, "ms2.info"))
   } else{
@@ -782,7 +782,7 @@ metIdentify = function(
       
       names(ms2.data) <- ms2.data.name
       ###prepare data for metidentification function
-      cat(crayon::green("Preparing MS2 data for identification..."))
+      message(crayon::green("Preparing MS2 data for identification..."))
       ms2.data <-
         mapply(
           FUN = function(temp.ms2.data, temp.ms2.data.name) {
@@ -845,11 +845,11 @@ metIdentify = function(
     save(ms2.info,
          file = file.path(intermediate_path, "ms2.info"),
          compress = "xz")
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   }
   
   if (!missing(ms1.data)) {
-    cat(crayon::green("Matching peak table with MS2 spectrum...\n"))
+    message(crayon::green("Matching peak table with MS2 spectrum..."))
     ##check ms1 data format
     if(length(grep("csv", ms1.data)) == 0){
       stop("Only support csv format ms1 data.\n")
@@ -885,15 +885,15 @@ metIdentify = function(
       return("No peaks are matched with MS2 spectra.\n")
     if (nrow(match.result) == 0)
       return("No peaks are matched with MS2 spectra.\n")
-    cat(crayon::green(
+    message(crayon::green(
       length(unique(match.result[, 1])),
       "out of",
       nrow(ms1.data),
-      "peaks have MS2 spectra.\n"
+      "peaks have MS2 spectra."
     ))
     
-    ###if one peak matches multiple peaks, select the more relibale MS2 spectrum
-    cat(crayon::green("Selecting the most intense MS2 spectrum for each peak..."))
+    ###if one peak matches multiple peaks, select the more reliable MS2 spectrum
+    message(crayon::green("Selecting the most intense MS2 spectrum for each peak..."))
     temp.idx <- unique(match.result[, 1])
     
     match.result <- lapply(temp.idx, function(idx) {
@@ -934,7 +934,7 @@ metIdentify = function(
     save(match.result,
          file = file.path(intermediate_path, "match.result"),
          compress = "xz")
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     stop("Please provide MS1 data name.\n")
   }
@@ -991,7 +991,7 @@ metIdentify = function(
     threads = threads,
     version = "1.0.0"
   )
-  cat(crayon::bgRed("All done.\n"))
+  message(crayon::bgRed("All done."))
   return(return.result)
 }
 

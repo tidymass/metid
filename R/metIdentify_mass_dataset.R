@@ -125,9 +125,9 @@ metIdentify_mass_dataset <-
     
     ##RT in database or not
     if (!database@database.info$RT) {
-      cat(
+      message(
         crayon::yellow(
-          "No RT information in database.\nThe weight of RT have been set as 0.\n"
+          "No RT information in database.\nThe weight of RT have been set as 0."
         )
       )
     }
@@ -167,14 +167,14 @@ metIdentify_mass_dataset <-
       stop("No MS2 in you object.\n")
     }
     
-    #####annotaion result for each set MS2 data
+    #####annotation result for each set MS2 data
     annotation_result =
       purrr::map2(.x = names(object@ms2_data),
                   .y = object@ms2_data,
                   function(temp_ms2_data_id,
                            temp_ms2_data) {
-                    cat(crayon::yellow(temp_ms2_data_id, "file:\n"))
-                    cat(crayon::green(length(temp_ms2_data@ms2_spectra), "MS2 spectra.\n"))
+                    message(crayon::yellow(temp_ms2_data_id, "file:"))
+                    message(crayon::green(length(temp_ms2_data@ms2_spectra), "MS2 spectra."))
                     
                     ms1.info = data.frame(
                       name = temp_ms2_data@ms2_spectrum_id,
@@ -238,6 +238,6 @@ metIdentify_mass_dataset <-
       as.data.frame() %>%
       dplyr::mutate(Database = database.name)
     
-    cat(crayon::bgRed("All done.\n"))
+    message(crayon::bgRed("All done."))
     return(annotation_result)
   }

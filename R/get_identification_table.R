@@ -48,7 +48,7 @@ get_identification_table = function(...,
     }
     
     if (nrow(object@match.result) == 0) {
-      cat(crayon::yellow("The object is identified without MS2 spectra.\n"))
+      message(crayon::yellow("The object is identified without MS2 spectra."))
       return(
         getIdentificationTable2(
           object = object,
@@ -592,7 +592,7 @@ getIdentificationTable2 = function(object,
                                    type = c("old", "new"),
                                    silence.deprecated = FALSE) {
   if (!silence.deprecated) {
-    cat(
+    message(
       crayon::yellow(
         "`getIdentificationTable2()` is deprecated, use `get_identification_table()`."
       )

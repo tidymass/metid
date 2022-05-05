@@ -36,7 +36,7 @@ metIdentification <-
     
     ##get the MS2 spectra within the CE values
     if (any(ce == "all")) {
-      cat(crayon::yellow("Use all CE values.\n"))
+      message(crayon::yellow("Use all CE values."))
       ce <- unique(unlist(lapply(spectra.data, function(x) {
         names(x)
       })))
@@ -59,12 +59,13 @@ metIdentification <-
     }
     
     spectra.info <- database@spectra.info
+    
     spectra.info <-
       spectra.info[which(spectra.info$Lab.ID %in% names(spectra.data)),]
     
     rm(list = c("database"))
-    cat("\n")
-    cat(crayon::green('Identifing metabolites with MS/MS database...\n'))
+    message("\n")
+    message(crayon::green('Identifing metabolites with MS/MS database...'))
     
     if (masstools::get_os() == "windows") {
       bpparam = BiocParallel::SnowParam(workers = threads,
@@ -142,197 +143,452 @@ metIdentification <-
 #' @param ... other parameters
 #' @return A metIdentifyClass object.
 
-identifyPeak = function(idx,
-                        ms1.info,
-                        ms2.info,
-                        spectra.info,
-                        spectra.data,
-                        ppm.ms1match = 25,
-                        ppm.ms2match = 30,
-                        mz.ppm.thr = 400,
-                        ms2.match.tol = 0.5,
-                        rt.match.tol = 30,
-                        ms1.match.weight = 0.25,
-                        rt.match.weight = 0.25,
-                        ms2.match.weight = 0.5,
-                        total.score.tol = 0.5,
-                        adduct.table,
-                        candidate.num = 3,
-                        fraction.weight = 0.3,
-                        dp.forward.weight = 0.6,
-                        dp.reverse.weight = 0.1,
-                        remove_fragment_intensity_cutoff = 0,
-                        ...) {
-  pk.precursor <- ms1.info[idx, ]
-  rm(list = c("ms1.info"))
-  pk.mz <- pk.precursor$mz
-  pk.rt <- pk.precursor$rt
-  pk.spec <- ms2.info[[idx]]
-  rm(list = c("ms2.info"))
-  
-  if (length(pk.spec) == 0) {
-    return(NA)
-  }
-  
-  spectra.mz <- apply(adduct.table, 1, function(x) {
-    temp.n <-
-      stringr::str_extract(string = as.character(x[1]), pattern = "[0-9]{1}M")
-    temp.n <-
-      as.numeric(stringr::str_replace(
-        string = temp.n,
-        pattern = "M",
-        replacement = ""
-      ))
-    temp.n[is.na(temp.n)] <- 1
-    as.numeric(x[2]) + temp.n * as.numeric(spectra.info$mz)
-  })
-  colnames(spectra.mz) <- adduct.table[, 1]
-  rownames(spectra.mz) <- spectra.info$Lab.ID
-  
-  ###mz match
-  match.idx <- apply(spectra.mz, 1, function(x) {
+
+identifyPeak <-
+  function(idx,
+           ms1.info,
+           ms2.info,
+           spectra.info,
+           spectra.data,
+           ppm.ms1match = 25,
+           ppm.ms2match = 30,
+           mz.ppm.thr = 400,
+           ms2.match.tol = 0.5,
+           rt.match.tol = 30,
+           ms1.match.weight = 0.25,
+           rt.match.weight = 0.25,
+           ms2.match.weight = 0.5,
+           total.score.tol = 0.5,
+           adduct.table,
+           candidate.num = 3,
+           fraction.weight = 0.3,
+           dp.forward.weight = 0.6,
+           dp.reverse.weight = 0.1,
+           remove_fragment_intensity_cutoff = 0,
+           ...) {
+    pk.precursor <- ms1.info[idx, , drop = FALSE]
+    rm(list = c("ms1.info"))
+    pk.mz <- pk.precursor$mz
+    pk.rt <- pk.precursor$rt
+    pk.spec <- ms2.info[[idx]]
+    rm(list = c("ms2.info"))
+    
+    if (length(pk.spec) == 0) {
+      return(NA)
+    }
+    
+    spectra.mz <-
+      apply(adduct.table, 1, function(x) {
+        temp.n <-
+          stringr::str_extract(string = as.character(x[1]), pattern = "[0-9]{1}M")
+        temp.n <-
+          as.numeric(stringr::str_replace(
+            string = temp.n,
+            pattern = "M",
+            replacement = ""
+          ))
+        temp.n[is.na(temp.n)] <- 1
+        as.numeric(x[2]) + temp.n * as.numeric(spectra.info$mz)
+      })
+    
+    colnames(spectra.mz) <- adduct.table[, 1]
+    rownames(spectra.mz) <- spectra.info$Lab.ID
+    
+    ###mz match
+    # match.idx <-
+    #   apply(spectra.mz, 1, function(x) {
+    #     temp.mz.error <-
+    #       abs(x - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+    #     temp.mz.match.score <-
+    #       exp(-0.5 * (temp.mz.error / (ppm.ms1match)) ^ 2)
+    #     data.frame(
+    #       "addcut" = names(temp.mz.error)[which(temp.mz.error < ppm.ms1match)],
+    #       "mz.error" = temp.mz.error[which(temp.mz.error < ppm.ms1match)],
+    #       "mz.match.score" = temp.mz.match.score[which(temp.mz.error < ppm.ms1match)],
+    #       stringsAsFactors = FALSE
+    #     )
+    #   })
+    
     temp.mz.error <-
-      abs(x - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+      abs(spectra.mz - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+    
+    temp.mz.error[which(is.na(temp.mz.error), arr.ind = TRUE)] <-
+      ppm.ms1match + 1
+    
     temp.mz.match.score <-
       exp(-0.5 * (temp.mz.error / (ppm.ms1match)) ^ 2)
-    data.frame(
-      "addcut" = names(temp.mz.error)[which(temp.mz.error < ppm.ms1match)],
-      "mz.error" = temp.mz.error[which(temp.mz.error < ppm.ms1match)],
-      "mz.match.score" = temp.mz.match.score[which(temp.mz.error < ppm.ms1match)],
-      stringsAsFactors = FALSE
-    )
-  })
-  
-  rm(list = c("spectra.mz", "adduct.table"))
-  
-  ##remove some none matched
-  match.idx <-
-    match.idx[which(unlist(lapply(match.idx, function(x) {
-      nrow(x)
-    })) != 0)]
-  
-  if (length(match.idx) == 0) {
-    return(NA)
-  }
-  
-  match.idx <- mapply(function(x, y) {
-    list(data.frame("Lab.ID" = y, x, stringsAsFactors = FALSE))
-  },
-  x = match.idx,
-  y = names(match.idx))
-  
-  match.idx <- do.call(rbind, match.idx)
-  # match.idx <- data.frame(rownames(match.idx), match.idx, stringsAsFactors = FALSE)
-  colnames(match.idx) <-
-    c("Lab.ID", "Adduct", "mz.error", "mz.match.score")
-  rownames(match.idx) <- NULL
-  
-  ###RT match
-  RT.error <- t(apply(match.idx, 1, function(x) {
-    temp.rt.error <-
-      abs(pk.rt - spectra.info$RT[match(x[1], spectra.info$Lab.ID)])
-    temp.rt.match.score <-
-      exp(-0.5 * (temp.rt.error / (rt.match.tol)) ^ 2)
     
-    ####if user set rt.match.tol as FALSE, set RT.error as NA
-    if (rt.match.tol > 10000) {
-      temp.rt.error = NA
-      temp.rt.match.score = NA
+    if (sum(temp.mz.error < ppm.ms1match) == 0) {
+      return(NA)
     }
-    c(temp.rt.error, temp.rt.match.score)
-  }))
-  colnames(RT.error) <- c("RT.error", "RT.match.score")
-  match.idx <-
-    data.frame(match.idx, RT.error, stringsAsFactors = FALSE)
-  rm(list = c("RT.error"))
-  
-  if (any(!is.na(match.idx$RT.error))) {
-    RT.error <- match.idx$RT.error
-    RT.error[is.na(RT.error)] <- rt.match.tol - 1
+    
     match.idx <-
-      match.idx[RT.error < rt.match.tol, , drop = FALSE]
-  }
-  
-  if (nrow(match.idx) == 0) {
-    return(NA)
-  }
-  
-  ###MS2 spectra match
-  ms2.score <-
-    apply(match.idx, 1, function(x) {
-      x <- as.character(x)
-      lib.spec <- spectra.data[[x[1]]]
-      dp <- lapply(lib.spec, function(y) {
-        masstools::get_spectra_match_score(
-          exp.spectrum = as.data.frame(pk.spec),
-          lib.spectrum = y,
-          ppm.tol = ppm.ms2match,
-          mz.ppm.thr = mz.ppm.thr,
-          fraction.weight = fraction.weight,
-          dp.forward.weight = dp.forward.weight,
-          dp.reverse.weight = dp.reverse.weight,
-          remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+      which(temp.mz.error < ppm.ms1match, arr.ind = TRUE) %>%
+      as.data.frame()
+    
+    match.idx <-
+      seq_len(nrow(match.idx)) %>%
+      purrr::map(function(i) {
+        data.frame(
+          Lab.ID = rownames(spectra.mz)[match.idx$row[i]],
+          Adduct = colnames(spectra.mz)[match.idx$col[i]],
+          mz.error = as.numeric(temp.mz.error[match.idx$row[i], match.idx$col[i]]),
+          mz.match.score = as.numeric(temp.mz.match.score[match.idx$row[i], match.idx$col[i]])
         )
-      })
-      dp <- dp[which.max(unlist(dp))]
-      dp <- unlist(dp)
-      data.frame("CE" = names(dp),
-                 "SS" = dp,
-                 stringsAsFactors = FALSE)
-    })
-  
-  ms2.score <- do.call(rbind, ms2.score)
-  rownames(ms2.score) <- NULL
-  
-  match.idx <-
-    data.frame(match.idx, ms2.score, stringsAsFactors = FALSE)
-  match.idx <-
-    match.idx[which(match.idx$SS > ms2.match.tol), , drop = FALSE]
-  rm(list = c("ms2.score"))
-  if (nrow(match.idx) == 0) {
-    return(NA)
-  }
-  
-  ###total score
-  total.score <- apply(match.idx, 1, function(x) {
-    if (is.na(x["RT.match.score"])) {
-      as.numeric(x["mz.match.score"]) * (ms1.match.weight + rt.match.weight /
-                                           2) +
-        as.numeric(x['SS']) * (ms2.match.weight + rt.match.weight /
-                                 2)
+      }) %>%
+      dplyr::bind_rows()
+    
+    rownames(match.idx) <- NULL
+    
+    rm(list = c("spectra.mz", "adduct.table"))
+    
+    ###RT match
+    if (rt.match.tol > 10000) {
+      temp.rt.error <-
+        temp.rt.match.score <-
+        rep(NA, nrow(match.idx))
     } else{
-      as.numeric(x['mz.match.score']) * ms1.match.weight +
-        as.numeric(x['RT.match.score']) * rt.match.weight +
-        as.numeric(x["SS"]) * ms2.match.weight
+      temp.rt.error <-
+        abs(pk.rt - spectra.info$RT[match(match.idx$Lab.ID, spectra.info$Lab.ID)])
+      
+      temp.rt.match.score <-
+        exp(-0.5 * (temp.rt.error / (rt.match.tol)) ^ 2)
     }
-  })
-  
-  match.idx <- data.frame(match.idx,
-                          "Total.score" = total.score,
-                          stringsAsFactors = FALSE)
-  rm(list = c("total.score"))
-  match.idx <-
-    match.idx[match.idx$Total.score > total.score.tol, , drop = FALSE]
-  
-  if (nrow(match.idx) == 0) {
-    return(NA)
+    
+    RT.error <-
+      data.frame(RT.error = temp.rt.error,
+                 RT.match.score = temp.rt.match.score)
+    
+    match.idx <-
+      data.frame(match.idx, RT.error, stringsAsFactors = FALSE)
+    
+    rm(list = c("RT.error"))
+    
+    if (any(!is.na(match.idx$RT.error))) {
+      RT.error <- match.idx$RT.error
+      RT.error[is.na(RT.error)] <- rt.match.tol - 1
+      match.idx <-
+        match.idx[RT.error < rt.match.tol, , drop = FALSE]
+    }
+    
+    if (nrow(match.idx) == 0) {
+      return(NA)
+    }
+    
+    ###MS2 spectra match
+    ms2.score <-
+      seq_len(nrow(match.idx)) %>% 
+      purrr::map(function(i){
+        lib.spec <- spectra.data[[match.idx$Lab.ID[i]]]
+        dp <- lapply(lib.spec, function(y) {
+          y$mz <- as.numeric(y$mz)
+          y$intensity <- as.numeric(y$intensity)
+          masstools::get_spectra_match_score(
+            exp.spectrum = as.data.frame(pk.spec),
+            lib.spectrum = y,
+            ppm.tol = ppm.ms2match,
+            mz.ppm.thr = mz.ppm.thr,
+            fraction.weight = fraction.weight,
+            dp.forward.weight = dp.forward.weight,
+            dp.reverse.weight = dp.reverse.weight,
+            remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+          )
+        })
+        dp <- dp[which.max(unlist(dp))]
+        dp <- unlist(dp)
+        data.frame("CE" = names(dp),
+                   "SS" = dp,
+                   stringsAsFactors = FALSE)
+      }) %>% 
+      dplyr::bind_rows()
+    
+    rownames(ms2.score) <- NULL
+    
+    match.idx <-
+      data.frame(match.idx, ms2.score, stringsAsFactors = FALSE)
+    match.idx <-
+      match.idx[which(match.idx$SS > ms2.match.tol), , drop = FALSE]
+    rm(list = c("ms2.score"))
+    if (nrow(match.idx) == 0) {
+      return(NA)
+    }
+    
+    ###total score
+    total.score <- 
+      seq_len(nrow(match.idx)) %>% 
+      purrr::map(function(i){
+        if(is.na(match.idx$RT.error[i])){
+          as.numeric(match.idx$mz.match.score[i]) * (ms1.match.weight + rt.match.weight /
+                                                       2) +
+            as.numeric(match.idx$SS[i]) * (ms2.match.weight + rt.match.weight /
+                                             2)
+        }else{
+          as.numeric(match.idx$mz.match.score[i]) * ms1.match.weight +
+            as.numeric(match.idx$RT.match.score[i]) * rt.match.weight +
+            as.numeric(match.idx$SS[i]) * ms2.match.weight
+        }
+      }) %>% 
+      unlist() %>% 
+      as.numeric()
+    
+    match.idx <- data.frame(match.idx,
+                            "Total.score" = total.score,
+                            stringsAsFactors = FALSE)
+    rm(list = c("total.score"))
+    match.idx <-
+      match.idx[match.idx$Total.score > total.score.tol, , drop = FALSE]
+    
+    if (nrow(match.idx) == 0) {
+      return(NA)
+    }
+    
+    match.idx <-
+      match.idx %>% 
+      dplyr::arrange(dplyr::desc(Total.score))
+    
+    if (nrow(match.idx) > candidate.num) {
+      match.idx <- match.idx[seq_len(candidate.num), ]
+    }
+    ##add other information
+    match.idx <-
+      data.frame(spectra.info[match(match.idx$Lab.ID, spectra.info$Lab.ID),
+                              c("Compound.name", "CAS.ID", "HMDB.ID", "KEGG.ID")], 
+                 match.idx,
+                 stringsAsFactors = FALSE)
+    
+    return(match.idx)
   }
-  
-  match.idx <-
-    match.idx[order(match.idx$Total.score, decreasing = TRUE),]
-  if (nrow(match.idx) > candidate.num) {
-    match.idx <- match.idx[seq_len(candidate.num),]
-  }
-  ##add other information
-  match.idx <-
-    data.frame(spectra.info[match(match.idx$Lab.ID, spectra.info$Lab.ID),
-                            c("Compound.name", "CAS.ID", "HMDB.ID", "KEGG.ID")], match.idx,
-               stringsAsFactors = FALSE)
-  match.idx <-
-    match.idx[order(match.idx$Total.score, decreasing = TRUE), , drop = FALSE]
-  
-  return(match.idx)
-}
+
+
+
+
+# identifyPeak <-
+#   function(idx,
+#            ms1.info,
+#            ms2.info,
+#            spectra.info,
+#            spectra.data,
+#            ppm.ms1match = 25,
+#            ppm.ms2match = 30,
+#            mz.ppm.thr = 400,
+#            ms2.match.tol = 0.5,
+#            rt.match.tol = 30,
+#            ms1.match.weight = 0.25,
+#            rt.match.weight = 0.25,
+#            ms2.match.weight = 0.5,
+#            total.score.tol = 0.5,
+#            adduct.table,
+#            candidate.num = 3,
+#            fraction.weight = 0.3,
+#            dp.forward.weight = 0.6,
+#            dp.reverse.weight = 0.1,
+#            remove_fragment_intensity_cutoff = 0,
+#            ...) {
+#     pk.precursor <- ms1.info[idx, ,drop = FALSE]
+#     rm(list = c("ms1.info"))
+#     pk.mz <- pk.precursor$mz
+#     pk.rt <- pk.precursor$rt
+#     pk.spec <- ms2.info[[idx]]
+#     rm(list = c("ms2.info"))
+#     
+#     if (length(pk.spec) == 0) {
+#       return(NA)
+#     }
+#     
+#     spectra.mz <-
+#       apply(adduct.table, 1, function(x) {
+#         temp.n <-
+#           stringr::str_extract(string = as.character(x[1]), pattern = "[0-9]{1}M")
+#         temp.n <-
+#           as.numeric(stringr::str_replace(
+#             string = temp.n,
+#             pattern = "M",
+#             replacement = ""
+#           ))
+#         temp.n[is.na(temp.n)] <- 1
+#         as.numeric(x[2]) + temp.n * as.numeric(spectra.info$mz)
+#       })
+#     
+#     colnames(spectra.mz) <- adduct.table[, 1]
+#     rownames(spectra.mz) <- spectra.info$Lab.ID
+#     
+#     ###mz match
+#     match.idx <-
+#       apply(spectra.mz, 1, function(x) {
+#         temp.mz.error <-
+#           abs(x - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+#         temp.mz.match.score <-
+#           exp(-0.5 * (temp.mz.error / (ppm.ms1match)) ^ 2)
+#         data.frame(
+#           "addcut" = names(temp.mz.error)[which(temp.mz.error < ppm.ms1match)],
+#           "mz.error" = temp.mz.error[which(temp.mz.error < ppm.ms1match)],
+#           "mz.match.score" = temp.mz.match.score[which(temp.mz.error < ppm.ms1match)],
+#           stringsAsFactors = FALSE
+#         )
+#       })
+#     
+#     # temp.mz.error <-
+#     #   abs(spectra.mz - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+#     # 
+#     # temp.mz.error[which(is.na(temp.mz.error), arr.ind = TRUE)] <- ppm.ms1match + 1
+#     # 
+#     # temp.mz.match.score <-
+#     #   exp(-0.5 * (temp.mz.error / (ppm.ms1match)) ^ 2)
+#     # 
+#     # if(sum(temp.mz.error < ppm.ms1match) == 0){
+#     #   return(NA)
+#     # }
+#     
+#     # match.idx <-
+#     #   spectra.mz %>%
+#     #   t() %>%
+#     #   as.data.frame() %>%
+#     #   purrr::map(function(x) {
+#     #     temp.mz.error <-
+#     #       abs(x - pk.mz) * 10 ^ 6 / ifelse(pk.mz < 400, 400, pk.mz)
+#     #     temp.mz.match.score <-
+#     #       exp(-0.5 * (temp.mz.error / (ppm.ms1match)) ^ 2)
+#     #     
+#     #     data.frame(
+#     #       "addcut" = colnames(spectra.mz),
+#     #       "mz.error" = temp.mz.error,
+#     #       "mz.match.score" = temp.mz.match.score,
+#     #       stringsAsFactors = FALSE
+#     #     ) %>%
+#     #       dplyr::filter(temp.mz.error < ppm.ms1match)
+#     #   })
+#     
+#     rm(list = c("spectra.mz", "adduct.table"))
+#     
+#     ##remove some none matched
+#     match.idx <-
+#       match.idx[which(unlist(lapply(match.idx, function(x) {
+#         nrow(x)
+#       })) != 0)]
+#     
+#     if (length(match.idx) == 0) {
+#       return(NA)
+#     }
+#     
+#     match.idx <- 
+#       mapply(function(x, y) {
+#       list(data.frame("Lab.ID" = y, x, stringsAsFactors = FALSE))
+#     },
+#     x = match.idx,
+#     y = names(match.idx))
+#     
+#     match.idx <- do.call(rbind, match.idx)
+#     # match.idx <- data.frame(rownames(match.idx), match.idx, stringsAsFactors = FALSE)
+#     colnames(match.idx) <-
+#       c("Lab.ID", "Adduct", "mz.error", "mz.match.score")
+#     rownames(match.idx) <- NULL
+#     
+#     ###RT match
+#     RT.error <- t(apply(match.idx, 1, function(x) {
+#       temp.rt.error <-
+#         abs(pk.rt - spectra.info$RT[match(x[1], spectra.info$Lab.ID)])
+#       temp.rt.match.score <-
+#         exp(-0.5 * (temp.rt.error / (rt.match.tol)) ^ 2)
+#       
+#       ####if user set rt.match.tol as FALSE, set RT.error as NA
+#       if (rt.match.tol > 10000) {
+#         temp.rt.error = NA
+#         temp.rt.match.score = NA
+#       }
+#       c(temp.rt.error, temp.rt.match.score)
+#     }))
+#     colnames(RT.error) <- c("RT.error", "RT.match.score")
+#     match.idx <-
+#       data.frame(match.idx, RT.error, stringsAsFactors = FALSE)
+#     rm(list = c("RT.error"))
+#     
+#     if (any(!is.na(match.idx$RT.error))) {
+#       RT.error <- match.idx$RT.error
+#       RT.error[is.na(RT.error)] <- rt.match.tol - 1
+#       match.idx <-
+#         match.idx[RT.error < rt.match.tol, , drop = FALSE]
+#     }
+#     
+#     if (nrow(match.idx) == 0) {
+#       return(NA)
+#     }
+#     
+#     ###MS2 spectra match
+#     ms2.score <-
+#       apply(match.idx, 1, function(x) {
+#         x <- as.character(x)
+#         lib.spec <- spectra.data[[x[1]]]
+#         dp <- lapply(lib.spec, function(y) {
+#           masstools::get_spectra_match_score(
+#             exp.spectrum = as.data.frame(pk.spec),
+#             lib.spectrum = y,
+#             ppm.tol = ppm.ms2match,
+#             mz.ppm.thr = mz.ppm.thr,
+#             fraction.weight = fraction.weight,
+#             dp.forward.weight = dp.forward.weight,
+#             dp.reverse.weight = dp.reverse.weight,
+#             remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+#           )
+#         })
+#         dp <- dp[which.max(unlist(dp))]
+#         dp <- unlist(dp)
+#         data.frame("CE" = names(dp),
+#                    "SS" = dp,
+#                    stringsAsFactors = FALSE)
+#       })
+#     
+#     ms2.score <- do.call(rbind, ms2.score)
+#     rownames(ms2.score) <- NULL
+#     
+#     match.idx <-
+#       data.frame(match.idx, ms2.score, stringsAsFactors = FALSE)
+#     match.idx <-
+#       match.idx[which(match.idx$SS > ms2.match.tol), , drop = FALSE]
+#     rm(list = c("ms2.score"))
+#     if (nrow(match.idx) == 0) {
+#       return(NA)
+#     }
+#     
+#     ###total score
+#     total.score <- apply(match.idx, 1, function(x) {
+#       if (is.na(x["RT.match.score"])) {
+#         as.numeric(x["mz.match.score"]) * (ms1.match.weight + rt.match.weight /
+#                                              2) +
+#           as.numeric(x['SS']) * (ms2.match.weight + rt.match.weight /
+#                                    2)
+#       } else{
+#         as.numeric(x['mz.match.score']) * ms1.match.weight +
+#           as.numeric(x['RT.match.score']) * rt.match.weight +
+#           as.numeric(x["SS"]) * ms2.match.weight
+#       }
+#     })
+#     
+#     match.idx <- data.frame(match.idx,
+#                             "Total.score" = total.score,
+#                             stringsAsFactors = FALSE)
+#     rm(list = c("total.score"))
+#     match.idx <-
+#       match.idx[match.idx$Total.score > total.score.tol, , drop = FALSE]
+#     
+#     if (nrow(match.idx) == 0) {
+#       return(NA)
+#     }
+#     
+#     match.idx <-
+#       match.idx[order(match.idx$Total.score, decreasing = TRUE),]
+#     if (nrow(match.idx) > candidate.num) {
+#       match.idx <- match.idx[seq_len(candidate.num),]
+#     }
+#     ##add other information
+#     match.idx <-
+#       data.frame(spectra.info[match(match.idx$Lab.ID, spectra.info$Lab.ID),
+#                               c("Compound.name", "CAS.ID", "HMDB.ID", "KEGG.ID")], match.idx,
+#                  stringsAsFactors = FALSE)
+#     match.idx <-
+#       match.idx[order(match.idx$Total.score, decreasing = TRUE), , drop = FALSE]
+#     
+#     return(match.idx)
+#   }
 
 
 

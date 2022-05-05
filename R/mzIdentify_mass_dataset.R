@@ -71,15 +71,15 @@ mzIdentify_mass_dataset =
       dplyr::rename(name = variable_id)
     
     if (rt.match.tol > 10000) {
-      cat(
+      message(
         crayon::yellow(
-          "You set rt.match.tol as NA, so RT will not be used for matching.\n"
+          "You set rt.match.tol as NA, so RT will not be used for matching."
         )
       )
     } else{
-      cat(
+      message(
         crayon::yellow(
-          "You set rt.match.tol < 10,000, so if the compounds have RT,  RTs will be used for matching\n"
+          "You set rt.match.tol < 10,000, so if the compounds have RT,  RTs will be used for matching."
         )
       )
     }
@@ -315,6 +315,6 @@ mzIdentify_mass_dataset =
                     ms2_spectrum_id,
                     dplyr::everything())
     
-    cat(crayon::bgRed("All done.\n"))
+    message(crayon::bgRed("All done."))
     return(annotation_result)
   }

@@ -54,42 +54,42 @@ construct_database = function(path = ".",
   ##check data first
   file <- dir(path)
   if (all(file != metabolite.info.name)) {
-    cat(crayon::red("No", metabolite.info.name, "in your", path, "\n"))
+    message(crayon::red("No", metabolite.info.name, "in your", path, "\n"))
     return(NULL)
   }
   
   if (all(file != "POS")) {
-    cat(crayon::red("No POS file in your", path, "\n"))
+    message(crayon::red("No POS file in your", path, "\n"))
   } else{
     file_pos <- dir(file.path(path, "POS"))
     if (length(file_pos) == 0) {
-      cat(crayon::red("No mzXML files in POS folder\n"))
+      message(crayon::red("No mzXML files in POS folder."))
     } else{
       if (sum(stringr::str_detect(file_pos, "mzXML")) == 0) {
-        cat(crayon::red("No mzXML files in POS folder\n"))
+        message(crayon::red("No mzXML files in POS folder."))
       }
     }
   }
   
   if (all(file != "NEG")) {
-    cat(crayon::red("No NEG file in your", path, "\n"))
+    message(crayon::red("No NEG file in your", path, "\n"))
   } else{
     file_neg <- dir(file.path(path, "NEG"))
     if (length(file_neg) == 0) {
-      cat(crayon::red("No mzXML files in NEG folder\n"))
+      message(crayon::red("No mzXML files in NEG folder."))
     } else{
       if (sum(stringr::str_detect(file_neg, "mzXML")) == 0) {
-        cat(crayon::red("No mzXML files in NEG folder\n"))
+        message(crayon::red("No mzXML files in NEG folder."))
       }
     }
   }
   
   ##read metabolite information
-  cat(crayon::green("Reading metabolite information...\n"))
+  message(crayon::green("Reading metabolite information..."))
   metabolite.info <-
     readTable(file = file.path(path, metabolite.info.name))
   
-  cat(crayon::green("Reading positive MS2 data...\n"))
+  message(crayon::green("Reading positive MS2 data..."))
   
   file.pos <-
     dir(file.path(path, 'POS'), full.names = TRUE)
@@ -113,12 +113,12 @@ construct_database = function(path = ".",
     
     rm(list = "ms2.data.pos")
     
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     ms1.info.pos <- NULL
   }
   
-  cat(crayon::green("Reading negative MS2 data...\n"))
+  message(crayon::green("Reading negative MS2 data..."))
   
   file.neg <-
     dir(file.path(path, 'NEG'), full.names = TRUE)
@@ -141,13 +141,13 @@ construct_database = function(path = ".",
     })
     
     rm(list = "ms2.data.neg")
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     ms1.info.neg <- NULL
   }
   
   ###---------------------------------------------------------------------------
-  cat(crayon::green("Matching metabolites with MS2 spectra (positive)...\n"))
+  message(crayon::green("Matching metabolites with MS2 spectra (positive)..."))
   
   if (!is.null(ms1.info.pos)) {
     match.result.pos <-
@@ -218,13 +218,13 @@ construct_database = function(path = ".",
     spectra.pos <-
       spectra.pos[which(!unlist(lapply(spectra.pos, is.null)))]
     
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     spectra.pos <- NULL
   }
   
   ###---------------------------------------------------------------------------
-  cat(crayon::green("Matching metabolites with MS2 spectra (negative)...\n"))
+  message(crayon::green("Matching metabolites with MS2 spectra (negative)..."))
   if (!is.null(ms1.info.neg)) {
     match.result.neg <-
       masstools::mz_rt_match(
@@ -293,7 +293,7 @@ construct_database = function(path = ".",
     
     spectra.neg <-
       spectra.neg[which(!unlist(lapply(spectra.neg, is.null)))]
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     spectra.neg <- NULL
   }
@@ -326,6 +326,6 @@ construct_database = function(path = ".",
   
   msDatabase0.0.1@database.info$RT <-
     ifelse(all(is.na(msDatabase0.0.1@spectra.info$RT)), FALSE, TRUE)
-  cat(crayon::bgRed("All done!\n"))
+  message(crayon::bgRed("All done!"))
   return(msDatabase0.0.1)
 }

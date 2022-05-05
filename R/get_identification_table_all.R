@@ -66,7 +66,7 @@ get_identification_table_all =
     
     ####annotation table level 1
     if (any(database_level$level == 1)) {
-      cat(crayon::green("Level 1 table...\n"))
+      message(crayon::green("Level 1 table..."))
       annotation_table1 <-
         get_identification_table(result[which(database_level$level == 1)],
                                  type = "new",
@@ -75,15 +75,15 @@ get_identification_table_all =
         data.frame(annotation_table1,
                    Level = 1,
                    stringsAsFactors = FALSE)
-      cat(crayon::red("OK\n"))
+      message(crayon::red("OK"))
     } else{
-      cat(crayon::yellow("No level 1.\n"))
+      message(crayon::yellow("No level 1."))
       annotation_table1 = NULL
     }
     
     ####annotation table level 2
     if (any(database_level$level == 2)) {
-      cat(crayon::green("Level 2 table...\n"))
+      message(crayon::green("Level 2 table..."))
       annotation_table2 <-
         get_identification_table(result[which(database_level$level == 2)],
                                  type = "new",
@@ -92,15 +92,15 @@ get_identification_table_all =
         data.frame(annotation_table2,
                    Level = 2,
                    stringsAsFactors = FALSE)
-      cat(crayon::red("OK\n"))
+      message(crayon::red("OK"))
     } else{
-      cat(crayon::yellow("No level 2.\n"))
+      message(crayon::yellow("No level 2."))
       annotation_table2 = NULL
     }
     
     ####annotation table level 3
     if (any(database_level$level == 3)) {
-      cat(crayon::green("Level 3 table...\n"))
+      message(crayon::green("Level 3 table..."))
       annotation_table3 <-
         get_identification_table(result[which(database_level$level == 3)],
                                  type = "new",
@@ -109,9 +109,9 @@ get_identification_table_all =
         data.frame(annotation_table3,
                    Level = 3,
                    stringsAsFactors = FALSE)
-      cat(crayon::red("OK\n"))
+      message(crayon::red("OK"))
     } else{
-      cat(crayon::yellow("No level 3.\n"))
+      message(crayon::yellow("No level 3."))
       annotation_table3 = NULL
     }
     
@@ -204,6 +204,6 @@ get_identification_table_all =
       annotation_table[match(result[[1]]@ms1.data$name, annotation_table$name),]
     }
     
-    cat(cat(crayon::red("All done.\n")))
+    message(crayon::red("All done."))
     return(tibble::as_tibble(annotation_table))
   }

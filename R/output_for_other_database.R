@@ -33,14 +33,14 @@ write_msp_mona = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   # temp = read_lines("2021_6_10/MoNA-export-LC-MS-MS_Spectra.msp")
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode..."))
     unlink(
       x = file.path(path, "spectra_pos.msp"),
       recursive = TRUE,
@@ -104,12 +104,12 @@ write_msp_mona = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.msp"),
       recursive = TRUE,
@@ -173,7 +173,7 @@ write_msp_mona = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 
@@ -209,13 +209,13 @@ write_mgf_mona = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode..."))
     unlink(
       x = file.path(path, "spectra_pos.mgf"),
       recursive = TRUE,
@@ -279,12 +279,12 @@ write_mgf_mona = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.mgf"),
       recursive = TRUE,
@@ -348,7 +348,7 @@ write_mgf_mona = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 
@@ -390,13 +390,13 @@ write_msp_massbank = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode..."))
     unlink(
       x = file.path(path, "spectra_pos.msp"),
       recursive = TRUE,
@@ -461,12 +461,12 @@ write_msp_massbank = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.msp"),
       recursive = TRUE,
@@ -531,7 +531,7 @@ write_msp_massbank = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 
@@ -568,13 +568,13 @@ write_mgf_massbank = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode..."))
     unlink(
       x = file.path(path, "spectra_pos.mgf"),
       recursive = TRUE,
@@ -639,12 +639,12 @@ write_mgf_massbank = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.mgf"),
       recursive = TRUE,
@@ -709,7 +709,7 @@ write_mgf_massbank = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 
@@ -753,12 +753,12 @@ write_msp_gnps = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode...\n"))
     unlink(
       x = file.path(path, "spectra_pos.msp"),
       recursive = TRUE,
@@ -818,12 +818,12 @@ write_msp_gnps = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.msp"),
       recursive = TRUE,
@@ -883,7 +883,7 @@ write_msp_gnps = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 
@@ -919,13 +919,13 @@ write_mgf_gnps = function(databasae,
   
   if (length(spectra_pos) == 0 &
       length(spectra_neg) == 0) {
-    cat("No MS2 spectra.")
+    message("No MS2 spectra.")
   }
   
   
   ####positive mode
   if (length(spectra_pos) > 0) {
-    cat(crayon::yellow("Write positive mode...\n"))
+    message(crayon::yellow("Write positive mode..."))
     unlink(
       x = file.path(path, "spectra_pos.mgf"),
       recursive = TRUE,
@@ -987,12 +987,12 @@ write_mgf_gnps = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
   
   ###negative mode
   if (length(spectra_neg) > 0) {
-    cat(crayon::yellow("Write negative mode...\n"))
+    message(crayon::yellow("Write negative mode..."))
     unlink(
       x = file.path(path, "spectra_neg.mgf"),
       recursive = TRUE,
@@ -1054,7 +1054,7 @@ write_mgf_gnps = function(databasae,
     )
     sink()
     sink(NULL)
-    cat(crayon::green("Done.\n"))
+    message(crayon::green("Done."))
   }
 }
 

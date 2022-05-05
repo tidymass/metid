@@ -223,6 +223,6 @@ construct_mona_database = function(file,
   
   database@database.info$RT <-
     ifelse(all(is.na(database@spectra.info$RT)), FALSE, TRUE)
-  cat(crayon::bgRed("All done!\n"))
+  message(crayon::bgRed("All done!\n"))
   return(database)
 }

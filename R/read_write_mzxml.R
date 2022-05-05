@@ -9,15 +9,15 @@
 
 readMZXML = function(file,
                      threads = 3) {
-  cat(crayon::yellow("`readMZXML()` is deprecated, use `read_mzxml()`.\n"))
+  message(crayon::yellow("`readMZXML()` is deprecated, use `read_mzxml()`."))
   # pbapply::pboptions(style = 1)
-  cat(crayon::green("Reading MS2 data...\n"))
+  message(crayon::green("Reading MS2 data..."))
   # mzxml.data.list <- pbapply::pblapply(file, ListMGF)
   ms2 <-
     MSnbase::readMSData(files = file,
                         msLevel. = 2,
                         mode = "onDisk")
-  cat(crayon::green("Processing...\n"))
+  message(crayon::green("Processing..."))
   
   new.ms2 <- ProtGenerics::spectra(object = ms2)
   rm(list = c("ms2"))
