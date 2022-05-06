@@ -98,3 +98,7 @@
 # Version 1.2.9 (2022-05-05)
 
 * Fix bugs and improve code quality.
+
+# Version 1.2.10 (2022-05-06)
+
+* Fix bugs and improve code quality.

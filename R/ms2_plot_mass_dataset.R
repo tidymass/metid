@@ -59,12 +59,10 @@ ms2_plot_mass_dataset =
       }
     }
     
-    
     ###Check data
     if (missing(database)) {
       stop("No database is provided.\n")
     }
-    
     
     if (class(database) != "databaseClass") {
       stop("database should be databaseClass object.\n")

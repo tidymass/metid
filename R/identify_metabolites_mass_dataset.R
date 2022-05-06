@@ -255,7 +255,8 @@ annotate_metabolites_mass_dataset <-
         total.score.tol = total.score.tol,
         candidate.num = candidate.num,
         database = database.name,
-        threads = threads
+        threads = threads,
+        remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
       ),
       time = Sys.time()
     )
