@@ -19,7 +19,7 @@
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-ms2_plot_mass_dataset =
+ms2_plot_mass_dataset <-
   function(object,
            variable_id,
            variable_index,
@@ -68,9 +68,10 @@ ms2_plot_mass_dataset =
       stop("database should be databaseClass object.\n")
     }
     
-    database.name = paste(database@database.info$Source,
-                          database@database.info$Version,
-                          sep = "_")
+    database.name <-
+      paste(database@database.info$Source,
+            database@database.info$Version,
+            sep = "_")
     
     ######check variable_id and variable_index
     if (missing(variable_id) & missing(variable_index)) {
@@ -104,13 +105,15 @@ ms2_plot_mass_dataset =
       )
     }
     
-    variable_id = object@variable_info$variable_id[variable_index] %>%
+    variable_id <-
+      object@variable_info$variable_id[variable_index] %>%
       unique() %>%
       `[`(1)
     
-    temp_variable_id = variable_id
+    temp_variable_id <-
+      variable_id
     
-    temp_annotation_table =
+    temp_annotation_table <-
       object@annotation_table %>%
       dplyr::filter(variable_id == temp_variable_id) %>%
       dplyr::filter(!is.na(SS))
@@ -120,68 +123,70 @@ ms2_plot_mass_dataset =
       return(NULL)
     }
     
-    all_plot = 
-    purrr::map(
-      as.data.frame(t(temp_annotation_table)),
-      .f = function(x) {
-        temp_idx = which(object@ms2_data[[x[2]]]@ms2_spectrum_id == x[3])
-        spectrum1 = object@ms2_data[[x[2]]]@ms2_spectra[[temp_idx]]
-        spectrum2 =
-          get_ms2_spectrum(
-            lab.id = x[8],
-            polarity = polarity,
-            database = database,
-            ce = x[14]
-          )
-        if(is.null(spectrum2)){
-          message("database may be wrong.")
-          plot = 
-            masstools::ms2_plot(
-              spectrum1 = spectrum1,
-              spectrum1_name = x[1],
-              spectrum2_name = x[4],
-              ppm.tol = ms1.match.ppm,
-              mz.ppm.thr = ms2.match.ppm,
-              interactive_plot = FALSE
+    all_plot <-
+      purrr::map(
+        as.data.frame(t(temp_annotation_table)),
+        .f = function(x) {
+          temp_idx <-
+            which(object@ms2_data[[x[2]]]@ms2_spectrum_id == x[3])[1]
+          spectrum1 <-
+            object@ms2_data[[x[2]]]@ms2_spectra[[temp_idx]]
+          spectrum2 <-
+            get_ms2_spectrum(
+              lab.id = x[8],
+              polarity = polarity,
+              database = database,
+              ce = x[14]
             )
-        }else{
-          plot =
-            masstools::ms2_plot(
-              spectrum1 = spectrum1,
-              spectrum2 = spectrum2,
-              spectrum1_name = x[1],
-              spectrum2_name = x[4],
-              ppm.tol = ms1.match.ppm,
-              mz.ppm.thr = ms2.match.ppm,
-              interactive_plot = FALSE
+          if (is.null(spectrum2)) {
+            message("database may be wrong.")
+            plot <-
+              masstools::ms2_plot(
+                spectrum1 = spectrum1,
+                spectrum1_name = x[1],
+                spectrum2_name = x[4],
+                ppm.tol = ms1.match.ppm,
+                mz.ppm.thr = ms2.match.ppm,
+                interactive_plot = FALSE
+              )
+          } else{
+            plot <-
+              masstools::ms2_plot(
+                spectrum1 = spectrum1,
+                spectrum2 = spectrum2,
+                spectrum1_name = x[1],
+                spectrum2_name = x[4],
+                ppm.tol = ms1.match.ppm,
+                mz.ppm.thr = ms2.match.ppm,
+                interactive_plot = FALSE
+              )
+            
+          }
+          temp_info = paste(colnames(temp_annotation_table),
+                            x, sep = ":")
+          
+          plot <-
+            plot +
+            ggplot2::annotate(
+              geom = "text",
+              x = -Inf,
+              y = Inf,
+              label = paste(temp_info, collapse = "\n"),
+              hjust = 0,
+              vjust = 1
             )
           
+          if (interactive_plot) {
+            plot <-
+              plotly::ggplotly(plot)
+          }
+          plot
         }
-        temp_info = paste(colnames(temp_annotation_table),
-                          x, sep = ":")
-        
-        plot =
-          plot +
-          ggplot2::annotate(
-            geom = "text",
-            x = -Inf,
-            y = Inf,
-            label = paste(temp_info, collapse = "\n"),
-            hjust = 0,
-            vjust = 1
-          )
-        
-        if(interactive_plot){
-          plot = 
-            plotly::ggplotly(plot)
-        }
-        plot
-      }
-    )
+      )
     
-    
-    names(all_plot) = paste(temp_annotation_table$variable_id,
-                            seq_len(nrow(temp_annotation_table)),
-                            sep = "_")
+    names(all_plot) <-
+      paste(temp_annotation_table$variable_id,
+            seq_len(nrow(temp_annotation_table)),
+            sep = "_")
     return(all_plot)
   }

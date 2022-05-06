@@ -181,7 +181,7 @@ identify_ms2_only = function(ms2.data,
   }
   
   if (all(c("ms1.info", "ms2.info") %in% dir(intermediate_path))) {
-    cat(crayon::yellow("Use old data\n"))
+    message(crayon::yellow("Use old data."))
     load(file.path(intermediate_path, "ms1.info"))
     load(file.path(intermediate_path, "ms2.info"))
   } else{
@@ -216,7 +216,7 @@ identify_ms2_only = function(ms2.data,
       
       names(ms2.data) <- ms2.data.name
       ###prepare data for metIdentification function
-      cat(crayon::green("Preparing MS2 data for identification..."))
+      message(crayon::green("Preparing MS2 data for identification..."))
       ms2.data <-
         mapply(
           FUN = function(temp.ms2.data, temp.ms2.data.name) {
@@ -279,11 +279,11 @@ identify_ms2_only = function(ms2.data,
     save(ms2.info,
          file = file.path(intermediate_path, "ms2.info"),
          compress = "xz")
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   }
   
   if (!missing(ms1.data)) {
-    cat(crayon::green("Matching peak table with MS2 spectrum...\n"))
+    message(crayon::green("Matching peak table with MS2 spectrum..."))
     ##check ms1 data format
     
     ms1.data <-
@@ -315,15 +315,15 @@ identify_ms2_only = function(ms2.data,
       return("No peaks are matched with MS2 spectra.\n")
     if (nrow(match.result) == 0)
       return("No peaks are matched with MS2 spectra.\n")
-    cat(crayon::green(
+    message(crayon::green(
       length(unique(match.result[, 1])),
       "out of",
       nrow(ms1.data),
-      "peaks have MS2 spectra.\n"
+      "peaks have MS2 spectra."
     ))
     
     ###if one peak matches multiple peaks, select the more relibale MS2 spectrum
-    cat(crayon::green("Selecting the most intense MS2 spectrum for each peak..."))
+    message(crayon::green("Selecting the most intense MS2 spectrum for each peak..."))
     temp.idx <- unique(match.result[, 1])
     
     match.result <- lapply(temp.idx, function(idx) {
@@ -366,7 +366,7 @@ identify_ms2_only = function(ms2.data,
       file = file.path(intermediate_path, "match.result"),
       compress = "xz"
     )
-    cat(crayon::red("OK\n"))
+    message(crayon::red("OK."))
   } else{
     stop("Please provide MS1 data name.\n")
   }
@@ -423,6 +423,6 @@ identify_ms2_only = function(ms2.data,
     threads = threads,
     version = "1.0.0"
   )
-  cat(crayon::bgRed("All done.\n"))
+  message(crayon::bgRed("All done."))
   return(return.result)
 }

@@ -8,7 +8,7 @@
 #' metid()
 
 metid <- function() {
-  cat(crayon::yellow(
+  message(crayon::yellow(
     "`metid()` is deprecated, please use `metid_logo()`."
   ))  
   cat(crayon::green(

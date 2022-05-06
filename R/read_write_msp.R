@@ -642,7 +642,7 @@ WriteMSP = function(info, fn.pre, spec.all) {
 readMSP = function(file,
                    silence.deprecated = TRUE) {
   if (!silence.deprecated) {
-    cat(crayon::yellow("`readMSP()` is deprecated, use `read_msp()`.\n"))
+    message(crayon::yellow("`readMSP()` is deprecated, use `read_msp()`."))
   }
   
   msp.data <- readLines(file)
@@ -759,7 +759,7 @@ readMSP = function(file,
     
     ##fix bug in msp data from metAnalyzer
     if (length(rt.idx) == 0) {
-      cat(crayon::yellow("The msp data are from MetAnalyzer software.\n"))
+      message(crayon::yellow("The msp data are from MetAnalyzer software."))
       rt.idx <-
         grep("NAME|Name|name", rownames(info.spec[[1]][[1]]))
       ##rt.idx is the name of peak
