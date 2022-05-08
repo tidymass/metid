@@ -57,6 +57,9 @@ globalVariables(
     "intensity",
     "ms2_files_id",
     "ms2_spectrum_id",
-    "variable_id"
+    "variable_id",
+    "Level",
+    "fill",
+    "n"
   )
 )
