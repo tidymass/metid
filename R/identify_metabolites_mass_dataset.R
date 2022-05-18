@@ -132,7 +132,7 @@ annotate_metabolites_mass_dataset <-
     }
     
     if (is.na(rt.match.tol)) {
-      rt.match.tol = 1000000
+      rt.match.tol <- 1000000
     }
     
     ###Check data
@@ -148,14 +148,17 @@ annotate_metabolites_mass_dataset <-
       stop("database should be databaseClass object.\n")
     }
     
-    database.name = paste(database@database.info$Source,
-                          database@database.info$Version,
-                          sep = "_")
+    database.name <-
+      paste(database@database.info$Source,
+            database@database.info$Version,
+            sep = "_")
     
     ######NO MS2 in object
     if (length(object@ms2_data) == 0) {
-      message(crayon::yellow("No MS2 data in object, so only use mz and/or RT for matching."))
-      annotation_result =
+      message(
+        crayon::yellow("No MS2 data in object, 
+                       so only use mz and/or RT for matching."))
+      annotation_result <-
         mzIdentify_mass_dataset(
           object = object,
           rt.match.tol = rt.match.tol,
@@ -166,7 +169,7 @@ annotate_metabolites_mass_dataset <-
           database = database,
           threads = threads
         )
-      annotation_result$SS = NA
+      annotation_result$SS <- NA
     }
     
     ######MS2 in object
@@ -180,15 +183,16 @@ annotate_metabolites_mass_dataset <-
         length()
       
       if (polarity == "positive") {
-        spectra_number = spectra_pos_number
+        spectra_number <- spectra_pos_number
       } else{
-        spectra_number = spectra_neg_number
+        spectra_number <- spectra_neg_number
       }
       
       ######NO MS2 in database
       if (spectra_number == 0) {
         message(crayon::yellow(
-          "No MS2 data in database, so only use mz and/or RT for matching."
+          "No MS2 data in database, 
+          so only use mz and/or RT for matching."
         ))
         annotation_result <-
           mzIdentify_mass_dataset(
@@ -201,7 +205,7 @@ annotate_metabolites_mass_dataset <-
             database = database,
             threads = threads
           )
-        annotation_result$SS = NA
+        annotation_result$SS <- NA
       } else{
         ######MS2 in database
         annotation_result <-
@@ -337,7 +341,7 @@ annotate_metabolites_mass_dataset <-
         dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
       
       ###only remain top annotations
-      object@annotation_table =
+      object@annotation_table <-
         object@annotation_table %>%
         dplyr::group_by(variable_id) %>%
         dplyr::slice_head(n = candidate.num) %>%

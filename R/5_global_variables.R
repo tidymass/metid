@@ -60,6 +60,7 @@ globalVariables(
     "variable_id",
     "Level",
     "fill",
-    "n"
+    "n",
+    "x"
   )
 )

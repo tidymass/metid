@@ -106,3 +106,7 @@
 # Version 1.2.11 (2022-05-07)
 
 * New function summary_annotation_table.
+
+# Version 1.2.12 (2022-05-18)
+
+* Improve function performance.
