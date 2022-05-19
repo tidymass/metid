@@ -260,7 +260,7 @@ mzIdentify_mass_dataset <-
     
     match_result <-
       BiocParallel::bplapply(
-        seq_len(nrow(ms1.data))[1:1000],
+        seq_len(nrow(ms1.data)),
         FUN = temp.fun,
         BPPARAM = bpparam,
         ms1.data = ms1.data,
