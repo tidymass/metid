@@ -110,3 +110,7 @@
 # Version 1.2.12 (2022-05-18)
 
 * Improve function performance.
+
+# Version 1.2.13 (2022-05-19)
+
+* Fix bug.

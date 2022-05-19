@@ -303,7 +303,7 @@ mzIdentify_mass_dataset <-
     if (rt.match.tol > 10000) {
       match_result$RT.error <- NA
       match_result$RT.match.score <- NA
-      match_result$Total.score <- x$mz.match.score
+      match_result$Total.score <- match_result$mz.match.score
     } else{
       match_result$RT.match.score <-
         exp(-0.5 * (match_result$RT.error / (rt.match.tol)) ^ 2)
