@@ -77,6 +77,7 @@ A metIdentifyClass object.
 Identify metabolites based on MS1 or MS/MS database.
 }
 \examples{
+\dontrun{
 library(massdataset)
 library(magrittr)
 library(dplyr)
@@ -127,7 +128,7 @@ object2 =
   annotate_metabolites_mass_dataset(object = object1,
                                     database = snyder_database_rplc0.0.3)
 head(object2@annotation_table)
-extract_variable_info(object = object)
+}
 }
 \seealso{
 The example and demo data of this function can be found

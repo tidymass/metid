@@ -1,7 +1,7 @@
 Type: Package
 Package: metid
 Title: Metabolite identification based on MS1 and MS2 spectra
-Version: 1.2.13
+Version: 1.2.14
 Date: 2021-07-02
 Authors@R: c(
     person(given = "Xiaotao",
@@ -37,9 +37,11 @@ Depends:
 Imports:
     BiocParallel,
     crayon,
+    data.table,
     dplyr,
     future,
     furrr,
+    tidyr,
     ggplot2,
     pbapply,
     methods,
@@ -63,7 +65,8 @@ Imports:
     cli,
     rstudioapi,
     rlang,
-    ggsci
+    ggsci,
+    progress
 Suggests: 
     knitr,
     rmarkdown,

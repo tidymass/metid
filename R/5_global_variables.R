@@ -61,6 +61,11 @@ globalVariables(
     "Level",
     "fill",
     "n",
-    "x"
+    "x",
+    "minus_h2o_number",
+    "h_number",
+    "o_number",
+    "h_diff",
+    "o_diff"
   )
 )

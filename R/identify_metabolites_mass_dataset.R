@@ -31,6 +31,7 @@
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 #' @examples
+#' \dontrun{
 #' library(massdataset)
 #' library(magrittr)
 #' library(dplyr)
@@ -39,17 +40,17 @@
 #'     system.file("ms1_peak", package = "metid"),
 #'     "ms1.peak.table.csv"
 #'   ))
-#'
+#' 
 #' ms1_data = data.frame(ms1_data, sample1 = 1, sample2 = 2)
-#'
+#' 
 #' expression_data = ms1_data %>%
 #'   dplyr::select(-c(name:rt))
-#'
+#' 
 #' variable_info =
 #'   ms1_data %>%
 #'   dplyr::select(name:rt) %>%
 #'   dplyr::rename(variable_id = name)
-#'
+#' 
 #' sample_info =
 #'   data.frame(
 #'     sample_id = colnames(expression_data),
@@ -58,30 +59,31 @@
 #'     group = c("Subject", "Subject")
 #'   )
 #' rownames(expression_data) = variable_info$variable_id
-#'
+#' 
 #' object = create_mass_dataset(
 #'   expression_data = expression_data,
 #'   sample_info = sample_info,
 #'   variable_info = variable_info
 #' )
-#'
+#' 
 #' object
-#'
+#' 
 #' data("hmdb_ms1_database0.0.3", package = "metid")
-#'
+#' 
 #' object1 =
 #'   annotate_metabolites_mass_dataset(object = object,
 #'                                     database = hmdb_ms1_database0.0.3)
-#'
+#' 
 #' data("snyder_database_rplc0.0.3", package = "metid")
-#'
+#' 
 #' database = snyder_database_rplc0.0.3
-#'
+#' 
 #' object2 =
 #'   annotate_metabolites_mass_dataset(object = object1,
 #'                                     database = snyder_database_rplc0.0.3)
 #' head(object2@annotation_table)
-#' extract_variable_info(object = object)
+#' }
+
 
 annotate_metabolites_mass_dataset <-
   function(object,
@@ -156,8 +158,7 @@ annotate_metabolites_mass_dataset <-
     ######NO MS2 in object
     if (length(object@ms2_data) == 0) {
       message(
-        crayon::yellow("No MS2 data in object, 
-                       so only use mz and/or RT for matching."))
+        crayon::yellow("No MS2 data in object, so only use mz and/or RT for matching."))
       annotation_result <-
         mzIdentify_mass_dataset(
           object = object,
@@ -331,6 +332,8 @@ annotate_metabolites_mass_dataset <-
         "Database",
         "Level"
       )]
+    
+    ###remove some annotation based on adducts
     
     if (nrow(object@annotation_table) == 0) {
       object@annotation_table <- annotation_result
