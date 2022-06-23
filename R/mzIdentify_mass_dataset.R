@@ -434,7 +434,7 @@ mzIdentify_mass_dataset <-
     } else{
       message(
         crayon::yellow(
-          "You set rt.match.tol < 10,000, so if the compounds have RT,  RTs will be used for matching."
+          "You set rt.match.tol < 10,000, so if the compounds have RT, RTs will be used for matching."
         )
       )
     }
@@ -600,7 +600,7 @@ mzIdentify_mass_dataset <-
       adduct_check %>%
       dplyr::mutate(h_diff = h_number - minus_h2o_number * 2,
                     o_diff = o_number - minus_h2o_number) %>%
-      dplyr::filter(h_diff < 0 & o_diff < 0)
+      dplyr::filter(h_diff < 0 | o_diff < 0)
     
     if (nrow(adduct_check) > 0) {
       match_result <-

@@ -192,8 +192,7 @@ annotate_metabolites_mass_dataset <-
       ######NO MS2 in database
       if (spectra_number == 0) {
         message(crayon::yellow(
-          "No MS2 data in database, 
-          so only use mz and/or RT for matching."
+          "No MS2 data in database, so only use mz and/or RT for matching."
         ))
         annotation_result <-
           mzIdentify_mass_dataset(

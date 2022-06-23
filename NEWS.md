@@ -118,3 +118,7 @@
 # Version 1.2.14 (2022-06-22)
 
 * Fixed bug in mz identification.
+
+# Version 1.2.15 (2022-06-22)
+
+* Fixed bug.
