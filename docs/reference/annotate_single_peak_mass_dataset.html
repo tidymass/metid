@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -117,7 +117,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -146,88 +146,137 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">annotate_single_peak_mass_dataset</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">variable_id</span>,
-  <span class="va">variable_index</span>,
-  based_on_rt <span class="op">=</span> <span class="cn">TRUE</span>,
-  based_on_ms2 <span class="op">=</span> <span class="cn">TRUE</span>,
-  add_to_annotation_table <span class="op">=</span> <span class="cn">FALSE</span>,
-  ms1.match.ppm <span class="op">=</span> <span class="fl">25</span>,
-  ms2.match.ppm <span class="op">=</span> <span class="fl">30</span>,
-  mz.ppm.thr <span class="op">=</span> <span class="fl">400</span>,
-  ms2.match.tol <span class="op">=</span> <span class="fl">0.5</span>,
-  fraction.weight <span class="op">=</span> <span class="fl">0.3</span>,
-  dp.forward.weight <span class="op">=</span> <span class="fl">0.6</span>,
-  dp.reverse.weight <span class="op">=</span> <span class="fl">0.1</span>,
-  rt.match.tol <span class="op">=</span> <span class="fl">30</span>,
-  polarity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"positive"</span>, <span class="st">"negative"</span><span class="op">)</span>,
-  ce <span class="op">=</span> <span class="st">"all"</span>,
-  column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rp"</span>, <span class="st">"hilic"</span><span class="op">)</span>,
-  ms1.match.weight <span class="op">=</span> <span class="fl">0.25</span>,
-  rt.match.weight <span class="op">=</span> <span class="fl">0.25</span>,
-  ms2.match.weight <span class="op">=</span> <span class="fl">0.5</span>,
-  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,
-  candidate.num <span class="op">=</span> <span class="fl">3</span>,
-  <span class="va">database</span>,
-  threads <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">annotate_single_peak_mass_dataset</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">variable_id</span>,</span>
+<span>  <span class="va">variable_index</span>,</span>
+<span>  based_on_rt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  based_on_ms2 <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_to_annotation_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ms1.match.ppm <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  ms2.match.ppm <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  mz.ppm.thr <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>  ms2.match.tol <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  fraction.weight <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  dp.forward.weight <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  dp.reverse.weight <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  rt.match.tol <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  polarity <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"positive"</span>, <span class="st">"negative"</span><span class="op">)</span>,</span>
+<span>  ce <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rp"</span>, <span class="st">"hilic"</span><span class="op">)</span>,</span>
+<span>  ms1.match.weight <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  rt.match.weight <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  ms2.match.weight <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  <span class="va">database</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>A mass_dataset class obejct.</p></dd>
+
+
 <dt>variable_id</dt>
 <dd><p>variable_id</p></dd>
+
+
 <dt>variable_index</dt>
 <dd><p>variable_index</p></dd>
+
+
 <dt>based_on_rt</dt>
 <dd><p>based_on_rt</p></dd>
+
+
 <dt>based_on_ms2</dt>
 <dd><p>based_on_ms2</p></dd>
+
+
 <dt>add_to_annotation_table</dt>
 <dd><p>add_to_annotation_table</p></dd>
+
+
 <dt>ms1.match.ppm</dt>
 <dd><p>Precursor match ppm tolerance.</p></dd>
+
+
 <dt>ms2.match.ppm</dt>
 <dd><p>Fragment ion match ppm tolerance.</p></dd>
+
+
 <dt>mz.ppm.thr</dt>
 <dd><p>Accurate mass tolerance for m/z error calculation.</p></dd>
+
+
 <dt>ms2.match.tol</dt>
 <dd><p>MS2 match (MS2 similarity) tolerance.</p></dd>
+
+
 <dt>fraction.weight</dt>
 <dd><p>The weight for matched fragments.</p></dd>
+
+
 <dt>dp.forward.weight</dt>
 <dd><p>Forward dot product weight.</p></dd>
+
+
 <dt>dp.reverse.weight</dt>
 <dd><p>Reverse dot product weight.</p></dd>
+
+
 <dt>rt.match.tol</dt>
 <dd><p>RT match tolerance.</p></dd>
+
+
 <dt>polarity</dt>
 <dd><p>The polarity of data, "positive"or "negative".</p></dd>
+
+
 <dt>ce</dt>
 <dd><p>Collision energy. Please confirm the CE values in your database. Default is "all".</p></dd>
+
+
 <dt>column</dt>
 <dd><p>"hilic" (HILIC column) or "rp" (reverse phase).</p></dd>
+
+
 <dt>ms1.match.weight</dt>
 <dd><p>The weight of MS1 match for total score calculation.</p></dd>
+
+
 <dt>rt.match.weight</dt>
 <dd><p>The weight of RT match for total score calculation.</p></dd>
+
+
 <dt>ms2.match.weight</dt>
 <dd><p>The weight of MS2 match for total score calculation.</p></dd>
+
+
 <dt>total.score.tol</dt>
 <dd><p>Total score tolerance. The total score are referring to MS-DIAL.</p></dd>
+
+
 <dt>candidate.num</dt>
 <dd><p>The number of candidate.</p></dd>
+
+
 <dt>database</dt>
 <dd><p>MS2 database name or MS database.</p></dd>
+
+
 <dt>threads</dt>
 <dd><p>Number of threads</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A metIdentifyClass object.</p>
+    
+
+<p>A metIdentifyClass object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>

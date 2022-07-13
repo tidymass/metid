@@ -37,7 +37,7 @@ mzIdentify_mass_dataset2 <-
     polarity <- match.arg(polarity)
     column <- match.arg(column)
     ##check ms1.file and ms2.file
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     
@@ -250,7 +250,7 @@ mzIdentify_mass_dataset2 <-
                                              progressbar = TRUE)
     }
     
-    if (class(database) == "databaseClass") {
+    if (is(database, "databaseClass")) {
       ms1_database <-
         database@spectra.info %>%
         dplyr::mutate(mz = as.numeric(mz)) %>%
@@ -395,7 +395,7 @@ mzIdentify_mass_dataset <-
     polarity <- match.arg(polarity)
     column <- match.arg(column)
     ##check ms1.file and ms2.file
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     

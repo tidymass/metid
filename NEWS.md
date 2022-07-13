@@ -122,3 +122,7 @@
 # Version 1.2.15 (2022-06-22)
 
 * Fixed bug.
+
+# Version 1.2.17 (2022-07-13)
+
+* Fixed bugs.

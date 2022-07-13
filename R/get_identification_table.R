@@ -598,9 +598,8 @@ getIdentificationTable2 = function(object,
       )
     )
   }
-  
-  if (class(object) != "mzIdentifyClass" &
-      class(object) != "metIdentifyClass") {
+
+  if (!is(object, "mzIdentifyClass") & !is(object, "metIdentifyClass")) {
     stop("Only for mzIdentifyClass or metIdentifyClass\n")
   }
   

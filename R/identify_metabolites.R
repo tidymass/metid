@@ -85,7 +85,7 @@ identify_metabolites = function(
     }
   }
 
-  if(class(database) != "databaseClass"){
+  if(!is(database, "databaseClass")){
     if (!all(database %in% file)) {
       stop("Database is not in this directory, please check it.\n")
     }  
@@ -193,14 +193,14 @@ mzIdentify =
       stop("MS1 data is not in the directory, please check it.\n")
     }
     
-    if(class(database) != "databaseClass"){
+    if(!is(database, "databaseClass")){
       if (!all(database %in% file)) {
         stop("Database is not in this directory, please check it.\n")
       }  
     }
     
     #load database
-    if(class(database) != "databaseClass"){
+    if(!is(database, "databaseClass")){
       database.name <- database
       load(file.path(path, database.name))
       database <- get(database.name) 
@@ -208,9 +208,7 @@ mzIdentify =
       database.name = paste(database@database.info$Source, 
                             database@database.info$Version, sep = "_")
     }
-    # if(class(database) != "data.frame"){
-    #   stop("The database must be HMDB.metabolite.data provided.\n")
-    # }
+
     #------------------------------------------------------------------
     ##load adduct table
     if (polarity == "positive" & column == "hilic") {
@@ -268,7 +266,7 @@ mzIdentify =
       
       rm(list = c("ms1.data"))
       
-      if (class(database) == "databaseClass") {
+      if (is(database, "databaseClass")) {
         database <- database@spectra.info
       }
       
@@ -439,7 +437,7 @@ mzIdentify =
       match.result <- match.result[-temp.idx]
     }
     
-    if (class(database) == "databaseClass") {
+    if (is(database, "databaseClass")) {
       return.result <- new(
         Class = "metIdentifyClass",
         ms1.data = ms1.data,
@@ -648,14 +646,14 @@ metIdentify = function(
     }
   }
   
-  if(class(database) != "databaseClass"){
+  if(!is(database, "databaseClass")){
     if (!all(database %in% file)) {
       stop("Database is not in this directory, please check it.\n")
     }  
   }
   
   #load MS2 database
-  if(class(database) != "databaseClass"){
+  if(!is(database, "databaseClass")){
     database.name <- database
     load(file.path(path, database.name))
     database <- get(database.name) 
@@ -664,7 +662,7 @@ metIdentify = function(
                           database@database.info$Version, sep = "_")
   }
   
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     stop("database must be databaseClass object\n")
   }
   
@@ -806,7 +804,7 @@ metIdentify = function(
           temp.ms2.data.name = ms2.data.name
         )
       
-      if (class(ms2.data)[1] == "matrix") {
+      if (is(ms2.data, "matrix")) {
         ms2.data <- ms2.data[, 1]
       } else{
         ms2.data <- do.call(what = c, args = ms2.data)

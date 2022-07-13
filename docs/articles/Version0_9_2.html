@@ -48,14 +48,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -119,7 +119,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -154,7 +154,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -179,9 +179,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Version 0.9.2</h1>
-                        <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen
+PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2021-03-11 and updated on 2022-03-21</h4>
+            <h4 data-toc-skip class="date">Created on 2021-03-11 and
+updated on 2022-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/Version0_9_2.Rmd" class="external-link"><code>vignettes/Version0_9_2.Rmd</code></a></small>
       <div class="hidden name"><code>Version0_9_2.Rmd</code></div>
@@ -191,33 +193,41 @@
     
     
 <hr>
-<p>In <code>version 0.9.2</code>, I just modified the <code>database</code> argument in <code><a href="../reference/identify_metabolites.html">identify_metabolites()</a></code> and <code>identify_metabolite_alls</code> functions. Now you can put the database in the work directory and then give the database name, and you can also directory provide the database (<code>databaseClass</code>) to it.</p>
+<p>In <code>version 0.9.2</code>, I just modified the
+<code>database</code> argument in <code><a href="../reference/identify_metabolites.html">identify_metabolites()</a></code>
+and <code>identify_metabolite_alls</code> functions. Now you can put the
+database in the work directory and then give the database name, and you
+can also directory provide the database (<code>databaseClass</code>) to
+it.</p>
 <div class="section level4">
 <h4 id="load-demo-data">
 <strong>Load demo data</strong><a class="anchor" aria-label="anchor" href="#load-demo-data"></a>
 </h4>
-<p>First we load the MS1 peak and database from <code>metid</code> package and then put them in a <code>example</code> folder.</p>
+<p>First we load the MS1 peak and database from <code>metid</code>
+package and then put them in a <code>example</code> folder.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">##create a folder named as example</span>
-<span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co">##get MS1 peak table from metid</span>
-<span class="va">ms1_peak</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms1_peak</span>, <span class="st">"ms1.peak.table.csv"</span><span class="op">)</span>, 
-          to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span>
-
-<span class="co">##get database from metid</span>
-<span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">database</span>, <span class="st">"msDatabase_rplc0.0.2"</span><span class="op">)</span>, 
-          to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>Now in your <code>./example</code>, there are two files, namely <code>ms1.peak.table.csv</code> and <code>msDatabase_rplc_0.0.2</code>, respectively.</p>
+<code class="sourceCode R"><span><span class="co">##create a folder named as example</span></span>
+<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">##get MS1 peak table from metid</span></span>
+<span><span class="va">ms1_peak</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms1_peak</span>, <span class="st">"ms1.peak.table.csv"</span><span class="op">)</span>, </span>
+<span>          to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span></span>
+<span><span class="co">##get database from metid</span></span>
+<span><span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">database</span>, <span class="st">"msDatabase_rplc0.0.2"</span><span class="op">)</span>, </span>
+<span>          to <span class="op">=</span> <span class="va">path</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>Now in your <code>./example</code>, there are two files, namely
+<code>ms1.peak.table.csv</code> and <code>msDatabase_rplc_0.0.2</code>,
+respectively.</p>
 </div>
 <div class="section level4">
 <h4 id="use-database-name">
@@ -447,29 +457,30 @@
 <strong>Use databaseClass object</strong><a class="anchor" aria-label="anchor" href="#use-databaseclass-object"></a>
 </h4>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"msDatabase_rplc0.0.2"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"msDatabase_rplc0.0.2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">msDatabase_rplc0.0.2</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">-----------Base information------------</span></span>
-<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">Version: 0.0.2 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Source: MS </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Link: http://snyderlab.stanford.edu/ </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; With RT information</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; </span><span style="color: #BBBB00;">-----------Spectral information------------</span></span>
-<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">There are 14 items of metabolites in database:</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 833 metabolites in total</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 356 metabolites in positive mode with MS2 spectra.</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 534 metabolites in negative mode with MS2 spectra.</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in positive mode (number:):</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in negative mode:</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
-<p>Then we can directory provide this database to <code><a href="../reference/identify_metabolites.html">identify_metabolites()</a></code>:</p>
+<code class="sourceCode R"><span><span class="va">msDatabase_rplc0.0.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">-----------Base information------------</span></span></span>
+<span><span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">Version: 0.0.2 </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Source: MS </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Link: http://snyderlab.stanford.edu/ </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; With RT information</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; </span><span style="color: #BBBB00;">-----------Spectral information------------</span></span></span>
+<span><span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">There are 14 items of metabolites in database:</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; There are 833 metabolites in total</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; There are 356 metabolites in positive mode with MS2 spectra.</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; There are 534 metabolites in negative mode with MS2 spectra.</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Collision energy in positive mode (number:):</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Collision energy in negative mode:</span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span></span>
+<span><span class="co"><span style="color: #00BB00;">#&gt; </span></span></span></code></pre></div>
+<p>Then we can directory provide this database to
+<code><a href="../reference/identify_metabolites.html">identify_metabolites()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>annotate_result2 <span class="ot">&lt;-</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identify_metabolites</span>(<span class="at">ms1.data =</span> <span class="st">"ms1.peak.table.csv"</span>, </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">ms1.match.ppm =</span> <span class="dv">15</span>, </span>
@@ -689,92 +700,96 @@
 <span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [41mAll done.</span></span>
 <span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49m</span></span></code></pre></div>
 <blockquote>
-<p>But what should be noticed is that it have different name for database in the final result:</p>
+<p>But what should be noticed is that it have different name for
+database in the final result:</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">annotate_result1</span><span class="op">@</span><span class="va">database</span>
-<span class="co">#&gt; [1] "msDatabase_rplc0.0.2"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">annotate_result1</span><span class="op">@</span><span class="va">database</span></span>
+<span><span class="co">#&gt; [1] "msDatabase_rplc0.0.2"</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">annotate_result2</span><span class="op">@</span><span class="va">database</span>
-<span class="co">#&gt; [1] "MS_0.0.2"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">annotate_result2</span><span class="op">@</span><span class="va">database</span></span>
+<span><span class="co">#&gt; [1] "MS_0.0.2"</span></span></code></pre></div>
 <blockquote>
-<p>It is because that if you give the <code>databaseClass</code>, so <code>identify_metabolites</code> can know the name of database, if just use the <code>source</code> and <code>version</code> as the name for database.</p>
+<p>It is because that if you give the <code>databaseClass</code>, so
+<code>identify_metabolites</code> can know the name of database, if just
+use the <code>source</code> and <code>version</code> as the name for
+database.</p>
 </blockquote>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msDatabase_rplc0.0.2</span><span class="op">@</span><span class="va">database.info</span><span class="op">$</span><span class="va">Source</span>,
-      <span class="va">msDatabase_rplc0.0.2</span><span class="op">@</span><span class="va">database.info</span><span class="op">$</span><span class="va">Version</span>, 
-      sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "MS_0.0.2"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">msDatabase_rplc0.0.2</span><span class="op">@</span><span class="va">database.info</span><span class="op">$</span><span class="va">Source</span>,</span>
+<span>      <span class="va">msDatabase_rplc0.0.2</span><span class="op">@</span><span class="va">database.info</span><span class="op">$</span><span class="va">Version</span>, </span>
+<span>      sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "MS_0.0.2"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="session-information">
 <strong>Session information</strong><a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h2>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt;  [1] tinytools_0.9.1    forcats_0.5.1      stringr_1.4.0      dplyr_1.0.8       </span>
-<span class="co">#&gt;  [5] purrr_0.3.4        readr_2.1.2        tidyr_1.2.0        tibble_3.1.6      </span>
-<span class="co">#&gt;  [9] ggplot2_3.3.5      tidyverse_1.3.1    massdataset_0.99.7 magrittr_2.0.2    </span>
-<span class="co">#&gt; [13] masstools_0.99.3   metid_1.2.2       </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] readxl_1.3.1          backports_1.4.1       circlize_0.4.14      </span>
-<span class="co">#&gt;   [4] systemfonts_1.0.3     plyr_1.8.6            lazyeval_0.2.2       </span>
-<span class="co">#&gt;   [7] BiocParallel_1.28.3   crosstalk_1.2.0       listenv_0.8.0        </span>
-<span class="co">#&gt;  [10] leaflet_2.1.0         digest_0.6.29         foreach_1.5.2        </span>
-<span class="co">#&gt;  [13] yulab.utils_0.0.4     htmltools_0.5.2       fansi_1.0.2          </span>
-<span class="co">#&gt;  [16] memoise_2.0.1         cluster_2.1.2         doParallel_1.0.17    </span>
-<span class="co">#&gt;  [19] tzdb_0.2.0            openxlsx_4.2.5        limma_3.50.0         </span>
-<span class="co">#&gt;  [22] ComplexHeatmap_2.10.0 globals_0.14.0        modelr_0.1.8         </span>
-<span class="co">#&gt;  [25] matrixStats_0.61.0    vroom_1.5.7           pkgdown_2.0.2        </span>
-<span class="co">#&gt;  [28] colorspace_2.0-2      rvest_1.0.2           textshaping_0.3.6    </span>
-<span class="co">#&gt;  [31] haven_2.4.3           xfun_0.29             crayon_1.5.0         </span>
-<span class="co">#&gt;  [34] jsonlite_1.7.3        impute_1.68.0         iterators_1.0.14     </span>
-<span class="co">#&gt;  [37] glue_1.6.1            gtable_0.3.0          zlibbioc_1.40.0      </span>
-<span class="co">#&gt;  [40] GetoptLong_1.0.5      shape_1.4.6           BiocGenerics_0.40.0  </span>
-<span class="co">#&gt;  [43] scales_1.1.1          vsn_3.62.0            DBI_1.1.2            </span>
-<span class="co">#&gt;  [46] Rcpp_1.0.8            mzR_2.28.0            viridisLite_0.4.0    </span>
-<span class="co">#&gt;  [49] clue_0.3-60           gridGraphics_0.5-1    bit_4.0.4            </span>
-<span class="co">#&gt;  [52] preprocessCore_1.56.0 stats4_4.1.2          MsCoreUtils_1.6.0    </span>
-<span class="co">#&gt;  [55] htmlwidgets_1.5.4     httr_1.4.2            RColorBrewer_1.1-2   </span>
-<span class="co">#&gt;  [58] ellipsis_0.3.2        pkgconfig_2.0.3       XML_3.99-0.8         </span>
-<span class="co">#&gt;  [61] sass_0.4.0            dbplyr_2.1.1          utf8_1.2.2           </span>
-<span class="co">#&gt;  [64] ggplotify_0.1.0       tidyselect_1.1.1      rlang_1.0.1          </span>
-<span class="co">#&gt;  [67] munsell_0.5.0         cellranger_1.1.0      tools_4.1.2          </span>
-<span class="co">#&gt;  [70] cachem_1.0.6          cli_3.2.0             generics_0.1.2       </span>
-<span class="co">#&gt;  [73] broom_0.7.12          evaluate_0.15         fastmap_1.1.0        </span>
-<span class="co">#&gt;  [76] mzID_1.32.0           yaml_2.3.4            ragg_1.2.1           </span>
-<span class="co">#&gt;  [79] bit64_4.0.5           knitr_1.37            fs_1.5.2             </span>
-<span class="co">#&gt;  [82] zip_2.2.0             ncdf4_1.19            pbapply_1.5-0        </span>
-<span class="co">#&gt;  [85] future_1.23.0         xml2_1.3.3            compiler_4.1.2       </span>
-<span class="co">#&gt;  [88] rstudioapi_0.13       plotly_4.10.0         png_0.1-7            </span>
-<span class="co">#&gt;  [91] affyio_1.64.0         reprex_2.0.1          bslib_0.3.1          </span>
-<span class="co">#&gt;  [94] stringi_1.7.6         desc_1.4.0            MSnbase_2.20.4       </span>
-<span class="co">#&gt;  [97] lattice_0.20-45       ProtGenerics_1.26.0   ggsci_2.9            </span>
-<span class="co">#&gt; [100] vctrs_0.3.8           pillar_1.7.0          lifecycle_1.0.1      </span>
-<span class="co">#&gt; [103] furrr_0.2.3           BiocManager_1.30.16   jquerylib_0.1.4      </span>
-<span class="co">#&gt; [106] MALDIquant_1.21       GlobalOptions_0.1.2   data.table_1.14.2    </span>
-<span class="co">#&gt; [109] R6_2.5.1              pcaMethods_1.86.0     affy_1.72.0          </span>
-<span class="co">#&gt; [112] IRanges_2.28.0        parallelly_1.30.0     codetools_0.2-18     </span>
-<span class="co">#&gt; [115] MASS_7.3-55           assertthat_0.2.1      rprojroot_2.0.2      </span>
-<span class="co">#&gt; [118] rjson_0.2.21          withr_2.4.3           S4Vectors_0.32.3     </span>
-<span class="co">#&gt; [121] parallel_4.1.2        hms_1.1.1             grid_4.1.2           </span>
-<span class="co">#&gt; [124] rmarkdown_2.11        Biobase_2.54.0        lubridate_1.8.0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.1.2 (2021-11-01)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt;  [1] tinytools_0.9.1    forcats_0.5.1      stringr_1.4.0      dplyr_1.0.8       </span></span>
+<span><span class="co">#&gt;  [5] purrr_0.3.4        readr_2.1.2        tidyr_1.2.0        tibble_3.1.6      </span></span>
+<span><span class="co">#&gt;  [9] ggplot2_3.3.5      tidyverse_1.3.1    massdataset_0.99.7 magrittr_2.0.2    </span></span>
+<span><span class="co">#&gt; [13] masstools_0.99.3   metid_1.2.2       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;   [1] readxl_1.3.1          backports_1.4.1       circlize_0.4.14      </span></span>
+<span><span class="co">#&gt;   [4] systemfonts_1.0.3     plyr_1.8.6            lazyeval_0.2.2       </span></span>
+<span><span class="co">#&gt;   [7] BiocParallel_1.28.3   crosstalk_1.2.0       listenv_0.8.0        </span></span>
+<span><span class="co">#&gt;  [10] leaflet_2.1.0         digest_0.6.29         foreach_1.5.2        </span></span>
+<span><span class="co">#&gt;  [13] yulab.utils_0.0.4     htmltools_0.5.2       fansi_1.0.2          </span></span>
+<span><span class="co">#&gt;  [16] memoise_2.0.1         cluster_2.1.2         doParallel_1.0.17    </span></span>
+<span><span class="co">#&gt;  [19] tzdb_0.2.0            openxlsx_4.2.5        limma_3.50.0         </span></span>
+<span><span class="co">#&gt;  [22] ComplexHeatmap_2.10.0 globals_0.14.0        modelr_0.1.8         </span></span>
+<span><span class="co">#&gt;  [25] matrixStats_0.61.0    vroom_1.5.7           pkgdown_2.0.2        </span></span>
+<span><span class="co">#&gt;  [28] colorspace_2.0-2      rvest_1.0.2           textshaping_0.3.6    </span></span>
+<span><span class="co">#&gt;  [31] haven_2.4.3           xfun_0.29             crayon_1.5.0         </span></span>
+<span><span class="co">#&gt;  [34] jsonlite_1.7.3        impute_1.68.0         iterators_1.0.14     </span></span>
+<span><span class="co">#&gt;  [37] glue_1.6.1            gtable_0.3.0          zlibbioc_1.40.0      </span></span>
+<span><span class="co">#&gt;  [40] GetoptLong_1.0.5      shape_1.4.6           BiocGenerics_0.40.0  </span></span>
+<span><span class="co">#&gt;  [43] scales_1.1.1          vsn_3.62.0            DBI_1.1.2            </span></span>
+<span><span class="co">#&gt;  [46] Rcpp_1.0.8            mzR_2.28.0            viridisLite_0.4.0    </span></span>
+<span><span class="co">#&gt;  [49] clue_0.3-60           gridGraphics_0.5-1    bit_4.0.4            </span></span>
+<span><span class="co">#&gt;  [52] preprocessCore_1.56.0 stats4_4.1.2          MsCoreUtils_1.6.0    </span></span>
+<span><span class="co">#&gt;  [55] htmlwidgets_1.5.4     httr_1.4.2            RColorBrewer_1.1-2   </span></span>
+<span><span class="co">#&gt;  [58] ellipsis_0.3.2        pkgconfig_2.0.3       XML_3.99-0.8         </span></span>
+<span><span class="co">#&gt;  [61] sass_0.4.0            dbplyr_2.1.1          utf8_1.2.2           </span></span>
+<span><span class="co">#&gt;  [64] ggplotify_0.1.0       tidyselect_1.1.1      rlang_1.0.1          </span></span>
+<span><span class="co">#&gt;  [67] munsell_0.5.0         cellranger_1.1.0      tools_4.1.2          </span></span>
+<span><span class="co">#&gt;  [70] cachem_1.0.6          cli_3.2.0             generics_0.1.2       </span></span>
+<span><span class="co">#&gt;  [73] broom_0.7.12          evaluate_0.15         fastmap_1.1.0        </span></span>
+<span><span class="co">#&gt;  [76] mzID_1.32.0           yaml_2.3.4            ragg_1.2.1           </span></span>
+<span><span class="co">#&gt;  [79] bit64_4.0.5           knitr_1.37            fs_1.5.2             </span></span>
+<span><span class="co">#&gt;  [82] zip_2.2.0             ncdf4_1.19            pbapply_1.5-0        </span></span>
+<span><span class="co">#&gt;  [85] future_1.23.0         xml2_1.3.3            compiler_4.1.2       </span></span>
+<span><span class="co">#&gt;  [88] rstudioapi_0.13       plotly_4.10.0         png_0.1-7            </span></span>
+<span><span class="co">#&gt;  [91] affyio_1.64.0         reprex_2.0.1          bslib_0.3.1          </span></span>
+<span><span class="co">#&gt;  [94] stringi_1.7.6         desc_1.4.0            MSnbase_2.20.4       </span></span>
+<span><span class="co">#&gt;  [97] lattice_0.20-45       ProtGenerics_1.26.0   ggsci_2.9            </span></span>
+<span><span class="co">#&gt; [100] vctrs_0.3.8           pillar_1.7.0          lifecycle_1.0.1      </span></span>
+<span><span class="co">#&gt; [103] furrr_0.2.3           BiocManager_1.30.16   jquerylib_0.1.4      </span></span>
+<span><span class="co">#&gt; [106] MALDIquant_1.21       GlobalOptions_0.1.2   data.table_1.14.2    </span></span>
+<span><span class="co">#&gt; [109] R6_2.5.1              pcaMethods_1.86.0     affy_1.72.0          </span></span>
+<span><span class="co">#&gt; [112] IRanges_2.28.0        parallelly_1.30.0     codetools_0.2-18     </span></span>
+<span><span class="co">#&gt; [115] MASS_7.3-55           assertthat_0.2.1      rprojroot_2.0.2      </span></span>
+<span><span class="co">#&gt; [118] rjson_0.2.21          withr_2.4.3           S4Vectors_0.32.3     </span></span>
+<span><span class="co">#&gt; [121] parallel_4.1.2        hms_1.1.1             grid_4.1.2           </span></span>
+<span><span class="co">#&gt; [124] rmarkdown_2.11        Biobase_2.54.0        lubridate_1.8.0</span></span></code></pre></div>
 </div>
   </div>
 

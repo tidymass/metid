@@ -94,9 +94,9 @@ file.copy(
 )
 
 ##get databases from metid
-data("snyder_database_rplc0.0.3", file = "metid")
-data("orbitrap_database0.0.3", file = "metid")
-data("hmdb_ms1_database0.0.3", file = "metid")
+data("snyder_database_rplc0.0.3")
+data("orbitrap_database0.0.3")
+data("hmdb_ms1_database0.0.3")
 
 save(snyder_database_rplc0.0.3, file = file.path(path, "snyder_database_rplc0.0.3"))
 save(orbitrap_database0.0.3, file = file.path(path, "orbitrap_database0.0.3"))

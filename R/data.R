@@ -64,9 +64,6 @@
 #' @format A databaseClass object.
 "orbitrap_database0.0.3"
 
-
-
-
 ##------------------------------------------------------------------------------
 #' @title Michael Snyder lab RPLC database 0.0.2
 #' @description Michael Snyder lab RPLC database

@@ -77,14 +77,14 @@ identify_ms2_only = function(ms2.data,
     }
   }
   
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     if (!all(database %in% file)) {
       stop("Database is not in this directory, please check it.\n")
     }
   }
   
   #load MS2 database
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     database.name <- database
     load(file.path(path, database.name))
     database <- get(database.name)
@@ -94,7 +94,7 @@ identify_ms2_only = function(ms2.data,
                           sep = "_")
   }
   
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     stop("database must be databaseClass object\n")
   }
   
@@ -240,7 +240,7 @@ identify_ms2_only = function(ms2.data,
           temp.ms2.data.name = ms2.data.name
         )
       
-      if (class(ms2.data)[1] == "matrix") {
+      if (is.matrix(ms2.data)) {
         ms2.data <- ms2.data[, 1]
       } else{
         ms2.data <- do.call(what = c, args = ms2.data)

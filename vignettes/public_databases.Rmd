@@ -43,6 +43,22 @@ knitr::opts_chunk$set(
 * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/snyder_database_rplc0.0.3.rda)
 
 
+# **In-house MS2 databases from [Caroline Johnson lab](https://medicine.yale.edu/lab/cjohnson/)**
+
+## 1. Caroline Johnson HILIC databases
+
+* <i class="fa fa-info"></i> From Professor Caroline Johnson's lab.
+
+* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/HILIC.database)
+
+
+## 2. Caroline Johnson RPLC databases
+
+* <i class="fa fa-info"></i> From Professor Caroline Johnson's lab. 
+
+* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/RPLC.database)
+
+
 ***
 
 # **Public MS2 databases**

@@ -211,7 +211,7 @@ identify_metabolite_all = function(ms1.data,
           temp.ms2.data.name = ms2.data.name
         )
       
-      if (class(ms2.data) == "matrix") {
+      if (is.matrix(ms2.data)) {
         ms2.data <- ms2.data[, 1]
       } else{
         ms2.data <- do.call(what = c, args = ms2.data)
@@ -257,7 +257,7 @@ identify_metabolite_all = function(ms1.data,
   
   database.name <-
     unlist(lapply(parameter.list, function(x) {
-      if (class(x$database) != "databaseClass") {
+      if (!is(x$database, "databaseClass")) {
         x$database
       } else{
         paste(x$database@database.info$Source,
@@ -312,8 +312,8 @@ identify_metabolite_all = function(ms1.data,
       rm(list = "result")
       next()
     }
-    
-    if (class(parameter.list[[i]]$database) == "databaseClass") {
+
+    if (is(parameter.list[[i]]$database, "databaseClass")) {
       temp_database =
         parameter.list[[i]]$database
     } else{
@@ -442,9 +442,7 @@ identify_metabolites_params = function(ms1.ms2.match.mz.tol = 25,
   if (missing(database)) {
     stop("The database or database name must be provided.\n")
   }
-  # if(class(database) != "metIdentifyClass"){
-  #   stop("database must be metIdentifyClass object\n")
-  # }
+
   polarity <- match.arg(polarity)
   column <- match.arg(column)
   param <-

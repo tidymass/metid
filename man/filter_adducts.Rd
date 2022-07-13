@@ -10,7 +10,7 @@ filter_adducts(object, remove_adduct = NULL)
 \item{object}{metIdentifyClass.}
 
 \item{remove_adduct}{What adduct you want to remove from annotation result. Like '(M-H)-'. All the adduct list can be found here:
-data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'), 
+data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'),
 data("rp.pos", package = 'metid'), data("rp.neg", package = 'metid').}
 }
 \value{

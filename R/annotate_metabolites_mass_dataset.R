@@ -146,7 +146,7 @@ annotate_metabolites_mass_dataset <-
     polarity <- match.arg(polarity)
     column <- match.arg(column)
     
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     

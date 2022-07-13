@@ -48,14 +48,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -119,7 +119,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -154,7 +154,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -179,9 +179,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Brief introduction of metid</h1>
-                        <h4 data-toc-skip class="author">Xiaotao Shen PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen
+PhD (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-01-07</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and
+updated on 2022-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/metid_introduction.Rmd" class="external-link"><code>vignettes/metid_introduction.Rmd</code></a></small>
       <div class="hidden name"><code>metid_introduction.Rmd</code></div>
@@ -196,49 +198,66 @@
 <strong>Introduction &amp; Installation</strong><a class="anchor" aria-label="anchor" href="#introduction-installation"></a>
 </h2>
 <hr>
-<p><em>metid</em> is a R package which can be used for in-house (MS2) database construction, and metabolite identification based on in-house and public MS1/MS2 database.</p>
+<p><em>metid</em> is a R package which can be used for in-house (MS2)
+database construction, and metabolite identification based on in-house
+and public MS1/MS2 database.</p>
 <p><img src="../reference/figures/Figure_1.png" align="middle" alt="" width="100%"></p>
 <p>Please install it via <a href="https://github.com/tidymass/metid" class="external-link">github</a>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/metid"</span><span class="op">)</span></code></pre></div>
-<p>All the demo data for <code>metid</code> are from <code>demoData</code>, so please install it first.</p>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/metid"</span><span class="op">)</span></span></code></pre></div>
+<p>All the demo data for <code>metid</code> are from
+<code>demoData</code>, so please install it first.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jaspershen/demoData"</span><span class="op">)</span></code></pre></div>
-<p><code>metid</code> is a part of <code>tidymass</code>, so you can also install it by installing <a href="https://tidymass.github.io/tidymass/index.html" class="external-link"><code>tidymass</code></a>.</p>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jaspershen/demoData"</span><span class="op">)</span></span></code></pre></div>
+<p><code>metid</code> is a part of <code>tidymass</code>, so you can
+also install it by installing <a href="https://tidymass.github.io/tidymass/index.html" class="external-link"><code>tidymass</code></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="database-construction">
 <strong>Database construction</strong><a class="anchor" aria-label="anchor" href="#database-construction"></a>
 </h2>
 <hr>
-<p>Please refer to this article: <a href="https://tidymass.github.io/metid/articles/database_construction.html">Construct in-house MS2 datbase using metid</a> for database construction.</p>
+<p>Please refer to this article: <a href="https://tidymass.github.io/metid/articles/database_construction.html">Construct
+in-house MS2 datbase using metid</a> for database construction.</p>
 </div>
 <div class="section level2">
 <h2 id="public-databases">
 <strong>Public databases</strong><a class="anchor" aria-label="anchor" href="#public-databases"></a>
 </h2>
-<p>We have provide some public databases and our in-house databases, so if you want to use them, please refer this article, <a href="https://tidymass.github.io/metid/articles/public_databases.html">Database provided for <code>metid</code></a>.</p>
+<p>We have provide some public databases and our in-house databases, so
+if you want to use them, please refer this article, <a href="https://tidymass.github.io/metid/articles/public_databases.html">Database
+provided for <code>metid</code></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="metabolite-identification">
 <strong>Metabolite identification</strong><a class="anchor" aria-label="anchor" href="#metabolite-identification"></a>
 </h2>
-<p>If you want to identify metabolite without MS2 spectra, please refer to this article, <a href="https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html">Annotate metabolites according to MS1 database using metid</a>.</p>
+<p>If you want to identify metabolite without MS2 spectra, please refer
+to this article, <a href="https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html">Annotate
+metabolites according to MS1 database using metid</a>.</p>
 <hr>
-<p>If you want to identify metabolite with MS2 spectra, please refer to this article, <a href="https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS2.html">Annotate metabolites according to MS2 database using metid</a>.</p>
+<p>If you want to identify metabolite with MS2 spectra, please refer to
+this article, <a href="https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS2.html">Annotate
+metabolites according to MS2 database using metid</a>.</p>
 <hr>
-<p>If you want to identify a peak table with multiple databases, please refer to this article, <a href="https://tidymass.github.io/metid/articles/multiple_databases.html">Identify peak tables with multiple databases</a>.</p>
+<p>If you want to identify a peak table with multiple databases, please
+refer to this article, <a href="https://tidymass.github.io/metid/articles/multiple_databases.html">Identify
+peak tables with multiple databases</a>.</p>
 <hr>
-<p>If you just want to identify single peak, please refer to this article: <a href="https://tidymass.github.io/metid/articles/identify_single_peak.html">Identify single peak with metid</a>.</p>
+<p>If you just want to identify single peak, please refer to this
+article: <a href="https://tidymass.github.io/metid/articles/identify_single_peak.html">Identify
+single peak with metid</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="other-tools">
 <strong>Other tools</strong><a class="anchor" aria-label="anchor" href="#other-tools"></a>
 </h2>
-<p><code>metid</code> package also has some useful tools, please refer to this article, <a href="https://tidymass.github.io/metid/articles/other_tools.html">Other tools in metid</a></p>
+<p><code>metid</code> package also has some useful tools, please refer
+to this article, <a href="https://tidymass.github.io/metid/articles/other_tools.html">Other
+tools in metid</a></p>
 </div>
   </div>
 
@@ -259,7 +278,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

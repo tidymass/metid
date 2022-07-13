@@ -74,7 +74,7 @@ Then there will be a folder named as `database_construction` in your work direct
 
 ![](../man/figures/Screen Shot 2021-02-26 at 9.22.52 PM.png)
 Then we run `construct_database()` function and then we can get the database.
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 library(metid)
 
 new.path <- file.path("./database_construction")
@@ -90,7 +90,7 @@ test.database <- construct_database(
   rt = TRUE,
   mz.tol = 15,
   rt.tol = 30,
-  threads = 5
+  threads = 3
 )
 ```
 
@@ -98,7 +98,7 @@ The arguments of `construct_database()` can be found here `construct_database()`
 
 test.database is a `databaseClass` object, you can print it to see its information.
 
-```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
+```{r,eval = FALSE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
 test.database
 ```
 

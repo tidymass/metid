@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -117,7 +117,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -146,21 +146,26 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">filter_adducts</span><span class="op">(</span><span class="va">object</span>, remove_adduct <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">filter_adducts</span><span class="op">(</span><span class="va">object</span>, remove_adduct <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>metIdentifyClass.</p></dd>
+
+
 <dt>remove_adduct</dt>
 <dd><p>What adduct you want to remove from annotation result. Like '(M-H)-'. All the adduct list can be found here:
-data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'), 
+data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'),
 data("rp.pos", package = 'metid'), data("rp.neg", package = 'metid').</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A MS2 spectrum.</p>
+    
+
+<p>A MS2 spectrum.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>

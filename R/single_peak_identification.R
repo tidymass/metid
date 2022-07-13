@@ -27,9 +27,9 @@
 #' @param threads Number of threads
 #' @return A metIdentifyClass object.
 #' @export
-#' @examples 
+#' @examples
 #' \dontrun{
-#' mz <- 115.0508 
+#' mz <- 115.0508
 #' rt <- 30
 #' mz = c(87.05525,
 #'88.03929,
@@ -59,51 +59,49 @@
 #'              1226.609),
 #'stringsAsFactors = FALSE
 #')
-#' 
+#'
 #' path <- file.path(".", "example")
 #' dir.create(path = path, showWarnings = FALSE)
 #' database <- system.file("ms2_database", package = "metid")
 #'
-#' file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
+#' file.copy(from = file.path(database, "msDatabase_rplc0.0.2"),
 #'          to = path, overwrite = TRUE, recursive = TRUE)
-#' 
-#' annotation_result <- 
-#' identify_single_peak(ms1.mz = mz, 
-#'                     ms1.rt = rt, 
-#'                     ms2 = ms2, 
-#'                     ms1.match.ppm = 15, 
+#'
+#' annotation_result <-
+#' identify_single_peak(ms1.mz = mz,
+#'                     ms1.rt = rt,
+#'                     ms2 = ms2,
+#'                     ms1.match.ppm = 15,
 #'                     rt.match.tol = 30,
-#'                     ms2.match.tol = 0.5, 
+#'                     ms2.match.tol = 0.5,
 #'                     database = "msDatabase_rplc0.0.2",
 #'                     path = path)
-#'                     
+#'
 #' annotation_result
 #' }
 
-identify_single_peak = function(
-  ms1.mz,
-  ms1.rt,
-  ms2,
-  ms1.match.ppm = 25,
-  ms2.match.ppm = 30,
-  mz.ppm.thr = 400,
-  ms2.match.tol = 0.5,
-  fraction.weight = 0.3,
-  dp.forward.weight = 0.6,
-  dp.reverse.weight = 0.1,
-  rt.match.tol = 30,
-  polarity = c("positive", "negative"),
-  ce = "all",
-  column = c("hilic", "rp"),
-  ms1.match.weight = 0.25,
-  rt.match.weight = 0.25,
-  ms2.match.weight = 0.5,
-  path = ".",
-  total.score.tol = 0.5,
-  candidate.num = 3,
-  database,
-  threads = 3
-){
+identify_single_peak = function(ms1.mz,
+                                ms1.rt,
+                                ms2,
+                                ms1.match.ppm = 25,
+                                ms2.match.ppm = 30,
+                                mz.ppm.thr = 400,
+                                ms2.match.tol = 0.5,
+                                fraction.weight = 0.3,
+                                dp.forward.weight = 0.6,
+                                dp.reverse.weight = 0.1,
+                                rt.match.tol = 30,
+                                polarity = c("positive", "negative"),
+                                ce = "all",
+                                column = c("hilic", "rp"),
+                                ms1.match.weight = 0.25,
+                                rt.match.weight = 0.25,
+                                ms2.match.weight = 0.5,
+                                path = ".",
+                                total.score.tol = 0.5,
+                                candidate.num = 3,
+                                database,
+                                threads = 3) {
   ###Check data
   if (missing(database)) {
     stop("No database is provided.\n")
@@ -121,7 +119,7 @@ identify_single_peak = function(
   database.name <- database
   load(file.path(path, database.name))
   database <- get(database.name)
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     stop("database must be databaseClass object\n")
   }
   
@@ -174,7 +172,11 @@ identify_single_peak = function(
   
   ##RT in database or not
   if (!database@database.info$RT) {
-    cat(crayon::yellow("No RT information in database.\nThe weight of RT have been set as 0.\n"))
+    cat(
+      crayon::yellow(
+        "No RT information in database.\nThe weight of RT have been set as 0.\n"
+      )
+    )
   }
   #------------------------------------------------------------------
   ##load adduct table
@@ -210,8 +212,7 @@ identify_single_peak = function(
                          file,
                          stringsAsFactors = FALSE)
   
-  if (any(class(ms2) == "matrix") |
-      any(class(ms2) == "data.frame")) {
+  if (is.matrix(ms2) | is.data.frame(ms2)) {
     ms2.info <- list(ms2)
   } else{
     ms2.info <- ms2

@@ -66,6 +66,7 @@ globalVariables(
     "h_number",
     "o_number",
     "h_diff",
-    "o_diff"
+    "o_diff",
+    "object"
   )
 )

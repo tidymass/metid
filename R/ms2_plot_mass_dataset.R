@@ -31,7 +31,6 @@ ms2_plot_mass_dataset <-
            interactive_plot = FALSE) {
     polarity = match.arg(polarity)
     massdataset::check_object_class(object = object, class = "mass_dataset")
-    # massdataset::check_object_class(object = database, class = "databaseClass")
     
     if (nrow(object@annotation_table) == 0) {
       stop("No annotation in object.\n")
@@ -64,7 +63,7 @@ ms2_plot_mass_dataset <-
       stop("No database is provided.\n")
     }
     
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     

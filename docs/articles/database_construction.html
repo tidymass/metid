@@ -48,14 +48,14 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -119,7 +119,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -154,7 +154,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -179,9 +179,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Construct in-house MS2 datbase using metid</h1>
-                        <h4 data-toc-skip class="author">Xiaotao Shen (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
+                        <h4 data-toc-skip class="author">Xiaotao Shen
+(<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
-            <h4 data-toc-skip class="date">Created on 2020-03-28 and updated on 2022-01-07</h4>
+            <h4 data-toc-skip class="date">Created on 2020-03-28 and
+updated on 2022-07-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/database_construction.Rmd" class="external-link"><code>vignettes/database_construction.Rmd</code></a></small>
       <div class="hidden name"><code>database_construction.Rmd</code></div>
@@ -190,206 +192,148 @@
 
     
     
-<p>If you have in-house standards which have been acquired with MS2 spectra data, then you can construct the in-house MS2 spectra databases using the <code>metid</code> package.</p>
-<p>There are no specific requirements on how to run the LC/MS data for users. As the in-house database construction in metid is used for users to get the in-house databases for themselves (including m/z, retention time and MS/MS spectra of metabolites, for level 1 annotation (Sumner et al., 2007)), so the users just need to run the standards using the same column, LC-gradient, and MS settings with their real samples in the lab</p>
-<div class="section level1">
-<h1 id="data-preparation">
+<p>If you have in-house standards which have been acquired with MS2
+spectra data, then you can construct the in-house MS2 spectra databases
+using the <code>metid</code> package.</p>
+<p>There are no specific requirements on how to run the LC/MS data for
+users. As the in-house database construction in metid is used for users
+to get the in-house databases for themselves (including m/z, retention
+time and MS/MS spectra of metabolites, for level 1 annotation (Sumner et
+al., 2007)), so the users just need to run the standards using the same
+column, LC-gradient, and MS settings with their real samples in the
+lab</p>
+<div class="section level2">
+<h2 id="data-preparation">
 <strong>Data preparation</strong><a class="anchor" aria-label="anchor" href="#data-preparation"></a>
-</h1>
-<p>Firstly, please transform your raw standard MS data (positive and negative modes) to mzXML format using <a href="http://proteowizard.sourceforge.net/" class="external-link">ProteoWizard</a>. The parameter setting is shown in the figure below:</p>
+</h2>
+<p>Firstly, please transform your raw standard MS data (positive and
+negative modes) to mzXML format using <a href="http://proteowizard.sourceforge.net/" class="external-link">ProteoWizard</a>. The
+parameter setting is shown in the figure below:</p>
 <p><img src="../reference/figures/parameter_setting_MS_conventer.png"></p>
 </div>
-<div class="section level1">
-<h1 id="data-organization">
+<div class="section level2">
+<h2 id="data-organization">
 <strong>Data organization</strong><a class="anchor" aria-label="anchor" href="#data-organization"></a>
-</h1>
-<p>Secondly, please organize your standard information as a table, and output it in a csv or xlsx format. The format of standard information can refer to our demo data in <code>demoData</code> package.</p>
-<p>From column 1 to 11, the columns are “Lab.ID”, “Compound.name”, “mz”, “RT”, “CAS.ID”, “HMDB.ID”, “KEGG.ID”, “Formula”, “mz.pos”, “mz.neg”, “Submitter”, respectively. It is OK if you have other information for the standards. As the demo data show, there are other additional information, namely “Family”, “Sub.pathway” and “Note”.</p>
+</h2>
+<p>Secondly, please organize your standard information as a table, and
+output it in a csv or xlsx format. The format of standard information
+can refer to our demo data in <code>demoData</code> package.</p>
+<p>From column 1 to 11, the columns are “Lab.ID”, “Compound.name”, “mz”,
+“RT”, “CAS.ID”, “HMDB.ID”, “KEGG.ID”, “Formula”, “mz.pos”, “mz.neg”,
+“Submitter”, respectively. It is OK if you have other information for
+the standards. As the demo data show, there are other additional
+information, namely “Family”, “Sub.pathway” and “Note”.</p>
 <ul>
 <li><p>Lab.ID: No duplicated.</p></li>
 <li><p>mz: Accurate mass of compounds.</p></li>
 <li><p>RT: Retention time, unit is second.</p></li>
-<li><p>mz.pos: Mass to change ratio of compound in positive mode, for example, M+H. <strong>You can set it as NA</strong>.</p></li>
-<li><p>mz.neg: Mass to change ratio of compound in negative mode, for example, M-H. <strong>You can set it as NA</strong>.</p></li>
-<li><p>Submitter: The name of person or organization. <strong>You can set it as NA</strong>.</p></li>
+<li><p>mz.pos: Mass to change ratio of compound in positive mode, for
+example, M+H. <strong>You can set it as NA</strong>.</p></li>
+<li><p>mz.neg: Mass to change ratio of compound in negative mode, for
+example, M-H. <strong>You can set it as NA</strong>.</p></li>
+<li><p>Submitter: The name of person or organization. <strong>You can
+set it as NA</strong>.</p></li>
 </ul>
 <p><img src="../reference/figures/compound_information.PNG"></p>
-<p>Then create a folder and put your mzXML format datasets (positive mode in ‘POS’ folder and negative mode in ‘NEG’ folder) and compound information in it. The mzXML file should have the collision energy in the name of each file. For example, <code>test_NCE25.mzXML</code>.</p>
-<p>The names of the mzXML files should be like this: <code>xxx_NCE25.mzXML</code>.</p>
+<p>Then create a folder and put your mzXML format datasets (positive
+mode in ‘POS’ folder and negative mode in ‘NEG’ folder) and compound
+information in it. The mzXML file should have the collision energy in
+the name of each file. For example, <code>test_NCE25.mzXML</code>.</p>
+<p>The names of the mzXML files should be like this:
+<code>xxx_NCE25.mzXML</code>.</p>
 <p><img src="../reference/figures/database_construction.png"></p>
 </div>
-<div class="section level1">
-<h1 id="run-construct_database-function">
+<div class="section level2">
+<h2 id="run-construct_database-function">
 <strong>Run <code>construct_database()</code> function</strong><a class="anchor" aria-label="anchor" href="#run-construct_database-function"></a>
-</h1>
-<p>Here we use the demo data from <code>demoData</code> package to show how to use the <code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct database.</p>
+</h2>
+<p>Here we use the demo data from <code>demoData</code> package to show
+how to use the <code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct
+database.</p>
 <p>We first prepare dataset.</p>
-<p>Download the data <a href="https://github.com/jaspershen/demoData/tree/master/inst/database_construction" class="external-link">here</a>. and then put all of them in the “database_construction” folder.</p>
-<p>Then there will be a folder named as <code>database_construction</code> in your work directory like below figure shows:</p>
-<p><img src="../reference/figures/Screen%20Shot%202021-02-26%20at%209.22.52%20PM.png"> Then we run <code><a href="../reference/construct_database.html">construct_database()</a></code> function and then we can get the database.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metid)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>new.path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"./database_construction"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>test.database <span class="ot">&lt;-</span> <span class="fu">construct_database</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> new.path,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="st">"0.0.1"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">metabolite.info.name =</span> <span class="st">"metabolite.info_RPLC.csv"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">source =</span> <span class="st">"Michael Snyder lab"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">link =</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">creater =</span> <span class="st">"Xiaotao Shen"</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">email =</span> <span class="st">"shenxt1990@163.com"</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mz.tol =</span> <span class="dv">15</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt.tol =</span> <span class="dv">30</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">threads =</span> <span class="dv">5</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32mReading metabolite information...</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading positive MS2 data...</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading MS2 data...</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mProcessing...</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [31mOK</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading negative MS2 data...</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mReading MS2 data...</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mProcessing...</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==============</span>                                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  <span class="er">|============================</span>                                          <span class="er">|</span>  <span class="dv">40</span>%</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  <span class="er">|==========================================</span>                            <span class="er">|</span>  <span class="dv">60</span>%</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="er">|========================================================</span>              <span class="er">|</span>  <span class="dv">80</span>%</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [31mOK</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mMatching metabolites with MS2 spectra (positive)...</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [31mOK</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [32mMatching metabolites with MS2 spectra (negative)...</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [31mOK</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [39m [41mAll done!</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49m</span></span></code></pre></div>
-<p>The arguments of <code><a href="../reference/construct_database.html">construct_database()</a></code> can be found here <code><a href="../reference/construct_database.html">construct_database()</a></code>.</p>
-<p>test.database is a <code>databaseClass</code> object, you can print it to see its information.</p>
+<p>Download the data <a href="https://github.com/jaspershen/demoData/tree/master/inst/database_construction" class="external-link">here</a>.
+and then put all of them in the “database_construction” folder.</p>
+<p>Then there will be a folder named as
+<code>database_construction</code> in your work directory like below
+figure shows:</p>
+<p><img src="../reference/figures/Screen%20Shot%202021-02-26%20at%209.22.52%20PM.png">
+Then we run <code><a href="../reference/construct_database.html">construct_database()</a></code> function and then we can
+get the database.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">new.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"./database_construction"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">test.database</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/construct_database.html">construct_database</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="va">new.path</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">"0.0.1"</span>,</span>
+<span>  metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info_RPLC.csv"</span>,</span>
+<span>  source <span class="op">=</span> <span class="st">"Michael Snyder lab"</span>,</span>
+<span>  link <span class="op">=</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,</span>
+<span>  creater <span class="op">=</span> <span class="st">"Xiaotao Shen"</span>,</span>
+<span>  email <span class="op">=</span> <span class="st">"shenxt1990@163.com"</span>,</span>
+<span>  rt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mz.tol <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  rt.tol <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The arguments of <code><a href="../reference/construct_database.html">construct_database()</a></code> can be found here
+<code><a href="../reference/construct_database.html">construct_database()</a></code>.</p>
+<p>test.database is a <code>databaseClass</code> object, you can print
+it to see its information.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">test.database</span>
-<span class="co">#&gt; <span style="color: #BBBB00;">-----------Base information------------</span></span>
-<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">Version: 0.0.1 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Source: Michael Snyder lab </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Link: http://snyderlab.stanford.edu/ </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Creater: Xiaotao Shen ( shenxt1990@163.com )</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; With RT information</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; </span><span style="color: #BBBB00;">-----------Spectral information------------</span></span>
-<span class="co"><span style="color: #BBBB00;">#&gt; </span><span style="color: #00BB00;">There are 14 items of metabolites in database:</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Lab.ID; Compound.name; mz; RT; CAS.ID; HMDB.ID; KEGG.ID; Formula; mz.pos; mz.neg; Submitter; Family; Sub.pathway; Note </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 170 metabolites in total</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 113 metabolites in positive mode with MS2 spectra.</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; There are 112 metabolites in negative mode with MS2 spectra.</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in positive mode (number:):</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Collision energy in negative mode:</span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; Total number: 2 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; NCE25; NCE50 </span></span>
-<span class="co"><span style="color: #00BB00;">#&gt; </span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">test.database</span></span></code></pre></div>
 <blockquote>
-<p>Note: <code>test.database</code> is only a demo database (metIdentifyClass object). We will don’t use it for next metabolite identification. Then please save this database in you local folder, please note that the saved file name and database name must be same. For example:</p>
+<p>Note: <code>test.database</code> is only a demo database
+(metIdentifyClass object). We will don’t use it for next metabolite
+identification. Then please save this database in you local folder,
+please note that the saved file name and database name must be same. For
+example:</p>
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">test.database</span>, file <span class="op">=</span> <span class="st">"test.database"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">test.database</span>, file <span class="op">=</span> <span class="st">"test.database"</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p>If you save the <code>test.database</code> as a different name, it will be a error when you use it.</p>
+<p>If you save the <code>test.database</code> as a different name, it
+will be a error when you use it.</p>
 </blockquote>
 </div>
-<div class="section level1">
-<h1 id="ms1-database">
+<div class="section level2">
+<h2 id="ms1-database">
 <strong>MS1 database</strong><a class="anchor" aria-label="anchor" href="#ms1-database"></a>
-</h1>
-<p>If you do not have MS2 data, you can also use <code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct MS1 database.</p>
+</h2>
+<p>If you do not have MS2 data, you can also use
+<code><a href="../reference/construct_database.html">construct_database()</a></code> function to construct MS1
+database.</p>
 </div>
-<div class="section level1">
-<h1 id="session-information">
+<div class="section level2">
+<h2 id="session-information">
 <strong>Session information</strong><a class="anchor" aria-label="anchor" href="#session-information"></a>
-</h1>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] massdataset_0.99.1 magrittr_2.0.1     tinytools_0.9.1    metid_1.2.1       </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;   [1] colorspace_2.0-2      rjson_0.2.20          ellipsis_0.3.2       </span>
-<span class="co">#&gt;   [4] leaflet_2.0.4.1       rprojroot_2.0.2       circlize_0.4.14      </span>
-<span class="co">#&gt;   [7] GlobalOptions_0.1.2   fs_1.5.0              clue_0.3-59          </span>
-<span class="co">#&gt;  [10] rstudioapi_0.13       mzR_2.26.1            listenv_0.8.0        </span>
-<span class="co">#&gt;  [13] furrr_0.2.3           affyio_1.62.0         fansi_0.5.0          </span>
-<span class="co">#&gt;  [16] codetools_0.2-18      ncdf4_1.17            doParallel_1.0.16    </span>
-<span class="co">#&gt;  [19] cachem_1.0.5          impute_1.66.0         knitr_1.33           </span>
-<span class="co">#&gt;  [22] jsonlite_1.7.2        Cairo_1.5-12.2        cluster_2.1.2        </span>
-<span class="co">#&gt;  [25] vsn_3.60.0            png_0.1-7             BiocManager_1.30.16  </span>
-<span class="co">#&gt;  [28] readr_2.0.0           compiler_4.1.0        httr_1.4.2           </span>
-<span class="co">#&gt;  [31] rvcheck_0.1.8         assertthat_0.2.1      fastmap_1.1.0        </span>
-<span class="co">#&gt;  [34] lazyeval_0.2.2        limma_3.48.1          cli_3.0.1            </span>
-<span class="co">#&gt;  [37] htmltools_0.5.2       tools_4.1.0           gtable_0.3.0         </span>
-<span class="co">#&gt;  [40] glue_1.4.2            affy_1.70.0           dplyr_1.0.7          </span>
-<span class="co">#&gt;  [43] Rcpp_1.0.7            MALDIquant_1.20       Biobase_2.52.0       </span>
-<span class="co">#&gt;  [46] cellranger_1.1.0      jquerylib_0.1.4       pkgdown_2.0.1        </span>
-<span class="co">#&gt;  [49] vctrs_0.3.8           preprocessCore_1.54.0 iterators_1.0.13     </span>
-<span class="co">#&gt;  [52] crosstalk_1.1.1       xfun_0.24             stringr_1.4.0        </span>
-<span class="co">#&gt;  [55] globals_0.14.0        openxlsx_4.2.4        lifecycle_1.0.0      </span>
-<span class="co">#&gt;  [58] XML_3.99-0.6          future_1.21.0         zlibbioc_1.38.0      </span>
-<span class="co">#&gt;  [61] MASS_7.3-54           scales_1.1.1          MSnbase_2.18.0       </span>
-<span class="co">#&gt;  [64] ragg_1.1.3            pcaMethods_1.84.0     hms_1.1.0            </span>
-<span class="co">#&gt;  [67] ProtGenerics_1.24.0   parallel_4.1.0        RColorBrewer_1.1-2   </span>
-<span class="co">#&gt;  [70] ComplexHeatmap_2.8.0  yaml_2.2.1            memoise_2.0.0        </span>
-<span class="co">#&gt;  [73] pbapply_1.4-3         ggplot2_3.3.5         sass_0.4.0           </span>
-<span class="co">#&gt;  [76] stringi_1.7.3         S4Vectors_0.30.0      desc_1.3.0           </span>
-<span class="co">#&gt;  [79] foreach_1.5.1         BiocGenerics_0.38.0   zip_2.2.0            </span>
-<span class="co">#&gt;  [82] BiocParallel_1.26.1   shape_1.4.6           rlang_0.4.11         </span>
-<span class="co">#&gt;  [85] pkgconfig_2.0.3       systemfonts_1.0.2     matrixStats_0.60.0   </span>
-<span class="co">#&gt;  [88] mzID_1.30.0           evaluate_0.14         lattice_0.20-44      </span>
-<span class="co">#&gt;  [91] purrr_0.3.4           htmlwidgets_1.5.3     tidyselect_1.1.1     </span>
-<span class="co">#&gt;  [94] ggsci_2.9             parallelly_1.27.0     plyr_1.8.6           </span>
-<span class="co">#&gt;  [97] R6_2.5.0              IRanges_2.26.0        generics_0.1.0       </span>
-<span class="co">#&gt; [100] DBI_1.1.1             pillar_1.6.2          MsCoreUtils_1.4.0    </span>
-<span class="co">#&gt; [103] tibble_3.1.3          crayon_1.4.1          utf8_1.2.2           </span>
-<span class="co">#&gt; [106] plotly_4.9.4.1        tzdb_0.1.2            rmarkdown_2.9        </span>
-<span class="co">#&gt; [109] GetoptLong_1.0.5      grid_4.1.0            readxl_1.3.1         </span>
-<span class="co">#&gt; [112] data.table_1.14.0     digest_0.6.27         tidyr_1.1.3          </span>
-<span class="co">#&gt; [115] gridGraphics_0.5-1    textshaping_0.3.6     stats4_4.1.0         </span>
-<span class="co">#&gt; [118] munsell_0.5.0         ggplotify_0.0.8       viridisLite_0.4.0    </span>
-<span class="co">#&gt; [121] bslib_0.3.1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] rprojroot_2.0.3   digest_0.6.29     R6_2.5.1          jsonlite_1.8.0   </span></span>
+<span><span class="co">#&gt;  [5] magrittr_2.0.3    evaluate_0.15     stringi_1.7.6     rlang_1.0.3      </span></span>
+<span><span class="co">#&gt;  [9] cachem_1.0.6      cli_3.3.0         rstudioapi_0.13   fs_1.5.2         </span></span>
+<span><span class="co">#&gt; [13] jquerylib_0.1.4   bslib_0.3.1       ragg_1.2.2        rmarkdown_2.14   </span></span>
+<span><span class="co">#&gt; [17] pkgdown_2.0.5     textshaping_0.3.6 desc_1.4.1        tools_4.2.1      </span></span>
+<span><span class="co">#&gt; [21] stringr_1.4.0     purrr_0.3.4       yaml_2.3.5        xfun_0.31        </span></span>
+<span><span class="co">#&gt; [25] fastmap_1.1.0     compiler_4.2.1    systemfonts_1.0.4 memoise_2.0.1    </span></span>
+<span><span class="co">#&gt; [29] htmltools_0.5.2   knitr_1.39        sass_0.4.1</span></span></code></pre></div>
 </div>
   </div>
 
@@ -410,7 +354,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://tidymass.github.io/tidymass/" class="external-link">A part of tidymass</a></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>

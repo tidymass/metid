@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -117,7 +117,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -146,7 +146,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">identify_metabolite_all</span><span class="op">(</span><span class="va">ms1.data</span>, <span class="va">ms2.data</span>, <span class="va">parameter.list</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">identify_metabolite_all</span><span class="op">(</span><span class="va">ms1.data</span>, <span class="va">ms2.data</span>, <span class="va">parameter.list</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -154,17 +154,26 @@
     <dl><dt>ms1.data</dt>
 <dd><p>The name of ms1 peak table (csv format). Column 1 is "name", column 2 is
 "mz" and column 3 is "rt" (second).</p></dd>
+
+
 <dt>ms2.data</dt>
 <dd><p>MS2 data, must be mgf, msp or mzXML format. For example, ms2.data = c("test.mgf", "test2.msp").</p></dd>
+
+
 <dt>parameter.list</dt>
 <dd><p>A list contains paramters for each processing.
 The parameter must get using metIdentifyParam or mzIdentifyParam.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Work directory.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list containing mzIdentifyClass object.</p>
+    
+
+<p>A list containing mzIdentifyClass object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -179,91 +188,91 @@ The parameter must get using metIdentifyParam or mzIdentifyParam.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">##creat a folder nameed as example</span></span>
-<span class="r-in"><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">##get MS1 peak table from metid</span></span>
-<span class="r-in"><span class="va">ms1_peak</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span>
-<span class="r-in">  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms1_peak</span>, <span class="st">"ms1.peak.table.csv"</span><span class="op">)</span>,</span>
-<span class="r-in">  to <span class="op">=</span> <span class="va">path</span>,</span>
-<span class="r-in">  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">##get MS2 data from metid</span></span>
-<span class="r-in"><span class="va">ms2_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_data"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span>
-<span class="r-in">  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms2_data</span>, <span class="st">"QC1_MSMS_NCE25.mgf"</span><span class="op">)</span>,</span>
-<span class="r-in">  to <span class="op">=</span> <span class="va">path</span>,</span>
-<span class="r-in">  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">##get databases from metid</span></span>
-<span class="r-in"><span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span>
-<span class="r-in">  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">database</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="st">"msDatabase_rplc0.0.2"</span>,</span>
-<span class="r-in">      <span class="st">"orbitrapDatabase0.0.1"</span>,</span>
-<span class="r-in">      <span class="st">"hmdbMS1Database0.0.1"</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  to <span class="op">=</span> <span class="va">path</span>,</span>
-<span class="r-in">  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">param1</span> <span class="op">&lt;-</span></span>
-<span class="r-in"><span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span>
-<span class="r-in">  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span>
-<span class="r-in">  ce <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span class="r-in">  column <span class="op">=</span> <span class="st">"rp"</span>,</span>
-<span class="r-in">  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span class="r-in">  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  threads <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  database <span class="op">=</span> <span class="st">"msDatabase_rplc0.0.2"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">param2</span> <span class="op">&lt;-</span> <span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span>
-<span class="r-in">  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span>
-<span class="r-in">  ce <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span class="r-in">  column <span class="op">=</span> <span class="st">"rp"</span>,</span>
-<span class="r-in">  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span class="r-in">  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  threads <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  database <span class="op">=</span> <span class="st">"orbitrapDatabase0.0.1"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">param3</span> <span class="op">&lt;-</span> <span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span>
-<span class="r-in">  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span>
-<span class="r-in">  ce <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span class="r-in">  column <span class="op">=</span> <span class="st">"rp"</span>,</span>
-<span class="r-in">  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span class="r-in">  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  threads <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">  database <span class="op">=</span> <span class="st">"hmdbMS1Database0.0.1"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">identify_metabolite_all</span><span class="op">(</span></span>
-<span class="r-in">ms1.data <span class="op">=</span> <span class="st">"ms1.peak.table.csv"</span>,</span>
-<span class="r-in">ms2.data <span class="op">=</span> <span class="st">"QC1_MSMS_NCE25.mgf"</span>,</span>
-<span class="r-in">parameter.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">param1</span>, <span class="va">param2</span>, <span class="va">param3</span><span class="op">)</span>,</span>
-<span class="r-in">path <span class="op">=</span> <span class="va">path</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">result</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">result</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">##creat a folder nameed as example</span></span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"example"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##get MS1 peak table from metid</span></span></span>
+<span class="r-in"><span><span class="va">ms1_peak</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms1_peak"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms1_peak</span>, <span class="st">"ms1.peak.table.csv"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  to <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##get MS2 data from metid</span></span></span>
+<span class="r-in"><span><span class="va">ms2_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_data"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">ms2_data</span>, <span class="st">"QC1_MSMS_NCE25.mgf"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  to <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">##get databases from metid</span></span></span>
+<span class="r-in"><span><span class="va">database</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"ms2_database"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">database</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"msDatabase_rplc0.0.2"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"orbitrapDatabase0.0.1"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"hmdbMS1Database0.0.1"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  to <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">param1</span> <span class="op">&lt;-</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span></span>
+<span class="r-in"><span>  ce <span class="op">=</span> <span class="st">"all"</span>,</span></span>
+<span class="r-in"><span>  column <span class="op">=</span> <span class="st">"rp"</span>,</span></span>
+<span class="r-in"><span>  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  threads <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  database <span class="op">=</span> <span class="st">"msDatabase_rplc0.0.2"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">param2</span> <span class="op">&lt;-</span> <span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span></span>
+<span class="r-in"><span>  ce <span class="op">=</span> <span class="st">"all"</span>,</span></span>
+<span class="r-in"><span>  column <span class="op">=</span> <span class="st">"rp"</span>,</span></span>
+<span class="r-in"><span>  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  threads <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  database <span class="op">=</span> <span class="st">"orbitrapDatabase0.0.1"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">param3</span> <span class="op">&lt;-</span> <span class="fu"><a href="identify_metabolites_params.html">identify_metabolites_params</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ms1.match.ppm <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  rt.match.tol <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>  polarity <span class="op">=</span> <span class="st">"positive"</span>,</span></span>
+<span class="r-in"><span>  ce <span class="op">=</span> <span class="st">"all"</span>,</span></span>
+<span class="r-in"><span>  column <span class="op">=</span> <span class="st">"rp"</span>,</span></span>
+<span class="r-in"><span>  total.score.tol <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>  candidate.num <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  threads <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>  database <span class="op">=</span> <span class="st">"hmdbMS1Database0.0.1"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">identify_metabolite_all</span><span class="op">(</span></span></span>
+<span class="r-in"><span>ms1.data <span class="op">=</span> <span class="st">"ms1.peak.table.csv"</span>,</span></span>
+<span class="r-in"><span>ms2.data <span class="op">=</span> <span class="st">"QC1_MSMS_NCE25.mgf"</span>,</span></span>
+<span class="r-in"><span>parameter.list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">param1</span>, <span class="va">param2</span>, <span class="va">param3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>path <span class="op">=</span> <span class="va">path</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">result</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

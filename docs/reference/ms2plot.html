@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -117,7 +117,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -146,88 +146,137 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ms2plot</span><span class="op">(</span>
-  <span class="va">object</span>,
-  <span class="va">database</span>,
-  which.peak <span class="op">=</span> <span class="st">"all"</span>,
-  ppm.tol <span class="op">=</span> <span class="fl">30</span>,
-  mz.ppm.thr <span class="op">=</span> <span class="fl">400</span>,
-  path <span class="op">=</span> <span class="st">"."</span>,
-  width <span class="op">=</span> <span class="fl">20</span>,
-  height <span class="op">=</span> <span class="fl">8</span>,
-  interaction.plot <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">range.mz</span>,
-  range.int <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,
-  xlab <span class="op">=</span> <span class="st">"Mass to charge ratio (m/z)"</span>,
-  ylab <span class="op">=</span> <span class="st">"Relative intensity"</span>,
-  col.lib <span class="op">=</span> <span class="st">"red"</span>,
-  col.exp <span class="op">=</span> <span class="st">"black"</span>,
-  title.size <span class="op">=</span> <span class="fl">15</span>,
-  lab.size <span class="op">=</span> <span class="fl">12</span>,
-  axis.text.size <span class="op">=</span> <span class="fl">12</span>,
-  legend.title.size <span class="op">=</span> <span class="fl">12</span>,
-  legend.text.size <span class="op">=</span> <span class="fl">10</span>,
-  figure.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"png"</span>, <span class="st">"pdf"</span><span class="op">)</span>,
-  threads <span class="op">=</span> <span class="fl">3</span>,
-  one.folder <span class="op">=</span> <span class="cn">TRUE</span>,
-  show.plot <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ms2plot</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  <span class="va">database</span>,</span>
+<span>  which.peak <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  ppm.tol <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  mz.ppm.thr <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  width <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  height <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  interaction.plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">range.mz</span>,</span>
+<span>  range.int <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Mass to charge ratio (m/z)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Relative intensity"</span>,</span>
+<span>  col.lib <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  col.exp <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  title.size <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  lab.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  axis.text.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  legend.title.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  legend.text.size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  figure.type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"png"</span>, <span class="st">"pdf"</span><span class="op">)</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  one.folder <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  show.plot <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>A metIdentifyClass object.</p></dd>
+
+
 <dt>database</dt>
 <dd><p>Used database (databaseClass).</p></dd>
+
+
 <dt>which.peak</dt>
 <dd><p>Peak name(s) or "all". You can use which_has_identification functions to get what peaks have identifications.</p></dd>
+
+
 <dt>ppm.tol</dt>
 <dd><p>MS2 fragment match ppm.</p></dd>
+
+
 <dt>mz.ppm.thr</dt>
 <dd><p>The threshold for m/z error calculation.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Work directory.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>The width of MS2 spectra match figure (inch).</p></dd>
+
+
 <dt>height</dt>
 <dd><p>The height of MS2 spectra match figure (inch).</p></dd>
+
+
 <dt>interaction.plot</dt>
 <dd><p>Output interactive plot or not.</p></dd>
+
+
 <dt>range.mz</dt>
 <dd><p>m/z range for MS2 spectra match plot.</p></dd>
+
+
 <dt>range.int</dt>
 <dd><p>Relative intensity range.</p></dd>
+
+
 <dt>xlab</dt>
 <dd><p>Title of x axis.</p></dd>
+
+
 <dt>ylab</dt>
 <dd><p>Title of y axis.</p></dd>
+
+
 <dt>col.lib</dt>
 <dd><p>Colour of database MS2 spectrum.</p></dd>
+
+
 <dt>col.exp</dt>
 <dd><p>Colour of experimental MS2 spectrum.</p></dd>
+
+
 <dt>title.size</dt>
 <dd><p>Font size of title.</p></dd>
+
+
 <dt>lab.size</dt>
 <dd><p>Font size of title of axis.</p></dd>
+
+
 <dt>axis.text.size</dt>
 <dd><p>Font size of axis text.</p></dd>
+
+
 <dt>legend.title.size</dt>
 <dd><p>Legend title size.</p></dd>
+
+
 <dt>legend.text.size</dt>
 <dd><p>Legend text size.</p></dd>
+
+
 <dt>figure.type</dt>
 <dd><p>"pdf" or "png".</p></dd>
+
+
 <dt>threads</dt>
 <dd><p>The number of threads</p></dd>
+
+
 <dt>one.folder</dt>
 <dd><p>Output all figure in one folder or not.</p></dd>
+
+
 <dt>show.plot</dt>
 <dd><p>Show plot or just save them.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A or all ms2 match plot(s).</p>
+    
+
+<p>A or all ms2 match plot(s).</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>

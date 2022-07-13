@@ -124,7 +124,7 @@ get_ms2_spectrum = function(lab.id,
                             polarity = c("positive", "negative"),
                             ce = "30") {
   polarity <- match.arg(polarity)
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     stop("The database must be databaseClass object.\n")
   }
   pol <- ifelse(polarity == "positive", 1, 2)

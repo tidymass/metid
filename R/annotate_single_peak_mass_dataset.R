@@ -33,7 +33,7 @@
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-annotate_single_peak_mass_dataset =
+annotate_single_peak_mass_dataset <-
   function(object,
            variable_id,
            variable_index,
@@ -102,7 +102,7 @@ annotate_single_peak_mass_dataset =
     polarity <- match.arg(polarity)
     column <- match.arg(column)
     
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     

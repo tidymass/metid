@@ -119,7 +119,7 @@ getMS2spectrum = function(lab.id,
     "`getMS2spectrum()` is deprecated, use `get_ms2_spectrum()`."
   ))
   polarity <- match.arg(polarity)
-  if (class(database) != "databaseClass") {
+  if (!is(database, "databaseClass")) {
     stop("The database must be databaseClass object.\n")
   }
   pol <- ifelse(polarity == "positive", 1, 2)

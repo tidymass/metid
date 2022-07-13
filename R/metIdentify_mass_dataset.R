@@ -58,7 +58,7 @@ metIdentify_mass_dataset <-
     polarity <- match.arg(polarity)
     column <- match.arg(column)
     
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database should be databaseClass object.\n")
     }
     
@@ -68,7 +68,7 @@ metIdentify_mass_dataset <-
                           sep = "_")
     
     
-    if (class(database) != "databaseClass") {
+    if (!is(database, "databaseClass")) {
       stop("database must be databaseClass object\n")
     }
     

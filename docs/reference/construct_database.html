@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.4</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -117,7 +117,7 @@
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/JasperShen1990" class="external-link">
+  <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
@@ -146,51 +146,74 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">construct_database</span><span class="op">(</span>
-  path <span class="op">=</span> <span class="st">"."</span>,
-  version <span class="op">=</span> <span class="st">"0.0.1"</span>,
-  metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info.csv"</span>,
-  source <span class="op">=</span> <span class="st">"Michael Snyder Lab"</span>,
-  link <span class="op">=</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,
-  creater <span class="op">=</span> <span class="st">"Xiaotao Shen"</span>,
-  email <span class="op">=</span> <span class="st">"shenxt1990@163.com"</span>,
-  rt <span class="op">=</span> <span class="cn">TRUE</span>,
-  mz.tol <span class="op">=</span> <span class="fl">15</span>,
-  rt.tol <span class="op">=</span> <span class="fl">30</span>,
-  threads <span class="op">=</span> <span class="fl">3</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">construct_database</span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">"0.0.1"</span>,</span>
+<span>  metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info.csv"</span>,</span>
+<span>  source <span class="op">=</span> <span class="st">"Michael Snyder Lab"</span>,</span>
+<span>  link <span class="op">=</span> <span class="st">"http://snyderlab.stanford.edu/"</span>,</span>
+<span>  creater <span class="op">=</span> <span class="st">"Xiaotao Shen"</span>,</span>
+<span>  email <span class="op">=</span> <span class="st">"shenxt1990@163.com"</span>,</span>
+<span>  rt <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mz.tol <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  rt.tol <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  threads <span class="op">=</span> <span class="fl">3</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>path</dt>
 <dd><p>Work directory.</p></dd>
+
+
 <dt>version</dt>
 <dd><p>The version of you database. Default is 0.0.1.</p></dd>
+
+
 <dt>metabolite.info.name</dt>
 <dd><p>The metabolite information table name, it must be csv format.
 The demo data can be got from the `demoData` package.
 Please see <a href="https://tidymass.github.io/metid/articles/metid.html">https://tidymass.github.io/metid/articles/metid.html</a></p></dd>
+
+
 <dt>source</dt>
 <dd><p>The source of your database.</p></dd>
+
+
 <dt>link</dt>
 <dd><p>Website link of the source.</p></dd>
+
+
 <dt>creater</dt>
 <dd><p>Creater name. For example, Xiaotao Shen.</p></dd>
+
+
 <dt>email</dt>
 <dd><p>email address.</p></dd>
+
+
 <dt>rt</dt>
 <dd><p>Do the metabolites have RT information or not?. If not, set it as FALSE.</p></dd>
+
+
 <dt>mz.tol</dt>
 <dd><p>m/z tolerance for the match between metabolites and precursor m/z of MS2 spectra.</p></dd>
+
+
 <dt>rt.tol</dt>
 <dd><p>RT tolerance for the match between metabolites and precursor m/z of MS2 spectra.</p></dd>
+
+
 <dt>threads</dt>
 <dd><p>The number of threads</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A databaseClass object.</p>
+    
+
+<p>A databaseClass object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -205,19 +228,19 @@ Please see <a href="https://tidymass.github.io/metid/articles/metid.html">https:
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">database0.0.1</span> <span class="op">&lt;-</span> <span class="fu">construct_database</span><span class="op">(</span></span>
-<span class="r-in">path <span class="op">=</span> <span class="st">"."</span>,</span>
-<span class="r-in">version <span class="op">=</span> <span class="st">"0.0.1"</span>,</span>
-<span class="r-in">metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info.csv"</span>,</span>
-<span class="r-in">creater <span class="op">=</span> <span class="st">"dumine"</span>,</span>
-<span class="r-in">email <span class="op">=</span> <span class="st">"dumine@zju.edu.cn"</span>,</span>
-<span class="r-in">rt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">mz.tol <span class="op">=</span> <span class="fl">15</span>,</span>
-<span class="r-in">rt.tol <span class="op">=</span> <span class="fl">30</span>,</span>
-<span class="r-in">threads <span class="op">=</span> <span class="fl">5</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">database0.0.1</span> <span class="op">&lt;-</span> <span class="fu">construct_database</span><span class="op">(</span></span></span>
+<span class="r-in"><span>path <span class="op">=</span> <span class="st">"."</span>,</span></span>
+<span class="r-in"><span>version <span class="op">=</span> <span class="st">"0.0.1"</span>,</span></span>
+<span class="r-in"><span>metabolite.info.name <span class="op">=</span> <span class="st">"metabolite.info.csv"</span>,</span></span>
+<span class="r-in"><span>creater <span class="op">=</span> <span class="st">"dumine"</span>,</span></span>
+<span class="r-in"><span>email <span class="op">=</span> <span class="st">"dumine@zju.edu.cn"</span>,</span></span>
+<span class="r-in"><span>rt <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>mz.tol <span class="op">=</span> <span class="fl">15</span>,</span></span>
+<span class="r-in"><span>rt.tol <span class="op">=</span> <span class="fl">30</span>,</span></span>
+<span class="r-in"><span>threads <span class="op">=</span> <span class="fl">5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>

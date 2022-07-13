@@ -83,7 +83,7 @@ We can use this function to identify single peak, you can just provide m/z or rt
 }
 \examples{
 \dontrun{
-mz <- 115.0508 
+mz <- 115.0508
 rt <- 30
 mz = c(87.05525,
 88.03929,
@@ -118,19 +118,19 @@ path <- file.path(".", "example")
 dir.create(path = path, showWarnings = FALSE)
 database <- system.file("ms2_database", package = "metid")
 
-file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
+file.copy(from = file.path(database, "msDatabase_rplc0.0.2"),
          to = path, overwrite = TRUE, recursive = TRUE)
 
-annotation_result <- 
-identify_single_peak(ms1.mz = mz, 
-                    ms1.rt = rt, 
-                    ms2 = ms2, 
-                    ms1.match.ppm = 15, 
+annotation_result <-
+identify_single_peak(ms1.mz = mz,
+                    ms1.rt = rt,
+                    ms2 = ms2,
+                    ms1.match.ppm = 15,
                     rt.match.tol = 30,
-                    ms2.match.tol = 0.5, 
+                    ms2.match.tol = 0.5,
                     database = "msDatabase_rplc0.0.2",
                     path = path)
-                    
+
 annotation_result
 }
 }

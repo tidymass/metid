@@ -178,6 +178,9 @@
     <loc>https://tidymass.github.io/metid/reference/identify_ms2_only.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metid/reference/identify_peak.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metid/reference/identify_single_peak.html</loc>
   </url>
   <url>
@@ -232,6 +235,9 @@
     <loc>https://tidymass.github.io/metid/reference/mzIdentify_mass_dataset.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metid/reference/mzIdentify_mass_dataset2.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metid/reference/orbitrap_database0.0.3.html</loc>
   </url>
   <url>
@@ -274,6 +280,9 @@
     <loc>https://tidymass.github.io/metid/reference/read_mzxml.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/metid/reference/reexports.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/metid/reference/rp.neg.html</loc>
   </url>
   <url>
@@ -284,6 +293,12 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/metid/reference/snyder_database_rplc0.0.3.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/summary-databaseClass.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/metid/reference/summary_annotation_table.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/metid/reference/trans2newStyle.html</loc>

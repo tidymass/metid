@@ -26,9 +26,12 @@ reference:
   - title: Database construction
     desc: Construct in-house or public MS2 spectra database.
     contents:
-    - databaseConstruction
-    - rtCor4database
+    - construct_database
+    - correct_database_rt
     - get_ms2_spectrum
+    - construct_massbank_database
+    - construct_mona_database
+    - filter_adducts
     
   - title: Metabolite identification
     desc: Metabolite identification based on MS1 and MS2 databases.
@@ -39,13 +42,27 @@ reference:
     - identify_single_peak
     - identify_metabolites_params
     - identify_metabolites
-    - identify_metabolites_all
     - get_parameters
     - get_ms2_spectrum_from_object
     - get_identification_table
     - get_identification_table_all
     - get_iden_info
     - filter_identification
+    - annotate_metabolites_mass_dataset
+    - annotate_single_peak_mass_dataset
+    - getIdentificationTable2
+    - getMS2spectrum
+    - get_parameters_metid
+    - identify_metabolite_all
+    - identify_ms2_only
+    - identify_peak
+    - metIdentify
+    - metIdentify_mass_dataset
+    - ms2_plot_mass_dataset
+    - mzIdentify
+    - mzIdentifyParam
+    - mzIdentify_mass_dataset
+    - mzIdentify_mass_dataset2
     
   - title: Data
     desc: Some data embed in metid
@@ -54,18 +71,41 @@ reference:
     - hilic.neg
     - rp.pos
     - rp.neg
-    - msDatabase_rplc0.0.2
+    - hmdb_ms1_database0.0.3
     - msDatabase_hilic0.0.2
-    - annotate_result
+    - msDatabase_rplc0.0.2
+    - orbitrap_database0.0.3
+    - snyder_database_hilic0.0.3
+    - snyder_database_rplc0.0.3
 
   - title: Other functions
     desc: Other usefull functions in metid
     contents:
     - readMGF
-    - read_mgf
     - readMSP
     - readMZXML
     - metid
+    - metid_conflicts
+    - metid_logo
+    - metid_packages
+    - readMSP_MoNA
+    - read_mgf_experiment
+    - read_mgf_gnps
+    - read_mgf_mona
+    - read_msp
+    - read_msp_database
+    - read_msp_gnps
+    - read_msp_mona
+    - colnames.databaseClass
+    - summary_annotation_table
+    - databaseClass-class
+    - metIdentifyClass-class
+    - write_mgf_gnps
+    - write_mgf_massbank
+    - write_mgf_mona
+    - write_msp_gnps
+    - write_msp_massbank
+    - write_msp_mona
 
 navbar:
   title: "sparklyr" 
