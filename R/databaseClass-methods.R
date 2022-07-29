@@ -25,53 +25,44 @@ setMethod(
   signature = "databaseClass",
   definition = function(object) {
     cat(crayon::yellow("-----------Base information------------\n"))
-    cat(crayon::green("Version:", object@database.info$Version, "\n"))
-    cat(crayon::green("Source:", object@database.info$Source, "\n"))
-    cat(crayon::green("Link:", object@database.info$Link, "\n"))
-    cat(
-      crayon::green(
-        "Creater:",
+    cat("Version:", object@database.info$Version, "\n")
+    cat("Source:", object@database.info$Source, "\n")
+    cat("Link:", object@database.info$Link, "\n")
+    cat("Creater:",
         object@database.info$Creater,
         "(",
         object@database.info$Email,
-        ")\n"
-      )
-    )
-    cat(crayon::green(
+        ")\n")
+    cat(
       ifelse(
         object@database.info$RT,
         "With RT information\n",
         "Without RT informtaion\n"
       )
-    ))
+    )
     cat(crayon::yellow("-----------Spectral information------------\n"))
-    cat(crayon::green(
-      "There are",
-      ncol(object@spectra.info),
-      "items of metabolites in database:\n"
-    ))
-    cat(crayon::green(paste(
-      colnames(object@spectra.info), collapse = "; "
-    ), "\n"))
+    cat(ncol(object@spectra.info),
+        "items of metabolite information:\n")
     
-    cat(crayon::green("There are", length(
-      unique(object@spectra.info$Compound.name)
-    ), "metabolites in total\n"))
+    cat(paste(paste(head(
+      colnames(object@spectra.info), 10
+    ),
+    collapse = "; "),
+    ifelse(
+      ncol(object@spectra.info) > 10, "(top10)", ""
+    )),
+    "\n")
+    
+    cat(length(unique(object@spectra.info$Lab.ID)), "metabolites in total.\n")
     
     cat(
-      crayon::green(
-        "There are",
-        length(object@spectra.data$Spectra.positive),
-        "MS2 spectra in positive mode.\n"
-      )
+      length(object@spectra.data$Spectra.positive),
+      "metabolites with spectra in positive mode.\n"
     )
     
     cat(
-      crayon::green(
-        "There are",
-        length(object@spectra.data$Spectra.negative),
-        "MS2 spectra in negative mode.\n"
-      )
+      length(object@spectra.data$Spectra.negative),
+      "metabolites with spectra in negative mode.\n"
     )
     
     ce.pos <-
@@ -84,12 +75,12 @@ setMethod(
         object@spectra.data$Spectra.negative, names
       )))
     
-    cat(crayon::green("Collision energy in positive mode (number:):\n"))
-    cat(crayon::green("Total number:", length(ce.pos), "\n"))
-    cat(crayon::green(paste(head(ce.pos, 10), collapse = "; "), "\n"))
-    cat(crayon::green("Collision energy in negative mode:\n"))
-    cat(crayon::green("Total number:", length(ce.neg), "\n"))
-    cat(crayon::green(paste(head(ce.neg, 10), collapse = "; "), "\n"))
+    cat("Collision energy in positive mode (number:):\n")
+    cat("Total number:", length(ce.pos), "\n")
+    cat(paste(head(ce.pos, 10), collapse = "; "), "\n")
+    cat("Collision energy in negative mode:\n")
+    cat("Total number:", length(ce.neg), "\n")
+    cat(paste(head(ce.neg, 10), collapse = "; "), "\n")
   }
 )
 
@@ -165,5 +156,3 @@ get_ms2_spectrum = function(lab.id,
 #' #'     }
 #' #'   }
 #' #' )
-
-
