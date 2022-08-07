@@ -90,47 +90,47 @@ setMethod(
   definition = function(object) {
     version <- try(object@version, silent = TRUE)
     if (!is(version, "try-error")) {
-      cat(crayon::green("--------------metid version-----------\n"))
-      cat(crayon::green(object@version, "\n"))
+      message(crayon::green("--------------metid version-----------"))
+      message(crayon::green(object@version))
     }
-    cat(crayon::green("-----------Identifications------------\n"))
-    cat(crayon::yellow(
-      "(Use get_identification_table() to get identification table)\n"
+    message(crayon::green("-----------Identifications------------"))
+    message(crayon::yellow(
+      "(Use get_identification_table() to get identification table)"
     ))
-    cat(crayon::green("There are", nrow(object@ms1.data), "peaks\n"))
-    cat(crayon::green(nrow(object@match.result), "peaks have MS2 spectra\n"))
-    cat(crayon::green("There are",
+    message(crayon::green("There are ", nrow(object@ms1.data), " peaks"))
+    message(crayon::green(nrow(object@match.result), " peaks have MS2 spectra"))
+    message(crayon::green("There are ",
                       length(unique(unlist(
                         lapply(object@identification.result, function(x) {
                           x$Compound.name
                         })
                       ))),
-                      "metabolites are identified\n"))
+                      " metabolites are identified."))
     if (length(object@identification.result) > 0) {
       if (is.null(object@identification.result[[1]])) {
-        cat(crayon::green("There are no peaks with identification\n"))
+        message(crayon::green("There are no peaks with identification."))
       } else{
-        cat(crayon::green(
-          "There are",
+        message(crayon::green(
+          "There are ",
           length(object@identification.result),
-          "peaks with identification\n"
+          " peaks with identification."
         ))
       }
     }
     
-    cat(crayon::green("-----------Parameters------------\n"))
-    cat(
+    message(crayon::green("-----------Parameters------------"))
+    message(
       crayon::yellow(
-        "(Use get_parameters() to get all the parameters of this processing)\n"
+        "(Use get_parameters() to get all the parameters of this processing)"
       )
     )
-    cat(crayon::green("Polarity:", object@polarity, "\n"))
-    cat(crayon::green("Collision energy:", object@ce, "\n"))
-    cat(crayon::green("database:", object@database, "\n"))
-    cat(crayon::green("Total score cutoff:", object@total.score.tol, "\n"))
-    cat(crayon::green("Column:", object@column, "\n"))
-    cat(crayon::green("Adduct table:\n"))
-    cat(crayon::green(paste(object@adduct.table$adduct, collapse = ";")))
+    message(crayon::green("Polarity: ", object@polarity))
+    message(crayon::green("Collision energy: ", object@ce))
+    message(crayon::green("database: ", object@database))
+    message(crayon::green("Total score cutoff: ", object@total.score.tol))
+    message(crayon::green("Column: ", object@column))
+    message(crayon::green("Adduct table:"))
+    message(crayon::green(paste(object@adduct.table$adduct, collapse = ";")))
     # print(head(tibble::as_tibble(object@adduct.table, 5)))
   }
 )
@@ -148,7 +148,7 @@ setMethod(
 
 get_parameters =
   function(object) {
-    cat(
+    message(
       crayon::yellow(
         "`get_parameters()` is deprecated, use `get_parameters_metid()`."
       )
@@ -348,7 +348,7 @@ get_iden_info = function(object,
   }
   
   if (is.null(object@identification.result[[1]])) {
-    cat(crayon::red("No identification in this result.\n"))
+    message(crayon::red("No identification in this result."))
     return(NULL)
   }
   
@@ -367,7 +367,7 @@ get_iden_info = function(object,
   }
   
   if (is.na(match(which.peak, object@match.result$MS1.peak.name))) {
-    cat(crayon::green("The peak has no MS2 spectrum.\n"))
+    message(crayon::green("The peak has no MS2 spectrum."))
     return()
   }
   
@@ -375,7 +375,7 @@ get_iden_info = function(object,
     object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)],
     names(identification.result)
   ))) {
-    cat(crayon::green("The peak has no identification result.\n"))
+    message(crayon::green("The peak has no identification result."))
     return(NULL)
   }
   
@@ -459,7 +459,7 @@ ms2plot <-
       stop("Only for metIdentifyClass\n")
     
     if (nrow(object@match.result) == 0) {
-      cat(crayon::red("Only for results using MS/MS spectra identification.\n"))
+      message(crayon::red("Only for results using MS/MS spectra identification."))
       return(NULL)
     }
     
@@ -481,25 +481,25 @@ ms2plot <-
         object@match.result$MS2.spectra.name[match(which.peak,
                                                    object@match.result$MS1.peak.name)]
       if (is.na(ms2.spectra.name)) {
-        cat(crayon::red(which.peak, "has no MS2 spectrum.\n"))
+        message(crayon::red(which.peak, "has no MS2 spectrum."))
         return()
       }
       temp.idx <-
         which(names(identification.result) == ms2.spectra.name)
       if (length(temp.idx) == 0) {
-        cat(crayon::red(which.peak, "has no identification.\n"))
+        message(crayon::red(which.peak, " has no identification."))
         return()
       }
       matched.info <- identification.result[[temp.idx]]
       
       if (nrow(matched.info) > 1) {
-        cat(crayon::green("There are", nrow(matched.info), "identifications.\n"))
-        cat(crayon::green(paste(
+        message(crayon::green("There are ", nrow(matched.info), " identifications."))
+        message(crayon::green(paste(
           paste(seq_len(nrow(matched.info)),
                 as.character(matched.info[, 1]), sep = ":"),
           collapse = "\n"
         )))
-        cat("\n")
+        # cat("\n")
         which.identification <- "test"
         while (is.na(which.identification) |
                !which.identification %in% seq_along(matched.info)) {
@@ -570,13 +570,13 @@ ms2plot <-
         ms2.spectra.name <-
           ms2.spectra.name[!is.na(ms2.spectra.name)]
         if (length(ms2.spectra.name) == 0) {
-          cat(crayon::red("All peaks have no MS2 spectra.\n"))
+          message(crayon::red("All peaks have no MS2 spectra."))
           return(NULL)
         }
         anno.idx <-
           match(ms2.spectra.name, names(object@identification.result))
         if (all(is.na(anno.idx))) {
-          cat(crayon::red("All peaks have no identifications.\n"))
+          message(crayon::red("All peaks have no identifications."))
           return(NULL)
         }
         
@@ -737,7 +737,7 @@ ms2plot <-
         plotMS2match = plotMS2match,
         getMS2spectrum = getMS2spectrum
       )
-      cat(crayon::bgYellow("All done.\n"))
+      message(crayon::bgYellow("All done."))
     }
   }
 
@@ -759,7 +759,7 @@ which_has_identification = function(object) {
     stop("Only for metIdentifyClass\n")
   
   if (is.null(object@identification.result[[1]])) {
-    cat(crayon::yellow("No identifications in this object.\n"))
+    message(crayon::yellow("No identifications in this object."))
     return(NULL)
   }
   
@@ -864,7 +864,7 @@ get_ms2_spectrum_from_object = function(object,
     stop('Please provide peak name.\n')
   
   if (nrow(object@match.result) == 0) {
-    cat(crayon::red('No MS2 spectrum in this result.\n'))
+    message(crayon::red('No MS2 spectrum in this result.'))
     return(NULL)
   }
   
@@ -902,8 +902,8 @@ filter_adducts = function(object,
     return(object)
   }
   
-  cat(crayon::yellow(paste(remove_adduct, collapse = ";")),
-      "will be removed from the annotation result.\n")
+  message(crayon::yellow(paste(remove_adduct, collapse = ";")),
+      " will be removed from the annotation result.\n")
   
   object@adduct.table <-
     object@adduct.table %>%

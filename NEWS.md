@@ -130,3 +130,7 @@
 # Version 1.2.18 (2022-07-29)
 
 * New show method for databaseClass.
+
+# Version 1.2.19 (2022-08-06)
+
+* Fixed bugs.

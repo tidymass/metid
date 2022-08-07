@@ -24,45 +24,44 @@ setMethod(
   f = "show",
   signature = "databaseClass",
   definition = function(object) {
-    cat(crayon::yellow("-----------Base information------------\n"))
-    cat("Version:", object@database.info$Version, "\n")
-    cat("Source:", object@database.info$Source, "\n")
-    cat("Link:", object@database.info$Link, "\n")
-    cat("Creater:",
+    message(crayon::yellow("-----------Base information------------"))
+    message("Version:", object@database.info$Version)
+    message("Source:", object@database.info$Source)
+    message("Link:", object@database.info$Link)
+    message("Creater:",
         object@database.info$Creater,
         "(",
         object@database.info$Email,
-        ")\n")
-    cat(
+        ")")
+    message(
       ifelse(
         object@database.info$RT,
-        "With RT information\n",
-        "Without RT informtaion\n"
+        "With RT information",
+        "Without RT informtaion"
       )
     )
-    cat(crayon::yellow("-----------Spectral information------------\n"))
-    cat(ncol(object@spectra.info),
-        "items of metabolite information:\n")
+    message(crayon::yellow("-----------Spectral information------------"))
+    message(ncol(object@spectra.info),
+        " items of metabolite information:")
     
-    cat(paste(paste(head(
+    message(paste(paste(head(
       colnames(object@spectra.info), 10
     ),
     collapse = "; "),
     ifelse(
       ncol(object@spectra.info) > 10, "(top10)", ""
-    )),
-    "\n")
+    )))
     
-    cat(length(unique(object@spectra.info$Lab.ID)), "metabolites in total.\n")
+    message(length(unique(object@spectra.info$Lab.ID)), " metabolites in total.")
     
-    cat(
+    message(
       length(object@spectra.data$Spectra.positive),
-      "metabolites with spectra in positive mode.\n"
+      " metabolites with spectra in positive mode."
     )
     
-    cat(
+    message(
       length(object@spectra.data$Spectra.negative),
-      "metabolites with spectra in negative mode.\n"
+      " metabolites with spectra in negative mode."
     )
     
     ce.pos <-
@@ -75,12 +74,12 @@ setMethod(
         object@spectra.data$Spectra.negative, names
       )))
     
-    cat("Collision energy in positive mode (number:):\n")
-    cat("Total number:", length(ce.pos), "\n")
-    cat(paste(head(ce.pos, 10), collapse = "; "), "\n")
-    cat("Collision energy in negative mode:\n")
-    cat("Total number:", length(ce.neg), "\n")
-    cat(paste(head(ce.neg, 10), collapse = "; "), "\n")
+    message("Collision energy in positive mode (number:):")
+    message("Total number:", length(ce.pos))
+    message(paste(head(ce.pos, 10), collapse = "; "), "")
+    message("Collision energy in negative mode:")
+    message("Total number:", length(ce.neg))
+    message(paste(head(ce.neg, 10), collapse = "; "))
   }
 )
 

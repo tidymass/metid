@@ -11,7 +11,7 @@
 read_msp = function(file,
                     threads = 3) {
   
-  cat(crayon::green("Reading msp data...\n"))
+  message(crayon::green("Reading msp data..."))
   
   # future::plan(strategy = future::multisession, workers = threads)
   
@@ -129,7 +129,7 @@ read_msp = function(file,
     
     ##fix bug in msp data from metAnalyzer
     if (length(rt.idx) == 0) {
-      cat(crayon::yellow("The msp data are from MetAnalyzer software.\n"))
+      message(crayon::yellow("The msp data are from MetAnalyzer software."))
       rt.idx <-
         grep("NAME|Name|name", rownames(info.spec[[1]][[1]]))
       ##rt.idx is the name of peak
@@ -307,7 +307,7 @@ read_msp_database = function(file,
     
     ##fix bug in msp data from metAnalyzer
     if (length(rt.idx) == 0) {
-      cat(crayon::yellow("The msp data are from MetAnalyzer software.\n"))
+      message(crayon::yellow("The msp data are from MetAnalyzer software."))
       rt.idx <-
         grep("NAME|Name|name", rownames(info.spec[[1]][[1]]))
       ##rt.idx is the name of peak
@@ -357,8 +357,8 @@ read_msp_database = function(file,
 #' @export
 
 readMSP_MoNA = function(file) {
-  cat(crayon::yellow("`readMSP_MoNA()` is deprecated, use `read_msp_mona()`.\n"))
-  cat(crayon::green("Reading MSP data...\n"))
+  message(crayon::yellow("`readMSP_MoNA()` is deprecated, use `read_msp_mona()`."))
+  message(crayon::green("Reading MSP data..."))
   msp.data <- readr::read_lines(file)
   n.null <- which(msp.data == '')
   temp.idx1 <- c(1, n.null[-length(n.null)])
@@ -379,7 +379,7 @@ readMSP_MoNA = function(file) {
   
   pbapply::pboptions(style = 1)
   # fix bug
-  cat(crayon::yellow("Transforming...\n"))
+  message(crayon::yellow("Transforming..."))
   info.spec <- pbapply::pblapply(temp.idx, function(idx) {
     if (idx[1] == idx[2])
       return(NULL)
@@ -472,7 +472,7 @@ readMSP_MoNA = function(file) {
 
 read_msp_mona = function(file,
                          threads = 3) {
-  cat(crayon::green("Reading msp data from MoNA...\n"))
+  message(crayon::green("Reading msp data from MoNA..."))
   future::plan(strategy = future::multisession, workers = threads)
   ms2 <- furrr::future_map(
     .x = file,
@@ -522,7 +522,7 @@ read_msp_mona = function(file,
   )
   
   ms2 = Reduce(`c`, ms2)
-  cat(crayon::green("Done.\n"))
+  message(crayon::green("Done."))
   ms2
 }
 
@@ -544,7 +544,7 @@ read_msp_mona = function(file,
 read_msp_gnps = function(file,
                          threads = 5) {
   pbapply::pboptions(style = 1)
-  cat(crayon::green("Reading msp data from GNPS...\n"))
+  message(crayon::green("Reading msp data from GNPS..."))
   
   future::plan(strategy = future::multisession, workers = threads)
   ms2 <- furrr::future_map(
@@ -593,7 +593,7 @@ read_msp_gnps = function(file,
   )
   
   ms2 = Reduce(`c`, ms2)
-  cat(crayon::green("Done.\n"))
+  message(crayon::green("Done."))
   ms2
 }
 

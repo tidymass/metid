@@ -44,10 +44,10 @@
 #' metid_logo()
 
 metid_logo <- function() {
-  cat(crayon::green("Thank you for using metid!\n"))
-  message(crayon::green("Version", metid_version, "(", update_date, ')\n'))
-  cat(crayon::green("More information: google tidymass metid.\n"))
-  cat(crayon::green(
+  message("Thank you for using metid!")
+  message("Version ", metid_version, " (", update_date, ')')
+  message("More information: metid.tidymass.org")
+  cat(
     c(
       "                _    _____  ___ ",
       " _ __ ___   ___| |_  \\_   \\/   \\",
@@ -55,13 +55,12 @@ metid_logo <- function() {
       "| | | | | |  __/ |_/\\/ /_/ /_// ",
       "|_| |_| |_|\\___|\\__\\____/___,'  ",
       "                                "
-    )
-    
-  ), sep = "\n")
+    ), sep = "\n")
 }
 
 
-metid_version <- utils::packageVersion(pkg = "metid")
+metid_version <- 
+  as.character(utils::packageVersion(pkg = "metid"))
 update_date <- as.character(Sys.time())
 
 

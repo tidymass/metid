@@ -172,9 +172,9 @@ identify_single_peak = function(ms1.mz,
   
   ##RT in database or not
   if (!database@database.info$RT) {
-    cat(
+    message(
       crayon::yellow(
-        "No RT information in database.\nThe weight of RT have been set as 0.\n"
+        "No RT information in database.\nThe weight of RT have been set as 0."
       )
     )
   }
@@ -290,6 +290,6 @@ identify_single_peak = function(ms1.mz,
     threads = threads,
     version = "1.0.0"
   )
-  cat(crayon::bgRed("All done.\n"))
+  message(crayon::bgRed("All done."))
   return(return.result)
 }

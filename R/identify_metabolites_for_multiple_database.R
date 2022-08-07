@@ -153,12 +153,12 @@ identify_metabolite_all = function(ms1.data,
   file <- dir(intermediate_path)
   
   if (all(c("ms1.info", "ms2.info") %in% file)) {
-    cat(crayon::yellow("Use old data\n"))
+    message(crayon::yellow("Use old data"))
     load(file.path(intermediate_path, "ms1.info"))
     load(file.path(intermediate_path, "ms2.info"))
   } else{
     ##read MS2 data
-    cat(crayon::green("Reading MS2 data...\n"))
+    message(crayon::green("Reading MS2 data..."))
     temp.ms2.type <-
       stringr::str_split(string = ms2.data.name,
                          pattern = "\\.")[[1]]
@@ -187,7 +187,7 @@ identify_metabolite_all = function(ms1.data,
       
       names(ms2.data) <- ms2.data.name
       ###prepare data for metIdentification function
-      cat(crayon::green("Preparing MS2 data for identification...\n"))
+      message(crayon::green("Preparing MS2 data for identification..."))
       ms2.data <-
         mapply(
           FUN = function(temp.ms2.data, temp.ms2.data.name) {
@@ -297,9 +297,9 @@ identify_metabolite_all = function(ms1.data,
   names(identification.result) <- database.name
   
   for (i in seq_along(database.name)) {
-    cat(crayon::yellow("-------------------------------\n"))
-    cat(crayon::yellow('Database', i, ":", database.name[i], "\n"))
-    cat(crayon::yellow("-------------------------------\n"))
+    message(crayon::yellow("-------------------------------"))
+    message(crayon::yellow('Database ', i, ": ", database.name[i]))
+    message(crayon::yellow("-------------------------------"))
     
     new.path <-
       file.path(path, paste(database.name[i], "Result", sep =  '_'))

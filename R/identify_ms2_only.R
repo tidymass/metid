@@ -151,9 +151,9 @@ identify_ms2_only = function(ms2.data,
   
   ##RT in database or not
   if (!database@database.info$RT) {
-    cat(
+    message(
       crayon::yellow(
-        "No RT information in database.\nThe weight of RT have been set as 0.\n"
+        "No RT information in database.\nThe weight of RT have been set as 0."
       )
     )
   }
