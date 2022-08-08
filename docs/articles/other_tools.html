@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.17</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.19</span>
       </span>
     </div>
 
@@ -183,7 +183,7 @@
 (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
             <h4 data-toc-skip class="date">Created on 2020-03-28 and
-updated on 2022-07-13</h4>
+updated on 2022-08-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/metid/blob/HEAD/vignettes/other_tools.Rmd" class="external-link"><code>vignettes/other_tools.Rmd</code></a></small>
       <div class="hidden name"><code>other_tools.Rmd</code></div>
@@ -195,19 +195,7 @@ updated on 2022-07-13</h4>
 <p>There are also a lot of useful tools in <code>metid</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metid" class="external-link">metid</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ────────────────────────────────────────── metid 1.2.17 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">masstools  </span> 0.99.13     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">massdataset</span> 1.0.5</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────────── metid_conflicts() ──</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">apply()</span>     masks <span style="color: #0000BB;">base</span>::apply()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">body&lt;-()</span>        masks <span style="color: #0000BB;">base</span>::body&lt;-()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colMeans()</span>  masks <span style="color: #0000BB;">base</span>::colMeans()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">colSums()</span>   masks <span style="color: #0000BB;">base</span>::colSums()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">filter()</span>    masks <span style="color: #0000BB;">metid</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">intersect()</span> masks <span style="color: #0000BB;">base</span>::intersect()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">methods</span>::<span style="color: #00BB00;">kronecker()</span>     masks <span style="color: #0000BB;">base</span>::kronecker()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">ms2_plot()</span>  masks <span style="color: #0000BB;">masstools</span>::ms2_plot()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowMeans()</span>  masks <span style="color: #0000BB;">base</span>::rowMeans()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">massdataset</span>::<span style="color: #00BB00;">rowSums()</span>   masks <span style="color: #0000BB;">base</span>::rowSums()</span></span>
+<span><span class="co">#&gt; Version 1.2.19 (2022-08-07 20:10:10)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'metid'</span></span>
 <span><span class="co">#&gt; The following object is masked from 'package:stats':</span></span>
@@ -215,16 +203,13 @@ updated on 2022-07-13</h4>
 <span><span class="co">#&gt;     filter</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.1 ──</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2</span> 3.3.6          <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 0.3.4     </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble </span> 3.1.7          <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr  </span> 1.0.9     </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr  </span> 1.2.0          <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr</span> 1.4.0     </span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr  </span> 2.1.2          <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats</span> 0.5.1.<span style="color: #BB0000;">9000</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 0.3.4</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">tibble</span>::<span style="color: #00BB00;">add_column()</span> masks <span style="color: #0000BB;">massdataset</span>::add_column()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">tidyr</span>::<span style="color: #00BB00;">extract()</span>     masks <span style="color: #0000BB;">magrittr</span>::extract()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span>      masks <span style="color: #0000BB;">massdataset</span>::filter(), <span style="color: #0000BB;">metid</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>         masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">purrr</span>::<span style="color: #00BB00;">set_names()</span>   masks <span style="color: #0000BB;">magrittr</span>::set_names()</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">metid</span>::filter(), <span style="color: #0000BB;">stats</span>::filter()</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="read-ms2-data">
 <strong>Read MS2 data</strong><a class="anchor" aria-label="anchor" href="#read-ms2-data"></a>
@@ -260,17 +245,15 @@ updated on 2022-07-13</h4>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">metid</span><span class="fu">::</span><span class="fu"><a href="../reference/metid_logo.html">metid_logo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Thank you for using metid!</span></span></span>
-<span><span class="co"><span style="color: #00BB00;">#&gt; </span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">Version 1.2.17 ( 2022-07-13 14:54:31 )</span></span></span>
-<span><span class="co"><span style="color: #00BB00;">#&gt; </span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">More information: google tidymass metid.</span></span></span>
-<span><span class="co"><span style="color: #00BB00;">#&gt;                 _    _____  ___ </span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;"> _ __ ___   ___| |_  \_   \/   \</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">| '_ ` _ \ / _ \ __|  / /\/ /\ /</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">| | | | | |  __/ |_/\/ /_/ /_// </span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">|_| |_| |_|\___|\__\____/___,'  </span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">                                </span></span></span></code></pre></div>
+<span><span class="co">#&gt; Thank you for using metid!</span></span>
+<span><span class="co">#&gt; Version 1.2.19 (2022-08-07 20:10:10)</span></span>
+<span><span class="co">#&gt; More information: metid.tidymass.org</span></span>
+<span><span class="co">#&gt;                 _    _____  ___ </span></span>
+<span><span class="co">#&gt;  _ __ ___   ___| |_  \_   \/   \</span></span>
+<span><span class="co">#&gt; | '_ ` _ \ / _ \ __|  / /\/ /\ /</span></span>
+<span><span class="co">#&gt; | | | | | |  __/ |_/\/ /_/ /_// </span></span>
+<span><span class="co">#&gt; |_| |_| |_|\___|\__\____/___,'  </span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="session-information">
