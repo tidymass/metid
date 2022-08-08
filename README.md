@@ -61,18 +61,8 @@ If you have any questions about `metid`, please don’t hesitate to email me (<s
 
 If you use `metid` in your publications, please cite this paper:
 
-Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen, Kevin Contrepois, Zheng-Jiang Zhu\*, Michael Snyder\* (Corresponding Author)
+1. Xiaotao Shen, Si Wu, Liang Liang, Songjie Chen, Kevin Contrepois, Zheng-Jiang Zhu\*, Michael Snyder\* (Corresponding Author). metID: A R package for automatable compound annotation for LC−MS-based data. Bioinformatics, btab583, [https://doi.org/10.1093/bioinformatics/btab583](https://doi.org/10.1093/bioinformatics/btab583)
 
-metID: A R package for automatable compound annotation for LC−MS-based data
-
-Bioinformatics, btab583, [https://doi.org/10.1093/bioinformatics/btab583](https://doi.org/10.1093/bioinformatics/btab583)
-
-and 
-
-TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
-
-Xiaotao Shen, Hong Yan, Chuchu Wang, Peng Gao, Caroline H. Johnson, Michael P. Snyder.
-
-[Web Link](https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1).
+2. Shen, X., Yan, H., Wang, C. et al. TidyMass an object-oriented reproducible analysis framework for LC–MS data. Nat Commun 13, 4365 (2022). [Weblink](https://www.nature.com/articles/s41467-022-32155-w)
 
 Thanks very much!
