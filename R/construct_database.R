@@ -64,10 +64,10 @@ construct_database <-
     } else{
       file_pos <- dir(file.path(path, "POS"))
       if (length(file_pos) == 0) {
-        message(crayon::red("No mzXML files in POS folder."))
+        message(crayon::red("No mzXML/mgf files in POS folder."))
       } else{
-        if (sum(stringr::str_detect(file_pos, "mzXML")) == 0) {
-          message(crayon::red("No mzXML files in POS folder."))
+        if (sum(stringr::str_detect(file_pos, "mzXML|mgf")) == 0) {
+          message(crayon::red("No mzXML/mgf files in POS folder."))
         }
       }
     }
@@ -77,10 +77,10 @@ construct_database <-
     } else{
       file_neg <- dir(file.path(path, "NEG"))
       if (length(file_neg) == 0) {
-        message(crayon::red("No mzXML files in NEG folder."))
+        message(crayon::red("No mzXML/mgf files in NEG folder."))
       } else{
-        if (sum(stringr::str_detect(file_neg, "mzXML")) == 0) {
-          message(crayon::red("No mzXML files in NEG folder."))
+        if (sum(stringr::str_detect(file_neg, "mzXML|mgf")) == 0) {
+          message(crayon::red("No mzXML/mgf files in NEG folder."))
         }
       }
     }
@@ -96,8 +96,15 @@ construct_database <-
       dir(file.path(path, 'POS'), full.names = TRUE)
     
     if (length(file.pos) > 0) {
-      ms2.data.pos <-
-        masstools::read_mzxml(file = file.pos, threads = threads)
+      if (stringr::str_detect(file.pos, "mzXML")) {
+        ms2.data.pos <-
+          masstools::read_mzxml(file = file.pos, threads = threads)
+      }
+      
+      if (stringr::str_detect(file.pos, "mgf")) {
+        ms2.data.pos <-
+          masstools::read_mgf4database(file = file.pos)
+      }
       
       ms1.info.pos <- lapply(ms2.data.pos, function(x) {
         x[[1]]
@@ -125,8 +132,15 @@ construct_database <-
       dir(file.path(path, 'NEG'), full.names = TRUE)
     
     if (length(file.neg) > 0) {
-      ms2.data.neg <-
-        masstools::read_mzxml(file = file.neg, threads = threads)
+      if (stringr::str_detect(file.neg, "mzXML")) {
+        ms2.data.neg <-
+          masstools::read_mzxml(file = file.neg, threads = threads)
+      }
+      
+      if (stringr::str_detect(file.neg, "mgf")) {
+        ms2.data.neg <-
+          masstools::read_mgf4database(file = file.neg)
+      }
       
       ms1.info.neg <- lapply(ms2.data.neg, function(x) {
         x[[1]]
@@ -178,7 +192,7 @@ construct_database <-
           if (!is.na(temp.submitter) &
               length(grep(temp.submitter, temp.match.result.pos[, 9])) > 0) {
             temp.match.result.pos <-
-              temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]),]
+              temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]), ]
           }
           
           if (nrow(temp.match.result.pos) == 0) {
@@ -254,7 +268,7 @@ construct_database <-
           if (!is.na(temp.submitter) &
               length(grep(temp.submitter, temp.match.result.neg[, 9])) > 0) {
             temp.match.result.neg <-
-              temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]),]
+              temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]), ]
           }
           
           if (nrow(temp.match.result.neg) == 0) {

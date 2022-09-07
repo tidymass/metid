@@ -138,3 +138,7 @@
 # Version 1.2.20
 
 * Fixed bugs.
+
+# Version 1.2.21
+
+* construct_database supports mgf format.
