@@ -10,7 +10,7 @@
   #   x <- metid_conflicts()
   #   msg(metid_conflict_message(x), startup = TRUE)
   # }
-  msg(paste0("Version ", metid_version, " (", update_date, ')'))
+  packageStartupMessage(paste0("metid ", metid_version, " (", update_date, ')'))
 }
 
 is_attached <- function(x) {
