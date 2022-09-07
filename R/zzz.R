@@ -2,10 +2,10 @@
   # needed <- core[!is_attached(core)]
   # if (length(needed) == 0)
   #   return()
-  # 
-  # crayon::num_colors(TRUE)
-  # metid_attach()
-  # 
+  #
+  crayon::num_colors(TRUE)
+  metid_attach()
+  #
   # if (!"package:conflicted" %in% search()) {
   #   x <- metid_conflicts()
   #   msg(metid_conflict_message(x), startup = TRUE)

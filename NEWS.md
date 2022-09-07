@@ -134,3 +134,7 @@
 # Version 1.2.19 (2022-08-06)
 
 * Fixed bugs.
+
+# Version 1.2.20
+
+* Fixed bugs.
