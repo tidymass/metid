@@ -4,10 +4,10 @@
 \alias{write_msp_gnps}
 \title{Export metid database to msp (gnps format)}
 \usage{
-write_msp_gnps(databasae, path = ".")
+write_msp_gnps(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }

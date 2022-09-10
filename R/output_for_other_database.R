@@ -7,7 +7,7 @@
 #' @description Export metid database to msp (mona format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -21,10 +21,10 @@
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_msp_mona(databasae = databasae)
+# write_msp_mona(database = database)
 # x = read_msp_mona(file = "spectra_pos.msp")
 
-write_msp_mona = function(databasae,
+write_msp_mona = function(database,
                           path = ".") {
   options(warn = -1)
   spectra.info = database@spectra.info
@@ -183,7 +183,7 @@ write_msp_mona = function(databasae,
 #' @description Export metid database to mgf (mona format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -197,10 +197,10 @@ write_msp_mona = function(databasae,
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_mgf_mona(databasae = databasae)
+# write_mgf_mona(database = database)
 # x = read_mgf_mona(file = "spectra_pos.mgf")
 
-write_mgf_mona = function(databasae,
+write_mgf_mona = function(database,
                           path = ".") {
   options(warn = -1)
   spectra.info = database@spectra.info
@@ -364,7 +364,7 @@ write_mgf_mona = function(databasae,
 #' @description Export metid database to msp (MassBank format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -378,162 +378,163 @@ write_mgf_mona = function(databasae,
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_msp_massbank(databasae = databasae)
+# write_msp_massbank(database = database)
 # x = read_msp_mona(file = "spectra_pos.msp")
 
-write_msp_massbank = function(databasae,
-                              path = ".") {
-  options(warn = -1)
-  spectra.info = database@spectra.info
-  spectra_pos = database@spectra.data$Spectra.positive
-  spectra_neg = database@spectra.data$Spectra.negative
-  
-  if (length(spectra_pos) == 0 &
-      length(spectra_neg) == 0) {
-    message("No MS2 spectra.")
-  }
-  
-  
-  ####positive mode
-  if (length(spectra_pos) > 0) {
-    message(crayon::yellow("Write positive mode..."))
-    unlink(
-      x = file.path(path, "spectra_pos.msp"),
-      recursive = TRUE,
-      force = TRUE
-    )
-    sink(file = file.path(path, "spectra_pos.msp"),
-         append = TRUE)
-    purrr::walk2(
-      .x = names(spectra_pos),
-      .y = spectra_pos,
-      .f = function(compound_id, spectra) {
-        message(compound_id)
-        purrr::walk2(
-          .x = names(spectra),
-          .y = spectra,
-          .f = function(ce, single_spectra) {
-            temp_spectra_info =
-              spectra.info %>%
-              dplyr::filter(Lab.ID == compound_id)
-            result =
-              c(
-                paste("Name:", temp_spectra_info$Compound.name),
-                paste("Synon:", temp_spectra_info$Synon),
-                paste("DB#:", temp_spectra_info$massbank.ID),
-                paste("InChIKey:", temp_spectra_info$InChIKey),
-                paste("InChI:", temp_spectra_info$InChI),
-                paste("SMILES:", temp_spectra_info$SMILES),
-                paste("Precursor_type:", temp_spectra_info$Precursor_type),
-                paste("Spectrum_type:", "MS2"),
-                paste("PrecursorMZ:", temp_spectra_info$PrecursorMZ),
-                paste(
-                  "Instrument_type:",
-                  temp_spectra_info$Instrument.type
-                ),
-                paste("Instrument:", temp_spectra_info$Instrument),
-                paste("Ion_mode:", "POSITIVE"),
-                paste("Collision_energy:", ce),
-                paste("Formula:", temp_spectra_info$Formula),
-                paste("MW:", temp_spectra_info$MW),
-                paste("ExactMass:", temp_spectra_info$mz),
-                paste("Comments:", temp_spectra_info$Comments),
-                paste("Splash:", temp_spectra_info$Splash),
-                paste("Num Peaks:", nrow(single_spectra))
+write_msp_massbank <-
+  function(database,
+           path = ".") {
+    options(warn = -1)
+    spectra.info = database@spectra.info
+    spectra_pos = database@spectra.data$Spectra.positive
+    spectra_neg = database@spectra.data$Spectra.negative
+    
+    if (length(spectra_pos) == 0 &
+        length(spectra_neg) == 0) {
+      message("No MS2 spectra.")
+    }
+    
+    
+    ####positive mode
+    if (length(spectra_pos) > 0) {
+      message(crayon::yellow("Write positive mode..."))
+      unlink(
+        x = file.path(path, "spectra_pos.msp"),
+        recursive = TRUE,
+        force = TRUE
+      )
+      sink(file = file.path(path, "spectra_pos.msp"),
+           append = TRUE)
+      purrr::walk2(
+        .x = names(spectra_pos),
+        .y = spectra_pos,
+        .f = function(compound_id, spectra) {
+          message(compound_id)
+          purrr::walk2(
+            .x = names(spectra),
+            .y = spectra,
+            .f = function(ce, single_spectra) {
+              temp_spectra_info =
+                spectra.info %>%
+                dplyr::filter(Lab.ID == compound_id)
+              result =
+                c(
+                  paste("Name:", temp_spectra_info$Compound.name),
+                  paste("Synon:", temp_spectra_info$Synon),
+                  paste("DB#:", temp_spectra_info$massbank.ID),
+                  paste("InChIKey:", temp_spectra_info$InChIKey),
+                  paste("InChI:", temp_spectra_info$InChI),
+                  paste("SMILES:", temp_spectra_info$SMILES),
+                  paste("Precursor_type:", temp_spectra_info$Precursor_type),
+                  paste("Spectrum_type:", "MS2"),
+                  paste("PrecursorMZ:", temp_spectra_info$PrecursorMZ),
+                  paste(
+                    "Instrument_type:",
+                    temp_spectra_info$Instrument.type
+                  ),
+                  paste("Instrument:", temp_spectra_info$Instrument),
+                  paste("Ion_mode:", "POSITIVE"),
+                  paste("Collision_energy:", ce),
+                  paste("Formula:", temp_spectra_info$Formula),
+                  paste("MW:", temp_spectra_info$MW),
+                  paste("ExactMass:", temp_spectra_info$mz),
+                  paste("Comments:", temp_spectra_info$Comments),
+                  paste("Splash:", temp_spectra_info$Splash),
+                  paste("Num Peaks:", nrow(single_spectra))
+                )
+              single_spectra2 =
+                single_spectra %>%
+                apply(1, function(x) {
+                  paste(x, collapse = " ")
+                })
+              result =
+                c(result, single_spectra2, "")
+              cat(
+                result,
+                file = file.path(path, "spectra_pos.msp"),
+                append = TRUE,
+                sep = "\n"
               )
-            single_spectra2 =
-              single_spectra %>%
-              apply(1, function(x) {
-                paste(x, collapse = " ")
-              })
-            result =
-              c(result, single_spectra2, "")
-            cat(
-              result,
-              file = file.path(path, "spectra_pos.msp"),
-              append = TRUE,
-              sep = "\n"
-            )
-            # writeLines(text = result, con = fileConn)
-          }
-        )
-      }
-    )
-    sink()
-    sink(NULL)
-    message(crayon::green("Done."))
-  }
-  
-  ###negative mode
-  if (length(spectra_neg) > 0) {
-    message(crayon::yellow("Write negative mode..."))
-    unlink(
-      x = file.path(path, "spectra_neg.msp"),
-      recursive = TRUE,
-      force = TRUE
-    )
-    sink(file = file.path(path, "spectra_neg.msp"),
-         append = TRUE)
-    purrr::walk2(
-      .x = names(spectra_neg),
-      .y = spectra_neg,
-      .f = function(compound_id, spectra) {
-        message(compound_id)
-        purrr::walk2(
-          .x = names(spectra),
-          .y = spectra,
-          .f = function(ce, single_spectra) {
-            temp_spectra_info =
-              spectra.info %>%
-              dplyr::filter(Lab.ID == compound_id)
-            result =
-              c(
-                paste("Name:", temp_spectra_info$Compound.name),
-                paste("Synon:", temp_spectra_info$Synon),
-                paste("DB#:", temp_spectra_info$massbank.ID),
-                paste("InChIKey:", temp_spectra_info$InChIKey),
-                paste("InChI:", temp_spectra_info$InChI),
-                paste("SMILES:", temp_spectra_info$SMILES),
-                paste("Precursor_type:", temp_spectra_info$Precursor_type),
-                paste("Spectrum_type:", "MS2"),
-                paste("PrecursorMZ:", temp_spectra_info$PrecursorMZ),
-                paste(
-                  "Instrument_type:",
-                  temp_spectra_info$Instrument.type
-                ),
-                paste("Instrument:", temp_spectra_info$Instrument),
-                paste("Ion_mode:", "NEGATIVE"),
-                paste("Collision_energy:", ce),
-                paste("Formula:", temp_spectra_info$Formula),
-                paste("MW:", temp_spectra_info$MW),
-                paste("ExactMass:", temp_spectra_info$mz),
-                paste("Comments:", temp_spectra_info$Comments),
-                paste("Splash:", temp_spectra_info$Splash),
-                paste("Num Peaks:", nrow(single_spectra))
+              # writeLines(text = result, con = fileConn)
+            }
+          )
+        }
+      )
+      sink()
+      sink(NULL)
+      message(crayon::green("Done."))
+    }
+    
+    ###negative mode
+    if (length(spectra_neg) > 0) {
+      message(crayon::yellow("Write negative mode..."))
+      unlink(
+        x = file.path(path, "spectra_neg.msp"),
+        recursive = TRUE,
+        force = TRUE
+      )
+      sink(file = file.path(path, "spectra_neg.msp"),
+           append = TRUE)
+      purrr::walk2(
+        .x = names(spectra_neg),
+        .y = spectra_neg,
+        .f = function(compound_id, spectra) {
+          message(compound_id)
+          purrr::walk2(
+            .x = names(spectra),
+            .y = spectra,
+            .f = function(ce, single_spectra) {
+              temp_spectra_info =
+                spectra.info %>%
+                dplyr::filter(Lab.ID == compound_id)
+              result =
+                c(
+                  paste("Name:", temp_spectra_info$Compound.name),
+                  paste("Synon:", temp_spectra_info$Synon),
+                  paste("DB#:", temp_spectra_info$massbank.ID),
+                  paste("InChIKey:", temp_spectra_info$InChIKey),
+                  paste("InChI:", temp_spectra_info$InChI),
+                  paste("SMILES:", temp_spectra_info$SMILES),
+                  paste("Precursor_type:", temp_spectra_info$Precursor_type),
+                  paste("Spectrum_type:", "MS2"),
+                  paste("PrecursorMZ:", temp_spectra_info$PrecursorMZ),
+                  paste(
+                    "Instrument_type:",
+                    temp_spectra_info$Instrument.type
+                  ),
+                  paste("Instrument:", temp_spectra_info$Instrument),
+                  paste("Ion_mode:", "NEGATIVE"),
+                  paste("Collision_energy:", ce),
+                  paste("Formula:", temp_spectra_info$Formula),
+                  paste("MW:", temp_spectra_info$MW),
+                  paste("ExactMass:", temp_spectra_info$mz),
+                  paste("Comments:", temp_spectra_info$Comments),
+                  paste("Splash:", temp_spectra_info$Splash),
+                  paste("Num Peaks:", nrow(single_spectra))
+                )
+              single_spectra2 =
+                single_spectra %>%
+                apply(1, function(x) {
+                  paste(x, collapse = " ")
+                })
+              result =
+                c(result, single_spectra2, "")
+              cat(
+                result,
+                file = file.path(path, "spectra_neg.msp"),
+                append = TRUE,
+                sep = "\n"
               )
-            single_spectra2 =
-              single_spectra %>%
-              apply(1, function(x) {
-                paste(x, collapse = " ")
-              })
-            result =
-              c(result, single_spectra2, "")
-            cat(
-              result,
-              file = file.path(path, "spectra_neg.msp"),
-              append = TRUE,
-              sep = "\n"
-            )
-            # writeLines(text = result, con = fileConn)
-          }
-        )
-      }
-    )
-    sink()
-    sink(NULL)
-    message(crayon::green("Done."))
+              # writeLines(text = result, con = fileConn)
+            }
+          )
+        }
+      )
+      sink()
+      sink(NULL)
+      message(crayon::green("Done."))
+    }
   }
-}
 
 
 ##------------------------------------------------------------------------------
@@ -541,7 +542,7 @@ write_msp_massbank = function(databasae,
 #' @description Export metid database to mgf (MassBank format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -556,10 +557,10 @@ write_msp_massbank = function(databasae,
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_mgf_massbank(databasae = databasae)
+# write_mgf_massbank(database = database)
 # x = read_mgf_mona(file = "spectra_neg.mgf")
 
-write_mgf_massbank = function(databasae,
+write_mgf_massbank = function(database,
                               path = ".") {
   options(warn = -1)
   spectra.info = database@spectra.info
@@ -727,7 +728,7 @@ write_mgf_massbank = function(databasae,
 #' @description Export metid database to msp (gnps format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -741,10 +742,10 @@ write_mgf_massbank = function(databasae,
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_msp_gnps(databasae = databasae)
+# write_msp_gnps(database = database)
 # x = read_msp_gnps(file = "spectra_neg.msp")
 
-write_msp_gnps = function(databasae,
+write_msp_gnps = function(database,
                           path = ".") {
   options(warn = -1)
   spectra.info = database@spectra.info
@@ -787,7 +788,10 @@ write_msp_gnps = function(databasae,
                 paste("Ontology:", temp_spectra_info$Ontology),
                 paste("INCHIKEY:", temp_spectra_info$InChIKey),
                 paste("SMILES:", temp_spectra_info$SMILES),
-                paste("RETENTIONTIME: CCS:", temp_spectra_info$RETENTIONTIME),
+                paste(
+                  "RETENTIONTIME: CCS:",
+                  temp_spectra_info$RETENTIONTIME
+                ),
                 paste("IONMODE:", "Positive"),
                 paste(
                   "INSTRUMENTTYPE:",
@@ -852,7 +856,10 @@ write_msp_gnps = function(databasae,
                 paste("Ontology:", temp_spectra_info$Ontology),
                 paste("INCHIKEY:", temp_spectra_info$InChIKey),
                 paste("SMILES:", temp_spectra_info$SMILES),
-                paste("RETENTIONTIME: CCS:", temp_spectra_info$RETENTIONTIME),
+                paste(
+                  "RETENTIONTIME: CCS:",
+                  temp_spectra_info$RETENTIONTIME
+                ),
                 paste("IONMODE:", "Positive"),
                 paste(
                   "INSTRUMENTTYPE:",
@@ -893,7 +900,7 @@ write_msp_gnps = function(databasae,
 #' @description Export metid database to mgf (gnps format).
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
-#' @param databasae metid database.
+#' @param database metid database.
 #' @param path Work directory.
 #' @importFrom magrittr %>%
 #' @importFrom crayon red yellow green bgRed
@@ -907,10 +914,10 @@ write_msp_gnps = function(databasae,
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
-# write_mgf_gnps(databasae = databasae)
+# write_mgf_gnps(database = database)
 # x = read_mgf_gnps(file = "spectra_pos.mgf")
 
-write_mgf_gnps = function(databasae,
+write_mgf_gnps = function(database,
                           path = ".") {
   options(warn = -1)
   spectra.info = database@spectra.info
@@ -955,7 +962,10 @@ write_mgf_gnps = function(databasae,
                 paste("Ontology:", temp_spectra_info$Ontology),
                 paste("INCHIKEY:", temp_spectra_info$InChIKey),
                 paste("SMILES:", temp_spectra_info$SMILES),
-                paste("RETENTIONTIME: CCS:", temp_spectra_info$RETENTIONTIME),
+                paste(
+                  "RETENTIONTIME: CCS:",
+                  temp_spectra_info$RETENTIONTIME
+                ),
                 paste("IONMODE:", "Positive"),
                 paste(
                   "INSTRUMENTTYPE:",
@@ -1022,7 +1032,10 @@ write_mgf_gnps = function(databasae,
                 paste("Ontology:", temp_spectra_info$Ontology),
                 paste("INCHIKEY:", temp_spectra_info$InChIKey),
                 paste("SMILES:", temp_spectra_info$SMILES),
-                paste("RETENTIONTIME: CCS:", temp_spectra_info$RETENTIONTIME),
+                paste(
+                  "RETENTIONTIME: CCS:",
+                  temp_spectra_info$RETENTIONTIME
+                ),
                 paste("IONMODE:", "Positive"),
                 paste(
                   "INSTRUMENTTYPE:",
@@ -1057,12 +1070,3 @@ write_mgf_gnps = function(databasae,
     message(crayon::green("Done."))
   }
 }
-
-
-
-
-
-
-
-
-

@@ -4,10 +4,10 @@
 \alias{write_mgf_massbank}
 \title{Export metid database to mgf (MassBank format)}
 \usage{
-write_mgf_massbank(databasae, path = ".")
+write_mgf_massbank(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }

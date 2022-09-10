@@ -4,10 +4,10 @@
 \alias{write_mgf_gnps}
 \title{Export metid database to mgf (gnps format)}
 \usage{
-write_mgf_gnps(databasae, path = ".")
+write_mgf_gnps(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }

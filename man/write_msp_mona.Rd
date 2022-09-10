@@ -4,10 +4,10 @@
 \alias{write_msp_mona}
 \title{Export metid database to msp (mona format)}
 \usage{
-write_msp_mona(databasae, path = ".")
+write_msp_mona(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }

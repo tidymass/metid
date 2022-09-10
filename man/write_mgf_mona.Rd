@@ -4,10 +4,10 @@
 \alias{write_mgf_mona}
 \title{Export metid database to mgf (mona format)}
 \usage{
-write_mgf_mona(databasae, path = ".")
+write_mgf_mona(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }

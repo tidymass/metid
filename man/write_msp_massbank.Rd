@@ -4,10 +4,10 @@
 \alias{write_msp_massbank}
 \title{Export metid database to msp (MassBank format)}
 \usage{
-write_msp_massbank(databasae, path = ".")
+write_msp_massbank(database, path = ".")
 }
 \arguments{
-\item{databasae}{metid database.}
+\item{database}{metid database.}
 
 \item{path}{Work directory.}
 }
