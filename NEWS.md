@@ -143,6 +143,6 @@
 
 * construct_database supports mgf format.
 
-# Version 1.2.22
+# Version 1.2.22 (2022-09-10)
 
 * Fixed bug.
