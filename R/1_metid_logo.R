@@ -28,10 +28,8 @@
 #' @importFrom furrr future_map2 future_map
 #' @importFrom rstudioapi isAvailable hasFun getThemeInfo
 #' @importFrom cli rule symbol cat_line
-#' @importFrom data.table rbindlist
 #' @importFrom progress progress_bar
 #' @importFrom tidyr pivot_longer
-#' @import RColorBrewer
 #' @import utils
 #' @import ggplot2
 #' @import methods

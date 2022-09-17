@@ -146,3 +146,7 @@
 # Version 1.2.22 (2022-09-10)
 
 * Fixed bug.
+
+# Version 1.2.23 (2022-09-17)
+
+* Fixed bug.

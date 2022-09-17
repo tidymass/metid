@@ -96,12 +96,12 @@ construct_database <-
       dir(file.path(path, 'POS'), full.names = TRUE)
     
     if (length(file.pos) > 0) {
-      if (stringr::str_detect(file.pos, "mzXML")) {
+      if (stringr::str_detect(file.pos, "mzXML")[1]) {
         ms2.data.pos <-
           masstools::read_mzxml(file = file.pos, threads = threads)
       }
       
-      if (stringr::str_detect(file.pos, "mgf")) {
+      if (stringr::str_detect(file.pos, "mgf")[1]) {
         ms2.data.pos <-
           masstools::read_mgf4database(file = file.pos)
       }

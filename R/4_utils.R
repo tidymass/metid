@@ -142,7 +142,6 @@ getMS2spectrum = function(lab.id,
 #' @importFrom purrr map
 #' @importFrom dplyr filter select mutate group_by distinct ungroup arrange
 #' @importFrom dplyr pull
-#' @importFrom ggsci pal_aaas
 #' @importFrom ggplot2 ggplot aes geom_col scale_fill_manual theme_void guides
 #' @importFrom ggplot2 guide_legend coord_polar
 #' @importFrom massdataset extract_variable_info
@@ -212,8 +211,22 @@ summary_annotation_table <-
                class_color$Level, class_color$Database
              )))
     
+    temp_color <-
+      c(
+        "#3B4992FF",
+        "#EE0000FF",
+        "#008B45FF",
+        "#631879FF",
+        "#008280FF",
+        "#BB0021FF",
+        "#5F559BFF",
+        "#A20056FF",
+        "#808180FF",
+        "#1B1919FF"
+      )
+    
     level_color <-
-      ggsci::pal_aaas()(n = 10)[1:length(unique(class_color$Level))]
+      temp_color[1:length(unique(class_color$Level))]
     
     names(level_color) <-
       unique(class_color$Level)
