@@ -27,58 +27,6 @@
 #' @param threads Number of threads
 #' @return A metIdentifyClass object.
 #' @export
-#' @examples
-#' \dontrun{
-#' mz <- 115.0508
-#' rt <- 30
-#' mz = c(87.05525,
-#'88.03929,
-#'91.57985,
-#'91.83949,
-#'91.84950,
-#'97.01802,
-#'98.03480,
-#'98.79539,
-#'115.04163,
-#'115.05016,
-#'115.05354,
-#'115.06940,
-#'129.11253),
-#'intensity = c(280301.375,
-#'              12300.317,
-#'              1339.649,
-#'              1134.635,
-#'              1263.785,
-#'              8685.318,
-#'              2102.683,
-#'              1109.476,
-#'              78187.086,
-#'              153354.766,
-#'              5545.969,
-#'              2884.935,
-#'              1226.609),
-#'stringsAsFactors = FALSE
-#')
-#'
-#' path <- file.path(".", "example")
-#' dir.create(path = path, showWarnings = FALSE)
-#' database <- system.file("ms2_database", package = "metid")
-#'
-#' file.copy(from = file.path(database, "msDatabase_rplc0.0.2"),
-#'          to = path, overwrite = TRUE, recursive = TRUE)
-#'
-#' annotation_result <-
-#' identify_single_peak(ms1.mz = mz,
-#'                     ms1.rt = rt,
-#'                     ms2 = ms2,
-#'                     ms1.match.ppm = 15,
-#'                     rt.match.tol = 30,
-#'                     ms2.match.tol = 0.5,
-#'                     database = "msDatabase_rplc0.0.2",
-#'                     path = path)
-#'
-#' annotation_result
-#' }
 
 identify_single_peak = function(ms1.mz,
                                 ms1.rt,

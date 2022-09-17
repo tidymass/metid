@@ -68,20 +68,14 @@
 #' 
 #' object
 #' 
-#' data("hmdb_ms1_database0.0.3", package = "metid")
-#' 
-#' object1 =
-#'   annotate_metabolites_mass_dataset(object = object,
-#'                                     database = hmdb_ms1_database0.0.3)
-#' 
 #' data("snyder_database_rplc0.0.3", package = "metid")
 #' 
 #' database = snyder_database_rplc0.0.3
 #' 
-#' object2 =
-#'   annotate_metabolites_mass_dataset(object = object1,
+#' object1 =
+#'   annotate_metabolites_mass_dataset(object = object,
 #'                                     database = snyder_database_rplc0.0.3)
-#' head(object2@annotation_table)
+#' head(extract_annotation_table(object1))
 #' }
 
 

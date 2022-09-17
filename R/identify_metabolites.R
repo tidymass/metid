@@ -548,40 +548,6 @@ mzIdentify =
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
-#' @examples 
-#' \dontrun{
-#' ##creat a folder nameed as example
-#' path <- file.path(".", "example")
-#' dir.create(path = path, showWarnings = FALSE)
-#' 
-#' ##get MS1 peak table from metid
-#' ms1_peak <- system.file("ms1_peak", package = "metid")
-#' file.copy(from = file.path(ms1_peak, "ms1.peak.table.csv"), 
-#'           to = path, overwrite = TRUE, recursive = TRUE)
-#' ms2_data <- system.file("ms2_data", package = "metid")
-#' file.copy(from = file.path(ms2_data, "QC1_MSMS_NCE25.mgf"), 
-#'           to = path, overwrite = TRUE, recursive = TRUE)
-#' database <- system.file("ms2_database", package = "metid")
-#' 
-#' file.copy(from = file.path(database, "msDatabase_rplc0.0.2"), 
-#'           to = path, overwrite = TRUE, recursive = TRUE)
-#' 
-#' annotate_result3 <- 
-#' metIdentify(ms1.data = "ms1.peak.table.csv", 
-#'                      ms2.data = c("QC1_MSMS_NCE25.mgf"), 
-#'                      ms2.match.tol = 0.5, 
-#'                      ce = "all",
-#'                      ms1.match.ppm = 15, 
-#'                      rt.match.tol = 30, 
-#'                      polarity = "positive", 
-#'                      column = "rp", 
-#'                      path = path, 
-#'                      candidate.num = 3,
-#'                      database = "msDatabase_rplc0.0.2", 
-#'                      threads = 2)
-#' annotate_result3
-#' }
-
 
 metIdentify = function(
   ms1.data,
