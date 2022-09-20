@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.19</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.24</span>
       </span>
     </div>
 
@@ -310,20 +310,14 @@ to MS-DIAL.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">object</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"hmdb_ms1_database0.0.3"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">object1</span> <span class="op">=</span></span></span>
-<span class="r-in"><span>  <span class="fu">annotate_metabolites_mass_dataset</span><span class="op">(</span>object <span class="op">=</span> <span class="va">object</span>,</span></span>
-<span class="r-in"><span>                                    database <span class="op">=</span> <span class="va">hmdb_ms1_database0.0.3</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"snyder_database_rplc0.0.3"</span>, package <span class="op">=</span> <span class="st">"metid"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">database</span> <span class="op">=</span> <span class="va">snyder_database_rplc0.0.3</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">object2</span> <span class="op">=</span></span></span>
-<span class="r-in"><span>  <span class="fu">annotate_metabolites_mass_dataset</span><span class="op">(</span>object <span class="op">=</span> <span class="va">object1</span>,</span></span>
+<span class="r-in"><span><span class="va">object1</span> <span class="op">=</span></span></span>
+<span class="r-in"><span>  <span class="fu">annotate_metabolites_mass_dataset</span><span class="op">(</span>object <span class="op">=</span> <span class="va">object</span>,</span></span>
 <span class="r-in"><span>                                    database <span class="op">=</span> <span class="va">snyder_database_rplc0.0.3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">object2</span><span class="op">@</span><span class="va">annotation_table</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/massdataset/man/extract-mass_dataset.html" class="external-link">extract_annotation_table</a></span><span class="op">(</span><span class="va">object1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
@@ -335,7 +329,7 @@ to MS-DIAL.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>metid Developed by Xiaotao Shen, Si Wu. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+  <p></p><p>metid Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

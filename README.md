@@ -22,13 +22,13 @@ retention time (RT) and/or MS2 spectra.
 
 # Installation
 
-You can install `metid` from [GitLab](https://gitlab.com/jaspershen/metid)
+You can install `metid` from [GitLab](https://gitlab.com/tidymass/metid)
 
 ``` r
 if(!require(remotes)){
 install.packages("remotes")
 }
-remotes::install_gitlab("jaspershen/metid")
+remotes::install_gitlab("tidymass/metid")
 ```
 or [Github](https://github.com/tidymass/metid)
 

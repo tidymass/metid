@@ -71,7 +71,6 @@ reference:
     - hilic.neg
     - rp.pos
     - rp.neg
-    - hmdb_ms1_database0.0.3
     - msDatabase_hilic0.0.2
     - msDatabase_rplc0.0.2
     - orbitrap_database0.0.3

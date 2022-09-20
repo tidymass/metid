@@ -100,13 +100,14 @@ object@ms2_data
 
 # **Identify metabolites according to MS1**
 
-
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
-data("hmdb_ms1_database0.0.3", package = "metid")
-hmdb_ms1_database0.0.3
+data("snyder_database_rplc0.0.3", package = "metid")
+data_base <- snyder_database_rplc0.0.3
+data_base@spectra.data <- list()
+data_base@spectra.info$RT <- NA
 object1 =
   annotate_metabolites_mass_dataset(object = object,
-                                    database = hmdb_ms1_database0.0.3)
+                                    database = data_base)
 ```
 
 ```{r,eval = TRUE,warning=FALSE, message=FALSE,R.options="",cache=TRUE}
