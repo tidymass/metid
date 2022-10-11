@@ -1,5 +1,5 @@
 ---
-title: "Construct in-house MS2 datbase using metid"
+title: "Construct in-house MS2 database using metid"
 author:
 - name: Xiaotao Shen (https://www.shenxt.info/)
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
