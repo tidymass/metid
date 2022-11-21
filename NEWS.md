@@ -154,3 +154,7 @@
 # Version 1.2.24 (2022-09-19)
 
 * Fixed bug.
+
+# Version 1.2.25 (2022-11-20)
+
+* Fixed bug.

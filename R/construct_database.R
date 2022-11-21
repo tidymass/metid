@@ -132,7 +132,7 @@ construct_database <-
       dir(file.path(path, 'NEG'), full.names = TRUE)
     
     if (length(file.neg) > 0) {
-      if (stringr::str_detect(file.neg, "mzXML")) {
+      if (stringr::str_detect(file.neg, "mzXML")[1]) {
         ms2.data.neg <-
           masstools::read_mzxml(file = file.neg, threads = threads)
       }
