@@ -137,7 +137,7 @@ construct_database <-
           masstools::read_mzxml(file = file.neg, threads = threads)
       }
       
-      if (stringr::str_detect(file.neg, "mgf")) {
+      if (stringr::str_detect(file.neg, "mgf")[1]) {
         ms2.data.neg <-
           masstools::read_mgf4database(file = file.neg)
       }
