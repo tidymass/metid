@@ -32,10 +32,7 @@
 #' @importFrom tidyr pivot_longer
 #' @import utils
 #' @import ggplot2
-#' @import methods
-#' @import graphics
 #' @import grDevices
-#' @import utils
 #' @importClassesFrom massdataset mass_dataset
 #' @export
 #' @examples

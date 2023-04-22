@@ -1,8 +1,8 @@
 Type: Package
 Package: metid
 Title: Metabolite identification based on MS1 and MS2 spectra
-Version: 1.2.25
-Date: 2022-11-20
+Version: 1.2.26
+Date: 2023-04-21
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -43,8 +43,6 @@ Imports:
     tidyr,
     ggplot2,
     pbapply,
-    methods,
-    graphics,
     grDevices,
     utils,
     stats,
@@ -59,25 +57,26 @@ Imports:
     MSnbase,
     ProtGenerics,
     plotly,
-    massdataset,
     cli,
     rstudioapi,
     rlang,
-    progress
+    progress,
+    massdataset
 Suggests: 
     knitr,
     rmarkdown,
     BiocStyle,
     RUnit,
     BiocGenerics,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    methods
 VignetteBuilder: 
     knitr
 biocViews: Metabolomics, MassSpectrometry
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Remotes: 
-    gitlab::jaspershen/masstools,
-    gitlab::jaspershen/massdataset
+    gitlab::tidymass/masstools,
+    gitlab::tidymass/massdataset
 Config/testthat/edition: 3
