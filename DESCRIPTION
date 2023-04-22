@@ -67,7 +67,6 @@ Suggests:
     rmarkdown,
     BiocStyle,
     RUnit,
-    BiocGenerics,
     testthat (>= 3.0.0),
     methods
 VignetteBuilder: 
