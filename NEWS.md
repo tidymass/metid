@@ -162,3 +162,7 @@
 # Version 1.2.26 (2023-04-21)
 
 * Fixed bug.
+
+# Version 1.2.27 (2023-05-04)
+
+* Support CCS matching.
