@@ -166,3 +166,7 @@
 # Version 1.2.27 (2023-05-04)
 
 * Support CCS matching.
+
+# Version 1.2.28 (2023-05-30)
+
+* Fix bugs in construct_database function.

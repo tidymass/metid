@@ -1,8 +1,8 @@
-get_extension = function(file) {
+get_extension <- function(file) {
   tail(stringr::str_split(string = file, pattern = "\\.")[[1]], 1)
 }
 
-readTable = function(file, ...) {
+readTable <- function(file, ...) {
   extension <- get_extension(file = file)
   if (extension == "csv") {
     return(readr::read_csv(file = file, show_col_types = FALSE, ...))

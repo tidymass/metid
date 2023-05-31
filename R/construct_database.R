@@ -53,6 +53,7 @@ construct_database <-
            rt.tol = 30,
            threads = 3) {
     ##check data first
+    
     file <- dir(path)
     if (all(file != metabolite.info.name)) {
       message(crayon::red("No", metabolite.info.name, "in your", path, "\n"))
@@ -96,6 +97,22 @@ construct_database <-
       dir(file.path(path, 'POS'), full.names = TRUE)
     
     if (length(file.pos) > 0) {
+      ####metabolite.info has to have mz.pos column
+      if (all(colnames(metabolite.info) != "mz.pos")) {
+        stop("You need to provide mz.pos column in metabolite.info")
+      } else{
+        metabolite.info$mz.pos <-
+          as.numeric(metabolite.info$mz.pos)
+        
+        if (all(is.na(metabolite.info$mz.pos))) {
+          stop("All are NAs in the mz.pos column.")
+        }
+        
+        if (any(is.na(metabolite.info$mz.pos))) {
+          warning("NA in the mz.pos column.")
+        }
+      }
+      
       if (stringr::str_detect(file.pos, "mzXML")[1]) {
         ms2.data.pos <-
           masstools::read_mzxml(file = file.pos, threads = threads)
@@ -132,6 +149,21 @@ construct_database <-
       dir(file.path(path, 'NEG'), full.names = TRUE)
     
     if (length(file.neg) > 0) {
+      if (all(colnames(metabolite.info) != "mz.neg")) {
+        stop("You need to provide mz.neg column in metabolite.info")
+      } else{
+        metabolite.info$mz.neg <-
+          as.numeric(metabolite.info$mz.neg)
+        
+        if (all(is.na(metabolite.info$mz.neg))) {
+          stop("All are NAs in the mz.neg column.")
+        }
+        
+        if (any(is.na(metabolite.info$mz.pos))) {
+          warning("NA in the mz.neg column.")
+        }
+      }
+      
       if (stringr::str_detect(file.neg, "mzXML")[1]) {
         ms2.data.neg <-
           masstools::read_mzxml(file = file.neg, threads = threads)
@@ -179,6 +211,10 @@ construct_database <-
                    "file" = ms1.info.pos$file[match.result.pos[, 2]],
                    stringsAsFactors = FALSE)
       
+      if (nrow(match.result.pos) == 0) {
+        warning("No metabolites matched MS2 spectra.")
+      }
+      
       unique.idx1 <- unique(match.result.pos[, 1])
       
       spectra.pos <-
@@ -192,7 +228,7 @@ construct_database <-
           if (!is.na(temp.submitter) &
               length(grep(temp.submitter, temp.match.result.pos[, 9])) > 0) {
             temp.match.result.pos <-
-              temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]), ]
+              temp.match.result.pos[grep(temp.submitter, temp.match.result.pos[, 9]),]
           }
           
           if (nrow(temp.match.result.pos) == 0) {
@@ -230,9 +266,12 @@ construct_database <-
       names(spectra.pos) <-
         metabolite.info$Lab.ID[unique.idx1]
       
-      spectra.pos <-
-        spectra.pos[which(!unlist(lapply(spectra.pos, is.null)))]
-      
+      if (length(spectra.pos) == 0) {
+        spectra.pos <- list()
+      } else{
+        spectra.pos <-
+          spectra.pos[which(!unlist(lapply(spectra.pos, is.null)))]
+      }
       message(crayon::red("OK."))
     } else{
       spectra.pos <- NULL
@@ -254,6 +293,10 @@ construct_database <-
                                      "file" = ms1.info.neg$file[match.result.neg[, 2]],
                                      stringsAsFactors = FALSE)
       
+      if (nrow(match.result.neg) == 0) {
+        warning("No metabolites matched MS2 spectra.")
+      }
+      
       unique.idx1 <- unique(match.result.neg[, 1])
       
       spectra.neg <-
@@ -268,7 +311,7 @@ construct_database <-
           if (!is.na(temp.submitter) &
               length(grep(temp.submitter, temp.match.result.neg[, 9])) > 0) {
             temp.match.result.neg <-
-              temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]), ]
+              temp.match.result.neg[grep(temp.submitter, temp.match.result.neg[, 9]),]
           }
           
           if (nrow(temp.match.result.neg) == 0) {
@@ -306,8 +349,13 @@ construct_database <-
       names(spectra.neg) <-
         metabolite.info$Lab.ID[unique.idx1]
       
-      spectra.neg <-
-        spectra.neg[which(!unlist(lapply(spectra.neg, is.null)))]
+      if (length(spectra.neg) == 0) {
+        spectra.neg <- list()
+      } else{
+        spectra.neg <-
+          spectra.neg[which(!unlist(lapply(spectra.neg, is.null)))]
+      }
+      
       message(crayon::red("OK."))
     } else{
       spectra.neg <- NULL
