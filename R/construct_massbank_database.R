@@ -24,7 +24,7 @@
 #' @export
 
 # # ####MassBank library
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("other_files/all_ms2_database/massbank/2021_3_5/")
 # massbank_database = construct_massbank_database(file = "MassBank_NIST.msp")
 #

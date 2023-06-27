@@ -9,7 +9,7 @@
 #' @return Return ms2 data. This is a list.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("other_files/all_ms2_database/gnps/")
 # x = read_mgf_gnps(file = "HMDB.mgf")
 
@@ -76,7 +76,7 @@ read_mgf_gnps <-
 #' @return Return ms2 data. This is a list.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("other_files/all_ms2_database/mona/2021_6_10/")
 # x = read_mgf_mona(file = "MoNA-export-LC-MS-MS_Spectra.mgf")
 
@@ -144,7 +144,7 @@ read_mgf_mona = function(file,
 #' @return Return ms2 data. This is a list.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("example/")
 # file = c("QC1_MSMS_NCE25.mgf", "QC1_MSMS_NCE25.mgf")
 

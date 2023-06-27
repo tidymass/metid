@@ -466,7 +466,7 @@ readMSP_MoNA = function(file) {
 #' @return Return ms2 data. This is a list.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("other_files/all_ms2_database/mona/2021_6_10/")
 # x = read_msp_mona(file = "MoNA-export-LC-MS-MS_Spectra.msp")
 
@@ -537,7 +537,7 @@ read_msp_mona = function(file,
 #' @return Return ms2 data. This is a list.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # setwd("other_files/all_ms2_database/mona/2021_6_10/")
 # x = read_msp_mona(file = "MoNA-export-LC-MS-MS_Spectra.msp")
 

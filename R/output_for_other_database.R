@@ -17,7 +17,7 @@
 #' @return msp format files in local folder.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
@@ -193,7 +193,7 @@ write_msp_mona = function(database,
 #' @return mgf format files in local folder.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
@@ -374,7 +374,7 @@ write_mgf_mona = function(database,
 #' @return msp format files in local folder.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
@@ -553,7 +553,7 @@ write_msp_massbank <-
 #' @export
 
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
@@ -738,7 +738,7 @@ write_mgf_massbank = function(database,
 #' @return msp format files in local folder.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")
@@ -910,7 +910,7 @@ write_msp_gnps = function(database,
 #' @return mgf format files in local folder.
 #' @export
 
-# sxtTools::setwd_project()
+# setwd(masstools::get_project_wd())
 # load("other_files/all_ms2_database/mike_in_house/msDatabase_hilic0.0.2")
 # database = msDatabase_hilic0.0.2
 # setwd("other_files/all_ms2_database/mike_in_house")

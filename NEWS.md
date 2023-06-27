@@ -170,3 +170,7 @@
 # Version 1.2.28 (2023-05-30)
 
 * Fix bugs in construct_database function.
+
+# Version 1.2.29 (2023-06-26)
+
+* Fix bugs in construct_mona_database function.
