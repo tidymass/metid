@@ -91,53 +91,40 @@ style_grey <- function(level, ...) {
 
 
 
-
-
-
-#' @title Get MS2 spectra of peaks from databaseClass object
-#' @description Get MS2 spectra of peaks from databaseClass object.
+#' Summary of Annotation Table with Plot
+#'
+#' This function generates a summary of an annotation table from a `mass_dataset` object or a 
+#' user-provided object. The function filters annotation data based on a specified `Level` and
+#' creates a polar bar plot to visualize the distribution of annotations across levels and databases.
+#'
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param lab.id The lab ID of metabolite.
-#' @param database Database (databaseClass object).
-#' @param polarity positive or negative.
-#' @param ce Collision value.
-#' @importFrom crayon red yellow green bgRed
-#' @importFrom stringr str_detect str_extract
-#' @importFrom readr cols
-#' @importFrom pbapply pblapply
-#' @return A MS2 spectrum (data.frame).
-#' @export
-#' @seealso The example and demo data of this function can be found
-#' \url{https://tidymass.github.io/metid/articles/metid.html}
-
-getMS2spectrum = function(lab.id,
-                          database,
-                          polarity = c("positive", "negative"),
-                          ce = "30") {
-  message(crayon::yellow(
-    "`getMS2spectrum()` is deprecated, use `get_ms2_spectrum()`."
-  ))
-  polarity <- match.arg(polarity)
-  if (!is(database, "databaseClass")) {
-    stop("The database must be databaseClass object.\n")
-  }
-  pol <- ifelse(polarity == "positive", 1, 2)
-  temp <-
-    database@spectra.data[[pol]][[match(lab.id, names(database@spectra.data[[pol]]))]]
-  temp[[match(ce, names(temp))]]
-}
-
-
-
-
-
-#' @title Summary the annotation  table
-#' @description Summary the annotation  table
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param object mass_dataset class or data.frame.
-#' @param level what levels you want to use.
+#' \email{xiaotao.shen@@outlook.com}
+#' @param object Either a `mass_dataset` object or a data frame containing annotation information.
+#' @param level A numeric vector specifying the annotation levels to include in the summary. Defaults to levels 1, 2, 3, and 4.
+#'
+#' @return A ggplot2 object representing a polar bar plot of the annotation summary, 
+#' showing the number and percentage of annotations by level and database.
+#'
+#' @details
+#' If the input is a `mass_dataset` object, the function extracts the annotation information 
+#' using the `massdataset::extract_variable_info` function. For non-`mass_dataset` objects, 
+#' it expects the input to be in a specific format and selects the most relevant annotations 
+#' based on the `Level`, `SS`, and `Total.score` columns.
+#'
+#' The function then filters out annotations with missing `Compound.name` and 
+#' those that are not in the specified `level`. It calculates the number and percentage 
+#' of annotations by level and database, which are visualized in a polar bar plot.
+#'
+#' @examples
+#' \dontrun{
+#' # For a mass_dataset object:
+#' summary_annotation_table(mass_object, level = c(1, 2, 3))
+#'
+#' # For a custom annotation table:
+#' custom_annotation <- data.frame(variable_id = ..., Level = ..., SS = ..., Total.score = ..., Compound.name = ...)
+#' summary_annotation_table(custom_annotation, level = c(1, 2))
+#' }
+#'
 #' @importFrom plyr . dlply
 #' @importFrom purrr map
 #' @importFrom dplyr filter select mutate group_by distinct ungroup arrange
@@ -145,7 +132,9 @@ getMS2spectrum = function(lab.id,
 #' @importFrom ggplot2 ggplot aes geom_col scale_fill_manual theme_void guides
 #' @importFrom ggplot2 guide_legend coord_polar
 #' @importFrom massdataset extract_variable_info
-#' @return A ggplot2 object
+#'
+#' @seealso \code{\link{massdataset::extract_variable_info}}
+#'
 #' @export
 
 summary_annotation_table <-

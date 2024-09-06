@@ -1,35 +1,39 @@
-#' @title Identify metabolites based on MS1 or MS/MS database
-#' @description Identify metabolites based on MS1 or MS/MS database.
+#' Annotate Metabolites in a mass_dataset Object
+#'
+#' This function performs metabolite annotation for a `mass_dataset` object based on MS1 and MS2 data. It matches the mass-to-charge ratio (m/z), retention time (RT), and MS2 spectra with a reference database to identify potential metabolites.
+#'
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param object A mass_dataset class obejct.
-#' @param ms1.match.ppm Precursor match ppm tolerance.
-#' @param ms2.match.ppm Fragment ion match ppm tolerance.
-#' @param mz.ppm.thr Accurate mass tolerance for m/z error calculation.
-#' @param ms2.match.tol MS2 match (MS2 similarity) tolerance.
-#' @param fraction.weight The weight for matched fragments.
-#' @param dp.forward.weight Forward dot product weight.
-#' @param dp.reverse.weight Reverse dot product weight.
-#' @param remove_fragment_intensity_cutoff remove_fragment_intensity_cutoff
-#' @param rt.match.tol RT match tolerance.
-#' @param polarity The polarity of data, "positive"or "negative".
-#' @param ce Collision energy. Please confirm the CE values in your database.
-#' Default is "all".
-#' @param column "hilic" (HILIC column) or "rp" (reverse phase).
-#' @param ms1.match.weight The weight of MS1 match for total score calculation.
-#' @param rt.match.weight The weight of RT match for total score calculation.
-#' @param ms2.match.weight The weight of MS2 match for total score calculation.
-#' @param total.score.tol Total score tolerance. The total score are referring
-#' to MS-DIAL.
-#' @param candidate.num The number of candidate.
-#' @param database MS2 database name or MS database.
-#' @param threads Number of threads
-#' @return A metIdentifyClass object.
+#' \email{xiaotao.shen@@outlook.com}
+#' @param object A `mass_dataset` object that contains MS1 and MS2 data.
+#' @param ms1.match.ppm A numeric value specifying the mass accuracy threshold for MS1 matching in parts per million (ppm). Defaults to `25`.
+#' @param ms2.match.ppm A numeric value specifying the mass accuracy threshold for MS2 (Fragment ion) matching in ppm. Defaults to `30`.
+#' @param mz.ppm.thr A numeric value specifying the m/z threshold in ppm for matching MS1 and MS2. Defaults to `400`.
+#' @param ms2.match.tol A numeric value specifying the tolerance for MS2 fragment ion matching. Defaults to `0.5`.
+#' @param fraction.weight A numeric value specifying the weight for the MS2 fragmentation score. Defaults to `0.3`.
+#' @param dp.forward.weight A numeric value specifying the weight for the forward dot product in MS2 matching. Defaults to `0.6`.
+#' @param dp.reverse.weight A numeric value specifying the weight for the reverse dot product in MS2 matching. Defaults to `0.1`.
+#' @param remove_fragment_intensity_cutoff A numeric value specifying the intensity cutoff for removing fragments in MS2 matching. Defaults to `0`.
+#' @param rt.match.tol A numeric value specifying the retention time matching tolerance in seconds. Defaults to `30`.
+#' @param polarity A character string specifying the ionization mode. It can be either `"positive"` or `"negative"`. Defaults to `"positive"`.
+#' @param ce A character string specifying the collision energy for MS2 matching. Defaults to `"all"`.
+#' @param column A character string specifying the chromatographic column type, either `"rp"` (reverse phase) or `"hilic"`. Defaults to `"rp"`.
+#' @param ms1.match.weight A numeric value specifying the weight of MS1 matching in the total score calculation. Defaults to `0.25`.
+#' @param rt.match.weight A numeric value specifying the weight of RT matching in the total score calculation. Defaults to `0.25`.
+#' @param ms2.match.weight A numeric value specifying the weight of MS2 matching in the total score calculation. Defaults to `0.5`.
+#' @param total.score.tol A numeric value specifying the threshold for the total score. Defaults to `0.5`.
+#' @param candidate.num A numeric value specifying the number of top candidates to retain per feature. Defaults to `3`.
+#' @param database A `databaseClass` object containing the reference spectral database for annotation.
+#' @param threads An integer specifying the number of threads to use for parallel processing. Defaults to `3`.
+#'
+#' @return A `mass_dataset` object with an updated annotation table containing the metabolite identification results.
+#'
 #' @importFrom crayon yellow green red bgRed
 #' @importFrom magrittr %>%
-#' @export
-#' @seealso The example and demo data of this function can be found
-#' \url{https://tidymass.github.io/metid/articles/metid.html}
+#' @details
+#' This function uses both MS1 and MS2 data (if available) to identify metabolites by matching experimental features with a reference spectral database. If no MS2 data is available, only m/z and RT are used for matching. The matching process is controlled by parameters like `ms1.match.ppm`, `ms2.match.ppm`, `rt.match.tol`, and various weighting factors.
+#'
+#' The function supports both positive and negative ionization modes and allows for fine-tuning of the matching process with customizable thresholds and weights. The number of top candidates to retain per feature can be controlled with `candidate.num`.
+#'
 #' @examples
 #' \dontrun{
 #' library(massdataset)
@@ -77,6 +81,9 @@
 #'                                     database = snyder_database_rplc0.0.3)
 #' head(extract_annotation_table(object1))
 #' }
+#'
+#' @seealso \code{\link{databaseClass}}, \code{\link{mass_dataset}}
+#' @export
 
 
 annotate_metabolites_mass_dataset <-

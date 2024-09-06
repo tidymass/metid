@@ -99,13 +99,11 @@ setMethod(
     ))
     message(crayon::green("There are ", nrow(object@ms1.data), " peaks"))
     message(crayon::green(nrow(object@match.result), " peaks have MS2 spectra"))
-    message(crayon::green("There are ",
-                      length(unique(unlist(
-                        lapply(object@identification.result, function(x) {
-                          x$Compound.name
-                        })
-                      ))),
-                      " metabolites are identified."))
+    message(crayon::green("There are ", length(unique(unlist(
+      lapply(object@identification.result, function(x) {
+        x$Compound.name
+      })
+    ))), " metabolites are identified."))
     if (length(object@identification.result) > 0) {
       if (is.null(object@identification.result[[1]])) {
         message(crayon::green("There are no peaks with identification."))
@@ -119,11 +117,9 @@ setMethod(
     }
     
     message(crayon::green("-----------Parameters------------"))
-    message(
-      crayon::yellow(
-        "(Use get_parameters() to get all the parameters of this processing)"
-      )
-    )
+    message(crayon::yellow(
+      "(Use get_parameters() to get all the parameters of this processing)"
+    ))
     message(crayon::green("Polarity: ", object@polarity))
     message(crayon::green("Collision energy: ", object@ce))
     message(crayon::green("database: ", object@database))
@@ -139,7 +135,7 @@ setMethod(
 #' @title Get parameters from a metIdentifyClass object
 #' @description Get parameters from a metIdentifyClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return A data frame contains all the parameters of this metIdentifiyClass object.
 #' @export
@@ -230,7 +226,7 @@ get_parameters =
 #' @title Get parameters from a metIdentifyClass object
 #' @description Get parameters from a metIdentifyClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return A data frame contains all the parameters of this metIdentifiyClass object.
 #' @export
@@ -318,7 +314,7 @@ get_parameters_metid =
 #' @title Get identification information from a metIdentifyClass object
 #' @description Get identification information from a metIdentifyClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param which.peak A peak name or "all". "all" means all peaks with identifications will be output.
 #' @param database Database used.
@@ -326,9 +322,7 @@ get_parameters_metid =
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
-get_iden_info = function(object,
-                         which.peak,
-                         database) {
+get_iden_info = function(object, which.peak, database) {
   if (missing(object) | missing(which.peak) | missing(database)) {
     stop("Please provide the object, which.peak and database.\n")
   }
@@ -358,9 +352,7 @@ get_iden_info = function(object,
       `[[`(object@identification.result, .)
     
     temp <-
-      data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID),
-                                             setdiff(colnames(database@spectra.info), colnames(temp))],
-                 stringsAsFactors = FALSE)
+      data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID), setdiff(colnames(database@spectra.info), colnames(temp))], stringsAsFactors = FALSE)
     temp <- tibble::as_tibble(temp)
     return(temp)
     
@@ -384,9 +376,7 @@ get_iden_info = function(object,
           names(identification.result))
   temp <- identification.result[[temp]]
   temp <-
-    data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID),
-                                           setdiff(colnames(database@spectra.info), colnames(temp))],
-               stringsAsFactors = FALSE)
+    data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID), setdiff(colnames(database@spectra.info), colnames(temp))], stringsAsFactors = FALSE)
   temp <- tibble::as_tibble(temp)
   temp
 }
@@ -399,7 +389,7 @@ get_iden_info = function(object,
 #' @title Get MS2 match plots from a metIdentifyClass object
 #' @description Get MS2 match plots from a metIdentifyClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param database Used database (databaseClass).
 #' @param which.peak Peak name(s) or "all". You can use which_has_identification functions to get what peaks have identifications.
@@ -478,8 +468,7 @@ ms2plot <-
       if (!which.peak %in% object@ms1.data$name)
         stop(which.peak, " is not in peak table, please check it.\n")
       ms2.spectra.name <-
-        object@match.result$MS2.spectra.name[match(which.peak,
-                                                   object@match.result$MS1.peak.name)]
+        object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)]
       if (is.na(ms2.spectra.name)) {
         message(crayon::red(which.peak, "has no MS2 spectrum."))
         return()
@@ -495,9 +484,7 @@ ms2plot <-
       if (nrow(matched.info) > 1) {
         message(crayon::green("There are ", nrow(matched.info), " identifications."))
         message(crayon::green(paste(
-          paste(seq_len(nrow(matched.info)),
-                as.character(matched.info[, 1]), sep = ":"),
-          collapse = "\n"
+          paste(seq_len(nrow(matched.info)), as.character(matched.info[, 1]), sep = ":"), collapse = "\n"
         )))
         # cat("\n")
         which.identification <- "test"
@@ -614,8 +601,7 @@ ms2plot <-
         temp.ms2.spectrum.name <-
           names(identification.result)[anno.idx]
         temp.peak.name <-
-          match.result$MS1.peak.name[match(temp.ms2.spectrum.name,
-                                           match.result$MS2.spectra.name)]
+          match.result$MS1.peak.name[match(temp.ms2.spectrum.name, match.result$MS2.spectra.name)]
         
         if (!one.folder) {
           temp.path <- file.path(
@@ -670,9 +656,7 @@ ms2plot <-
                 ce = temp.matched.info["CE"]
               )
             exp.spectrum <-
-              ms2.info[[match(match.result$MS2.spectra.name[match(temp.peak.name,
-                                                                  match.result$MS1.peak.name)],
-                              names(ms2.info))]]
+              ms2.info[[match(match.result$MS2.spectra.name[match(temp.peak.name, match.result$MS1.peak.name)], names(ms2.info))]]
             range.mz <-
               range(c(lib.spectrum[, "mz"], exp.spectrum[, "mz"]))
             
@@ -707,11 +691,9 @@ ms2plot <-
       }
       
       if (masstools::get_os() == "windows") {
-        bpparam = BiocParallel::SnowParam(workers = threads,
-                                          progressbar = TRUE)
+        bpparam = BiocParallel::SnowParam(workers = threads, progressbar = TRUE)
       } else{
-        bpparam = BiocParallel::MulticoreParam(workers = threads,
-                                               progressbar = TRUE)
+        bpparam = BiocParallel::MulticoreParam(workers = threads, progressbar = TRUE)
       }
       
       BiocParallel::bplapply(
@@ -747,37 +729,38 @@ ms2plot <-
 #' @title Get the peak names which have identifications
 #' @description Get the peak names which have identifications.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @return Peak names with identifications.
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-which_has_identification = function(object) {
-  if (!is(object, "metIdentifyClass"))
-    stop("Only for metIdentifyClass\n")
-  
-  if (is.null(object@identification.result[[1]])) {
-    message(crayon::yellow("No identifications in this object."))
-    return(NULL)
+which_has_identification <-
+  function(object) {
+    if (!is(object, "metIdentifyClass"))
+      stop("Only for metIdentifyClass\n")
+    
+    if (is.null(object@identification.result[[1]])) {
+      message(crayon::yellow("No identifications in this object."))
+      return(NULL)
+    }
+    
+    if (nrow(object@match.result) != 0) {
+      temp <-
+        object@match.result[match(names(object@identification.result),
+                                  object@match.result$MS2.spectra.name), c(3, 4)]
+    } else{
+      temp <- names(object@identification.result) %>%
+        data.frame(
+          "MS1.peak.name" = .,
+          MS2.spectra.name = NA,
+          stringsAsFactors = FALSE
+        )
+    }
+    rownames(temp) <- NULL
+    return(temp)
   }
-  
-  if (nrow(object@match.result) != 0) {
-    temp <-
-      object@match.result[match(names(object@identification.result),
-                                object@match.result$MS2.spectra.name), c(3, 4)]
-  } else{
-    temp <- names(object@identification.result) %>%
-      data.frame(
-        "MS1.peak.name" = .,
-        MS2.spectra.name = NA,
-        stringsAsFactors = FALSE
-      )
-  }
-  rownames(temp) <- NULL
-  return(temp)
-}
 
 
 
@@ -788,7 +771,7 @@ which_has_identification = function(object) {
 #' @title Filter identifications according to m/z error, RT error, MS similarity and total score
 #' @description Filter identifications according to m/z error, RT error, MS similarity and total score.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object A metIdentifyClass object.
 #' @param ms1.match.ppm MS1 match ppm.
 #' @param rt.match.tol RT match tolerance.
@@ -799,47 +782,48 @@ which_has_identification = function(object) {
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-filter_identification = function(object,
-                                 ms1.match.ppm = 25,
-                                 rt.match.tol = 30,
-                                 ms2.match.tol = 0.5,
-                                 total.score.tol = 0.5) {
-  if (!is(object, "metIdentifyClass")) {
-    stop("Only for metIdentifyClass\n")
+filter_identification <-
+  function(object,
+           ms1.match.ppm = 25,
+           rt.match.tol = 30,
+           ms2.match.tol = 0.5,
+           total.score.tol = 0.5) {
+    if (!is(object, "metIdentifyClass")) {
+      stop("Only for metIdentifyClass\n")
+    }
+    
+    object@ms1.match.ppm <- ms1.match.ppm
+    object@rt.match.tol <- rt.match.tol
+    object@ms2.match.tol <- ms2.match.tol
+    object@total.score.tol <- total.score.tol
+    
+    identification.result <- object@identification.result
+    
+    identification.result <-
+      lapply(identification.result, function(x) {
+        RT.error <- x$RT.error
+        RT.error[is.na(RT.error)] <- rt.match.tol - 1
+        SS <- x$SS
+        SS[is.na(SS)] <- ms2.match.tol + 1
+        SS[SS == 0] <- ms2.match.tol + 1
+        x <-
+          x[which(
+            x$mz.error < ms1.match.ppm & RT.error < rt.match.tol &
+              SS > ms2.match.tol &
+              x$Total.score > total.score.tol
+          ), , drop = FALSE]
+      })
+    
+    temp.idx <-
+      which(unlist(lapply(identification.result, function(x) {
+        nrow(x) != 0
+      })))
+    
+    identification.result <-
+      identification.result[temp.idx]
+    object@identification.result <- identification.result
+    object
   }
-  
-  object@ms1.match.ppm <- ms1.match.ppm
-  object@rt.match.tol <- rt.match.tol
-  object@ms2.match.tol <- ms2.match.tol
-  object@total.score.tol <- total.score.tol
-  
-  identification.result <- object@identification.result
-  
-  identification.result <-
-    lapply(identification.result, function(x) {
-      RT.error <- x$RT.error
-      RT.error[is.na(RT.error)] <- rt.match.tol - 1
-      SS <- x$SS
-      SS[is.na(SS)] <- ms2.match.tol + 1
-      SS[SS == 0] <- ms2.match.tol + 1
-      x <-
-        x[which(
-          x$mz.error < ms1.match.ppm & RT.error < rt.match.tol &
-            SS > ms2.match.tol &
-            x$Total.score > total.score.tol
-        ), , drop = FALSE]
-    })
-  
-  temp.idx <-
-    which(unlist(lapply(identification.result, function(x) {
-      nrow(x) != 0
-    })))
-  
-  identification.result <-
-    identification.result[temp.idx]
-  object@identification.result <- identification.result
-  object
-}
 
 
 
@@ -848,7 +832,7 @@ filter_identification = function(object,
 #' @title Get spectra of peaks from metIdentifyClass object
 #' @description Get spectra of peaks from metIdentifyClass object.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object metIdentifyClass.
 #' @param peak.name Peak name.
 #' @return A MS2 spectrum.
@@ -856,20 +840,20 @@ filter_identification = function(object,
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-get_ms2_spectrum_from_object = function(object,
-                                        peak.name) {
-  if (!is(object, "metIdentifyClass"))
-    stop("Only for metIdentifyClass\n")
-  if (missing(peak.name))
-    stop('Please provide peak name.\n')
-  
-  if (nrow(object@match.result) == 0) {
-    message(crayon::red('No MS2 spectrum in this result.'))
-    return(NULL)
+get_ms2_spectrum_from_object <-
+  function(object, peak.name) {
+    if (!is(object, "metIdentifyClass"))
+      stop("Only for metIdentifyClass\n")
+    if (missing(peak.name))
+      stop('Please provide peak name.\n')
+    
+    if (nrow(object@match.result) == 0) {
+      message(crayon::red('No MS2 spectrum in this result.'))
+      return(NULL)
+    }
+    
+    object@ms2.info[[which(object@match.result$MS2.spectra.name[match(peak.name, object@match.result$MS1.peak.name)] == names(object@ms2.info))]]
   }
-  
-  object@ms2.info[[which(object@match.result$MS2.spectra.name[match(peak.name, object@match.result$MS1.peak.name)] == names(object@ms2.info))]]
-}
 
 
 
@@ -880,7 +864,7 @@ get_ms2_spectrum_from_object = function(object,
 #' @title Filter adducts.
 #' @description Filter adducts.
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
+#' \email{xiaotao.shen@@outlook.com}
 #' @param object metIdentifyClass.
 #' @param remove_adduct What adduct you want to remove from annotation result. Like '(M-H)-'. All the adduct list can be found here:
 #' data("hilic.pos", package = 'metid'), data("hilic.neg", package = 'metid'),
@@ -891,53 +875,53 @@ get_ms2_spectrum_from_object = function(object,
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
 
-filter_adducts = function(object,
-                          remove_adduct = NULL) {
-  if (!is(object, "metIdentifyClass"))
-    stop("Only for metIdentifyClass\n")
-  if (missing(remove_adduct))
-    stop('Please provide peak name.\n')
-  
-  if (is.null(remove_adduct)) {
-    return(object)
-  }
-  
-  message(crayon::yellow(paste(remove_adduct, collapse = ";")),
-      " will be removed from the annotation result.\n")
-  
-  object@adduct.table <-
-    object@adduct.table %>%
-    dplyr::filter(!adduct %in% remove_adduct)
-  
-  if (length(object@identification.result) == 0) {
-    return(object)
-  } else{
-    object@identification.result <-
-      purrr::map(
-        .x = object@identification.result,
-        .f = function(x) {
-          x %>%
-            dplyr::filter(!Adduct %in% remove_adduct)
-        }
-      )
+filter_adducts <-
+  function(object, remove_adduct = NULL) {
+    if (!is(object, "metIdentifyClass"))
+      stop("Only for metIdentifyClass\n")
+    if (missing(remove_adduct))
+      stop('Please provide peak name.\n')
     
-    remove_idx <-
-      purrr::map(
-        .x = object@identification.result,
-        .f = function(x) {
-          nrow(x)
-        }
-      ) %>% unlist()
-    
-    remove_idx <- which(remove_idx == 0)
-    if (length(remove_idx) > 0) {
-      object@identification.result <-
-        object@identification.result[-remove_idx]
+    if (is.null(remove_adduct)) {
+      return(object)
     }
+    
+    message(crayon::yellow(paste(remove_adduct, collapse = ";")),
+            " will be removed from the annotation result.\n")
+    
+    object@adduct.table <-
+      object@adduct.table %>%
+      dplyr::filter(!adduct %in% remove_adduct)
     
     if (length(object@identification.result) == 0) {
-      object@identification.result <- list()
+      return(object)
+    } else{
+      object@identification.result <-
+        purrr::map(
+          .x = object@identification.result,
+          .f = function(x) {
+            x %>%
+              dplyr::filter(!Adduct %in% remove_adduct)
+          }
+        )
+      
+      remove_idx <-
+        purrr::map(
+          .x = object@identification.result,
+          .f = function(x) {
+            nrow(x)
+          }
+        ) %>% unlist()
+      
+      remove_idx <- which(remove_idx == 0)
+      if (length(remove_idx) > 0) {
+        object@identification.result <-
+          object@identification.result[-remove_idx]
+      }
+      
+      if (length(object@identification.result) == 0) {
+        object@identification.result <- list()
+      }
+      return(object)
     }
-    return(object)
   }
-}

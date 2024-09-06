@@ -1,5 +1,9 @@
 
 
+
+
+
+
 # ###HILIC Positive
 # setwd("D:/study/database and library/inhouse/Metabolite database/RT correction/HILIC/POS")
 # metabolite.info <- readr::read_csv("metabolite.info_HILIC.csv")
@@ -466,349 +470,371 @@
 #
 # save(msDatabase_hilic0.0.1, file = "msDatabase_hilic0.0.1")
 
-
-#' @title Correct RTs of metabolites in database using internal standard list
-#' @description Correct RTs of metabolites in database using internal standard list.
+#' Correct Retention Time (RT) in a Spectral Database
+#'
+#' This function corrects the retention time (RT) information in a spectral database using a reference table of internal standards from an experiment and a corresponding table from the database. The correction can be performed using different methods such as polynomial fitting or loess smoothing.
+#'
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param experiment.is.table Experiment internal standard table.
-#' @param database.is.table Database internal standard table.
-#' @param database Database, must be datasetClass object.
-#' @param method polyline or loess.
-#' @param poly A numeric vector.
-#' @param degree A numeric vector.
-#' @param path Work directory.
-#' @return A metIdentifyClass object.
+#' \email{xiaotao.shen@@outlook.com}
+#' @param experiment.is.table A data frame containing the internal standards (IS) information from the experiment. It should include columns for retention time (RT) and other relevant information.
+#' @param database.is.table A data frame containing the internal standards (IS) information from the database. It should include retention time (RT) values corresponding to the database spectra.
+#' @param database A `databaseClass` object that contains the database to be corrected.
+#' @param method A character string specifying the method for RT correction. Options are `"polyline"` for polynomial fitting or `"loess"` for loess smoothing. Defaults to `"polyline"`.
+#' @param poly A numeric vector specifying the polynomial degrees to use for the correction when `method = "polyline"`. Defaults to `c(1, 2, 3, 4, 5)`.
+#' @param degree A numeric vector specifying the degree for loess smoothing when `method = "loess"`. Defaults to `c(1, 2)`.
+#' @param path A character string specifying the directory to save intermediate files. Defaults to the current directory (`"."`).
+#'
+#' @return A `databaseClass` object with corrected RT values.
+#'
+#' @details
+#' The function first writes a table of features from the database to a CSV file, which is used in the `correct_rt` function to perform the retention time correction based on the provided internal standards tables. The corrected RT values are then updated in the `databaseClass` object.
+#'
+#' The `method` parameter allows the user to choose between polynomial fitting (`"polyline"`) and loess smoothing (`"loess"`) for the RT correction. The `poly` and `degree` parameters specify the details of the polynomial or loess fitting, respectively.
+#'
+#' Intermediate files generated during the process are saved in the directory specified by `path`, but are removed after use.
+#'
+#' @examples
+#' \dontrun{
+#' # Correct RT in a database using polynomial fitting
+#' corrected_db <- correct_database_rt(
+#'   experiment.is.table = experiment_table,
+#'   database.is.table = database_table,
+#'   database = db_object,
+#'   method = "polyline",
+#'   poly = 1:3,
+#'   degree = 2,
+#'   path = "output_directory"
+#' )
+#' }
+#'
+#' @seealso \code{\link{databaseClass}}, \code{\link{correct_rt}}
+#'
 #' @export
 
-correct_database_rt = function(experiment.is.table,
-                               database.is.table,
-                               database,
-                               method = c("polyline", "loess"),
-                               poly = c(1, 2, 3, 4, 5),
-                               degree = c(1, 2),
-                               path = "."){
-  dir.create(path, showWarnings = FALSE)
-  method <- match.arg(method)
-  
-  cor.feature.table <-
-    as.data.frame(database@spectra.info[, c("Lab.ID", "Compound.name", "RT")])
-  write.csv(
-    cor.feature.table,
-    file = file.path(path, "cor.feature.table.csv"),
-    row.names = FALSE
-  )
-  
-  predicted.rt <-
-    correct_rt(
-      ref.is.table = experiment.is.table,
-      cor.is.table = database.is.table,
-      cor.feature.table = "cor.feature.table.csv",
-      method = method,
-      poly = poly,
-      degree = degree,
-      path = path,
-      return.predicted.rt = TRUE
-    )
-  unlink(x = file.path(path, "cor.feature.table.csv"))
-  predicted.rt <- predicted.rt$RT.correction
-  database@spectra.info$RT <- predicted.rt
-  return(database)
-}
-
-
-
-correct_rt = function(ref.is.table,
-                      cor.is.table,
-                      cor.feature.table,
-                      method = c("polyline", "loess"),
-                      poly = c(1, 2, 3, 4, 5),
-                      degree = c(1, 2),
-                      path = ".",
-                      return.predicted.rt = TRUE){
-  # dir.create(path)
-  method <- match.arg(method)
-  
-  ref.is.table <-
-    readTable(file = file.path(path, ref.is.table))
-  cor.is.table <-
-    readTable(file = file.path(path, cor.is.table))
-  cor.feature.table <-
-    readTable(file = file.path(path, cor.feature.table))
-  ref.is.table <- as.data.frame(ref.is.table)
-  cor.is.table <- as.data.frame(cor.is.table)
-  cor.feature.table <- as.data.frame(cor.feature.table)
-  
-  ref.is.table[, 3] <- as.numeric(ref.is.table[, 3])
-  cor.is.table[, 3] <- as.numeric(cor.is.table[, 3])
-  cor.feature.table[, 3] <-
-    as.numeric(cor.feature.table[, 3])
-  
-  remain.idx <-
-    which(!is.na(ref.is.table[, 3]) & !is.na(cor.is.table[, 3]))
-  ref.is.table <-
-    ref.is.table[remain.idx, , drop = FALSE]
-  cor.is.table <-
-    cor.is.table[remain.idx, , drop = FALSE]
-  
-  rt.table <- data.frame(ref = ref.is.table[, 3],
-                         cor = cor.is.table[, 3],
-                         stringsAsFactors = FALSE)
-  
-  rt1 <- rt.table$ref
-  rt2 <- rt.table$cor
-  
-  if (method == "polyline") {
-    poly <- poly[which(poly < nrow(rt.table) - 1)]
-    mse <- bestpoly(
-      x = rt.table$cor,
-      y = rt.table$ref,
-      poly = poly,
-      path = path
-    )
-    idx <- poly[which.min(mse)]
+correct_database_rt <-
+  function(experiment.is.table,
+           database.is.table,
+           database,
+           method = c("polyline", "loess"),
+           poly = c(1, 2, 3, 4, 5),
+           degree = c(1, 2),
+           path = ".") {
+    dir.create(path, showWarnings = FALSE)
+    method <- match.arg(method)
     
-    model <- lm(rt1 ~ poly(rt2, idx))
-  } else{
-    result <- bestloess(
-      x = rt.table$cor,
-      y = rt.table$ref,
-      span.begin = 0.5,
-      span.end = 1,
-      span.step = 0.1,
-      degree = degree,
-      path = path
-    )
-    idx <- which.min(result[, 3])
-    model <- loess(rt1 ~ rt2,
-                   span = result[idx, 2],
-                   degree = result[idx, 1])
-    
-  }
-  
-  raw.rt <- cor.feature.table$RT
-  
-  predict.rt <- predict(object = model,
-                        newdata = data.frame(rt2 = raw.rt))
-  predict.rt[raw.rt < min(rt2)] <-
-    raw.rt[raw.rt < min(rt2)]
-  predict.rt[raw.rt > max(rt2)] <-
-    raw.rt[raw.rt > max(rt2)]
-  
-  temp.data <- data.frame(raw.rt, predict.rt,
-                          stringsAsFactors = FALSE)
-  
-  # temp.data
-  
-  plot <-
-    ggplot2::ggplot(data = temp.data, ggplot2::aes(x = raw.rt, y = predict.rt)) +
-    ggplot2::geom_point(color = "black") +
-    # ggplot2::geom_line() +
-    ggplot2::geom_smooth(method = "loess",
-                         color = "black",
-                         fill = "gray") +
-    ggplot2::geom_abline(intercept = 0,
-                         slope = 1,
-                         color = "red") +
-    ggplot2::theme_bw()
-  
-  ggplot2::ggsave(
-    filename = file.path(path, "Raw.RT vs Predict.RT plot.pdf"),
-    plot = plot,
-    width = 8,
-    height = 6
-  )
-  
-  cor.feature.table <- data.frame(cor.feature.table,
-                                  "RT.correction" = predict.rt,
-                                  stringsAsFactors = FALSE)
-  if (return.predicted.rt) {
-    return(cor.feature.table)
-  } else{
+    cor.feature.table <-
+      as.data.frame(database@spectra.info[, c("Lab.ID", "Compound.name", "RT")])
     write.csv(
       cor.feature.table,
-      file = file.path(path, "Feature.table.with.corrected.RT.csv"),
+      file = file.path(path, "cor.feature.table.csv"),
       row.names = FALSE
     )
+    
+    predicted.rt <-
+      correct_rt(
+        ref.is.table = experiment.is.table,
+        cor.is.table = database.is.table,
+        cor.feature.table = "cor.feature.table.csv",
+        method = method,
+        poly = poly,
+        degree = degree,
+        path = path,
+        return.predicted.rt = TRUE
+      )
+    unlink(x = file.path(path, "cor.feature.table.csv"))
+    predicted.rt <- predicted.rt$RT.correction
+    database@spectra.info$RT <- predicted.rt
+    return(database)
   }
-}
+
+
+
+correct_rt <-
+  function(ref.is.table,
+           cor.is.table,
+           cor.feature.table,
+           method = c("polyline", "loess"),
+           poly = c(1, 2, 3, 4, 5),
+           degree = c(1, 2),
+           path = ".",
+           return.predicted.rt = TRUE) {
+    # dir.create(path)
+    method <- match.arg(method)
+    
+    ref.is.table <-
+      readTable(file = file.path(path, ref.is.table))
+    cor.is.table <-
+      readTable(file = file.path(path, cor.is.table))
+    cor.feature.table <-
+      readTable(file = file.path(path, cor.feature.table))
+    ref.is.table <- as.data.frame(ref.is.table)
+    cor.is.table <- as.data.frame(cor.is.table)
+    cor.feature.table <- as.data.frame(cor.feature.table)
+    
+    ref.is.table[, 3] <- as.numeric(ref.is.table[, 3])
+    cor.is.table[, 3] <- as.numeric(cor.is.table[, 3])
+    cor.feature.table[, 3] <-
+      as.numeric(cor.feature.table[, 3])
+    
+    remain.idx <-
+      which(!is.na(ref.is.table[, 3]) & !is.na(cor.is.table[, 3]))
+    ref.is.table <-
+      ref.is.table[remain.idx, , drop = FALSE]
+    cor.is.table <-
+      cor.is.table[remain.idx, , drop = FALSE]
+    
+    rt.table <- data.frame(ref = ref.is.table[, 3],
+                           cor = cor.is.table[, 3],
+                           stringsAsFactors = FALSE)
+    
+    rt1 <- rt.table$ref
+    rt2 <- rt.table$cor
+    
+    if (method == "polyline") {
+      poly <- poly[which(poly < nrow(rt.table) - 1)]
+      mse <- bestpoly(
+        x = rt.table$cor,
+        y = rt.table$ref,
+        poly = poly,
+        path = path
+      )
+      idx <- poly[which.min(mse)]
+      
+      model <- lm(rt1 ~ poly(rt2, idx))
+    } else{
+      result <- bestloess(
+        x = rt.table$cor,
+        y = rt.table$ref,
+        span.begin = 0.5,
+        span.end = 1,
+        span.step = 0.1,
+        degree = degree,
+        path = path
+      )
+      idx <- which.min(result[, 3])
+      model <- loess(rt1 ~ rt2, span = result[idx, 2], degree = result[idx, 1])
+      
+    }
+    
+    raw.rt <- cor.feature.table$RT
+    
+    predict.rt <- predict(object = model, newdata = data.frame(rt2 = raw.rt))
+    predict.rt[raw.rt < min(rt2)] <-
+      raw.rt[raw.rt < min(rt2)]
+    predict.rt[raw.rt > max(rt2)] <-
+      raw.rt[raw.rt > max(rt2)]
+    
+    temp.data <- data.frame(raw.rt, predict.rt, stringsAsFactors = FALSE)
+    
+    # temp.data
+    
+    plot <-
+      ggplot2::ggplot(data = temp.data, ggplot2::aes(x = raw.rt, y = predict.rt)) +
+      ggplot2::geom_point(color = "black") +
+      # ggplot2::geom_line() +
+      ggplot2::geom_smooth(method = "loess",
+                           color = "black",
+                           fill = "gray") +
+      ggplot2::geom_abline(intercept = 0,
+                           slope = 1,
+                           color = "red") +
+      ggplot2::theme_bw()
+    
+    ggplot2::ggsave(
+      filename = file.path(path, "Raw.RT vs Predict.RT plot.pdf"),
+      plot = plot,
+      width = 8,
+      height = 6
+    )
+    
+    cor.feature.table <- data.frame(cor.feature.table,
+                                    "RT.correction" = predict.rt,
+                                    stringsAsFactors = FALSE)
+    if (return.predicted.rt) {
+      return(cor.feature.table)
+    } else{
+      write.csv(
+        cor.feature.table,
+        file = file.path(path, "Feature.table.with.corrected.RT.csv"),
+        row.names = FALSE
+      )
+    }
+  }
 
 
 
 
 ###parameters optimization
-bestpoly = function(x,
-                    y,
-                    poly = c(1, 2, 3, 4),
-                    path = "."){
-  pre.all <- list()
-  for (i in seq_along(poly)) {
-    # cat(i, " ")
-    ##LOO
-    pre <- NULL
-    for (j in seq_along(x)) {
-      # cat(j, " ")
-      y1 <- y[-j]
-      x1 <- x[-j]
-      model <- lm(y1 ~ poly(x1, poly[i]))
-      pre[j] <- predict(object = model,
-                        newdata = data.frame(x1 = x[j]))
+bestpoly <-
+  function(x,
+           y,
+           poly = c(1, 2, 3, 4),
+           path = ".") {
+    pre.all <- list()
+    for (i in seq_along(poly)) {
+      # cat(i, " ")
+      ##LOO
+      pre <- NULL
+      for (j in seq_along(x)) {
+        # cat(j, " ")
+        y1 <- y[-j]
+        x1 <- x[-j]
+        model <- lm(y1 ~ poly(x1, poly[i]))
+        pre[j] <- predict(object = model, newdata = data.frame(x1 = x[j]))
+      }
+      pre.all[[i]] <- pre
     }
-    pre.all[[i]] <- pre
+    
+    mse <-
+      unlist(lapply(pre.all, function(x) {
+        sum((y - x) ^ 2) / length(y)
+      }))
+    
+    # y.lim1 <- 0.8*min(c(y, unlist(lapply(pre.all, min))))
+    # y.lim2 <- 1.2*max(c(y, unlist(lapply(pre.all, max))))
+    
+    temp.data1 <- do.call(c, pre.all)
+    temp.data1 <- data.frame(
+      Cor.RT = rep(x, length(pre.all)),
+      Ref.RT = temp.data1,
+      Poly.MSE = as.character(rep(paste(
+        poly, round(mse, 3), sep = ": "
+      ), each = length(x))),
+      stringsAsFactors = FALSE
+    )
+    
+    temp.data2 <- data.frame(Cor.RT = x,
+                             Ref.RT = y,
+                             stringsAsFactors = FALSE)
+    
+    plot <-
+      ggplot2::ggplot(data = temp.data2, ggplot2::aes(x = Cor.RT, y = Ref.RT)) +
+      ggplot2::geom_point(color = "black") +
+      ggplot2::geom_line() +
+      ggplot2::geom_smooth(method = "loess",
+                           color = "black",
+                           fill = "gray") +
+      ggplot2::geom_point(data = temp.data1,
+                          mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Poly.MSE)) +
+      ggplot2::geom_line(data = temp.data1,
+                         mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Poly.MSE)) +
+      ggplot2::geom_smooth(
+        data = temp.data1,
+        mapping = ggplot2::aes(
+          x = Cor.RT,
+          y = Ref.RT,
+          color = Poly.MSE,
+          fill = Poly.MSE
+        ),
+        method = "loess"
+      ) +
+      # ggthemes::theme_pander() +
+      ggplot2::theme_bw()
+    ggplot2::ggsave(
+      filename = file.path(path, "MSE.plot.pdf"),
+      plot = plot,
+      width = 8,
+      height = 6
+    )
+    
+    return(mse)
   }
-  
-  mse <-
-    unlist(lapply(pre.all, function(x) {
-      sum((y - x) ^ 2) / length(y)
-    }))
-  
-  # y.lim1 <- 0.8*min(c(y, unlist(lapply(pre.all, min))))
-  # y.lim2 <- 1.2*max(c(y, unlist(lapply(pre.all, max))))
-  
-  temp.data1 <- do.call(c, pre.all)
-  temp.data1 <- data.frame(
-    Cor.RT = rep(x, length(pre.all)),
-    Ref.RT = temp.data1,
-    Poly.MSE = as.character(rep(paste(
-      poly, round(mse, 3), sep = ": "
-    ), each = length(x))),
-    stringsAsFactors = FALSE
-  )
-  
-  temp.data2 <- data.frame(Cor.RT = x,
-                           Ref.RT = y,
-                           stringsAsFactors = FALSE)
-  
-  plot <-
-    ggplot2::ggplot(data = temp.data2,
-                    ggplot2::aes(x = Cor.RT, y = Ref.RT)) +
-    ggplot2::geom_point(color = "black") +
-    ggplot2::geom_line() +
-    ggplot2::geom_smooth(method = "loess",
-                         color = "black",
-                         fill = "gray") +
-    ggplot2::geom_point(data = temp.data1,
-                        mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Poly.MSE)) +
-    ggplot2::geom_line(data = temp.data1,
-                       mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Poly.MSE)) +
-    ggplot2::geom_smooth(
-      data = temp.data1,
-      mapping = ggplot2::aes(
-        x = Cor.RT,
-        y = Ref.RT,
-        color = Poly.MSE,
-        fill = Poly.MSE
-      ),
-      method = "loess"
-    ) +
-    # ggthemes::theme_pander() +
-    ggplot2::theme_bw()
-  ggplot2::ggsave(
-    filename = file.path(path, "MSE.plot.pdf"),
-    plot = plot,
-    width = 8,
-    height = 6
-  )
-  
-  return(mse)
-}
 
 
 
-bestloess = function(x,
-                     y,
-                     span.begin = 0.5,
-                     span.end = 1,
-                     span.step = 0.1,
-                     degree = c(1, 2),
-                     path = "."){
-  span <- seq(span.begin, span.end, span.step)
-  para <- NULL
-  for (i in seq_along(degree)) {
-    para <- rbind(para, cbind(degree[i], span))
-  }
-  colnames(para) <- c("degree", "span")
-  
-  y <- y[order(x)]
-  x <- sort(x)
-  
-  pre.all <- list()
-  
-  for (i in seq_len(nrow(para))) {
-    temp.degree <- para[i, 1]
-    temp.span <- para[i, 2]
-    pre <- NULL
-    # for(j in 2:(length(x) - 1)) {
-    for (j in seq_along(x)) {
-      y1 <- y
-      x1 <- x
-      # y1 <- y[-j]
-      # x1 <- x[-j]
-      model <-
-        loess(y1 ~ x1, span = temp.span, degree = temp.degree)
-      pre[j] <- predict(object = model,
-                        newdata = data.frame(x1 = x[j]))
+bestloess <-
+  function(x,
+           y,
+           span.begin = 0.5,
+           span.end = 1,
+           span.step = 0.1,
+           degree = c(1, 2),
+           path = ".") {
+    span <- seq(span.begin, span.end, span.step)
+    para <- NULL
+    for (i in seq_along(degree)) {
+      para <- rbind(para, cbind(degree[i], span))
     }
-    pre.all[[i]] <- pre[!is.na(pre)]
+    colnames(para) <- c("degree", "span")
+    
+    y <- y[order(x)]
+    x <- sort(x)
+    
+    pre.all <- list()
+    
+    for (i in seq_len(nrow(para))) {
+      temp.degree <- para[i, 1]
+      temp.span <- para[i, 2]
+      pre <- NULL
+      # for(j in 2:(length(x) - 1)) {
+      for (j in seq_along(x)) {
+        y1 <- y
+        x1 <- x
+        # y1 <- y[-j]
+        # x1 <- x[-j]
+        model <-
+          loess(y1 ~ x1, span = temp.span, degree = temp.degree)
+        pre[j] <- predict(object = model, newdata = data.frame(x1 = x[j]))
+      }
+      pre.all[[i]] <- pre[!is.na(pre)]
+    }
+    
+    mse <-
+      unlist(lapply(pre.all, function(x) {
+        sum((y[2:(length(y) - 1)] - x) ^ 2) / length(y)
+      }))
+    result <- data.frame(para, mse, stringsAsFactors = FALSE)
+    
+    
+    temp.data1 <- do.call(c, pre.all)
+    para <- paste(para[, 1], para[, 2], sep = ";")
+    
+    temp.data1 <- data.frame(
+      Cor.RT = rep(x, length(pre.all)),
+      Ref.RT = temp.data1,
+      Degree.Span.MSE = as.character(rep(paste(
+        para, round(mse, 3), sep = ": "
+      ), each = length(x))),
+      stringsAsFactors = FALSE
+    )
+    
+    
+    temp.data2 <- data.frame(Cor.RT = x,
+                             Ref.RT = y,
+                             stringsAsFactors = FALSE)
+    
+    plot <-
+      ggplot2::ggplot(data = temp.data2, ggplot2::aes(x = Cor.RT, y = Ref.RT)) +
+      ggplot2::geom_point(color = "black") +
+      ggplot2::geom_line() +
+      ggplot2::geom_smooth(method = "loess",
+                           color = "black",
+                           fill = "gray") +
+      ggplot2::geom_point(
+        data = temp.data1,
+        mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Degree.Span.MSE)
+      ) +
+      ggplot2::geom_line(
+        data = temp.data1,
+        mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Degree.Span.MSE)
+      ) +
+      ggplot2::geom_smooth(
+        data = temp.data1,
+        mapping = ggplot2::aes(
+          x = Cor.RT,
+          y = Ref.RT,
+          color = Degree.Span.MSE,
+          fill = Degree.Span.MSE
+        ),
+        method = "loess"
+      ) +
+      ggplot2::theme_bw()
+    
+    ggplot2::ggsave(
+      filename = file.path(path, "MSE.plot.pdf"),
+      plot = plot,
+      width = 8,
+      height = 6
+    )
+    return(result)
   }
-  
-  mse <-
-    unlist(lapply(pre.all, function(x) {
-      sum((y[2:(length(y) - 1)] - x) ^ 2) / length(y)
-    }))
-  result <- data.frame(para, mse, stringsAsFactors = FALSE)
-  
-  
-  temp.data1 <- do.call(c, pre.all)
-  para <- paste(para[, 1], para[, 2], sep = ";")
-  
-  temp.data1 <- data.frame(
-    Cor.RT = rep(x, length(pre.all)),
-    Ref.RT = temp.data1,
-    Degree.Span.MSE = as.character(rep(paste(
-      para, round(mse, 3), sep = ": "
-    ), each = length(x))),
-    stringsAsFactors = FALSE
-  )
-  
-  
-  temp.data2 <- data.frame(Cor.RT = x,
-                           Ref.RT = y,
-                           stringsAsFactors = FALSE)
-  
-  plot <-
-    ggplot2::ggplot(data = temp.data2,
-                    ggplot2::aes(x = Cor.RT, y = Ref.RT)) +
-    ggplot2::geom_point(color = "black") +
-    ggplot2::geom_line() +
-    ggplot2::geom_smooth(method = "loess",
-                         color = "black",
-                         fill = "gray") +
-    ggplot2::geom_point(
-      data = temp.data1,
-      mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Degree.Span.MSE)
-    ) +
-    ggplot2::geom_line(
-      data = temp.data1,
-      mapping = ggplot2::aes(x = Cor.RT, y = Ref.RT, color = Degree.Span.MSE)
-    ) +
-    ggplot2::geom_smooth(
-      data = temp.data1,
-      mapping = ggplot2::aes(
-        x = Cor.RT,
-        y = Ref.RT,
-        color = Degree.Span.MSE,
-        fill = Degree.Span.MSE
-      ),
-      method = "loess"
-    ) +
-    ggplot2::theme_bw()
-  
-  ggplot2::ggsave(
-    filename = file.path(path, "MSE.plot.pdf"),
-    plot = plot,
-    width = 8,
-    height = 6
-  )
-  return(result)
-} 

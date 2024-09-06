@@ -2,20 +2,29 @@
 % Please edit documentation in R/1_metid_logo.R
 \name{metid_logo}
 \alias{metid_logo}
-\title{Show the base information of metid pacakge}
+\title{Display the metid Logo and Information}
 \usage{
 metid_logo()
 }
 \value{
-A ASCII log of metid
+This function prints messages and ASCII art to the console, but it does not return any value.
 }
 \description{
-Show the base information of metid pacakge.
+This function prints the metid logo in ASCII art along with version information
+and a link to the official website. It provides a visual and informative message 
+to users when they interact with the package.
+}
+\details{
+The function prints the following:
+
+- A thank you message for using `metid`
+
+- The current version of `metid` and the last update date
+
+- A URL link for more information
+
+- An ASCII art representation of the `metid` logo
 }
 \examples{
 metid_logo()
-}
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
 }

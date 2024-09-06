@@ -1,23 +1,36 @@
-#' @title Identify metabolites based on MS1 or MS/MS database for single peak.
-#' @description Identify metabolites based on MS1 or MS/MS database.
+#' Plot MS2 Spectra for a Single Peak in a mass_dataset Object
+#'
+#' This function generates MS2 spectra comparison plots for a single peak in a `mass_dataset` object by comparing experimental MS2 data with reference MS2 data from a spectral database.
+#'
+#' @param object A `mass_dataset` object containing the peak data.
+#' @param variable_id The ID of the peak to plot. Either `variable_id` or `variable_index` must be provided.
+#' @param variable_index The index of the peak to plot. Either `variable_id` or `variable_index` must be provided.
+#' @param polarity Character, ionization mode, either `"positive"` or `"negative"`. Defaults to `"positive"`.
+#' @param ms1.match.ppm Numeric, mass accuracy threshold for MS1 matching in parts per million (ppm). Defaults to `25`.
+#' @param ms2.match.ppm Numeric, mass accuracy threshold for MS2 matching in ppm. Defaults to `30`.
+#' @param mz.ppm.thr Numeric, m/z threshold in ppm for matching MS1 and MS2. Defaults to `400`.
+#' @param database A `databaseClass` object containing the reference spectral database for MS2 data.
+#' @param interactive_plot Logical, if `TRUE`, generates an interactive plot using `plotly`. Defaults to `FALSE`.
+#'
+#' @return A list of MS2 spectra comparison plots for the specified peak, with one plot per matched annotation. If `interactive_plot = TRUE`, the plots are returned as interactive `plotly` plots.
+#'
+#' @details
+#' This function retrieves the MS2 spectra for a specified peak and compares them to the reference MS2 spectra from a provided database. It generates a plot for each matched annotation, showing the experimental spectrum and the reference spectrum side by side.
+#'
+#' @examples
+#' \dontrun{
+#' # Plot MS2 spectra for a peak
+#' ms2_plots <- ms2_plot_mass_dataset(
+#'   object = mass_object,
+#'   variable_id = "P001",
+#'   database = reference_database
+#' )
+#' }
+#'
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param object A mass_dataset class obejct.
-#' @param variable_id variable_id
-#' @param variable_index variable_index
-#' @param polarity The polarity of data, "positive"or "negative".
-#' @param ms1.match.ppm Precursor match ppm tolerance.
-#' @param ms2.match.ppm Fragment ion match ppm tolerance.
-#' @param mz.ppm.thr Accurate mass tolerance for m/z error calculation.
-#' @param database MS2 database name or MS database.
-#' @param interactive_plot interactive_plot
-#' @return A list of ggplot2 object.
-#' @importFrom crayon yellow green red bgRed
-#' @importFrom magrittr %>%
-#' @importFrom masstools ms2_plot
+#' \email{xiaotao.shen@@outlook.com}
+#' @seealso \code{\link{mass_dataset}}, \code{\link{databaseClass}}
 #' @export
-#' @seealso The example and demo data of this function can be found
-#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 ms2_plot_mass_dataset <-
   function(object,
@@ -29,7 +42,7 @@ ms2_plot_mass_dataset <-
            mz.ppm.thr = 400,
            database,
            interactive_plot = FALSE) {
-    polarity = match.arg(polarity)
+    polarity <- match.arg(polarity)
     massdataset::check_object_class(object = object, class = "mass_dataset")
     
     if (nrow(object@annotation_table) == 0) {

@@ -1,37 +1,53 @@
-#' @title Identify metabolites based on MS1 or MS/MS database for single peak.
-#' @description Identify metabolites based on MS1 or MS/MS database.
+#' Annotate a Single Peak in a mass_dataset Object
+#'
+#' This function annotates a single peak in a `mass_dataset` object using MS1 and optionally MS2 data. It allows for matching with a reference database based on m/z, retention time (RT), and MS2 fragmentation patterns.
+#'
+#' @param object A `mass_dataset` object containing the peak data to annotate.
+#' @param variable_id The ID of the peak to annotate. Either `variable_id` or `variable_index` must be provided.
+#' @param variable_index The index of the peak to annotate. Either `variable_id` or `variable_index` must be provided.
+#' @param based_on_rt Logical, if `TRUE` (default), retention time will be used for matching.
+#' @param based_on_ms2 Logical, if `TRUE` (default), MS2 spectra will be used for matching if available.
+#' @param add_to_annotation_table Logical, if `TRUE`, the annotation results will be added to the annotation table in the object. Defaults to `FALSE`.
+#' @param ms1.match.ppm Numeric, mass accuracy threshold for MS1 matching in parts per million (ppm). Defaults to `25`.
+#' @param ms2.match.ppm Numeric, mass accuracy threshold for MS2 matching in ppm. Defaults to `30`.
+#' @param mz.ppm.thr Numeric, m/z threshold in ppm for matching MS1 and MS2. Defaults to `400`.
+#' @param ms2.match.tol Numeric, tolerance for MS2 fragment ion matching. Defaults to `0.5`.
+#' @param fraction.weight Numeric, weight for the MS2 fragmentation score. Defaults to `0.3`.
+#' @param dp.forward.weight Numeric, weight for the forward dot product in MS2 matching. Defaults to `0.6`.
+#' @param dp.reverse.weight Numeric, weight for the reverse dot product in MS2 matching. Defaults to `0.1`.
+#' @param rt.match.tol Numeric, retention time matching tolerance in seconds. Defaults to `30`.
+#' @param polarity Character, ionization mode, either `"positive"` or `"negative"`. Defaults to `"positive"`.
+#' @param ce Character, collision energy for MS2 matching. Defaults to `"all"`.
+#' @param column Character, chromatographic column type, either `"rp"` (reverse phase) or `"hilic"`. Defaults to `"rp"`.
+#' @param ms1.match.weight Numeric, weight of MS1 matching in total score calculation. Defaults to `0.25`.
+#' @param rt.match.weight Numeric, weight of RT matching in total score calculation. Defaults to `0.25`.
+#' @param ms2.match.weight Numeric, weight of MS2 matching in total score calculation. Defaults to `0.5`.
+#' @param total.score.tol Numeric, threshold for the total score. Defaults to `0.5`.
+#' @param candidate.num Numeric, the number of top candidates to retain for each peak. Defaults to `3`.
+#' @param database A `databaseClass` object containing the reference spectral database for annotation.
+#' @param threads Numeric, the number of threads to use for parallel processing. Defaults to `3`.
+#'
+#' @return Either the `mass_dataset` object with updated annotation table or a data frame containing the annotation results for the specified peak.
+#'
+#' @details
+#' This function performs peak annotation using MS1 data and optionally MS2 data for a single peak in a `mass_dataset` object. The matching process is based on m/z, retention time, and MS2 spectra comparison with a reference database. The results can either be returned as a data frame or added to the annotation table in the `mass_dataset` object.
+#'
+#' @examples
+#' \dontrun{
+#' # Annotate a single peak using MS1 and MS2 data
+#' annotation <- annotate_single_peak_mass_dataset(
+#'   object = mass_object,
+#'   variable_id = "P001",
+#'   database = reference_database,
+#'   based_on_rt = TRUE,
+#'   based_on_ms2 = TRUE
+#' )
+#' }
+#'
 #' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param object A mass_dataset class obejct.
-#' @param variable_id variable_id
-#' @param variable_index variable_index
-#' @param based_on_rt based_on_rt
-#' @param based_on_ms2 based_on_ms2
-#' @param add_to_annotation_table add_to_annotation_table
-#' @param ms1.match.ppm Precursor match ppm tolerance.
-#' @param ms2.match.ppm Fragment ion match ppm tolerance.
-#' @param mz.ppm.thr Accurate mass tolerance for m/z error calculation.
-#' @param ms2.match.tol MS2 match (MS2 similarity) tolerance.
-#' @param fraction.weight The weight for matched fragments.
-#' @param dp.forward.weight Forward dot product weight.
-#' @param dp.reverse.weight Reverse dot product weight.
-#' @param rt.match.tol RT match tolerance.
-#' @param polarity The polarity of data, "positive"or "negative".
-#' @param ce Collision energy. Please confirm the CE values in your database. Default is "all".
-#' @param column "hilic" (HILIC column) or "rp" (reverse phase).
-#' @param ms1.match.weight The weight of MS1 match for total score calculation.
-#' @param rt.match.weight The weight of RT match for total score calculation.
-#' @param ms2.match.weight The weight of MS2 match for total score calculation.
-#' @param total.score.tol Total score tolerance. The total score are referring to MS-DIAL.
-#' @param candidate.num The number of candidate.
-#' @param database MS2 database name or MS database.
-#' @param threads Number of threads
-#' @return A metIdentifyClass object.
-#' @importFrom crayon yellow green red bgRed
-#' @importFrom magrittr %>%
+#' \email{xiaotao.shen@@outlook.com}
+#' @seealso \code{\link{metIdentify_mass_dataset}}, \code{\link{mzIdentify_mass_dataset}}, \code{\link{databaseClass}}
 #' @export
-#' @seealso The example and demo data of this function can be found
-#' \url{https://tidymass.github.io/metid/articles/metid.html}
 
 annotate_single_peak_mass_dataset <-
   function(object,
@@ -85,7 +101,7 @@ annotate_single_peak_mass_dataset <-
       }
     }
     
-    if(!based_on_rt){
+    if (!based_on_rt) {
       rt.match.tol = 1000000
     }
     
@@ -116,29 +132,33 @@ annotate_single_peak_mass_dataset <-
     }
     
     if (!missing(variable_id)) {
-      
-      purrr::walk(variable_id, .f = function(temp_variable_id){
-        if (!temp_variable_id %in% object@variable_info$variable_id) {
-          stop(paste(temp_variable_id, "is not in variable_info.\n"))
-        }  
-      })
-        variable_index = match(variable_id, object@variable_info$variable_id)
-    } else{
-      
-      purrr::walk(variable_index, .f = function(temp_variable_index){
-        if (temp_variable_index <= 0 |
-            temp_variable_index > nrow(object@variable_info)) {
-          stop(
-            "variable_index ",
-            temp_variable_index,
-            " should be range from 1 to ",
-            nrow(object@variable_info)
-          )
+      purrr::walk(
+        variable_id,
+        .f = function(temp_variable_id) {
+          if (!temp_variable_id %in% object@variable_info$variable_id) {
+            stop(paste(temp_variable_id, "is not in variable_info.\n"))
+          }
         }
-      })
+      )
+      variable_index = match(variable_id, object@variable_info$variable_id)
+    } else{
+      purrr::walk(
+        variable_index,
+        .f = function(temp_variable_index) {
+          if (temp_variable_index <= 0 |
+              temp_variable_index > nrow(object@variable_info)) {
+            stop(
+              "variable_index ",
+              temp_variable_index,
+              " should be range from 1 to ",
+              nrow(object@variable_info)
+            )
+          }
+        }
+      )
     }
     
-    temp_object = object[variable_index,]
+    temp_object = object[variable_index, ]
     
     ######NO MS2 in object
     if (length(object@ms2_data) == 0 | !based_on_ms2) {
@@ -279,8 +299,7 @@ annotate_single_peak_mass_dataset <-
         object@annotation_table = as.data.frame(annotation_result)
       } else{
         object@annotation_table =
-          rbind(object@annotation_table,
-                annotation_result) %>%
+          rbind(object@annotation_table, annotation_result) %>%
           dplyr::arrange(variable_id, Level, dplyr::desc(Total.score))
         
         ###only remain top annotations
@@ -289,7 +308,7 @@ annotate_single_peak_mass_dataset <-
           dplyr::group_by(variable_id) %>%
           dplyr::slice_head(n = candidate.num) %>%
           dplyr::ungroup() %>%
-          dplyr::distinct(.keep_all = TRUE) %>% 
+          dplyr::distinct(.keep_all = TRUE) %>%
           as.data.frame()
       }
       
