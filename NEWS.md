@@ -174,3 +174,7 @@
 # Version 1.2.29 (2023-06-26)
 
 * Fix bugs in construct_mona_database function.
+
+# Version 1.2.31 (2024-09-06)
+
+* Update metid.

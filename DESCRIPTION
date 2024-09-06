@@ -1,8 +1,8 @@
 Type: Package
 Package: metid
 Title: Metabolite identification based on MS1 and MS2 spectra
-Version: 1.2.30
-Date: 2023-09-02
+Version: 1.2.31
+Date: 2024-09-06
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -74,7 +74,7 @@ VignetteBuilder:
 biocViews: Metabolomics, MassSpectrometry
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Remotes: 
     gitlab::tidymass/masstools,
     gitlab::tidymass/massdataset
