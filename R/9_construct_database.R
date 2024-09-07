@@ -29,7 +29,8 @@
 #' @examples
 #' \dontrun{
 #' # Construct a database from the current working directory
-#' db <- construct_database(path = ".", version = "1.0.0", metabolite.info.name = "metabolite_info.csv")
+#' db <- construct_database(path = ".", version = "1.0.0", 
+#' metabolite.info.name = "metabolite_info.csv")
 #' }
 #'
 #' @importFrom magrittr %>%

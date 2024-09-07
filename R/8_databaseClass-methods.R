@@ -118,7 +118,8 @@ setMethod(
 #' @examples
 #' \dontrun{
 #' # Assuming `db_instance` is an instance of `databaseClass`
-#' spectrum <- get_ms2_spectrum(lab.id = "M123", database = db_instance, polarity = "positive", ce = "30")
+#' spectrum <- get_ms2_spectrum(lab.id = "M123", 
+#' database = db_instance, polarity = "positive", ce = "30")
 #' }
 #'
 #' @seealso The example and demo data of this function can be found

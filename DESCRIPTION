@@ -61,14 +61,14 @@ Imports:
     rstudioapi,
     rlang,
     progress,
-    massdataset
+    massdataset,
+    methods
 Suggests: 
     knitr,
     rmarkdown,
     BiocStyle,
     RUnit,
-    testthat (>= 3.0.0),
-    methods
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 biocViews: Metabolomics, MassSpectrometry

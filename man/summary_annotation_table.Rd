@@ -36,7 +36,8 @@ of annotations by level and database, which are visualized in a polar bar plot.
 summary_annotation_table(mass_object, level = c(1, 2, 3))
 
 # For a custom annotation table:
-custom_annotation <- data.frame(variable_id = ..., Level = ..., SS = ..., Total.score = ..., Compound.name = ...)
+custom_annotation <- data.frame(variable_id = ..., 
+Level = ..., SS = ..., Total.score = ..., Compound.name = ...)
 summary_annotation_table(custom_annotation, level = c(1, 2))
 }
 
