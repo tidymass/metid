@@ -50,7 +50,6 @@
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{mass_dataset}}, \code{\link{databaseClass}}
 #' @importFrom dplyr filter mutate select left_join bind_rows
 #' @importFrom BiocParallel bplapply MulticoreParam SnowParam
 #' @importFrom crayon yellow green
@@ -79,6 +78,11 @@ metIdentification <-
            dp.forward.weight = 0.6,
            dp.reverse.weight = 0.1,
            remove_fragment_intensity_cutoff = 0) {
+    ###Check data
+    if (missing(ms1.info)) {
+      stop("No ms1.info is provided.\n")
+    }
+    
     polarity <- match.arg(polarity)
     ms1.info$mz <- as.numeric(ms1.info$mz)
     ms1.info$rt <- as.numeric(ms1.info$rt)
@@ -241,7 +245,6 @@ metIdentification <-
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{metIdentification}}, \code{\link{databaseClass}}
 #' @export
 
 

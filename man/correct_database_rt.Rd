@@ -56,9 +56,7 @@ corrected_db <- correct_database_rt(
 )
 }
 
-}
-\seealso{
-\code{\link{databaseClass}}, \code{\link{correct_rt}}
+
 }
 \author{
 Xiaotao Shen

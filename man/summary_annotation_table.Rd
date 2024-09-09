@@ -42,9 +42,6 @@ summary_annotation_table(custom_annotation, level = c(1, 2))
 }
 
 }
-\seealso{
-\code{\link{massdataset::extract_variable_info}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

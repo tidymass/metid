@@ -478,7 +478,6 @@ construct_database <-
 #' @importFrom purrr map map2
 #' @importFrom dplyr select mutate everything
 #' @importFrom crayon bgRed
-#' @seealso \code{\link{databaseClass}}, \code{\link{read_msp_mona}}
 #' @export
 
 construct_massbank_database <-
@@ -676,7 +675,6 @@ construct_massbank_database <-
 #' @importFrom purrr map map2
 #' @importFrom dplyr select mutate everything
 #' @importFrom crayon bgRed
-#' @seealso \code{\link{databaseClass}}, \code{\link{read_msp_mona}}
 #' @export
 
 # # # ####MoNA library

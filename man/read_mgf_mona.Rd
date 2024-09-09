@@ -29,9 +29,6 @@ mgf_data <- read_mgf_mona(file = c("path/to/mgf1.mgf", "path/to/mgf2.mgf"))
 }
 
 }
-\seealso{
-\code{\link{read_mgf_gnps}}, \code{\link{read_mzxml}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

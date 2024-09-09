@@ -27,9 +27,6 @@ write_msp_massbank(database = my_database, path = "output_directory")
 }
 
 }
-\seealso{
-\code{\link{read_msp}}, \code{\link{write_msp}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

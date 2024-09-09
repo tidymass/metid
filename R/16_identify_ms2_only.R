@@ -1,6 +1,3 @@
-
-
-
 #' @title Identify metabolites based on MS/MS database
 #' @description Identify metabolites based on MS2 data.
 #' @author Xiaotao Shen
@@ -55,6 +52,7 @@ identify_ms2_only <-
            candidate.num = 3,
            database,
            threads = 3) {
+    message("`identify_ms2_only()` is deprecated.")
     ###Check data
     if (missing(database)) {
       stop("No database is provided.\n")

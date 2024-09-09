@@ -52,6 +52,7 @@ mzIdentify_mass_dataset <-
            candidate.num = 3,
            database,
            threads = 3) {
+    message("`mzIdentify_mass_dataset()` is deprecated.")
     options(warn = -1)
     ###Check data
     if (missing(database)) {

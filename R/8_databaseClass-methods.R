@@ -101,52 +101,6 @@ setMethod(
 )
 
 
-#' Retrieve MS2 Spectrum from a Database
-#'
-#' This function extracts the MS2 spectrum data for a specific metabolite from a `databaseClass` object based on the provided Lab ID, polarity, and collision energy (CE).
-#'
-#' @param lab.id A character string representing the Lab ID of the metabolite whose MS2 spectrum is to be retrieved.
-#' @param database A `databaseClass` object that contains the MS2 spectra data.
-#' @param polarity A character string specifying the polarity mode for the spectrum. It can be either `"positive"` or `"negative"`. Defaults to `"positive"`.
-#' @param ce A character string specifying the collision energy (CE) to retrieve. Defaults to `"30"`.
-#'
-#' @return A list containing the MS2 spectrum for the specified metabolite, polarity, and collision energy.
-#'
-#' @details
-#' The function retrieves the MS2 spectrum for a given Lab ID from the provided `databaseClass` object. The user can specify the polarity mode (positive or negative) and the collision energy (CE) value to retrieve the correct spectrum. If the `database` is not a valid `databaseClass` object, the function stops with an error.
-#'
-#' @examples
-#' \dontrun{
-#' # Assuming `db_instance` is an instance of `databaseClass`
-#' spectrum <- get_ms2_spectrum(lab.id = "M123", 
-#' database = db_instance, polarity = "positive", ce = "30")
-#' }
-#'
-#' @seealso The example and demo data of this function can be found
-#' \url{https://tidymass.github.io/metid/articles/metid.html}
-#' 
-#' @seealso \code{\link{databaseClass}}
-#'
-#' @export
-
-
-get_ms2_spectrum <-
-  function(lab.id,
-           database,
-           polarity = c("positive", "negative"),
-           ce = "30") {
-    polarity <- match.arg(polarity)
-    if (!is(database, "databaseClass")) {
-      stop("The database must be databaseClass object.\n")
-    }
-    pol <- ifelse(polarity == "positive", 1, 2)
-    temp <-
-      database@spectra.data[[pol]][[match(lab.id, names(database@spectra.data[[pol]]))]]
-    temp[[match(ce, names(temp))]]
-  }
-
-
-
 #' @title colnames
 #' @method colnames databaseClass
 #' @param x x
@@ -192,34 +146,46 @@ dim.databaseClass <- function(x) {
 }
 
 
+
+#' Retrieve MS2 Spectrum from a Database
 #'
-#' #' setGeneric(
-#' #'   name = "get_ms2_spectrum",
-#' #'   def = function(object,
-#' #'                  lab.id,
-#' #'                  polarity = c("positive", "negative"),
-#' #'                  ce = "30") standardGeneric(f = "get_ms2_spectrum"),
-#' #'   signature = "object"
-#' #'
-#' #' )
-#' #'
+#' This function extracts the MS2 spectrum data for a specific metabolite from a `databaseClass` object based on the provided Lab ID, polarity, and collision energy (CE).
 #'
-#' #' setMethod(
-#' #'   f = "get_ms2_spectrum",
-#' #'   signature = "databaseClass",
-#' #'   definition = function(object,
-#' #'                         lab.id,
-#' #'                         polarity = c("positive", "negative"),
-#' #'                         ce = "30") {
-#' #'     polarity <- match.arg(polarity)
-#' #'     pol <- ifelse(polarity == "positive", 1, 2)
-#' #'     temp <-
-#' #'       object@spectra.data[[pol]][[match(lab.id, names(object@spectra.data[[pol]]))]]
-#' #'     temp <- temp[[match(ce, names(temp))]]
-#' #'     if(is.null(temp)){
-#' #'       temp
-#' #'     }else{
-#' #'       tibble::as_tibble(temp)
-#' #'     }
-#' #'   }
-#' #' )
+#' @param lab.id A character string representing the Lab ID of the metabolite whose MS2 spectrum is to be retrieved.
+#' @param database A `databaseClass` object that contains the MS2 spectra data.
+#' @param polarity A character string specifying the polarity mode for the spectrum. It can be either `"positive"` or `"negative"`. Defaults to `"positive"`.
+#' @param ce A character string specifying the collision energy (CE) to retrieve. Defaults to `"30"`.
+#'
+#' @return A list containing the MS2 spectrum for the specified metabolite, polarity, and collision energy.
+#'
+#' @details
+#' The function retrieves the MS2 spectrum for a given Lab ID from the provided `databaseClass` object. The user can specify the polarity mode (positive or negative) and the collision energy (CE) value to retrieve the correct spectrum. If the `database` is not a valid `databaseClass` object, the function stops with an error.
+#'
+#' @examples
+#' \dontrun{
+#' # Assuming `db_instance` is an instance of `databaseClass`
+#' spectrum <- get_ms2_spectrum(lab.id = "M123",
+#' database = db_instance, polarity = "positive", ce = "30")
+#' }
+#'
+#' @seealso The example and demo data of this function can be found
+#' \url{https://tidymass.github.io/metid/articles/metid.html}
+#'
+#'
+#' @export
+
+
+get_ms2_spectrum <-
+  function(lab.id,
+           database,
+           polarity = c("positive", "negative"),
+           ce = "30") {
+    polarity <- match.arg(polarity)
+    if (!is(database, "databaseClass")) {
+      stop("The database must be databaseClass object.\n")
+    }
+    pol <- ifelse(polarity == "positive", 1, 2)
+    temp <-
+      database@spectra.data[[pol]][[match(lab.id, names(database@spectra.data[[pol]]))]]
+    temp[[match(ce, names(temp))]]
+  }

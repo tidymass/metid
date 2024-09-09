@@ -134,7 +134,6 @@ style_grey <- function(level, ...) {
 #' @importFrom ggplot2 guide_legend coord_polar
 #' @importFrom massdataset extract_variable_info
 #'
-#' @seealso \code{\link{massdataset::extract_variable_info}}
 #'
 #' @export
 

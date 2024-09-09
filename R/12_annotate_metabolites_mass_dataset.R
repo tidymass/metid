@@ -82,7 +82,6 @@
 #' head(extract_annotation_table(object1))
 #' }
 #'
-#' @seealso \code{\link{databaseClass}}, \code{\link{mass_dataset}}
 #' @export
 
 

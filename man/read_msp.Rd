@@ -29,9 +29,6 @@ msp_data <- read_msp(file = "path/to/data.msp")
 }
 
 }
-\seealso{
-\code{\link{read_mgf_mona}}, \code{\link{read_mgf_gnps}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

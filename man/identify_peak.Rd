@@ -92,9 +92,6 @@ identified_peak <- identify_peak(
 }
 
 }
-\seealso{
-\code{\link{metIdentification}}, \code{\link{databaseClass}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

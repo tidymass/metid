@@ -56,6 +56,3 @@ mona_db <- construct_mona_database(file = "MoNA.msp", only.remain.ms2 = TRUE)
 }
 
 }
-\seealso{
-\code{\link{databaseClass}}, \code{\link{read_msp_mona}}
-}

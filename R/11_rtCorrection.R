@@ -470,6 +470,7 @@
 #
 # save(msDatabase_hilic0.0.1, file = "msDatabase_hilic0.0.1")
 
+
 #' Correct Retention Time (RT) in a Spectral Database
 #'
 #' This function corrects the retention time (RT) information in a spectral database using a reference table of internal standards from an experiment and a corresponding table from the database. The correction can be performed using different methods such as polynomial fitting or loess smoothing.
@@ -507,7 +508,6 @@
 #' )
 #' }
 #'
-#' @seealso \code{\link{databaseClass}}, \code{\link{correct_rt}}
 #'
 #' @export
 

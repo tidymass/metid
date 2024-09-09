@@ -29,9 +29,6 @@ mgf_data <- read_mgf_gnps(file = c("path/to/mgf1.mgf", "path/to/mgf2.mgf"))
 }
 
 }
-\seealso{
-\code{\link{read_mzxml}}, \code{\link{read_mgf4database}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

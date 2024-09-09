@@ -102,9 +102,6 @@ annotation <- annotate_single_peak_mass_dataset(
 }
 
 }
-\seealso{
-\code{\link{metIdentify_mass_dataset}}, \code{\link{mzIdentify_mass_dataset}}, \code{\link{databaseClass}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

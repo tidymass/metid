@@ -34,9 +34,6 @@ write_msp(info, fn.pre = "example", spec.all = spec.all)
 }
 
 }
-\seealso{
-\code{\link{read_msp}}, \code{\link{read_msp_mona}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

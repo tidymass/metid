@@ -142,13 +142,9 @@ setMethod(
 #' @importFrom magrittr %>%
 #' @importFrom  dplyr filter select mutate pull everything lag
 
-get_parameters =
+get_parameters <-
   function(object) {
-    message(
-      crayon::yellow(
-        "`get_parameters()` is deprecated, use `get_parameters_metid()`."
-      )
-    )
+    message("`get_parameters()` is deprecated, use `get_parameters_metid()`.")
     if (is(object, "mzIdentifyClass")) {
       stop(
         crayon::red(
@@ -322,64 +318,66 @@ get_parameters_metid =
 #' @export
 #' @seealso The example and demo data of this function can be found
 #' \url{https://tidymass.github.io/metid/articles/metid.html}
-get_iden_info = function(object, which.peak, database) {
-  if (missing(object) | missing(which.peak) | missing(database)) {
-    stop("Please provide the object, which.peak and database.\n")
-  }
-  
-  if (!is(object, "metIdentifyClass"))
-    stop("Only for metIdentifyClass\n")
-  
-  if (!is(database, "databaseClass"))
-    stop("Only for databaseClass\n")
-  
-  identification.result <- object@identification.result
-  
-  which.peak <- as.character(which.peak)
-  
-  if (!which.peak %in% object@ms1.data$name) {
-    stop(which.peak, " is not in peak table, please check it.\n")
-  }
-  
-  if (is.null(object@identification.result[[1]])) {
-    message(crayon::red("No identification in this result."))
-    return(NULL)
-  }
-  
-  #####
-  if (nrow(object@match.result) == 0) {
-    temp <- match(which.peak, names(object@identification.result)) %>%
-      `[[`(object@identification.result, .)
+get_iden_info <-
+  function(object, which.peak, database) {
+    message("This function is deprecated.")
+    if (missing(object) | missing(which.peak) | missing(database)) {
+      stop("Please provide the object, which.peak and database.\n")
+    }
     
+    if (!is(object, "metIdentifyClass"))
+      stop("Only for metIdentifyClass\n")
+    
+    if (!is(database, "databaseClass"))
+      stop("Only for databaseClass\n")
+    
+    identification.result <- object@identification.result
+    
+    which.peak <- as.character(which.peak)
+    
+    if (!which.peak %in% object@ms1.data$name) {
+      stop(which.peak, " is not in peak table, please check it.\n")
+    }
+    
+    if (is.null(object@identification.result[[1]])) {
+      message(crayon::red("No identification in this result."))
+      return(NULL)
+    }
+    
+    #####
+    if (nrow(object@match.result) == 0) {
+      temp <- match(which.peak, names(object@identification.result)) %>%
+        `[[`(object@identification.result, .)
+      
+      temp <-
+        data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID), setdiff(colnames(database@spectra.info), colnames(temp))], stringsAsFactors = FALSE)
+      temp <- tibble::as_tibble(temp)
+      return(temp)
+      
+    }
+    
+    if (is.na(match(which.peak, object@match.result$MS1.peak.name))) {
+      message(crayon::green("The peak has no MS2 spectrum."))
+      return()
+    }
+    
+    if (is.na(match(
+      object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)],
+      names(identification.result)
+    ))) {
+      message(crayon::green("The peak has no identification result."))
+      return(NULL)
+    }
+    
+    temp <-
+      match(object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)],
+            names(identification.result))
+    temp <- identification.result[[temp]]
     temp <-
       data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID), setdiff(colnames(database@spectra.info), colnames(temp))], stringsAsFactors = FALSE)
     temp <- tibble::as_tibble(temp)
-    return(temp)
-    
+    temp
   }
-  
-  if (is.na(match(which.peak, object@match.result$MS1.peak.name))) {
-    message(crayon::green("The peak has no MS2 spectrum."))
-    return()
-  }
-  
-  if (is.na(match(
-    object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)],
-    names(identification.result)
-  ))) {
-    message(crayon::green("The peak has no identification result."))
-    return(NULL)
-  }
-  
-  temp <-
-    match(object@match.result$MS2.spectra.name[match(which.peak, object@match.result$MS1.peak.name)],
-          names(identification.result))
-  temp <- identification.result[[temp]]
-  temp <-
-    data.frame(temp, database@spectra.info[match(temp$Lab.ID, database@spectra.info$Lab.ID), setdiff(colnames(database@spectra.info), colnames(temp))], stringsAsFactors = FALSE)
-  temp <- tibble::as_tibble(temp)
-  temp
-}
 
 
 
@@ -444,7 +442,8 @@ ms2plot <-
            threads = 3,
            one.folder = TRUE,
            show.plot = TRUE) {
-    #
+    
+    message("This function is deprecated.")
     if (!is(object, "metIdentifyClass"))
       stop("Only for metIdentifyClass\n")
     
@@ -738,6 +737,7 @@ ms2plot <-
 
 which_has_identification <-
   function(object) {
+    message("This function is deprecated.")
     if (!is(object, "metIdentifyClass"))
       stop("Only for metIdentifyClass\n")
     
@@ -788,6 +788,7 @@ filter_identification <-
            rt.match.tol = 30,
            ms2.match.tol = 0.5,
            total.score.tol = 0.5) {
+    message("This function is deprecated.")
     if (!is(object, "metIdentifyClass")) {
       stop("Only for metIdentifyClass\n")
     }
@@ -842,6 +843,7 @@ filter_identification <-
 
 get_ms2_spectrum_from_object <-
   function(object, peak.name) {
+    message("This function is deprecated.")
     if (!is(object, "metIdentifyClass"))
       stop("Only for metIdentifyClass\n")
     if (missing(peak.name))
@@ -877,6 +879,7 @@ get_ms2_spectrum_from_object <-
 
 filter_adducts <-
   function(object, remove_adduct = NULL) {
+    message("This function is deprecated.")
     if (!is(object, "metIdentifyClass"))
       stop("Only for metIdentifyClass\n")
     if (missing(remove_adduct))

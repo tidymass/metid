@@ -93,9 +93,6 @@ identification_result <- metIdentify_mass_dataset(
 }
 
 }
-\seealso{
-\code{\link{mass_dataset}}, \code{\link{databaseClass}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

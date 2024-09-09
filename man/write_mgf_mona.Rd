@@ -27,9 +27,6 @@ write_mgf_mona(database = my_database, path = "output_directory")
 }
 
 }
-\seealso{
-\code{\link{read_mgf}}, \code{\link{write_mgf}}
-}
 \author{
 Xiaotao Shen
 \email{xiaotao.shen@outlook.com}

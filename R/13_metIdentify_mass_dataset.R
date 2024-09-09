@@ -45,7 +45,6 @@
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{mass_dataset}}, \code{\link{databaseClass}}
 #' @importFrom dplyr filter mutate select left_join bind_rows
 #' @importFrom purrr map2
 #' @importFrom crayon yellow green bgRed

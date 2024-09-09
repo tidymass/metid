@@ -56,6 +56,3 @@ massbank_db <- construct_massbank_database(file = "MassBank.msp", only.remain.ms
 }
 
 }
-\seealso{
-\code{\link{databaseClass}}, \code{\link{read_msp_mona}}
-}

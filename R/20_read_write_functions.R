@@ -18,7 +18,6 @@
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{read_mzxml}}, \code{\link{read_mgf4database}}
 #' @export
 
 # setwd(masstools::get_project_wd())
@@ -99,7 +98,6 @@ read_mgf_gnps <-
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{read_mgf_gnps}}, \code{\link{read_mzxml}}
 #' @export
 
 # setwd(masstools::get_project_wd())
@@ -180,7 +178,6 @@ read_mgf_mona <-
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{read_mgf_gnps}}, \code{\link{read_mgf_mona}}, \code{\link{read_mzxml}}
 #' @export
 
 # setwd(masstools::get_project_wd())
@@ -281,7 +278,6 @@ list_mgf <- function(file) {
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{read_mgf_mona}}, \code{\link{read_mgf_gnps}}
 #' @export
 
 read_msp <-
@@ -461,7 +457,6 @@ read_msp <-
 #'
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
-#' @seealso \code{\link{read_mgf_mona}}, \code{\link{read_mgf_gnps}}
 #' @export
 
 read_msp_database <-
@@ -741,7 +736,6 @@ read_msp_mona <-
 #' msp_data <- read_msp_gnps(file = "path/to/gnps_data.msp")
 #' }
 #'
-#' @seealso \code{\link{read_msp_mona}}, \code{\link{read_mgf_gnps}}
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
 #' @export
@@ -833,7 +827,6 @@ read_msp_gnps <-
 #' write_msp(info, fn.pre = "example", spec.all = spec.all)
 #' }
 #'
-#' @seealso \code{\link{read_msp}}, \code{\link{read_msp_mona}}
 #' @author Xiaotao Shen
 #' \email{xiaotao.shen@@outlook.com}
 #' @export
