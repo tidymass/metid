@@ -1,8 +1,8 @@
 Type: Package
 Package: metid
 Title: Metabolite identification based on MS1 and MS2 spectra
-Version: 1.2.31
-Date: 2024-09-06
+Version: 1.2.32
+Date: 2024-09-10
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",

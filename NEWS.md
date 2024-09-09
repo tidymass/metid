@@ -179,3 +179,7 @@
 
 * Update metid.
 
+# Version 1.2.32 (2024-09-10)
+
+* Add more functions for more efficient annotation.
+
