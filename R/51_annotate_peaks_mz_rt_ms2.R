@@ -205,7 +205,9 @@ annotate_peaks_mz_rt_ms2 <-
               temp %>%
               dplyr::filter(RT.error < rt.match.tol)
           }
-          temp
+          temp %>%
+            dplyr::arrange(mz.error, RT.error) %>%
+            head(candidate.num)
         }, .progress = TRUE)
       
       match_result <-
@@ -364,6 +366,11 @@ annotate_peaks_mz_rt_ms2 <-
       rownames(match_result_ms2) <- NULL
       
       if ("ms1" %in% based_on | "rt" %in% based_on) {
+        if(any(colnames(match_result) == "CE")){
+          match_result <-
+            match_result %>% 
+            dplyr::select(-CE)
+        }
         match_result <-
           match_result_ms2 %>%
           dplyr::left_join(match_result, by = c("ms2_spectrum_id", "Lab.ID")) %>%
