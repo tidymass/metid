@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://tidymass.github.io/metid/apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://tidymass.github.io/metid/apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="https://tidymass.github.io/metid/apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="https://tidymass.github.io/metid/bootstrap-toc.css">
 <script src="https://tidymass.github.io/metid/bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -33,7 +33,7 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-title-body">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="https://tidymass.github.io/metid/index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.24</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.32</span>
       </span>
     </div>
 
@@ -56,7 +56,7 @@
 <li class="dropdown">
   <a href="https://tidymass.github.io/metid/#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -84,7 +84,19 @@
     </li>
     <li class="divider">
     </li>
-<li class="dropdown-header">Metabolite identification</li>
+<li class="dropdown-header">metid for mass_dataset class object</li>
+    <li>
+      <a href="https://tidymass.github.io/metid/articles/work_with_mass_dataset.html">Annotate metabolites</a>
+    </li>
+    <li>
+      <a href="https://tidymass.github.io/metid/articles/annotate_single_peak_mass_dataset.html">Annotate single peak</a>
+    </li>
+    <li>
+      <a href="https://tidymass.github.io/metid/articles/ms2_plot_mass_dataset.html">MS2 plot</a>
+    </li>
+    <li class="divider">
+    </li>
+<li class="dropdown-header">Old pipeline</li>
     <li>
       <a href="https://tidymass.github.io/metid/articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
     </li>
@@ -103,24 +115,12 @@
     <li>
       <a href="https://tidymass.github.io/metid/articles/other_tools.html">Other usefull tools</a>
     </li>
-    <li class="divider">
-    </li>
-<li class="dropdown-header">metid for mass_dataset class object</li>
-    <li>
-      <a href="https://tidymass.github.io/metid/articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
-    </li>
-    <li>
-      <a href="https://tidymass.github.io/metid/articles/annotate_single_peak_mass_dataset.html">Annotate single peak in mass_dataset</a>
-    </li>
-    <li>
-      <a href="https://tidymass.github.io/metid/articles/ms2_plot_mass_dataset.html">MS2 plot in mass_dataset</a>
-    </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="https://tidymass.github.io/metid/#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -149,13 +149,13 @@
 <li>
   <a href="https://github.com/tidymass/metid/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
 <li>
   <a href="https://twitter.com/xiaotaoshen1990" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -164,7 +164,7 @@
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
       </form>
-      
+
     </div>
 <!--/.nav-collapse -->
   </div>
@@ -172,7 +172,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -195,22 +195,22 @@ Content not found. Please use links in the navbar.
 
       <footer><div class="copyright">
   <p></p>
-<p>metid Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+<p>metid Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Nanyang Technological University Singapore <br><i class="fa fa-clinic-medical"></i>Lee Kong Chian School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">
   <p></p>
-<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenxt1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
+<p><b>Contact Us:</b> <br><i class="fa fa-envelope"></i> <a href="mailto:xiaotao.shen@outlook.com" class="email">xiaotao.shen@outlook.com</a> <br><i class="fa fa-weixin"></i> <a href="https://jaspershen.github.io/image/wechat_QR.jpg" class="external-link">jaspershen1990</a> <br><i class="fa fa-network-wired"></i> <a href="https://www.tidymass.org/" class="external-link">A part of tidymass</a></p>
 </div>
 
       </footer>
 </div>
 
-  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script><script src="https://tidymass.github.io/metid/NA">
   docsearch({
-    
-    
+
+
     apiKey: '21ff2860978c5d2ceb7d4150364070ff',
     indexName: 'metid',
     inputSelector: 'input#search-input.form-control',

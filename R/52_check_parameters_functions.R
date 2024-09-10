@@ -1,5 +1,6 @@
 
 
+
 #' Validate Parameters for Metabolite Annotation
 #'
 #' This function validates the input parameters required for the metabolite annotation process. It checks the `mass_dataset` object, the annotation database, the adduct table, and various matching and weighting parameters to ensure they are correctly specified.
@@ -303,11 +304,6 @@ check_database <-
     ##check MS2 information
     ####if based_on has ms2, the object and database should have ms2 information
     if ("ms2" %in% based_on) {
-      ##check if object have ms2 information
-      if (length(object@ms2_data) == 0) {
-        stop("The object should have MS2 information.\n")
-      }
-      
       ##Check if database have MS2 spectra or not
       spectra_pos_number <-
         database@spectra.data[['Spectra.positive']] %>%
@@ -461,11 +457,11 @@ check_adduct_table <-
 #'
 #' # Example MS2 info
 #' ms2_info <- list(
-#'   spectrum1 = matrix(c(75, 1000, 80, 2000), 
-#'   ncol = 2, byrow = TRUE, 
+#'   spectrum1 = matrix(c(75, 1000, 80, 2000),
+#'   ncol = 2, byrow = TRUE,
 #'   dimnames = list(NULL, c("mz", "intensity"))),
-#'   spectrum2 = matrix(c(85, 3000, 90, 1500), 
-#'   ncol = 2, byrow = TRUE, 
+#'   spectrum2 = matrix(c(85, 3000, 90, 1500),
+#'   ncol = 2, byrow = TRUE,
 #'   dimnames = list(NULL, c("mz", "intensity")))
 #' )
 #'

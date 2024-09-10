@@ -183,3 +183,7 @@
 
 * Add more functions for more efficient annotation.
 
+# Version 1.2.33 (2024-09-10)
+
+* Fix bugs.
+

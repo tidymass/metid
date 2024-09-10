@@ -1,8 +1,7 @@
-pandoc: '2.18'
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  Version0_9_2: Version0_9_2.html
   annotate_single_peak_mass_dataset: annotate_single_peak_mass_dataset.html
   contact_us: contact_us.html
   database_construction: database_construction.html
@@ -17,9 +16,9 @@ articles:
   output_database: output_database.html
   public_database_construction: public_database_construction.html
   public_databases: public_databases.html
+  Version0_9_2: Version0_9_2.html
   work_with_mass_dataset: work_with_mass_dataset.html
-last_built: 2022-09-20T00:11Z
+last_built: 2024-09-09T23:54Z
 urls:
   reference: https://tidymass.github.io/metid/reference
   article: https://tidymass.github.io/metid/articles
-

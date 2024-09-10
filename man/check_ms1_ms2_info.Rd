@@ -44,11 +44,11 @@ ms1_info <- data.frame(
 
 # Example MS2 info
 ms2_info <- list(
-  spectrum1 = matrix(c(75, 1000, 80, 2000), 
-  ncol = 2, byrow = TRUE, 
+  spectrum1 = matrix(c(75, 1000, 80, 2000),
+  ncol = 2, byrow = TRUE,
   dimnames = list(NULL, c("mz", "intensity"))),
-  spectrum2 = matrix(c(85, 3000, 90, 1500), 
-  ncol = 2, byrow = TRUE, 
+  spectrum2 = matrix(c(85, 3000, 90, 1500),
+  ncol = 2, byrow = TRUE,
   dimnames = list(NULL, c("mz", "intensity")))
 )
 

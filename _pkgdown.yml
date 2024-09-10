@@ -22,90 +22,6 @@ template:
     bootswatch: flatly
     ganalytics: UA-000000-01
 
-reference:
-  - title: Database construction
-    desc: Construct in-house or public MS2 spectra database.
-    contents:
-    - construct_database
-    - correct_database_rt
-    - get_ms2_spectrum
-    - construct_massbank_database
-    - construct_mona_database
-    - filter_adducts
-    
-  - title: Metabolite identification
-    desc: Metabolite identification based on MS1 and MS2 databases.
-    contents:
-    - which_has_identification
-    - trans_to_new_style
-    - ms2plot
-    - identify_single_peak
-    - identify_metabolites_params
-    - identify_metabolites
-    - get_parameters
-    - get_ms2_spectrum_from_object
-    - get_identification_table
-    - get_identification_table_all
-    - get_iden_info
-    - filter_identification
-    - annotate_metabolites_mass_dataset
-    - annotate_single_peak_mass_dataset
-    - getIdentificationTable2
-    - getMS2spectrum
-    - get_parameters_metid
-    - identify_metabolite_all
-    - identify_ms2_only
-    - identify_peak
-    - metIdentify
-    - metIdentify_mass_dataset
-    - ms2_plot_mass_dataset
-    - mzIdentify
-    - mzIdentifyParam
-    - mzIdentify_mass_dataset
-    - mzIdentify_mass_dataset2
-    
-  - title: Data
-    desc: Some data embed in metid
-    contents:
-    - hilic.pos
-    - hilic.neg
-    - rp.pos
-    - rp.neg
-    - msDatabase_hilic0.0.2
-    - msDatabase_rplc0.0.2
-    - orbitrap_database0.0.3
-    - snyder_database_hilic0.0.3
-    - snyder_database_rplc0.0.3
-
-  - title: Other functions
-    desc: Other usefull functions in metid
-    contents:
-    - readMGF
-    - readMSP
-    - readMZXML
-    - metid
-    - metid_conflicts
-    - metid_logo
-    - metid_packages
-    - readMSP_MoNA
-    - read_mgf_experiment
-    - read_mgf_gnps
-    - read_mgf_mona
-    - read_msp
-    - read_msp_database
-    - read_msp_gnps
-    - read_msp_mona
-    - colnames.databaseClass
-    - summary_annotation_table
-    - databaseClass-class
-    - metIdentifyClass-class
-    - write_mgf_gnps
-    - write_mgf_massbank
-    - write_mgf_mona
-    - write_msp_gnps
-    - write_msp_massbank
-    - write_msp_mona
-
 navbar:
   title: "sparklyr" 
   # type: inverse
@@ -132,7 +48,15 @@ navbar:
       - text: Correct retention times in database according to internal standards
         href: articles/rt_correction.html
       - text: -------
-      - text: "Metabolite identification"
+      - text: "metid for mass_dataset class object"
+      - text: "Annotate metabolites"
+        href: articles/work_with_mass_dataset.html
+      - text: "Annotate single peak"
+        href: articles/annotate_single_peak_mass_dataset.html
+      - text: "MS2 plot"
+        href: articles/ms2_plot_mass_dataset.html
+      - text: -------
+      - text: "Old pipeline"
       - text: Metabolite identification using MS1 database
         href: articles/metabolite_annotation_using_MS1.html
       - text: Metabolite identification using MS2 database
@@ -145,14 +69,6 @@ navbar:
       - text: "Others"
       - text: Other usefull tools
         href: articles/other_tools.html
-      - text: -------
-      - text: "metid for mass_dataset class object"
-      - text: "Work with mass_dataset class object"
-        href: articles/work_with_mass_dataset.html
-      - text: "Annotate single peak in mass_dataset"
-        href: articles/annotate_single_peak_mass_dataset.html
-      - text: "MS2 plot in mass_dataset"
-        href: articles/ms2_plot_mass_dataset.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/xiaotaoshen1990
@@ -177,10 +93,10 @@ footer:
     left: [package, developed_by, from]
     right: [contact, email, wechat, tidymass]
   components:
-    from: <br> from <i class="fa fa-university"></i> Stanford University <br> <i class="fa fa-clinic-medical"></i>School of Medicine <br> <i class="fa fa-dna"></i> Genetics Department
+    from: <br> from <i class="fa fa-university"></i> Nanyang Technological University Singapore <br> <i class="fa fa-clinic-medical"></i>Lee Kong Chian School of Medicine <br> <i class="fa fa-dna"></i> Genetics Department
     contact: <b>Contact Us:</b> <br>
-    email: <i class="fa fa-envelope"></i> shenxt1990@outlook.com <br>
-    wechat: <i class="fa fa-weixin"></i>  [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg) <br>
+    email: <i class="fa fa-envelope"></i> xiaotao.shen@outlook.com <br>
+    wechat: <i class="fa fa-weixin"></i>  [jaspershen1990](https://jaspershen.github.io/image/wechat_QR.jpg) <br>
     tidymass: <i class="fa fa-network-wired"></i> [A part of tidymass](https://www.tidymass.org/)
      
 
