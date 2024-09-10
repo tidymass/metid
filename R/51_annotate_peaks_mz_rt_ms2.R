@@ -42,11 +42,11 @@
 #'   rt = c(12.5, 14.7)
 #' )
 #' ms2_info <- list(
-#'   id1 = matrix(c(75, 1000, 80, 2000), 
-#'   ncol = 2, byrow = TRUE, 
+#'   id1 = matrix(c(75, 1000, 80, 2000),
+#'   ncol = 2, byrow = TRUE,
 #'   dimnames = list(NULL, c("mz", "intensity"))),
-#'   id2 = matrix(c(85, 3000, 90, 1500), 
-#'   ncol = 2, byrow = TRUE, 
+#'   id2 = matrix(c(85, 3000, 90, 1500),
+#'   ncol = 2, byrow = TRUE,
 #'   dimnames = list(NULL, c("mz", "intensity")))
 #' )
 #'
@@ -307,6 +307,25 @@ annotate_peaks_mz_rt_ms2 <-
         return(NULL)
       }
       
+      ###debug
+      # for (i in seq_len(length(ms2.info))) {
+      #   cat(i, " ")
+      #   match_ms2_temp(
+      #     idx = i,
+      #     ms2.info = ms2.info,
+      #     pre_match_result = match_result,
+      #     spectra.data = spectra.data,
+      #     ms2.match.ppm = ms2.match.ppm,
+      #     mz.ppm.thr = mz.ppm.thr,
+      #     ms2.match.tol = ms2.match.tol,
+      #     candidate.num = candidate.num,
+      #     fraction.weight = fraction.weight,
+      #     dp.forward.weight = dp.forward.weight,
+      #     dp.reverse.weight = dp.reverse.weight,
+      #     remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+      #   )
+      # }
+      
       match_result_ms2 <-
         suppressMessages(
           BiocParallel::bplapply(
@@ -533,22 +552,23 @@ match_ms2_temp <-
         seq_len(length(spectra.data[library_compound_id])) %>%
         purrr::map(function(i) {
           temp_spectra_data <- spectra.data[library_compound_id][[i]]
-          score <- lapply(temp_spectra_data, function(y) {
-            y <- as.data.frame(y)
-            y$mz <- as.numeric(y$mz)
-            y$intensity <- as.numeric(y$intensity)
-            calculate_ms2_matching_score(
-              experimental.spectrum = peak_ms2_spectrum,
-              library.spectrum = y,
-              ms2.match.ppm = ms2.match.ppm,
-              mz.ppm.thr = mz.ppm.thr,
-              fraction.weight = fraction.weight,
-              dp.forward.weight = dp.forward.weight,
-              dp.reverse.weight = dp.reverse.weight,
-              remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
-            )
-          })
-          score <- score[which.max(unlist(dp))]
+          score <-
+            lapply(temp_spectra_data, function(y) {
+              y <- as.data.frame(y)
+              y$mz <- as.numeric(y$mz)
+              y$intensity <- as.numeric(y$intensity)
+              calculate_ms2_matching_score(
+                experimental.spectrum = peak_ms2_spectrum,
+                library.spectrum = y,
+                ms2.match.ppm = ms2.match.ppm,
+                mz.ppm.thr = mz.ppm.thr,
+                fraction.weight = fraction.weight,
+                dp.forward.weight = dp.forward.weight,
+                dp.reverse.weight = dp.reverse.weight,
+                remove_fragment_intensity_cutoff = remove_fragment_intensity_cutoff
+              )
+            })
+          score <- score[which.max(unlist(score))]
           score <- unlist(score)
           data.frame(
             Lab.ID = names(spectra.data[library_compound_id])[i],

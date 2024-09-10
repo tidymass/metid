@@ -97,11 +97,11 @@ ms1_info <- data.frame(
   rt = c(12.5, 14.7)
 )
 ms2_info <- list(
-  id1 = matrix(c(75, 1000, 80, 2000), 
-  ncol = 2, byrow = TRUE, 
+  id1 = matrix(c(75, 1000, 80, 2000),
+  ncol = 2, byrow = TRUE,
   dimnames = list(NULL, c("mz", "intensity"))),
-  id2 = matrix(c(85, 3000, 90, 1500), 
-  ncol = 2, byrow = TRUE, 
+  id2 = matrix(c(85, 3000, 90, 1500),
+  ncol = 2, byrow = TRUE,
   dimnames = list(NULL, c("mz", "intensity")))
 )
 

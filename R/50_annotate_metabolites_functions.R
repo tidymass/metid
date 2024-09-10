@@ -146,6 +146,14 @@ annotate_metabolites <-
       
       ms2.info <-
         extract_ms2_info(object = object)
+      
+      if (!is.null(ms2.info)) {
+        if (length(ms2.info) > 0) {
+          ms2.info <-
+            ms2.info[which(names(ms2.info) %in% ms1.info$ms2_spectrum_id)]
+        }
+      }
+      
     } else{
       ms1.info <-
         extract_variable_info(object = object)

@@ -32,11 +32,11 @@ The function checks the polarity and collision energy values against the availab
 my_database <- load_database("path/to/database")
 
 # Extract all MS2 spectra in positive ion mode
-ms2_spectra <- extract_ms2_database(database = my_database, 
+ms2_spectra <- extract_ms2_database(database = my_database,
 polarity = "positive", ce = "all")
 
 # Extract MS2 spectra for specific CE values in negative ion mode
-ms2_spectra <- extract_ms2_database(database = my_database, 
+ms2_spectra <- extract_ms2_database(database = my_database,
 polarity = "negative", ce = c("10", "20"))
 }
 

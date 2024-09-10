@@ -110,11 +110,11 @@ extract_ms1_database <-
 #' my_database <- load_database("path/to/database")
 #'
 #' # Extract all MS2 spectra in positive ion mode
-#' ms2_spectra <- extract_ms2_database(database = my_database, 
+#' ms2_spectra <- extract_ms2_database(database = my_database,
 #' polarity = "positive", ce = "all")
 #'
 #' # Extract MS2 spectra for specific CE values in negative ion mode
-#' ms2_spectra <- extract_ms2_database(database = my_database, 
+#' ms2_spectra <- extract_ms2_database(database = my_database,
 #' polarity = "negative", ce = c("10", "20"))
 #' }
 #'
@@ -254,22 +254,29 @@ extract_ms1_info <-
     if (!is(object, "mass_dataset")) {
       stop("object should be a massdataset object")
     } else{
-      purrr::map2(
-        .x = names(object@ms2_data),
-        .y = object@ms2_data,
-        .f = function(temp_ms2_data_id, temp_ms2_data) {
-          data.frame(
-            ms2_spectrum_id = paste(temp_ms2_data_id, temp_ms2_data@ms2_spectrum_id, sep = "_"),
-            mz = temp_ms2_data@ms2_mz,
-            rt = temp_ms2_data@ms2_rt,
-            ms2_files_id = temp_ms2_data@ms2_file,
-            variable_id = temp_ms2_data@variable_id
-          )
-        }
-      ) %>%
+      ms1.info <-
+        purrr::map2(
+          .x = names(object@ms2_data),
+          .y = object@ms2_data,
+          .f = function(temp_ms2_data_id, temp_ms2_data) {
+            data.frame(
+              ms2_spectrum_id = paste(temp_ms2_data_id, temp_ms2_data@ms2_spectrum_id, sep = "_"),
+              mz = temp_ms2_data@ms2_mz,
+              rt = temp_ms2_data@ms2_rt,
+              ms2_files_id = temp_ms2_data@ms2_file,
+              variable_id = temp_ms2_data@variable_id
+            )
+          }
+        ) %>%
         do.call(rbind, .) %>%
         as.data.frame()
     }
+    
+    ms1.info <-
+      ms1.info %>%
+      dplyr::filter(variable_id %in% object@variable_info$variable_id)
+    return(ms1.info)
+    
   }
 
 
@@ -297,20 +304,20 @@ extract_ms1_info <-
 #'
 #' @export
 
-
 extract_ms2_info <-
   function(object) {
     if (!is(object, "mass_dataset")) {
       stop("object should be a massdataset object")
     } else{
       ms2.info <-
-        purrr::map(
-          .x = object@ms2_data,
-          .f = function(temp_ms2_data) {
+        purrr::map2(
+          .x = names(object@ms2_data),
+          .y = object@ms2_data,
+          .f = function(temp_ms2_data_id, temp_ms2_data) {
             temp_ms2_spectra <-
               temp_ms2_data@ms2_spectra
             names(temp_ms2_spectra) <-
-              paste(unique(temp_ms2_data@ms2_file),
+              paste(temp_ms2_data_id,
                     names(temp_ms2_data@ms2_spectra),
                     sep = "_")
             temp_ms2_spectra
@@ -327,6 +334,7 @@ extract_ms2_info <-
       
     }
   }
+
 
 
 #' Calculate m/z Match Score
@@ -506,7 +514,7 @@ calculate_total_score <-
 #'
 #' @param annotation_result A data frame containing the annotation results, including the columns `mz.error`, `RT.error`, and `SS`.
 #'
-#' @details 
+#' @details
 #' The function assigns a confidence level to each annotation according to the following rules:
 #' \describe{
 #'   \item{1}{All of `mz.error`, `RT.error`, and `SS` are available (not NA).}
@@ -647,6 +655,7 @@ remove_impossible_annotations <-
     adduct_check <-
       match_result %>%
       dplyr::select(Formula, Adduct) %>%
+      dplyr::filter(!is.na(Formula)) %>% 
       dplyr::distinct(Formula, Adduct) %>%
       dplyr::filter(stringr::str_detect(Adduct, "(-H2O)|(-2H2O)")) %>%
       dplyr::mutate(minus_h2o_number = stringr::str_extract(Adduct, "(-H2O)|(-2H2O)")) %>%
