@@ -263,7 +263,8 @@ extract_ms1_info <-
               ms2_spectrum_id = paste(temp_ms2_data_id, temp_ms2_data@ms2_spectrum_id, sep = "_"),
               mz = temp_ms2_data@ms2_mz,
               rt = temp_ms2_data@ms2_rt,
-              ms2_files_id = temp_ms2_data@ms2_file,
+              # ms2_files_id = temp_ms2_data@ms2_file,
+              ms2_files_id = temp_ms2_data_id,
               variable_id = temp_ms2_data@variable_id
             )
           }

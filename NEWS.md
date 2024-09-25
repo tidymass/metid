@@ -187,3 +187,7 @@
 
 * Fix bugs.
 
+# Version 1.2.34 (2024-09-25)
+
+* Fix bugs.
+
