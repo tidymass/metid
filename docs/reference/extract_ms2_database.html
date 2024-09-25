@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">metid</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.32</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.33</span>
       </span>
     </div>
 
@@ -185,11 +185,11 @@
 <span class="r-in"><span><span class="va">my_database</span> <span class="op">&lt;-</span> <span class="fu">load_database</span><span class="op">(</span><span class="st">"path/to/database"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract all MS2 spectra in positive ion mode</span></span></span>
-<span class="r-in"><span><span class="va">ms2_spectra</span> <span class="op">&lt;-</span> <span class="fu">extract_ms2_database</span><span class="op">(</span>database <span class="op">=</span> <span class="va">my_database</span>, </span></span>
+<span class="r-in"><span><span class="va">ms2_spectra</span> <span class="op">&lt;-</span> <span class="fu">extract_ms2_database</span><span class="op">(</span>database <span class="op">=</span> <span class="va">my_database</span>,</span></span>
 <span class="r-in"><span>polarity <span class="op">=</span> <span class="st">"positive"</span>, ce <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract MS2 spectra for specific CE values in negative ion mode</span></span></span>
-<span class="r-in"><span><span class="va">ms2_spectra</span> <span class="op">&lt;-</span> <span class="fu">extract_ms2_database</span><span class="op">(</span>database <span class="op">=</span> <span class="va">my_database</span>, </span></span>
+<span class="r-in"><span><span class="va">ms2_spectra</span> <span class="op">&lt;-</span> <span class="fu">extract_ms2_database</span><span class="op">(</span>database <span class="op">=</span> <span class="va">my_database</span>,</span></span>
 <span class="r-in"><span>polarity <span class="op">=</span> <span class="st">"negative"</span>, ce <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"10"</span>, <span class="st">"20"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
