@@ -1,7 +1,7 @@
 ---
 title: "Contact us"
 # author:
-# - name: Xiaotao Shen PhD (https://www.shenxt.info/)
+# - name: Xiaotao Shen PhD (https://www.shen-lab.org/)
 # - affiliation: School of Medicine, Stanford University
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
 output:
@@ -38,7 +38,7 @@ knitr::opts_chunk$set(
 
 ---
 
-<i class="fa fa-weixin"></i> [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg)
+<i class="fa fa-weixin"></i> [shenxt1990](https://www.shen-lab.org/files/wechat_QR.jpg)
 
 <i class="fa fa-envelope"></i> shenxt@stanford.edu
 

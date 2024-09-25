@@ -155,59 +155,118 @@ match_ms2_fragments <-
   function(experimental.spectrum,
            library.spectrum,
            ms2.match.ppm = 30,
-           mz.ppm.thr = 400) {
+           mz.ppm.thr = 400,
+           direction = c("reverse", "forward"),
+           remove.noise = TRUE) {
+    direction <-
+      match.arg(direction)
     ## remove noisy fragments
-    experimental.spectrum <- remove_noise(spectrum = experimental.spectrum,
-                                          ms2.match.ppm = ms2.match.ppm,
-                                          mz.ppm.thr = mz.ppm.thr)
-    library.spectrum <- remove_noise(spectrum = library.spectrum,
-                                     ms2.match.ppm = ms2.match.ppm,
-                                     mz.ppm.thr = mz.ppm.thr)
+    if (remove.noise) {
+      experimental.spectrum <-
+        remove_noise(
+          spectrum = experimental.spectrum,
+          ms2.match.ppm = ms2.match.ppm,
+          mz.ppm.thr = mz.ppm.thr
+        )
+      library.spectrum <-
+        remove_noise(
+          spectrum = library.spectrum,
+          ms2.match.ppm = ms2.match.ppm,
+          mz.ppm.thr = mz.ppm.thr
+        )
+    }
     
     ## for each fragment in library.spectrum,
     ## its matched fragments index in experimental.spectrum
-    match.idx <- lapply(library.spectrum$mz, function(x) {
-      diff.mz <- abs(x - experimental.spectrum$mz)
-      x[x < mz.ppm.thr] <- mz.ppm.thr
-      mz.error <- diff.mz * 10 ^ 6 / x
-      temp.idx <- which(mz.error < ms2.match.ppm)
-      if (length(temp.idx) == 0) {
-        return(NA)
+    if (direction == "reverse") {
+      match.idx <-
+        lapply(library.spectrum$mz, function(x) {
+          diff.mz <- abs(x - experimental.spectrum$mz)
+          x[x < mz.ppm.thr] <- mz.ppm.thr
+          mz.error <- diff.mz * 10 ^ 6 / x
+          temp.idx <- which(mz.error < ms2.match.ppm)
+          if (length(temp.idx) == 0) {
+            return(NA)
+          }
+          if (length(temp.idx) > 1) {
+            return(temp.idx[which.max(experimental.spectrum$intensity[temp.idx])])
+          }
+          return(temp.idx)
+        })
+      
+      match.idx <- do.call(rbind, match.idx)
+      match.idx <- cbind(seq_len(nrow(match.idx)), match.idx)
+      colnames(match.idx) <- c("Lib", "Exp")
+      
+      non.idx2 <-
+        setdiff(c(seq_len(nrow(
+          experimental.spectrum
+        ))), match.idx[, 2][!is.na(match.idx[, 2])])
+      
+      if (length(non.idx2) != 0) {
+        match.idx2 <- data.frame(NA, non.idx2, stringsAsFactors = FALSE)
+        colnames(match.idx2) <- c("Lib", "Exp")
+      } else {
+        match.idx2 <- NULL
       }
-      if (length(temp.idx) > 1) {
-        return(temp.idx[which.max(experimental.spectrum$intensity[temp.idx])])
+      
+      match.matrix <-
+        as.data.frame(rbind(match.idx, match.idx2), stringsAsFactors = FALSE)
+      
+      match.matrix <-
+        data.frame(match.matrix, library.spectrum[match.matrix$Lib, c(1, 2)], experimental.spectrum[match.matrix$Exp, c(1, 2)])
+      colnames(match.matrix) <-
+        c("Lib.index",
+          "Exp.index",
+          "Lib.mz",
+          "Lib.intensity",
+          "Exp.mz",
+          "Exp.intensity")
+    } else{
+      match.idx <-
+        lapply(experimental.spectrum$mz, function(x) {
+          diff.mz <- abs(x - library.spectrum$mz)
+          x[x < mz.ppm.thr] <- mz.ppm.thr
+          mz.error <- diff.mz * 10 ^ 6 / x
+          temp.idx <- which(mz.error < ms2.match.ppm)
+          if (length(temp.idx) == 0) {
+            return(NA)
+          }
+          if (length(temp.idx) > 1) {
+            return(temp.idx[which.max(library.spectrum$intensity[temp.idx])])
+          }
+          return(temp.idx)
+        })
+      
+      match.idx <- do.call(rbind, match.idx)
+      match.idx <- cbind(seq_len(nrow(match.idx)), match.idx)
+      colnames(match.idx) <- c("Exp", "Lib")
+      
+      non.idx2 <-
+        setdiff(c(seq_len(nrow(
+          library.spectrum
+        ))), match.idx[, 2][!is.na(match.idx[, 2])])
+      
+      if (length(non.idx2) != 0) {
+        match.idx2 <- data.frame(NA, non.idx2, stringsAsFactors = FALSE)
+        colnames(match.idx2) <- c("Exp", "Lib")
+      } else {
+        match.idx2 <- NULL
       }
-      return(temp.idx)
-    })
-    
-    match.idx <- do.call(rbind, match.idx)
-    match.idx <- cbind(seq_len(nrow(match.idx)), match.idx)
-    colnames(match.idx) <- c("Lib", "Exp")
-    
-    non.idx2 <-
-      setdiff(c(seq_len(nrow(
-        experimental.spectrum
-      ))), match.idx[, 2][!is.na(match.idx[, 2])])
-    
-    if (length(non.idx2) != 0) {
-      match.idx2 <- data.frame(NA, non.idx2, stringsAsFactors = FALSE)
-      colnames(match.idx2) <- c("Lib", "Exp")
-    } else {
-      match.idx2 <- NULL
+      
+      match.matrix <-
+        as.data.frame(rbind(match.idx, match.idx2), stringsAsFactors = FALSE)
+      
+      match.matrix <-
+        data.frame(match.matrix, library.spectrum[match.matrix$Lib, c(1, 2)], experimental.spectrum[match.matrix$Exp, c(1, 2)])
+      colnames(match.matrix) <-
+        c("Exp.index",
+          "Lib.index",
+          "Lib.mz",
+          "Lib.intensity",
+          "Exp.mz",
+          "Exp.intensity")
     }
-    
-    match.matrix <-
-      as.data.frame(rbind(match.idx, match.idx2), stringsAsFactors = FALSE)
-    
-    
-    match.matrix <- data.frame(match.matrix, library.spectrum[match.matrix$Lib, c(1, 2)], experimental.spectrum[match.matrix$Exp, c(1, 2)])
-    colnames(match.matrix) <-
-      c("Lib.index",
-        "Exp.index",
-        "Lib.mz",
-        "Lib.intensity",
-        "Exp.mz",
-        "Exp.intensity")
     
     match.matrix$Lib.intensity[is.na(match.matrix$Lib.intensity)] <- 0
     match.matrix$Exp.intensity[is.na(match.matrix$Exp.intensity)] <- 0

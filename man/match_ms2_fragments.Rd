@@ -8,7 +8,9 @@ match_ms2_fragments(
   experimental.spectrum,
   library.spectrum,
   ms2.match.ppm = 30,
-  mz.ppm.thr = 400
+  mz.ppm.thr = 400,
+  direction = c("reverse", "forward"),
+  remove.noise = TRUE
 )
 }
 \arguments{

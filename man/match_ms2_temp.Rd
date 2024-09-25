@@ -17,6 +17,7 @@ match_ms2_temp(
   dp.forward.weight = 0.6,
   dp.reverse.weight = 0.1,
   remove_fragment_intensity_cutoff = 0,
+  masstplus_method_cutoff = 100,
   ...
 )
 }

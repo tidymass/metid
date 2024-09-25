@@ -300,12 +300,20 @@ annotate_peaks_mz_rt_ms2 <-
         match_result <-
           match_result %>%
           dplyr::left_join(ms1.info[, c("variable_id", "ms2_files_id", "ms2_spectrum_id")], by = "variable_id")
+        
+        spectra.data <-
+          spectra.data[names(spectra.data) %in% match_result$Lab.ID]
+        
+        ms2.info <-
+          ms2.info[which(names(ms2.info) %in% match_result$ms2_spectrum_id)]
+        
       }
       
-      ms2.info <-
-        ms2.info[which(names(ms2.info) %in% match_result$ms2_spectrum_id)]
-      
       if (length(ms2.info) == 0) {
+        return(NULL)
+      }
+      
+      if (length(spectra.data) == 0) {
         return(NULL)
       }
       
@@ -366,9 +374,9 @@ annotate_peaks_mz_rt_ms2 <-
       rownames(match_result_ms2) <- NULL
       
       if ("ms1" %in% based_on | "rt" %in% based_on) {
-        if(any(colnames(match_result) == "CE")){
+        if (any(colnames(match_result) == "CE")) {
           match_result <-
-            match_result %>% 
+            match_result %>%
             dplyr::select(-CE)
         }
         match_result <-
@@ -531,6 +539,7 @@ match_ms2_temp <-
            dp.forward.weight = 0.6,
            dp.reverse.weight = 0.1,
            remove_fragment_intensity_cutoff = 0,
+           masstplus_method_cutoff = 100,
            ...) {
     peak_ms2_spectrum <-
       as.data.frame(ms2.info[[idx]])
@@ -551,9 +560,12 @@ match_ms2_temp <-
     library_compound_id <-
       library_compound_id[which(library_compound_id %in% names(spectra.data))]
     
+    ###if no matched compounds with MS2 in spectra
     if (length(library_compound_id) == 0) {
       return(NULL)
-    } else{
+    }
+    
+    if (length(library_compound_id) <= masstplus_method_cutoff) {
       ###MS2 spectra match
       ms2_match_score <-
         seq_len(length(spectra.data[library_compound_id])) %>%
@@ -594,6 +606,8 @@ match_ms2_temp <-
         dplyr::arrange(dplyr::desc(SS)) %>%
         head(candidate.num) %>%
         dplyr::filter(SS > ms2.match.tol)
+    } else{
+      
     }
     
     # rm(list = c("ms2_match_score"))
@@ -602,4 +616,115 @@ match_ms2_temp <-
     } else{
       return(ms2_match_score)
     }
+  }
+
+
+# spectra_database <-
+#   purrr::map2(.x = names(spectra.data), .y = spectra.data, function(x, y) {
+#     names(y) <- paste(x, names(y), sep = "_")
+#     y
+#   }) %>%
+#   do.call(c, .)
+#
+# names(spectra_database) <-
+#   masstools::name_duplicated(names(spectra_database))
+#
+# save(query_ms2, file = "example/query_ms2")
+# save(spectra_database, file = "example/spectra_database")
+
+
+###load data first if you want to run this function
+# load("example/query_ms2")
+# load("example/spectra_database")
+
+match_ms2_masstplus <-
+  function(query_ms2,
+           spectra_database,
+           remove_fragment_intensity_cutoff = 0,
+           ms2.match.ppm = 30,
+           mz.ppm.thr = 400) {
+    total_spectra_data <-
+      purrr::map2(.x = names(spectra_database), .y = spectra_database, function(x, y) {
+        y$intensity <- as.numeric(y$intensity) / max(as.numeric(y$intensity))
+        y$Lab.ID <- x
+        y
+      }) %>%
+      do.call(rbind, .) %>%
+      as.data.frame() %>%
+      dplyr::arrange(mz, intensity, Lab.ID) %>%
+      dplyr::filter(intensity > remove_fragment_intensity_cutoff) %>%
+      dplyr::mutate(idx = seq_len(nrow(.)))
+    
+    all_spectra_ids <-
+      unique(total_spectra_data$Lab.ID)
+    
+    query_ms2 <-
+      query_ms2 %>%
+      dplyr::mutate(intensity = as.numeric(intensity) / max(as.numeric(intensity))) %>%
+      dplyr::filter(intensity > remove_fragment_intensity_cutoff) %>%
+      remove_noise()
+    
+    ###match query and total spectra
+    match_matrix <-
+      purrr::map(seq_len(nrow(experimental.spectrum)), function(i) {
+        temp_mz <-
+          experimental.spectrum$mz[i]
+        mz_error <-
+          abs(temp_mz - total_spectra_data$mz) * 10 ^ 6 / ifelse(temp_mz < 400, 400, temp_mz)
+        idx <- total_spectra_data$idx[which(mz_error < ms2.match.ppm)]
+        return_intensity <- rep(0, length(all_spectra_ids))
+        names(return_intensity) <- all_spectra_ids
+        if (length(idx) > 0) {
+          duplicated_id <-
+            unique(total_spectra_data$Lab.ID[idx][duplicated(total_spectra_data$Lab.ID[idx])])
+          if (length(duplicated_id) > 0) {
+            idx <-
+              total_spectra_data[idx, ] %>%
+              dplyr::filter(Lab.ID %in% duplicated_id) %>%
+              dplyr::group_by(Lab.ID) %>%
+              dplyr::filter(intensity == max(intensity)) %>%
+              dplyr::ungroup() %>%
+              pull(idx)
+          }
+          return_intensity[total_spectra_data$Lab.ID[idx]] <-
+            total_spectra_data$intensity[idx]
+          return_intensity
+        } else{
+          return_intensity
+        }
+      }) %>%
+      do.call(cbind, .) %>%
+      t() %>%
+      as.data.frame()
+    
+    ###remove the spectra with no matched fragments
+    remove_idx <-
+      which(colSums(match_matrix) == 0)
+    
+    if (length(remove_idx) > 0) {
+      match_matrix <- match_matrix[, -remove_idx, drop = FALSE]
+    }
+    
+    if (ncol(match_matrix) == 0) {
+      return(NULL)
+    }
+    
+    forward_dp <-
+      purrr::map(match_matrix, function(x) {
+        calculate_dotproduct(exp.int = query_ms2$intensity, lib.int = x)
+      }) %>%
+      unlist()
+    
+    forward_dp2 <-
+      lapply(spectra_database, function(x) {
+        calculate_ms2_matching_score(x, query_ms2)
+      }) %>%
+      unlist()
+    
+    x = forward_dp
+    
+    y = forward_dp2[match(names(forward_dp), names(forward_dp2))]
+    
+    plot(x, y)
+    
   }

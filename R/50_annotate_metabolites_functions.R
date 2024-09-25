@@ -61,7 +61,7 @@ annotate_metabolites <-
            database,
            based_on = c("ms1", "rt", "ms2"),
            polarity = c("positive", "negative"),
-           column = c("hilic", "rp"),
+           column = c("rp", "hilic"),
            adduct.table = NULL,
            ce = "all",
            ms1.match.ppm = 25,

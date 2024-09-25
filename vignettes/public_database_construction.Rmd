@@ -1,7 +1,7 @@
 ---
 title: "Construct public MS2 datbase using metid"
 author:
-- name: Xiaotao Shen (https://www.shenxt.info/)
+- name: Xiaotao Shen (https://www.shen-lab.org/)
 date: "Created on 2020-06-10 and updated on `r Sys.Date()`"
 output:
   html_document:

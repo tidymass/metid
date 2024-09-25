@@ -1,7 +1,7 @@
 ---
 title: "Database provided for `metid`"
 author:
-- name: Xiaotao Shen PhD (https://www.shenxt.info/)
+- name: Xiaotao Shen PhD (https://www.shen-lab.org/)
 date: "Created on 2020-03-28 and updated on `r Sys.Date()`"
 output:
   html_document:
@@ -33,14 +33,14 @@ knitr::opts_chunk$set(
 
 * <i class="fa fa-info"></i> Professor Michael Snyder's lab. More than 1,000 metabolites.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/snyder_database_hilic0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/mpsnyder_hilic_ms2.rda)
 
 
 ## 2. Michael Snyder RPLC databases
 
 * <i class="fa fa-info"></i> Professor Michael Snyder's lab. More than 1,000 metabolites.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/snyder_database_rplc0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/mpsnyder_rplc_ms2.rda)
 
 
 # **In-house MS2 databases from [Caroline Johnson lab](https://medicine.yale.edu/lab/cjohnson/)**
@@ -49,14 +49,14 @@ knitr::opts_chunk$set(
 
 * <i class="fa fa-info"></i> From Professor Caroline Johnson's lab.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/HILIC.database)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/HILIC.database)
 
 
 ## 2. Caroline Johnson RPLC databases
 
 * <i class="fa fa-info"></i> From Professor Caroline Johnson's lab. 
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/RPLC.database)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/RPLC.database)
 
 
 ***
@@ -67,37 +67,37 @@ knitr::opts_chunk$set(
 
 * <i class="fa fa-info"></i> HMDB database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdb_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/hmdb_ms2.rda)
 
 ## 2. [MassBank database](https://massbank.eu/MassBank/)
 
 * <i class="fa fa-info"></i> MassBank database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/massbank_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/massbank_ms2.rda)
 
 ## 3. [MoNA database](https://mona.fiehnlab.ucdavis.edu/)
 
 * <i class="fa fa-info"></i> MoNA database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/mona_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/mona_ms2.rda)
 
 ## 4. [Orbitrap database](https://mona.fiehnlab.ucdavis.edu/)
 
 * <i class="fa fa-info"></i> Orbitrap database from MoNA.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/orbitrap_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/orbitrap_database0.0.3.rda)
 
 ## 5. [Fiehn HILIC database](https://fiehnlab.ucdavis.edu/staff/kind/publications)
 
 * <i class="fa fa-info"></i> HILIC MS2 database from Fiehn lab.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/fiehn_hilic_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/fiehn_hilic_database0.0.3.rda)
 
 <!-- ### 6. Exposome database -->
 
 <!-- * <i class="fa fa-info"></i> Some chemical exposome database -->
 
-<!-- * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/exposureDatabase) -->
+<!-- * <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/exposureDatabase) -->
 
 > If you need this database, please contact shenxt@stanford.edu.
 
@@ -109,38 +109,33 @@ knitr::opts_chunk$set(
 
 * <i class="fa fa-info"></i> HMDB MS1 database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdb_ms1_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/hmdb_ms1.rda)
 
 
 ## 2. [KEGG MS1 database](https://www.genome.jp/kegg/compound/)
 
 * <i class="fa fa-info"></i> KEGG MS1 database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/kegg_ms1_database0.0.3.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/kegg_ms1.rda)
 
-## 3. [Drugbank database](https://go.drugbank.com/releases/latest)
-
-* <i class="fa fa-info"></i> Drugbank MS1 database.
-
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/drugbank_database5.1.8.rda)
 
 <!-- ### 4. [Foodb database](https://foodb.ca/downloads) -->
 
 <!-- * <i class="fa fa-info"></i> Foodb MS1 database. -->
 
-<!-- * <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/hmdbMS1Database0.0.1) -->
+<!-- * <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/hmdbMS1Database0.0.1) -->
 
-## 4. [T3DB database](http://www.t3db.ca/downloads)
+## 3. [T3DB database](http://www.t3db.ca/downloads)
 
 * <i class="fa fa-info"></i> T3DB MS1 database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/t3db_database1.0.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/t3db_ms1.rda)
 
-## 5. [Blood exposome database](https://bloodexposome.org/#/download)
+## 4. [Blood exposome database](https://bloodexposome.org/#/download)
 
 * <i class="fa fa-info"></i> Blood exposome MS1 database.
 
-* <i class="fa fa-download"></i> [Download here](https://www.shenxt.info/ms2_data/bloodexposome_database1.0.rda)
+* <i class="fa fa-download"></i> [Download here](https://www.shen-lab.org/ms2_data/bloodexposome_ms1.rda)
 
 
 # **Session information**
