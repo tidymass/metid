@@ -35,13 +35,22 @@ plot_ms2_matching <-
            variable_id,
            variable_index,
            database,
-           polarity = c("positive", "negative"),
+           polarity,
            ms1.match.ppm = 25,
            ms2.match.ppm = 30,
            mz.ppm.thr = 400,
            remove_fragment_intensity_cutoff = 0,
            interactive_plot = FALSE) {
-    polarity <- match.arg(polarity)
+    
+    if(missing(polarity)){
+      stop("polarity should be provided.\n")
+    }
+    
+    if(polarity %in% c("positive", "negative")){
+      polarity <- polarity
+    } else{
+      stop("polarity should be either 'positive' or 'negative'.\n")
+    }
     
     if (!is(object, "mass_dataset")) {
       stop("object should be mass_dataset object.\n")

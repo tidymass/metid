@@ -9,7 +9,7 @@ plot_ms2_matching(
   variable_id,
   variable_index,
   database,
-  polarity = c("positive", "negative"),
+  polarity,
   ms1.match.ppm = 25,
   ms2.match.ppm = 30,
   mz.ppm.thr = 400,
