@@ -2,7 +2,7 @@
 % Please edit documentation in R/53_ms2_spectra_matching_scores.R
 \name{match_ms2_fragments}
 \alias{match_ms2_fragments}
-\title{Match MS2 Fragments Between Experimental and Library Spectra}
+\title{Match MS2 Fragments}
 \usage{
 match_ms2_fragments(
   experimental.spectrum,
@@ -14,30 +14,55 @@ match_ms2_fragments(
 )
 }
 \arguments{
-\item{experimental.spectrum}{A data frame representing the experimental spectrum, with columns `mz` for mass-to-charge ratios and `intensity` for corresponding intensities.}
+\item{experimental.spectrum}{A data frame with `mz` and `intensity` columns representing the experimental MS2 spectrum.}
 
-\item{library.spectrum}{A data frame representing the library spectrum, with columns `mz` for mass-to-charge ratios and `intensity` for corresponding intensities.}
+\item{library.spectrum}{A data frame with `mz` and `intensity` columns representing the reference MS2 spectrum.}
 
-\item{ms2.match.ppm}{Numeric. The mass tolerance in parts per million (ppm) for matching MS2 fragments. Default is 30.}
+\item{ms2.match.ppm}{Numeric, mass tolerance in parts per million (ppm) for fragment matching. Default is 30 ppm.}
 
-\item{mz.ppm.thr}{Numeric. A threshold for mass-to-charge ratio (m/z) to use in ppm calculation. Default is 400.}
+\item{mz.ppm.thr}{Numeric, minimum m/z threshold for ppm-based error calculation. Default is 400.}
+
+\item{direction}{Character, either `"reverse"` (library to experimental matching) or `"forward"` (experimental to library matching). Default is `"reverse"`.}
+
+\item{remove.noise}{Logical, whether to remove low-intensity fragment ions before matching. Default is `TRUE`.}
 }
 \value{
-A data frame with matched MS2 fragments, containing the following columns:
-\describe{
-  \item{Lib.index}{The index of the fragment in the library spectrum.}
-  \item{Exp.index}{The index of the matched fragment in the experimental spectrum.}
-  \item{Lib.mz}{The m/z value of the fragment in the library spectrum.}
-  \item{Lib.intensity}{The intensity of the fragment in the library spectrum.}
-  \item{Exp.mz}{The m/z value of the matched fragment in the experimental spectrum.}
-  \item{Exp.intensity}{The intensity of the matched fragment in the experimental spectrum.}
-}
+A data frame containing the matched fragment ions with the following columns:
+\item{Lib.index}{Index of the fragment in the library spectrum.}
+\item{Exp.index}{Index of the fragment in the experimental spectrum.}
+\item{Lib.mz}{m/z value of the library fragment ion.}
+\item{Lib.intensity}{Intensity of the library fragment ion.}
+\item{Exp.mz}{m/z value of the experimental fragment ion.}
+\item{Exp.intensity}{Intensity of the experimental fragment ion.}
+
+Unmatched peaks in either spectrum are included with missing values (`NA`) in the corresponding columns.
 }
 \description{
-This function matches MS2 fragments between an experimental spectrum and a library spectrum based on m/z values, using a specified mass tolerance (ppm). It returns a matrix of matched fragments, including their m/z values and intensities.
+Matches MS2 fragment ions between an experimental spectrum and a library spectrum.
 }
 \details{
-The function first removes noisy fragments from both the experimental and library spectra based on the provided mass tolerance (ppm). It then performs matching by comparing the m/z values of the fragments. If multiple experimental fragments match a library fragment, the one with the highest intensity is selected. Any unmatched fragments are added with NA values for the respective library or experimental fragment.
+This function aligns the fragment ions from an experimental MS2 spectrum with those from a library spectrum based on m/z similarity within a given ppm tolerance.
+
+- If `direction = "reverse"`, the function looks for matches of each **library fragment ion** in the **experimental spectrum**.
+- If `direction = "forward"`, the function looks for matches of each **experimental fragment ion** in the **library spectrum**.
+
+If multiple matches are found for a given fragment, the most intense one is selected.
+}
+\examples{
+# Example data for experimental and library MS2 spectra
+experimental.spectrum <- data.frame(mz = c(100.1, 150.2, 200.3), intensity = c(300, 500, 200))
+library.spectrum <- data.frame(mz = c(100.09, 150.25, 210.4), intensity = c(250, 600, 150))
+
+# Perform MS2 fragment matching
+matched_fragments <- match_ms2_fragments(
+  experimental.spectrum = experimental.spectrum,
+  library.spectrum = library.spectrum,
+  ms2.match.ppm = 30,
+  direction = "reverse"
+)
+
+print(matched_fragments)
+
 }
 \author{
 Xiaotao Shen \email{xiaotao.shen@outlook.com}

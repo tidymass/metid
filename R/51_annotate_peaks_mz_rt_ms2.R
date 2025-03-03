@@ -193,7 +193,7 @@ annotate_peaks_mz_rt_ms2 <-
             mz_rt_matrix %>%
             dplyr::mutate(variable_id = ms1.info$variable_id[i]) %>%
             dplyr::mutate(
-              mz.error = abs(ms1.info$mz[i] - mz) * 10 ^ 6 / ifelse(ms1.info$mz[i] < 400, 400, ms1.info$mz[i])
+              mz.error = abs(ms1.info$mz[i] - mz) * 10^6 / ifelse(ms1.info$mz[i] < 400, 400, ms1.info$mz[i])
             ) %>%
             dplyr::mutate(RT.error = abs(ms1.info$rt[i] - RT)) %>%
             dplyr::filter(mz.error < ifelse("ms1" %in% based_on, ms1.match.ppm, max(mz.error) + 100)) %>%
@@ -492,36 +492,39 @@ annotate_peaks_mz_rt_ms2 <-
   }
 
 
-#' Match MS2 Spectra to Database Compounds
+#' @title Match MS2 Spectra to Library Compounds
+#' @description Matches an experimental MS2 spectrum against a library of reference spectra, computing similarity scores.
+#' @author Xiaotao Shen \email{xiaotao.shen@outlook.com}
 #'
-#' This function matches MS2 spectra from experimental data against MS2 spectra in a database. It calculates MS2 matching scores for each compound in the database, and selects the best matches based on the provided matching parameters.
+#' @param idx Integer, index of the MS2 spectrum to be matched.
+#' @param ms2.info List, containing experimental MS2 spectra with m/z and intensity values.
+#' @param pre_match_result Data frame, pre-matching results containing `Lab.ID` and `ms2_spectrum_id`. Default is `NULL`.
+#' @param spectra.data List, reference MS2 spectra library, with compound IDs as names.
+#' @param ms2.match.ppm Numeric, mass tolerance in parts per million (ppm) for fragment matching. Default is `30`.
+#' @param mz.ppm.thr Numeric, minimum m/z threshold for ppm-based error calculation. Default is `400`.
+#' @param ms2.match.tol Numeric, minimum score threshold for a valid MS2 match. Default is `0.5`.
+#' @param candidate.num Integer, number of top candidates to retain based on match scores. Default is `3`.
+#' @param fraction.weight Numeric, weighting factor for the fraction of matched peaks in the similarity score. Default is `0.3`.
+#' @param dp.forward.weight Numeric, weight for the forward dot product score in similarity calculation. Default is `0.6`.
+#' @param dp.reverse.weight Numeric, weight for the reverse dot product score in similarity calculation. Default is `0.1`.
+#' @param remove_fragment_intensity_cutoff Numeric, intensity threshold for filtering out low-intensity fragments. Default is `0`.
+#' @param masstplus_method_cutoff Integer, maximum number of library compounds to process using standard matching. Default is `100`.
+#' @param ... Additional arguments (not currently used).
 #'
-#' @param idx Numeric. The index of the current MS2 spectrum in the `ms2.info` list.
-#' @param ms2.info A list of MS2 spectra, where each element is a matrix with two columns (`mz` and `intensity`).
-#' @param pre_match_result A data frame containing the preliminary match results from MS1 or RT matching, including compound identifiers (`Lab.ID`).
-#' @param spectra.data A list of MS2 spectra from the database, where each element is a matrix with two columns (`mz` and `intensity`).
-#' @param ms2.match.ppm Numeric. Mass tolerance in parts per million (ppm) for MS2 peak matching. Default is 30.
-#' @param mz.ppm.thr Numeric. m/z threshold for ppm calculation. Default is 400.
-#' @param ms2.match.tol Numeric. Score threshold for MS2 matches. Only matches with scores above this value are retained. Default is 0.5.
-#' @param candidate.num Numeric. The number of top candidate annotations to retain per MS2 spectrum. Default is 3.
-#' @param fraction.weight Numeric. Weight for the fraction of matched fragments in the total MS2 score calculation. Default is 0.3.
-#' @param dp.forward.weight Numeric. Weight for the forward dot product score in the total MS2 score calculation. Default is 0.6.
-#' @param dp.reverse.weight Numeric. Weight for the reverse dot product score in the total MS2 score calculation. Default is 0.1.
-#' @param remove_fragment_intensity_cutoff Numeric. Intensity cutoff to remove low-intensity MS2 fragments from matching. Default is 0.
-#' @param ... Additional arguments to pass to internal functions.
+#' @details This function performs MS2 spectrum matching by comparing a given experimental spectrum to a reference database.
 #'
-#' @return A data frame containing the top candidate matches for the given MS2 spectrum. The output includes:
-#' \describe{
-#'   \item{Lab.ID}{The database compound ID.}
-#'   \item{CE}{The collision energy used in the MS2 spectrum.}
-#'   \item{SS}{The matching score for the compound.}
-#'   \item{ms2_spectrum_id}{The ID of the experimental MS2 spectrum.}
-#' }
+#' - If `pre_match_result` is provided, only the compounds in `pre_match_result$Lab.ID` are considered.
+#' - If no pre-matched compounds are found, the function searches across all compounds in `spectra.data`.
+#' - If the number of candidate compounds is below `masstplus_method_cutoff`, the function calculates MS2 matching scores using `calculate_ms2_matching_score()`.
+#' - The function filters and retains the top `candidate.num` matches with scores above `ms2.match.tol`.
 #'
-#' @details
-#' The function takes an MS2 spectrum from the experimental data and matches it against MS2 spectra in a reference database. It computes matching scores based on the provided mass tolerance (`ms2.match.ppm`), fragment matching weight parameters (`fraction.weight`, `dp.forward.weight`, `dp.reverse.weight`), and intensity cutoff. The best-matching spectra from the database are retained and returned as candidates.
+#' @return A data frame containing the top candidate matches with the following columns:
+#' \item{Lab.ID}{Compound ID from the reference library.}
+#' \item{CE}{Collision energy setting from the reference spectrum (if applicable).}
+#' \item{SS}{Similarity score between the experimental and library spectrum.}
+#' \item{ms2_spectrum_id}{ID of the experimental spectrum.}
 #'
-#' If preliminary MS1/RT matches are provided (`pre_match_result`), the function only considers those compounds for MS2 matching. Otherwise, all compounds in the database are considered.
+#' If no matches are found, `NULL` is returned.
 #'
 #' @export
 
@@ -618,7 +621,6 @@ match_ms2_temp <-
     }
   }
 
-
 # spectra_database <-
 #   purrr::map2(.x = names(spectra.data), .y = spectra.data, function(x, y) {
 #     names(y) <- paste(x, names(y), sep = "_")
@@ -670,7 +672,7 @@ match_ms2_masstplus <-
         temp_mz <-
           experimental.spectrum$mz[i]
         mz_error <-
-          abs(temp_mz - total_spectra_data$mz) * 10 ^ 6 / ifelse(temp_mz < 400, 400, temp_mz)
+          abs(temp_mz - total_spectra_data$mz) * 10^6 / ifelse(temp_mz < 400, 400, temp_mz)
         idx <- total_spectra_data$idx[which(mz_error < ms2.match.ppm)]
         return_intensity <- rep(0, length(all_spectra_ids))
         names(return_intensity) <- all_spectra_ids

@@ -68,6 +68,7 @@ globalVariables(
     "h_diff",
     "o_diff",
     "object",
-    "dp"
+    "dp",
+    "experimental.spectrum"
   )
 )
