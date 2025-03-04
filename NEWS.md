@@ -199,4 +199,8 @@
 
 * Fix bugs.
 
+# Version 1.2.5 (2025-03-04)
+
+* Fix bugs.
+
 

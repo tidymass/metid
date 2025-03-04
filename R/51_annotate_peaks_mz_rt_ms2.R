@@ -227,6 +227,19 @@ annotate_peaks_mz_rt_ms2 <-
       match_result$RT.match.score <-
         calculate_rt_match_score(RT.error = match_result$RT.error, rt.match.tol = rt.match.tol)
       
+      ####remove some columns from ms1_database that are also in match_result columns
+      remove_column_names <-
+        intersect(colnames(ms1_database), colnames(match_result))
+      
+      remove_column_names <-
+        remove_column_names[!remove_column_names %in% "Lab.ID"]
+      
+      if(length(remove_column_names) > 0){
+        ms1_database <-
+          ms1_database %>%
+          dplyr::select(-remove_column_names)
+      }
+      
       match_result <-
         match_result %>%
         dplyr::left_join(ms1_database, by = "Lab.ID")
