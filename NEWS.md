@@ -203,4 +203,8 @@
 
 * Fix bugs.
 
+# Version 1.2.6 (2025-03-07)
+
+* Fix bugs.
+
 

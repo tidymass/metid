@@ -84,7 +84,7 @@ annotate_metabolites <-
     if (missing(object)) {
       stop("No object is provided.\n")
     }
-    
+    # browser()
     if (missing(database)) {
       stop("No database is provided.\n")
     }

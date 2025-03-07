@@ -366,7 +366,7 @@ extract_ms2_info <-
 
 calculate_mz_match_score <-
   function(mz.error, ms1.match.ppm = 25) {
-    exp(-0.5 * (mz.error / (ms1.match.ppm)) ^ 2)
+    exp(-0.5 * (mz.error / (ms1.match.ppm))^2)
   }
 
 #' Calculate Retention Time (RT) Match Score
@@ -396,7 +396,7 @@ calculate_mz_match_score <-
 
 calculate_rt_match_score <-
   function(RT.error, rt.match.tol = 30) {
-    exp(-0.5 * (RT.error / (rt.match.tol)) ^ 2)
+    exp(-0.5 * (RT.error / (rt.match.tol))^2)
   }
 
 #' Calculate the Total Annotation Score
@@ -656,7 +656,7 @@ remove_impossible_annotations <-
     adduct_check <-
       match_result %>%
       dplyr::select(Formula, Adduct) %>%
-      dplyr::filter(!is.na(Formula)) %>% 
+      dplyr::filter(!is.na(Formula)) %>%
       dplyr::distinct(Formula, Adduct) %>%
       dplyr::filter(stringr::str_detect(Adduct, "(-H2O)|(-2H2O)")) %>%
       dplyr::mutate(minus_h2o_number = stringr::str_extract(Adduct, "(-H2O)|(-2H2O)")) %>%
@@ -667,19 +667,36 @@ remove_impossible_annotations <-
     adduct_check$minus_h2o_number[is.na(adduct_check$minus_h2o_number)] <-
       1
     
-    adduct_check <-
-      adduct_check %>%
-      dplyr::mutate(
-        h_number = stringr::str_extract(Formula, "H[0-9]{1,2}") %>%
-          stringr::str_replace("H", "") %>%
-          as.numeric()
-      ) %>%
-      dplyr::mutate(
-        o_number = stringr::str_extract(Formula, "O[0-9]{1,2}") %>%
-          stringr::str_replace("O", "") %>%
-          as.numeric()
-      )
+    extract_element_count <-
+      function(formula, element = "H") {
+        match <- regmatches(formula, regexec(paste0(element, "(\\d*)"), formula))
+        
+        # Extract matched value, if missing assume '1', otherwise convert to numeric
+        if (length(match[[1]]) > 1 && match[[1]][2] != "") {
+          return(as.numeric(match[[1]][2]))
+        } else if (grepl("O", formula)) {
+          return(1)
+        } else {
+          return(0)
+        }
+      }
     
+    adduct_check$h_number <-
+      sapply(adduct_check$Formula, extract_element_count, element = "H")
+    adduct_check$o_number <-
+      sapply(adduct_check$Formula, extract_element_count, element = "O")
+    # adduct_check <-
+    #   adduct_check %>%
+    #   dplyr::mutate(
+    #     h_number = stringr::str_extract(Formula, "H[0-9]{1,2}") %>%
+    #       stringr::str_replace("H", "") %>%
+    #       as.numeric()
+    #   ) %>%
+    #   dplyr::mutate(
+    #     o_number = stringr::str_extract(Formula, "O[0-9]{0,2}") %>%
+    #     stringr::str_replace("O", "") %>%
+    #     as.numeric())
+    #
     adduct_check$h_number[is.na(adduct_check$h_number)] <- 0
     adduct_check$o_number[is.na(adduct_check$o_number)] <- 0
     
