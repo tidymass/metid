@@ -12,22 +12,22 @@ summary_annotation_table(object, level = c(1, 2, 3, 4))
 \item{level}{A numeric vector specifying the annotation levels to include in the summary. Defaults to levels 1, 2, 3, and 4.}
 }
 \value{
-A ggplot2 object representing a polar bar plot of the annotation summary, 
+A ggplot2 object representing a polar bar plot of the annotation summary,
 showing the number and percentage of annotations by level and database.
 }
 \description{
-This function generates a summary of an annotation table from a `mass_dataset` object or a 
+This function generates a summary of an annotation table from a `mass_dataset` object or a
 user-provided object. The function filters annotation data based on a specified `Level` and
 creates a polar bar plot to visualize the distribution of annotations across levels and databases.
 }
 \details{
-If the input is a `mass_dataset` object, the function extracts the annotation information 
-using the `massdataset::extract_variable_info` function. For non-`mass_dataset` objects, 
-it expects the input to be in a specific format and selects the most relevant annotations 
+If the input is a `mass_dataset` object, the function extracts the annotation information
+using the `massdataset::extract_variable_info` function. For non-`mass_dataset` objects,
+it expects the input to be in a specific format and selects the most relevant annotations
 based on the `Level`, `SS`, and `Total.score` columns.
 
-The function then filters out annotations with missing `Compound.name` and 
-those that are not in the specified `level`. It calculates the number and percentage 
+The function then filters out annotations with missing `Compound.name` and
+those that are not in the specified `level`. It calculates the number and percentage
 of annotations by level and database, which are visualized in a polar bar plot.
 }
 \examples{
@@ -36,7 +36,7 @@ of annotations by level and database, which are visualized in a polar bar plot.
 summary_annotation_table(mass_object, level = c(1, 2, 3))
 
 # For a custom annotation table:
-custom_annotation <- data.frame(variable_id = ..., 
+custom_annotation <- data.frame(variable_id = ...,
 Level = ..., SS = ..., Total.score = ..., Compound.name = ...)
 summary_annotation_table(custom_annotation, level = c(1, 2))
 }

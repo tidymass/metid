@@ -9,11 +9,19 @@ readTable <- function(file, ...) {
   }
   
   if (extension == 'xlsx') {
-    return(readxl::read_xlsx(path = file, ...))
+    if (requireNamespace("readxl", quietly = TRUE)) {
+      return(readxl::read_xlsx(path = file, ...))
+    } else{
+      stop("Please install the readxl package.")
+    }
   }
   
   if (extension == "xls") {
-    return(readxl::read_xls(path = file, ...))
+    if (requireNamespace("readxl", quietly = TRUE)) {
+      return(readxl::read_xls(path = file, ...))
+    } else{
+      stop("Please install the readxl package.")
+    }
   }
   
   if (extenstion != "csv" &
@@ -93,7 +101,7 @@ style_grey <- function(level, ...) {
 
 #' Summary of Annotation Table with Plot
 #'
-#' This function generates a summary of an annotation table from a `mass_dataset` object or a 
+#' This function generates a summary of an annotation table from a `mass_dataset` object or a
 #' user-provided object. The function filters annotation data based on a specified `Level` and
 #' creates a polar bar plot to visualize the distribution of annotations across levels and databases.
 #'
@@ -102,17 +110,17 @@ style_grey <- function(level, ...) {
 #' @param object Either a `mass_dataset` object or a data frame containing annotation information.
 #' @param level A numeric vector specifying the annotation levels to include in the summary. Defaults to levels 1, 2, 3, and 4.
 #'
-#' @return A ggplot2 object representing a polar bar plot of the annotation summary, 
+#' @return A ggplot2 object representing a polar bar plot of the annotation summary,
 #' showing the number and percentage of annotations by level and database.
 #'
 #' @details
-#' If the input is a `mass_dataset` object, the function extracts the annotation information 
-#' using the `massdataset::extract_variable_info` function. For non-`mass_dataset` objects, 
-#' it expects the input to be in a specific format and selects the most relevant annotations 
+#' If the input is a `mass_dataset` object, the function extracts the annotation information
+#' using the `massdataset::extract_variable_info` function. For non-`mass_dataset` objects,
+#' it expects the input to be in a specific format and selects the most relevant annotations
 #' based on the `Level`, `SS`, and `Total.score` columns.
 #'
-#' The function then filters out annotations with missing `Compound.name` and 
-#' those that are not in the specified `level`. It calculates the number and percentage 
+#' The function then filters out annotations with missing `Compound.name` and
+#' those that are not in the specified `level`. It calculates the number and percentage
 #' of annotations by level and database, which are visualized in a polar bar plot.
 #'
 #' @examples
@@ -121,7 +129,7 @@ style_grey <- function(level, ...) {
 #' summary_annotation_table(mass_object, level = c(1, 2, 3))
 #'
 #' # For a custom annotation table:
-#' custom_annotation <- data.frame(variable_id = ..., 
+#' custom_annotation <- data.frame(variable_id = ...,
 #' Level = ..., SS = ..., Total.score = ..., Compound.name = ...)
 #' summary_annotation_table(custom_annotation, level = c(1, 2))
 #' }
@@ -138,8 +146,7 @@ style_grey <- function(level, ...) {
 #' @export
 
 summary_annotation_table <-
-  function(object,
-           level = c(1, 2, 3, 4)) {
+  function(object, level = c(1, 2, 3, 4)) {
     if (is(object, class2 = "mass_dataset")) {
       annotation_table <-
         massdataset::extract_variable_info(object)
@@ -195,10 +202,9 @@ summary_annotation_table <-
       dplyr::arrange(Level)
     
     temp_data$fill <-
-      factor(temp_data$fill,
-             levels = unique(c(
-               class_color$Level, class_color$Database
-             )))
+      factor(temp_data$fill, levels = unique(c(
+        class_color$Level, class_color$Database
+      )))
     
     temp_color <-
       c(
@@ -260,10 +266,8 @@ summary_annotation_table <-
     temp_data$fill <-
       factor(temp_data$fill, levels = new_level)
     
-    ggplot(temp_data,
-           aes(x = class, y = n, fill = fill)) +
-      geom_col(color = "black",
-               position = 'stack') +
+    ggplot(temp_data, aes(x = class, y = n, fill = fill)) +
+      geom_col(color = "black", position = 'stack') +
       # scale_x_discrete(limits = c(" ", "level","database")) +
       scale_fill_manual(values = c(level_color, database_color)) +
       theme_void() +

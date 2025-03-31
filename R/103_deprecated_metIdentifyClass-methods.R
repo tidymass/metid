@@ -442,7 +442,6 @@ ms2plot <-
            threads = 3,
            one.folder = TRUE,
            show.plot = TRUE) {
-    
     message("This function is deprecated.")
     if (!is(object, "metIdentifyClass"))
       stop("Only for metIdentifyClass\n")
@@ -537,7 +536,11 @@ ms2plot <-
         database = database
       )
       if (interaction.plot) {
-        plot <- plotly::ggplotly(p = plot)
+        if (requireNamespace("plotly", quietly = TRUE)) {
+          plot <- plotly::ggplotly(plot)
+        } else{
+          message(crayon::red("Please install plotly package to get interactive plot."))
+        }
       }
       plot
     } else{

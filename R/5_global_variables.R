@@ -1,4 +1,7 @@
 
+
+
+
 globalVariables(
   names = c(
     "MS1.peak.name",
@@ -69,6 +72,33 @@ globalVariables(
     "o_diff",
     "object",
     "dp",
-    "experimental.spectrum"
+    "experimental.spectrum",
+    "Specific_source",
+    "degree",
+    "edge_class",
+    "from",
+    "from_animal",
+    "from_bacteria",
+    "from_drug",
+    "from_environment",
+    "from_food",
+    "from_human",
+    "from_plant",
+    "from_which_animal",
+    "from_which_bacteria",
+    "from_which_drug",
+    "from_which_environment",
+    "from_which_food",
+    "from_which_part",
+    "from_which_plant",
+    "index node_class",
+    "node_class2",
+    "node_name",
+    "to",
+    "x1",
+    "y",
+    "y1",
+    "index",
+    "node_class"
   )
 )

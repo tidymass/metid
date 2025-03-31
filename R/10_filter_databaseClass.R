@@ -12,22 +12,22 @@ filter.databaseClass <-
     x <-
       dplyr::filter(x, !!!dots, .preserve = .preserve)
     
-    if(nrow(x) == 0){
+    if (nrow(x) == 0) {
       stop("No compound left.")
     }
     slot(object = .data, name = "spectra.info") = x
     
-    if(length(.data@spectra.data$Spectra.positive) > 0){
-      remain_idx <- 
+    if (length(.data@spectra.data$Spectra.positive) > 0) {
+      remain_idx <-
         which(names(.data@spectra.data$Spectra.positive) %in% x$Lab.ID)
-      .data@spectra.data$Spectra.positive <- 
+      .data@spectra.data$Spectra.positive <-
         .data@spectra.data$Spectra.positive[remain_idx]
     }
     
-    if(length(.data@spectra.data$Spectra.negative) > 0){
-      remain_idx <- 
+    if (length(.data@spectra.data$Spectra.negative) > 0) {
+      remain_idx <-
         which(names(.data@spectra.data$Spectra.negative) %in% x$Lab.ID)
-      .data@spectra.data$Spectra.negative <- 
+      .data@spectra.data$Spectra.negative <-
         .data@spectra.data$Spectra.negative[remain_idx]
     }
     return(.data)

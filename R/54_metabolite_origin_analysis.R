@@ -6,7 +6,7 @@
 # # gc()
 # load("pregnancy_urine_metabolomics.rda")
 # load("hmdb_ms2.rda")
-# 
+#
 # # load("ms1_database.rda")
 # # annotation_table <-
 # #   pregnancy_urine_metabolomics@variable_info
@@ -25,38 +25,38 @@
 # #
 # # save(annotation_table, file = "annotation_table.rda")
 # load("annotation_table.rda")
-# 
+#
 # pregnancy_urine_metabolomics@annotation_table <-
 #   annotation_table
-# 
+#
 # object <-
 #   pregnancy_urine_metabolomics
-# 
+#
 # object <-
 #   analyze_metabolite_origins(object = object)
-# 
+#
 # metabolite_origin_upsetplot(object = object)
-# 
-# 
+#
+#
 # ###metabolite_origin_network
 # metabolite_origin_network(
 #   object = object,
 #   metabolite_id = object@annotation_table$Lab.ID[c(421)],
 #   top_specific_source = 3
 # )
-# 
+#
 # metabolite_origin_network(
 #   object = object,
 #   metabolite_id = object@annotation_table$Lab.ID[c(421, 422)],
 #   top_specific_source = 3
 # )
-# 
+#
 # soure_network(
 #   object = object,
 #   source_id = c("Food"),
 #   top_specific_source = 3
 # )
-# 
+#
 # specific_source_network(
 #   object = object,
 #   specific_source_id = c("Urine"),
@@ -84,7 +84,7 @@ analyze_metabolite_origins <-
   function(object) {
     check_object4metablite_origin(object)
     
-    if (class(object) == "mass_dataset") {
+    if (is(object, "mass_dataset")) {
       annotation_table <-
         object@annotation_table
     }
@@ -379,13 +379,13 @@ source_metabolite_network <-
 
 check_object4metablite_origin <-
   function(object) {
-    if (class(object) != "data.frame" &
-        class(object) != "mass_dataset") {
+    if (!is(object, "data.frame") &
+        !is(object, "mass_dataset")) {
       stop("The object should be a data.frame or mass_dataset")
     }
     
     
-    if (class(object) == "mass_dataset") {
+    if (is(object, "mass_dataset")) {
       object <-
         object@annotation_table
     }
@@ -465,21 +465,25 @@ edge_color <-
 #' (human, bacteria, plant, animal, etc.).
 #'
 #' @param object A mass_dataset object containing metabolite annotation data
+#' @param min_size Integer specifying the minimum size of a set to be included in the plot (default: 1)
+#' @param counts Logical specifying whether to show counts in the plot (default: TRUE)
 #'
 #' @return A ggplot2 object representing the upset plot
 #'
 #' @author Xiaotao Shen \email{xiaotao.shen@@outlook.com}
 #'
 #' @importFrom ggplot2 ggplot aes geom_bar scale_y_continuous labs theme_bw
-#' @importFrom ggupset scale_x_upset
 #' @importFrom tibble tibble
 #' @importFrom purrr map
 #' @importFrom dplyr select filter
 #' @importFrom stringr str_split
 #'
+#'
 #' @export
 metabolite_origin_upsetplot <-
-  function(object) {
+  function(object,
+           min_size = 1,
+           counts = TRUE) {
     check_object4metablite_origin(object)
     temp_data <-
       object@annotation_table %>%
@@ -520,35 +524,46 @@ metabolite_origin_upsetplot <-
         "Food_name"
       )
     
-    ####upset plot
-    temp_data2 <-
-      temp_data$Lab.ID %>%
-      unique() %>%
-      purrr::map(function(x) {
-        idx <-
-          temp_data %>%
-          dplyr::filter(Lab.ID == x) %>%
-          dplyr::select(-Lab.ID) %>%
-          as.character() %>%
-          `==`("Yes") %>%
-          which()
-        colnames(temp_data)[-1][idx]
-      })
+    final_name <-
+      c("Human",
+        "Bacteria",
+        "Plant",
+        "Animal",
+        "Environment",
+        "Drug",
+        "Food")
     
     temp_data2 <-
-      tibble::tibble(Lab.ID = temp_data$Lab.ID, source = temp_data2)
+      temp_data[, c(final_name)]
     
-    upset_plot <-
-      temp_data2 %>%
-      ggplot(aes(x = source)) +
-      geom_bar() +
-      ggupset::scale_x_upset(n_intersections = Inf) +
-      labs(x = "", y = "Number of metabolites") +
-      scale_y_continuous(expand = c(0, 0.5)) +
-      theme_bw()
+    temp_data2[temp_data2 == "Yes"] <- 1
+    temp_data2[temp_data2 == "No"] <- 0
+    temp_data2[temp_data2 == "Unknown"] <- NA
+    temp_data2 <-
+      apply(temp_data2, 2, as.numeric) %>%
+      as.data.frame()
     
-    upset_plot
+    if (requireNamespace("ComplexUpset", quietly = TRUE)) {
+      plot <-
+        ComplexUpset::upset(
+          data = temp_data2,
+          intersect = final_name,
+          name = "",
+          themes = ComplexUpset::upset_themes,
+          width_ratio = 0.15,
+          min_size = min_size,
+          base_annotations = list('Intersection size' =
+                                    ComplexUpset::intersection_size(counts =
+                                                                      counts))
+        )
+    } else {
+      stop("Please install the ComplexUpset package")
+    }
+    
+    plot
+    
   }
+
 
 
 #' Create a network visualization for specific metabolites and their origins

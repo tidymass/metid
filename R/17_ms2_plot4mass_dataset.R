@@ -41,12 +41,11 @@ plot_ms2_matching <-
            mz.ppm.thr = 400,
            remove_fragment_intensity_cutoff = 0,
            interactive_plot = FALSE) {
-    
-    if(missing(polarity)){
+    if (missing(polarity)) {
       stop("polarity should be provided.\n")
     }
     
-    if(polarity %in% c("positive", "negative")){
+    if (polarity %in% c("positive", "negative")) {
       polarity <- polarity
     } else{
       stop("polarity should be either 'positive' or 'negative'.\n")
@@ -197,8 +196,11 @@ plot_ms2_matching <-
             )
           
           if (interactive_plot) {
-            plot <-
-              plotly::ggplotly(plot)
+            if (requireNamespace("plotly", quietly = TRUE)) {
+              plot <- plotly::ggplotly(plot)
+            } else{
+              message(crayon::red("Please install plotly package to get interactive plot."))
+            }
           }
           plot
         }
@@ -401,8 +403,11 @@ ms2_plot_mass_dataset <-
             )
           
           if (interactive_plot) {
-            plot <-
-              plotly::ggplotly(plot)
+            if (requireNamespace("plotly", quietly = TRUE)) {
+              plot <- plotly::ggplotly(plot)
+            } else{
+              message(crayon::red("Please install plotly package to get interactive plot."))
+            }
           }
           plot
         }

@@ -27,17 +27,14 @@
 #' @importFrom dplyr mutate filter everything select bind_rows left_join pull
 #' @importFrom plyr dlply .
 #' @importFrom BiocParallel bplapply MulticoreParam SnowParam
-#' @importFrom readxl read_xlsx read_xls
 #' @importFrom purrr map map2
 #' @importFrom ggplot2 aes ggplot geom_point geom_line geom_smooth theme annotate
 #' @importFrom ggplot2 geom_abline theme_bw ggsave geom_segment xlim ylim labs
 #' @importFrom ggplot2 element_line element_text
 #' @importFrom MSnbase readMSData
-#' @importFrom ProtGenerics spectra
 #' @importFrom masstools ms2_match get_os mz_rt_match read_mzxml read_mgf
 #' @importFrom masstools get_spectra_match_score
 #' @importFrom stats lm loess predict
-#' @importFrom plotly ggplotly
 #' @importFrom future plan multisession
 #' @importFrom furrr future_map2 future_map
 #' @importFrom rstudioapi isAvailable hasFun getThemeInfo

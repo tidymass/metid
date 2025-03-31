@@ -3,6 +3,8 @@
 
 
 
+
+
 #' @title Get MS2 spectra of peaks from databaseClass object
 #' @description Get MS2 spectra of peaks from databaseClass object.
 #' @author Xiaotao Shen
@@ -324,7 +326,7 @@ mzIdentify <-
       
       ###mz match
       temp <-
-        abs(spectra.mz - temp.mz) * 10 ^ 6 / ifelse(temp.mz < 400, 400, temp.mz)
+        abs(spectra.mz - temp.mz) * 10^6 / ifelse(temp.mz < 400, 400, temp.mz)
       temp.idx <-
         which(temp < ms1.match.ppm, arr.ind = TRUE)
       if (nrow(temp.idx) == 0)
@@ -460,7 +462,7 @@ mzIdentify <-
             return(x)
           } else{
             x$mz.match.score <-
-              exp(-0.5 * (x$mz.error / (ms1.match.ppm)) ^ 2)
+              exp(-0.5 * (x$mz.error / (ms1.match.ppm))^2)
             if (rt.match.tol > 10000) {
               # cat(crayon::yellow("You set rt.match.tol > 10,000, so RT will not be used for matching.\n"))
               x$RT.error <- NA
@@ -468,7 +470,7 @@ mzIdentify <-
               x$Total.score <- x$mz.match.score
             } else{
               x$RT.match.score <-
-                exp(-0.5 * (x$RT.error / (rt.match.tol)) ^ 2)
+                exp(-0.5 * (x$RT.error / (rt.match.tol))^2)
               
               x$Total.score <- x$mz.match.score * 0.5 +
                 x$RT.match.score * 0.5
@@ -2854,7 +2856,12 @@ readMZXML <-
                           mode = "onDisk")
     message(crayon::green("Processing..."))
     
-    new.ms2 <- ProtGenerics::spectra(object = ms2)
+    if (requireNamespace("ProtGenerics", quietly = TRUE)) {
+      new.ms2 <- ProtGenerics::spectra(object = ms2)
+    } else{
+      stop("Please install ProtGenerics package.")
+    }
+    
     rm(list = c("ms2"))
     #
     temp.fun <- function(idx, ms2) {

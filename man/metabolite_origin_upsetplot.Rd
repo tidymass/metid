@@ -4,10 +4,14 @@
 \alias{metabolite_origin_upsetplot}
 \title{Create an upset plot of metabolite origins}
 \usage{
-metabolite_origin_upsetplot(object)
+metabolite_origin_upsetplot(object, min_size = 1, counts = TRUE)
 }
 \arguments{
 \item{object}{A mass_dataset object containing metabolite annotation data}
+
+\item{min_size}{Integer specifying the minimum size of a set to be included in the plot (default: 1)}
+
+\item{counts}{Logical specifying whether to show counts in the plot (default: TRUE)}
 }
 \value{
 A ggplot2 object representing the upset plot
