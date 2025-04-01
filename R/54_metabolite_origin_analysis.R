@@ -51,7 +51,7 @@
 #   top_specific_source = 3
 # )
 #
-# soure_network(
+# source_network(
 #   object = object,
 #   source_id = c("Food"),
 #   top_specific_source = 3
@@ -107,6 +107,7 @@ analyze_metabolite_origins <-
 #' The network shows metabolites connected to their origins (human, bacteria, plant, etc.).
 #'
 #' @param object A mass_dataset object containing metabolite annotation data
+#' @param circle Logical specifying whether to display the network in a circular layout (default: TRUE)
 #'
 #' @return A ggplot2 object representing the source network visualization
 #'
@@ -124,7 +125,7 @@ analyze_metabolite_origins <-
 #' @export
 
 source_metabolite_network <-
-  function(object) {
+  function(object, circle = TRUE) {
     check_object4metablite_origin(object)
     temp_data <-
       object@annotation_table %>%
@@ -206,7 +207,14 @@ source_metabolite_network <-
     temp_data3 <-
       seq_len(nrow(temp_data2)) %>%
       purrr::map(function(i) {
-        data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]])
+        temp <-
+          tryCatch(
+            data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]]),
+            error = function(e) {
+              NULL
+            }
+          )
+        temp
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
@@ -318,6 +326,17 @@ source_metabolite_network <-
       dplyr::mutate(x1 = y, y1 = x) %>%
       dplyr::select(-c(x, y)) %>%
       dplyr::mutate(x = x1, y = y1)
+    
+    if (circle) {
+      coords <-
+        coords %>%
+        dplyr::mutate(
+          theta = y / (max(y) + 1) * 2 * pi,
+          r = x + 1,
+          x = r * cos(theta),
+          y = r * sin(theta)
+        )
+    }
     
     my_graph <-
       ggraph::create_layout(
@@ -893,7 +912,7 @@ metabolite_origin_network <-
 #'
 #' @export
 
-soure_network <-
+source_network <-
   function(object, source_id, top_specific_source = 5) {
     check_object4metablite_origin(object)
     if (missing(source_id)) {
@@ -981,7 +1000,14 @@ soure_network <-
     temp_data3 <-
       seq_len(nrow(temp_data2)) %>%
       purrr::map(function(i) {
-        data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]])
+        temp <-
+          tryCatch(
+            data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]]),
+            error = function(e) {
+              NULL
+            }
+          )
+        temp
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame() %>%
@@ -1283,7 +1309,14 @@ specific_source_network <-
     temp_data3 <-
       seq_len(nrow(temp_data2)) %>%
       purrr::map(function(i) {
-        data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]])
+        temp <-
+          tryCatch(
+            data.frame(Lab.ID = temp_data2$Lab.ID[i], Source = temp_data2$source[[i]]),
+            error = function(e) {
+              NULL
+            }
+          )
+        temp
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()

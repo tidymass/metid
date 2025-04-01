@@ -99,6 +99,8 @@ globalVariables(
     "y",
     "y1",
     "index",
-    "node_class"
+    "node_class", 
+    "r",
+    "theta"
   )
 )

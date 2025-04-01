@@ -4,10 +4,12 @@
 \alias{source_metabolite_network}
 \title{Create a network visualization of metabolite sources}
 \usage{
-source_metabolite_network(object)
+source_metabolite_network(object, circle = TRUE)
 }
 \arguments{
 \item{object}{A mass_dataset object containing metabolite annotation data}
+
+\item{circle}{Logical specifying whether to display the network in a circular layout (default: TRUE)}
 }
 \value{
 A ggplot2 object representing the source network visualization
