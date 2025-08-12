@@ -50,7 +50,7 @@ Imports:
     stringr,
     tibble,
     magrittr,
-    masstools (>= 1.0.7),
+    masstools,
     purrr,
     plyr,
     MSnbase,
