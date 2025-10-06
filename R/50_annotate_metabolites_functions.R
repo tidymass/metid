@@ -56,12 +56,13 @@
 #'
 #' @export
 
+
 annotate_metabolites <-
-  function(object,
-           database,
-           based_on = c("ms1", "rt", "ms2"),
-           polarity = c("positive", "negative"),
-           column = c("rp", "hilic"),
+  function(object = object_pos2,
+           database = gnps_ms2,
+           based_on = c("ms1", "ms2"),
+           polarity = "positive",
+           column = "hilic",
            adduct.table = NULL,
            ce = "all",
            ms1.match.ppm = 25,
@@ -242,14 +243,18 @@ annotate_metabolites <-
     }
     
     object@process_info <- process_info
-    
+
+    if (is.null(annotation_result)) {
+      return(object)
+    }
+        
     annotation_result <-
       annotation_result %>%
       dplyr::filter(variable_id %in% object@variable_info$variable_id)
     
-    if (is.null(annotation_result)) {
-      return(object)
-    }
+    # if (is.null(annotation_result)) {
+    #   return(object)
+    # }
     
     if (nrow(annotation_result) == 0) {
       return(object)

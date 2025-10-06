@@ -264,7 +264,7 @@ annotate_peaks_mz_rt_ms2 <-
       
       ####remove some impossible adducts
       match_result <-
-        remove_impossible_annotations(match_result)
+        remove_impossible_annotations_fix(match_result)
       
       match_result <-
         match_result %>%
