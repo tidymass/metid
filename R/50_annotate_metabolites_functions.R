@@ -58,11 +58,11 @@
 
 
 annotate_metabolites <-
-  function(object = object_pos2,
-           database = gnps_ms2,
-           based_on = c("ms1", "ms2"),
-           polarity = "positive",
-           column = "hilic",
+  function(object,
+           database,
+           based_on = c("ms1", "rt", "ms2"),
+           polarity = c("positive", "negative"),
+           column = c("rp", "hilic"),
            adduct.table = NULL,
            ce = "all",
            ms1.match.ppm = 25,
