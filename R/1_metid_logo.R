@@ -52,7 +52,7 @@
 metid_logo <- function() {
   message("Thank you for using metid!")
   message("Version ", metid_version, " (", update_date, ')')
-  message("More information: metid.tidymass.org")
+  message("More information: tidymass.org")
   cat(
     c(
       "                _    _____  ___ ",
