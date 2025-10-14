@@ -211,4 +211,6 @@
 
 * Add functions for metabolite origin analysis.
 
+# Version 1.3.2 (2025-10-06)
 
+* Fix bugs.

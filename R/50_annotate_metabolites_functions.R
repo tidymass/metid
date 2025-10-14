@@ -56,6 +56,7 @@
 #'
 #' @export
 
+
 annotate_metabolites <-
   function(object,
            database,
@@ -242,14 +243,18 @@ annotate_metabolites <-
     }
     
     object@process_info <- process_info
-    
+
+    if (is.null(annotation_result)) {
+      return(object)
+    }
+        
     annotation_result <-
       annotation_result %>%
       dplyr::filter(variable_id %in% object@variable_info$variable_id)
     
-    if (is.null(annotation_result)) {
-      return(object)
-    }
+    # if (is.null(annotation_result)) {
+    #   return(object)
+    # }
     
     if (nrow(annotation_result) == 0) {
       return(object)
